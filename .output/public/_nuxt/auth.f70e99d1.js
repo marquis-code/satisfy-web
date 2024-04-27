@@ -1,1 +1,0 @@
-import{a as r}from"./axios.config.3b7d29d9.js";const e={register(t){return r.post("/auth/register",t)},login(t){return r.post("/auth/login",t)},verify(t){return r.post("/auth/verify",t)}};export{e as a};

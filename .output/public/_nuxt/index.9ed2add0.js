@@ -1,1 +1,0 @@
-import{q as o,I as n,H as t,o as s,c as a,a as r}from"./entry.0551859d.js";const c=r("h1",{class:"h-screen grid place-content-center"},"Coming soon",-1),_=[c],p=o({__name:"index",setup(i){return n(()=>{t().push("/dashboard/organization")}),(e,u)=>(s(),a("main",null,_))}});export{p as default};
