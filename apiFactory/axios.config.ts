@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: "https://doctrack.lordvidex.com/v1",
+  baseURL: "https://api.develop.admin.storipod.app",
 });
 
 axiosInstance.interceptors.request.use((config: any) => {

@@ -26,7 +26,7 @@ watch(
 })();
 
 const loginPayload = ref({
-  email: "",
+  username: "",
   password: "",
 });
 export const useLogin = () => {
@@ -35,7 +35,7 @@ export const useLogin = () => {
     loading.value = true;
     try {
       const payload = {
-        email: loginPayload.value.email,
+        username: loginPayload.value.username,
         password: loginPayload.value.password,
       };
       const response = await authApiFactory.login(payload);
@@ -112,7 +112,7 @@ export const useLogin = () => {
     set: () => {},
   });
   const isFormEmpty = computed(() => {
-    return !!(loginPayload.value.email && loginPayload.value.password);
+    return !!(loginPayload.value.username && loginPayload.value.password);
   });
 
   return {
