@@ -1,0 +1,1 @@
+import{_ as n,M as r,o as t,c as a,b as c}from"./entry.0551859d.js";const s={};function l(o,_){const e=r("WorkflowForm");return t(),a("main",null,[c(e,{onSave:o.addWorkflow},null,8,["onSave"])])}const m=n(s,[["render",l]]);export{m as default};
