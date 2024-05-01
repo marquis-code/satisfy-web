@@ -1,13 +1,37 @@
 <template>
-    <div class="text-center border rounded-br-md rounded-bl-md py-10">
-        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-            aria-hidden="true">
-            <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-        </svg>
-        <h3 class="mt-2 text-sm font-semibold text-gray-900">{{ title }}</h3>
-        <p class="mt-1 text-sm text-gray-500">{{ desc }}.</p>
-    </div>
+    <section class="container px-4 mx-auto">
+        <div class="flex items-center mt-6 text-center border rounded-lg h-96 border-gray-100">
+            <div class="flex flex-col w-full max-w-sm px-4 mx-auto">
+                <div class="p-3 mx-auto text-blue-500 bg-blue-100 rounded-full dark:bg-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                    </svg>
+                </div>
+                <h1 class="mt-3 text-lg text-gray-800 dark:text-white">No vendors found</h1>
+                <p class="mt-2 text-gray-500 dark:text-gray-400">Your search “Stripe” did not match any vendors. Please
+                    try again or create add a new vendor.</p>
+                <div class="flex items-center mt-4 sm:mx-auto gap-x-3">
+                    <button
+                        class="w-1/2 px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:border-gray-700">
+                        Clear Search
+                    </button>
+
+                    <button
+                        class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+
+                        <span>Add vendor</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
 </template>
 
 <script setup lang="ts">

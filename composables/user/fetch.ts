@@ -1,13 +1,13 @@
 import { userApiFactory } from "@/apiFactory/users";
 
 export const useFetchUsers = () => {
-  const usersList = ref([]);
+  const usersList = ref([]) as any
   const loading = ref(false);
   const fetchUsers = async () => {
     loading.value = true;
     try {
       const response = await userApiFactory.getTopUsers();
-      usersList.value = response.data;
+      usersList.value = response.data.result;
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
         autoClose: 5000,

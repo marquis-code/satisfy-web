@@ -6,7 +6,8 @@ const runtimeData = {
   user: ref({} as any),
   token: ref(""),
 };
-const localstorageDate = {
+const router = useRouter();
+const localstorageData = {
   user: useStorage("user", {} as any),
   token: useStorage("token", ""),
 };
@@ -14,15 +15,15 @@ watch(
   runtimeData.user,
   (val) => {
     Object.keys(val).forEach((key) => {
-      localstorageDate.user.value[key] = val[key];
+      localstorageData.user.value[key] = val[key];
     });
   },
   { deep: true }
 );
 
 (() => {
-  runtimeData.user.value = localstorageDate.user.value;
-  runtimeData.token.value = localstorageDate.token.value;
+  runtimeData.user.value = localstorageData.user.value;
+  runtimeData.token.value = localstorageData.token.value;
 })();
 
 const loginPayload = ref({
@@ -40,7 +41,7 @@ export const useLogin = () => {
       };
       const response = await authApiFactory.login(payload);
       runtimeData.user.value = response.data.user;
-      localstorageDate.token.value = response.data?.token;
+      localstorageData.token.value = response.data?.token;
       runtimeData.token.value = response.data?.token;
       useNuxtApp().$toast.success("Welcome back.", {
         autoClose: 5000,
@@ -72,7 +73,7 @@ export const useLogin = () => {
       if (result.value) {
         localStorage.clear();
         runtimeData.user.value = null;
-        location.href = "/login";
+        router.push({ path: "/", query: { page: "login" } });
       } else {
         Swal.fire("Cancelled", "Action was cancelled", "info");
       }
@@ -117,7 +118,7 @@ export const useLogin = () => {
 
   return {
     handleLogin,
-    localstorageDate,
+    localstorageData,
     loginPayload,
     loading,
     isFormEmpty,
@@ -125,6 +126,6 @@ export const useLogin = () => {
     isLoggedIn,
     id,
     userRole,
-    user
+    user,
   };
 };

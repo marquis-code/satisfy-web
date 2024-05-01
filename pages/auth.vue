@@ -61,6 +61,8 @@
 </template>
 
 <script setup lang="ts">
+import { useLogin } from '@/composables/auth/login'
+const { isLoggedIn } = useLogin()
 const isLoading = ref(false)
 const route = useRoute()
 const router = useRouter()
@@ -88,5 +90,10 @@ const handleForgotPasswordSuccess = () => {
 const navigateToLogin = () => {
     const newQuery = { page: "login" };
     router.push({ query: newQuery });
+}
+
+
+if (isLoggedIn) {
+    router.push('/dashboard')
 }
 </script>
