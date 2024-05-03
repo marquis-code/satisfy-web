@@ -5,11 +5,13 @@ import Swal from "sweetalert2";
 const runtimeData = {
   user: ref({} as any),
   token: ref(""),
+  expiry: ref("")
 };
 const router = useRouter();
 const localstorageData = {
   user: useStorage("user", {} as any),
   token: useStorage("token", ""),
+  expiry: useStorage("expiry", ""),
 };
 watch(
   runtimeData.user,
@@ -40,8 +42,10 @@ export const useLogin = () => {
         password: loginPayload.value.password,
       };
       const response = await authApiFactory.login(payload);
+      console.log(response, "res here");
       runtimeData.user.value = response.data.user;
-      localstorageData.token.value = response.data?.token;
+      localstorageData.token.value = response.data?.token.accessToken;
+      localstorageData.expiry.value = response.data?.token.expiresIn
       runtimeData.token.value = response.data?.token;
       useNuxtApp().$toast.success("Welcome back.", {
         autoClose: 5000,

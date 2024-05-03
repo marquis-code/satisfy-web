@@ -5,4 +5,5 @@ export { withCtx, withDirectives, withKeys, withMemo, withModifiers, withScopeId
 export { injectHead, useHead, useSeoMeta, useHeadSafe, useServerHead, useServerSeoMeta, useServerHeadSafe } from '@unhead/vue';
 export { generateCurrentDateISO } from '../utils/generateDate';
 export { generateUUID } from '../utils/generateUUID';
+export { base64UrlToBase64, decodeToken } from '../utils/jwt';
 export { definePageMeta } from '../node_modules/nuxt/dist/pages/runtime/composables';

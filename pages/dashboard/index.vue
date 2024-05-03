@@ -1,11 +1,14 @@
 <template>
-  <main>
-    <h1 class="h-screen grid place-content-center">Coming soon</h1>
+  <main class="space-y-10">
+    <DashboardStatsCards />
+    <DashboardSectionTwo />
+    <DashboardSectionThree />
   </main>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-  layout: 'dashboard'
-})
+  layout: 'dashboard',
+  middleware: ['auth']
+});
 </script>
