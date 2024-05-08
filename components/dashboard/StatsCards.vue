@@ -12,7 +12,7 @@
                             <img v-if="value.growth >= 0" src="@/assets/icons/dashboard/increase.svg" alt="" />
                             <img v-if="value.growth < 0" src="@/assets/icons/dashboard/decrease.svg" alt="" />
                             <p class="" :class="[value.growth >= 0 ? 'text-green-600' : 'text-red-600']">
-                                {{ value.growth || 0 }}
+                                {{ Math.round(value.growth) || 0 }}%
                             </p>
                         </div>
                     </div>
