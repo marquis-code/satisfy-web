@@ -3,7 +3,7 @@ export default {
   target: "static",
   app: {
     head: {
-      title: "National Profile Admin",
+      title: "Homepod - Storipod Admin Platform",
       htmlAttrs: { lang: "en" },
       meta: [
         { charset: "utf-8" },
