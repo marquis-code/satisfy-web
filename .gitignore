@@ -7,6 +7,7 @@ nuxt.d.ts
 .output/*
 # dist
 .DS_Store
+.vscode
 .vscode/*
 package-lock.json
 npm-debug.log* 
