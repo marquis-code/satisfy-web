@@ -451,6 +451,10 @@ useKeyboardShortcut(() => {
   isSearchModalOpen.value = true;
 });
 
+definePageMeta({
+  middleware: 'auth'
+})
+
 </script>
 
 <style scoped>

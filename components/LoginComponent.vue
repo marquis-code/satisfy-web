@@ -5,7 +5,7 @@
       <div class="flex h-full w-full max-w-xl items-center justify-center lg:max-w-2xl">
         <form @submit.prevent="handleLogin" class="mt-8 w-full space-y-10">
           <div class="space-y-4">
-            <h1 class="text-2xl font-semibold text-white">Login {{ isLoggedIn }}</h1>
+            <h1 class="text-2xl font-semibold text-white">Login</h1>
             <p class="text-sm text-white">Enter your credentials to login</p>
           </div>
           <div class="col-span-6 w-full">
@@ -23,8 +23,8 @@
               Password
             </label>
 
-            <input id="Password" v-model="loginPayload.password" :type="showPassword ? 'text' : 'password'" name="password"
-              placeholder="Enter Your Password..."
+            <input id="Password" v-model="loginPayload.password" :type="showPassword ? 'text' : 'password'"
+              name="password" placeholder="Enter Your Password..."
               class="mt-1 w-full rounded-md border border-gray-200 bg-white px-3 py-3.5 text-sm text-gray-700 shadow-sm outline-none" />
             <img v-if="showPassword" src="@/assets/icons/eye-open.svg" alt=""
               class="absolute right-4 top-10 h-6 w-6 cursor-pointer" @click="showPassword = !showPassword" />
