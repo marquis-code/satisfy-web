@@ -3,7 +3,7 @@ import { axiosInstance } from "./axios.config";
 export const storyApiFactory = {
   getAllStories() {
     return axiosInstance.get(
-      "/story?sortBy=date&reported=true&page=1&limit=25"
+      "/story"
     );
   },
   getAllStoryById(id: string) {
