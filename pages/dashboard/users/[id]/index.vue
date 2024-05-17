@@ -43,7 +43,6 @@ fetchUser()
 const activeProfileView = ref('')
 
 const handleSelected = (data: any) => {
-    console.log(data, 'data')
     activeProfileView.value = data
 }
 
