@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div v-if="!loading && usersList.length" class="px-4 sm:px-6 lg:px-8">
+    <div class="px-4 sm:px-6 lg:px-8">
       <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
           <h1 class="text-base font-semibold leading-6 text-gray-900">Users</h1>
@@ -15,9 +15,13 @@
         </div>
       </div>
       <div class="mt-8 flow-root">
-        <div v-if="tableView === 'list'" class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <UsersTable v-if="usersList.length && !loading" :usersList="usersList" :loadingUsers="loading"
-            @selectedUser="handleSelectedUser" />
+        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div v-if="usersList.length && !loading">
+            <UsersTable :usersList="usersList" :loadingUsers="loading" :pagination="pagination"
+              @selectedUser="handleSelectedUser" />
+            <CorePagination :total="pagination.total" :page="pagination.page" :perPage="pagination.perPage"
+              :pages="pagination.pages" @page-changed="handlePageChange" />
+          </div>
           <CoreEmptyState v-if="usersList.length <= 0 && !loading" title="No User available"
             desc="Get started by creating a new user." />
           <LoadingSpinner v-if="loading" />
@@ -32,9 +36,7 @@
 
 <script setup lang="ts">
 import { useFetchUsers } from '@/composables/user/fetch'
-const { fetchUsers, usersList, loading } = useFetchUsers()
-import Datepicker from 'vue3-datepicker'
-const tableView = ref("list")
+const { fetchUsers, usersList, loading, pagination } = useFetchUsers()
 const selectedUser = ref({}) as any
 
 const selectedPeople = ref([])
@@ -46,5 +48,69 @@ definePageMeta({
 const handleSelectedUser = (data: any) => {
   selectedUser.value = data
 }
+
+const handlePageChange = (val: any) => {
+  pagination.value.page = val
+}
 fetchUsers()
+
+// const users = ref([]);
+// const pagination = ref({
+//   total: 0,
+//   page: 1,
+//   perPage: 20,
+//   pages: 0,
+// });
+
+// const handleFetchUsers = async (page = 1) => {
+//   pagination.value = {
+//     total: metadata.value.total,
+//     page: metadata.value.page,
+//     perPage: metadata.value.perPage,
+//     pages: metadata.value.pages,
+//   };
+// };
+
+// onMounted(() => {
+//   fetchUsers();
+// });
+
+
+// interface Item {
+//   id: number
+//   name: string
+// }
+
+// interface Metadata {
+//   total: number
+//   page: number
+//   perPage: number
+//   pages: number
+// }
+
+// const data = ref<Item[]>([])
+// const metadata = ref<Metadata>({
+//   total: 0,
+//   page: 1,
+//   perPage: 20,
+//   pages: 0,
+// })
+
+// const fetchData = async (page: number = 1) => {
+//   // Replace with your actual API endpoint and logic
+//   // const response = await fetch(/api/items?page=${page}&perPage=${metadata.value.perPage})
+//   const result = await response.json()
+
+//   data.value = result.items
+//   metadata.value = {
+//     total: result.total,
+//     page: result.page,
+//     perPage: result.perPage,
+//     pages: result.pages,
+//   }
+// }
+
+// onMounted(() => {
+//   fetchData()
+// })
 </script>

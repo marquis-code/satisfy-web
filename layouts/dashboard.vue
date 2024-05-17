@@ -440,6 +440,7 @@ import { useKeyboardShortcut } from '@/composables/core/useKeyboardShortcut';
 import { useLogin } from '@/composables/auth/login'
 const { localstorageData, logOut } = useLogin()
 const isOpen = ref(false)
+const route = useRoute()
 
 const username = computed(() => {
   return Object.keys(localstorageData.user.value).length ? `${localstorageData.user.value.firstname} ${localstorageData.user.value.lastname}` : ''

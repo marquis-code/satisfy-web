@@ -1,8 +1,8 @@
 import { axiosInstance } from "./axios.config";
 
 export const userApiFactory = {
-  getUsersList() {
-    return axiosInstance.get("/user/all");
+  getUsersList(metadata: { page: number, perPage: number}) {
+    return axiosInstance.get(`/user/all?page=${metadata.page}&perPage=${metadata.perPage}`);
   },
   getUserById(id: string) {
     return axiosInstance.get(`/user/${id}`);
@@ -36,5 +36,5 @@ export const userApiFactory = {
   },
   deactivateUser(userId: string, payload: any) {
     return axiosInstance.post(`/user/${userId}/status`, payload);
-  }
+  },
 };

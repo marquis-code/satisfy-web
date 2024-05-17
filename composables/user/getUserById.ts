@@ -1,7 +1,7 @@
 import { userApiFactory } from "@/apiFactory/users";
 
 export const useFetchUserById = () => {
-  const user = ref([]);
+  const user = ref([]) as Record<string, any>;
   const userId = useRoute().params.id;
   const loading = ref(false);
   const fetchUser = async () => {

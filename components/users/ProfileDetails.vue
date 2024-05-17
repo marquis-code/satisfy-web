@@ -2,9 +2,9 @@
   <div class="flow-root p-4 lg:p-6  bg-white">
     <div class="space-y-6 pb-3">
       <div class="flex items-center gap-x-6">
-        <p class="font-semibold text-lg">{{ user ? `${user.fname} ${user.lname}` : 'N/A' }}</p>
+        <p class="font-semibold text-lg">{{ user ? `${user.fname} ${user.lname}` : 'Nil' }}</p>
         <div class="mb-3">
-          <span class="text-[#175CD3] bg-blue-50 rounded-full text-xs px-3 py-2">@{{ user.handle ?? 'N/A' }}</span>
+          <span class="text-[#175CD3] bg-blue-50 rounded-full text-xs px-3 py-2">@{{ user.handle ?? 'Nil' }}</span>
         </div>
       </div>
       <p class="text-gray-500 font-semibold text-sm">
@@ -17,7 +17,7 @@
           Email address
         </dt>
         <dd class="font-semibold text-gray-900 text-[14px]">
-          {{ user.email ?? 'N/A' }}
+          {{ user.email ?? 'Nil' }}
         </dd>
       </div>
 
@@ -26,7 +26,7 @@
           Phone number
         </dt>
         <dd class="font-semibold text-gray-900 text-[14px]">
-          {{ user.phone ?? 'N/A' }}
+          {{ user.phone ?? 'Nil' }}
         </dd>
       </div>
 
@@ -43,7 +43,7 @@
       <div class="flex justify-between space-x-6 items-center py-5">
         <dt class="font-semibold text-gray-900 text-[14px] ">Interests</dt>
         <dd class="text-gray-700 sm:col-span-2 ">
-          <div v-if="user.categories" class="grid grid-cols-2 gap-3">
+          <div v-if="user?.categories?.length" class="grid grid-cols-2 gap-3">
             <div v-for="(itm, idx) in user.categories" :key="idx" class="text-xs">
               <div>
                 <label for="ColorRed"
@@ -57,7 +57,7 @@
                   {{ itm.name }}</p> -->
             </div>
           </div>
-          <div v-else>N/A</div>
+          <div v-else>Nil</div>
         </dd>
       </div>
 
@@ -66,13 +66,13 @@
           Date of birth
         </dt>
         <dd class="font-semibold text-gray-900 text-[14px]">
-          {{ user.dateOfBirth ? formatDate(user.dateOfBirth) : 'N/A' }}
+          {{ user.dateOfBirth ? formatDate(user.dateOfBirth) : 'Nil' }}
         </dd>
       </div>
 
       <div class="flex justify-between items-center py-5">
         <dt class="font-semibold text-gray-900 text-[14px]">Gender</dt>
-        <dd class="font-semibold text-gray-900 text-[14px]">{{ user.gender ?? 'N/A' }}</dd>
+        <dd class="font-semibold text-gray-900 text-[14px]">{{ user.gender ?? 'Nil' }}</dd>
       </div>
 
       <div class="flex justify-between items-center py-5">
