@@ -17,7 +17,6 @@ export default defineNuxtRouteMiddleware((context) => {
         // return navigateTo('/signin');
       }
     } catch (error) {
-      console.error('Error decoding token:', error);
       // On error, remove the token and redirect
       localStorage.removeItem('token');
       return router.push({ path: "/", query: { page: "login" } });
