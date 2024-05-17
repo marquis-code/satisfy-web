@@ -1,7 +1,7 @@
 <template>
   <main>
     <div v-if="usersList.length && !loadingUsers"
-      class="inline-block min-w-full py-2 align-middle border-gray-100 sm:px-6 lg:px-8 rounded-lg border bg-white shadow">
+      class="inline-block min-w-full py-2 align-middle border-gray-100 sm:px-6 lg:px-8 rounded-b-lg border bg-white shadow">
       <div class="relative">
         <div v-if="selectedPeople.length > 0"
           class="absolute left-14 top-0 flex h-12 items-center space-x-3 bg-white sm:left-12">

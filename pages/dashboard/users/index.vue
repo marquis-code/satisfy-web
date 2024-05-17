@@ -1,20 +1,17 @@
 <template>
   <main>
+    <div class="w-full border-b">
+      <nav class="" aria-label="Tabs">
+        <div href="#"
+          :class="[activeTab === 'users' ? 'border-b-4 border-[#0ba9b9] text-gray-800' : 'text-gray-400 group-hover:text-gray-500']"
+          class="uppercase group inline-flex items-center py-2 px-1 text-xs font-semibold">
+          <span>Users </span><span class="font-semibold ml-2 rounded-3xl px-2 py-2 bg-[#0ba9b9] text-white">{{
+            pagination.total }}</span>
+        </div>
+      </nav>
+    </div>
     <div class="px-4 sm:px-6 lg:px-8">
-      <div class="sm:flex sm:items-center">
-        <div class="sm:flex-auto">
-          <h1 class="text-base font-semibold leading-6 text-gray-900">Users</h1>
-          <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title,
-            email
-            and role.</p>
-        </div>
-        <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-          <button type="button"
-            class="block rounded-md bg-indigo-600 px-3 py-1.5 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add
-            user</button>
-        </div>
-      </div>
-      <div class="mt-8 flow-root">
+      <div class="flow-root mt-2">
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div v-if="usersList.length && !loading">
             <UsersTable :usersList="usersList" :loadingUsers="loading" :pagination="pagination"
@@ -38,7 +35,7 @@
 import { useFetchUsers } from '@/composables/user/fetch'
 const { fetchUsers, usersList, loading, pagination } = useFetchUsers()
 const selectedUser = ref({}) as any
-
+const activeTab = ref('users')
 const selectedPeople = ref([])
 const indeterminate = computed(() => selectedPeople.value.length > 0 && selectedPeople.value.length < usersList.length)
 definePageMeta({

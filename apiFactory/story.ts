@@ -6,6 +6,9 @@ export const storyApiFactory = {
       "/story"
     );
   },
+  getStoryByUserId(userId: string | number) {
+    return axiosInstance.get(`/story?userId=${userId}`)
+  },
   getAllStoryById(id: string) {
     return axiosInstance.get(`/story/${id}`);
   },

@@ -72,7 +72,8 @@ export const useLogin = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Logout",
+      cancelButtonText: "Nah, Just kidding",
     }).then((result) => {
       if (result.value) {
         localStorage.clear();
