@@ -37,4 +37,12 @@ export const userApiFactory = {
   deactivateUser(userId: string, payload: any) {
     return axiosInstance.post(`/user/${userId}/status`, payload);
   },
+  removeUser(id: string | number) {
+    const url = `/users/${id}`
+    return axiosInstance.delete(url)
+  },
+  editUser(id: string | number, payload: any) {
+    const url = `/users/${id}/edit`
+    return axiosInstance.patch(url, payload)
+  }
 };

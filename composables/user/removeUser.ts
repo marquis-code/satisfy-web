@@ -1,11 +1,12 @@
 import { userApiFactory } from "@/apiFactory/users";
 
-export const useDeactivateUser = () => {
+export const useRemoveUser = () => {
+//   const userId = useRoute().params.id;
   const loading = ref(false);
-  const deactivateUser = async (userId: string, payload: any) => {
+  const removeUser = async (userId: string | number) => {
     loading.value = true;
     try {
-      const response = await userApiFactory.deactivateUser(userId, payload);
+      const response = await userApiFactory.removeUser(userId);
       return response
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
@@ -18,5 +19,5 @@ export const useDeactivateUser = () => {
     }
   };
 
-  return { deactivateUser, loading };
+  return { removeUser, loading };
 };

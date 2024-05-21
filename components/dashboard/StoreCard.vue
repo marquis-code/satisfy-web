@@ -1,8 +1,8 @@
 <template>
   <section class="shadow border-[0.6px] rounded-lg">
     <div class="flex items-center justify-between px-7 py-4 border-b-[0.8px] border-gray-100">
-      <h6 class="font-medium text-gray-500">App Store information</h6>
-      <select class="text-sm font-medium outline-none bg-gray-100 rounded-md px-2.5 py-2">
+      <h6 class="font-medium text-gray-500">App Store information </h6>
+      <select class="text-sm font-medium outline-none bg-gray-50 rounded-md px-2.5 py-2">
         <option>All Time</option>
       </select>
     </div>

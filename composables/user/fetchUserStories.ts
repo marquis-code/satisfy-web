@@ -4,10 +4,10 @@ export const useFetchUserStories = () => {
   const userStoriesList = ref([]) as any;
   const route = useRoute();
   const loading = ref(false);
-  const fetchUserStories = async () => {
+  const fetchUserStories = async (userId?: string) => {
     loading.value = true;
     try {
-      const response = await storyApiFactory.getStoryByUserId(route.params.id);
+      const response = await storyApiFactory.getStoryByUserId(route.params.id || userId);
       userStoriesList.value = response?.data ?? [];
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
