@@ -1,5 +1,5 @@
 <template>
-    <section class="bg-white md:rounded-lg p-6 space-y-10 mx-3 pb-6">
+    <section class="bg-white md:rounded-lg space-y-10">
         <StoriesCardList :stories="storiesList" v-if="!loading && storiesList.length" />
         <CoreEmptyState v-if="storiesList.length <= 0 && !loading" title="No Stories available"
             desc="Get started by creating a new story." />

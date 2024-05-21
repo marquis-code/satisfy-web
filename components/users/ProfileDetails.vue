@@ -89,8 +89,11 @@
         <dt class="font-semibold text-gray-900 text-[14px]">
           Last Session
         </dt>
-        <dd class="font-semibold text-gray-900 text-[14px]">
-          1 h 37 mins
+        <dd v-if="user.lastSession" class="font-semibold text-gray-900 text-[14px]">
+         {{ user.lastSession }}
+        </dd>
+        <dd v-else class="font-semibold text-gray-900 text-[14px] flex items-center gap-x-3">
+          Nil
         </dd>
       </div>
     </dl>

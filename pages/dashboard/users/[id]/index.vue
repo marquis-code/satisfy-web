@@ -1,8 +1,8 @@
 <template>
     <main>
         <UsersTabs @selected="handleSelected" />
-        <section v-if="activeProfileView === 'insight'"
-            class="bg-white p-6 border-[0.1px] border-gray-100 shadow-sm rounded-lg space-y-10">
+        <section v-if="activeProfileView === 'insight' && route.query.page === 'insight'"
+            class="bg-white p-6 border-[0.1px] border-gray-100 shadow-sm rounded-b-lg space-y-10">
             <section class="">
                 <div v-if="!loading && Object.keys(user).length" class="space-y-3">
                     <h1 class="text-[#101828] font-medium text-base">User Information</h1>
@@ -22,7 +22,8 @@
                     </div>
                 </div>
                 <div>
-                    <div v-if="!loading && Object.keys(user).length" class="bg-[#F3F2F2] rounded-md border-[0.1px] p-4">
+                    <div v-if="!loading && Object.keys(user).length"
+                        class="bg-[#F3F2F2] lg:mt-16 rounded-md border-[0.1px] p-4">
                         <ChartsStoriCharts class="w-full" />
                         <ChartsStoriCharts class="w-full" />
                     </div>
@@ -32,57 +33,29 @@
                 </div>
             </section>
         </section>
+        <UsersWallet v-if="activeProfileView === 'wallet' && route.query.page === 'wallet'" />
+        <UsersStories v-if="activeProfileView === 'stori' && route.query.page === 'stori'" />
     </main>
 </template>
 
 <script lang="ts" setup>
 import { useFetchUserById } from '@/composables/user/getUserById'
-const activeTab = ref("default") as any
+import { useFetchUserStories } from '@/composables/user/fetchUserStories'
+const { fetchUserStories, userStoriesList, loading: loadingUserStories } = useFetchUserStories()
 const { fetchUser, user, loading } = useFetchUserById()
 fetchUser()
+fetchUserStories()
+const router = useRouter()
+const route = useRoute()
+const activeTab = ref("default") as any
 const activeProfileView = ref('')
 
 const handleSelected = (data: any) => {
     activeProfileView.value = data
+    router.push({ path: route.path, query: { page: data } })
 }
 
-// const userStats = ref([
-//     {
-//         title: "Followers",
-//         key: "followers",
-//         count: '300k',
-//     },
-//     {
-//         title: "Following",
-//         key: "following",
-//         count: '500k'
-//     },
-//     {
-//         title: "Stories",
-//         key: "stories",
-//         count: "96",
-//     },
-//     {
-//         title: "Premium stories",
-//         key: "premium_stories",
-//         count: "96",
-//     },
-//     {
-//         title: "Views",
-//         key: "views",
-//         count: "12.02k",
-//     },
-//     {
-//         title: "Reactions",
-//         key: "reactions",
-//         count: "40k",
-//     },
-//     {
-//         title: "Estimated Payout",
-//         key: "estimated_payout",
-//         count: "US $0.28",
-//     }
-// ]) as any
+// router.push({ path: route.path, query: { page: 'insight' } })
 
 const setUserStats = () => {
     return [
@@ -99,7 +72,7 @@ const setUserStats = () => {
         {
             title: "Stories",
             key: "stories",
-            count: user?.value?.stories ?? 0
+            count: !loadingUserStories.value ? userStoriesList?.value?.length : 0
         },
         {
             title: "Premium stories",

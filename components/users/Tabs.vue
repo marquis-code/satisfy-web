@@ -13,6 +13,8 @@
 
 <script setup lang="ts">
 const activeTable = ref("insight")
+const router = useRouter()
+const route = useRoute()
 
 const breadcrumbTabs = ref([
     {
@@ -31,6 +33,7 @@ const breadcrumbTabs = ref([
 
 onMounted(() => {
     emit('selected', activeTable.value)
+    router.push({ path: route.path, query: { page: activeTable.value } })
 })
 
 const emit = defineEmits<{
@@ -39,6 +42,7 @@ const emit = defineEmits<{
 
 const handleSelectedTab = (item: any) => {
     activeTable.value = item
+    router.push({ path: route.path, query: { page: item } })
     emit('selected', item)
 }
 </script>

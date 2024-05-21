@@ -3,6 +3,7 @@ import { userApiFactory } from "@/apiFactory/users";
 export const useFetchUsers = () => {
   const usersList = ref([]) as any;
   const loading = ref(false);
+  const searchQuery = ref<string>("");
   const pagination = ref({
     page: 1,
     perPage: 10,
@@ -26,6 +27,18 @@ export const useFetchUsers = () => {
     }
   };
 
+  const filteredUsers = computed(() => {
+    const query = searchQuery.value.trim().toLowerCase();
+    console.log(query, 'query here');
+    if (!query) return usersList.value;
+
+    return usersList.value.filter(
+      (user) =>
+        user.fname.toLowerCase().includes(query) ||
+        user.lname.toLowerCase().includes(query)
+    );
+  });
+
   watch(
     () => pagination.value.page,
     (newPage) => {
@@ -38,5 +51,12 @@ export const useFetchUsers = () => {
     pagination.value.page = val;
   };
 
-  return { fetchUsers, usersList, loading, pagination };
+  return {
+    fetchUsers,
+    usersList,
+    loading,
+    pagination,
+    searchQuery,
+    filteredUsers,
+  };
 };
