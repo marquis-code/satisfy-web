@@ -1,6 +1,6 @@
 <template>
     <main>
-        <!-- <UsersTabs @selected="handleSelected" /> -->
+        <UsersTabs @selected="handleSelected" />
         <section class="bg-white p-6 border-[0.1px] border-gray-100 shadow-sm rounded-b-lg space-y-10">
             <section class="">
                 <div v-if="!loading && Object.keys(user).length" class="space-y-3">
@@ -41,8 +41,6 @@
                 <CoreEmptyState title="No Data Available" desc="" />
             </section>
         </section>
-        <!-- <UsersWallet v-if="activeProfileView === 'wallet' && route.query.page === 'wallet'" /> -->
-        <!-- <UsersStories v-if="activeProfileView === 'stori' && route.query.page === 'stori'" /> -->
     </main>
 </template>
 
@@ -63,7 +61,7 @@ const handleSelected = (data: any) => {
     router.push({ path: route.path, query: { page: data } })
 }
 
-const activeProfileTab = ref('default')
+// const activeProfileTab = ref('default')
 
 // router.push({ path: route.path, query: { page: 'insight' } })
 

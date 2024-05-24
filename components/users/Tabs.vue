@@ -32,8 +32,8 @@ const breadcrumbTabs = ref([
 ])
 
 onMounted(() => {
-    emit('selected', activeTable.value)
-    router.push({ path: route.path, query: { page: activeTable.value } })
+    // emit('selected', activeTable.value)
+    // router.push({ path: route.path, query: { page: activeTable.value } })
 })
 
 const emit = defineEmits<{
@@ -41,8 +41,8 @@ const emit = defineEmits<{
 }>()
 
 const handleSelectedTab = (item: any) => {
-    activeTable.value = item
-    router.push({ path: route.path, query: { page: item } })
+    // activeTable.value = item
+    // router.push({ path: route.path, query: { page: item } })
     emit('selected', item)
 }
 </script>
