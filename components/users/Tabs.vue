@@ -21,10 +21,6 @@ const breadcrumbTabs = ref([
         key: 'insight',
         text: "Insight",
     },
-    // {
-    //     key: 'stori',
-    //     text: "Stori",
-    // },
     {
         key: 'wallet',
         text: "Wallet & Payout",
@@ -41,7 +37,7 @@ const emit = defineEmits<{
 }>()
 
 const handleSelectedTab = (item: any) => {
-    // activeTable.value = item
+    // activeTable.value = itemcommented
     // router.push({ path: route.path, query: { page: item } })
     emit('selected', item)
 }
