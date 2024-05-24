@@ -1,19 +1,18 @@
 <template>
     <main>
-        <UsersTabs @selected="handleSelected" />
-        <section v-if="activeProfileView === 'insight' && route.query.page === 'insight'"
-            class="bg-white p-6 border-[0.1px] border-gray-100 shadow-sm rounded-b-lg space-y-10">
+        <!-- <UsersTabs @selected="handleSelected" /> -->
+        <section class="bg-white p-6 border-[0.1px] border-gray-100 shadow-sm rounded-b-lg space-y-10">
             <section class="">
                 <div v-if="!loading && Object.keys(user).length" class="space-y-3">
                     <h1 class="text-[#101828] font-medium text-base">User Information</h1>
-                    <UsersProfileHeader :user="user" :loadingUser="loading" :userStats="setUserStats()"
-                        :activeTable="activeTable" :activeTab="activeTab" />
+                    <UsersProfileHeader @selected="handleSelectedTab" :user="user" :loadingUser="loading"
+                        :userStats="setUserStats()" :activeTable="activeTable" :activeTab="activeTab" />
                 </div>
                 <div class="w-full" v-if="loading && !Object.keys(user).length">
                     <div class="h-[100px] w-full bg-slate-300 rounded-2xl animate-pulse"></div>
                 </div>
             </section>
-            <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <section v-if="!Object.keys(route.query).length" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
                     <UsersProfileDetails v-if="!loading && Object.keys(user).length" class="w-full"
                         :userStats="setUserStats()" :user="user" :loadingUser="loading" />
@@ -32,9 +31,18 @@
                     </div>
                 </div>
             </section>
+            <section v-else-if="route.query.page === 'stories'">
+                <UsersStories />
+            </section>
+            <section v-else-if="route.query.page === 'wallet'">
+                <UsersWallet />
+            </section>
+            <section v-else>
+                <CoreEmptyState title="No Data Available" desc="" />
+            </section>
         </section>
-        <UsersWallet v-if="activeProfileView === 'wallet' && route.query.page === 'wallet'" />
-        <UsersStories v-if="activeProfileView === 'stori' && route.query.page === 'stori'" />
+        <!-- <UsersWallet v-if="activeProfileView === 'wallet' && route.query.page === 'wallet'" /> -->
+        <!-- <UsersStories v-if="activeProfileView === 'stori' && route.query.page === 'stori'" /> -->
     </main>
 </template>
 
@@ -48,12 +56,14 @@ fetchUserStories()
 const router = useRouter()
 const route = useRoute()
 const activeTab = ref("default") as any
-const activeProfileView = ref('')
+const activeProfileView = ref('default')
 
 const handleSelected = (data: any) => {
     activeProfileView.value = data
     router.push({ path: route.path, query: { page: data } })
 }
+
+const activeProfileTab = ref('default')
 
 // router.push({ path: route.path, query: { page: 'insight' } })
 
@@ -104,4 +114,10 @@ onMounted(() => {
 definePageMeta({
     layout: 'dashboard'
 })
+
+const handleSelectedTab = (itm: any) => {
+    activeProfileView.value = itm.key
+    router.push({ path: route.path, query: { page: itm.key } })
+    // activeProfileTab.value = itm.key
+}
 </script>

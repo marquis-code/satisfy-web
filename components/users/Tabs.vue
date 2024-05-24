@@ -21,10 +21,10 @@ const breadcrumbTabs = ref([
         key: 'insight',
         text: "Insight",
     },
-    {
-        key: 'stori',
-        text: "Stori",
-    },
+    // {
+    //     key: 'stori',
+    //     text: "Stori",
+    // },
     {
         key: 'wallet',
         text: "Wallet & Payout",
