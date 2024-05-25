@@ -5,7 +5,7 @@
             <section class="">
                 <div v-if="!loading && Object.keys(user).length" class="space-y-3">
                     <h1 class="text-[#101828] font-medium text-base">User Information</h1>
-                    <UsersProfileHeader @selected="handleSelectedTab" :user="user" :loadingUser="loading"
+                    <UsersProfileHeader @profileSelected="handleSelectedProfileTab" @selected="handleSelectedTab" :user="user" :loadingUser="loading"
                         :userStats="setUserStats()" :activeTable="activeTable" :activeTab="activeTab" />
                 </div>
                 <div class="w-full" v-if="loading && !Object.keys(user).length">
@@ -45,12 +45,18 @@
 </template>
 
 <script lang="ts" setup>
+import { useFetchFollowersCount } from '@/composables/user/getFollowersCount'
+import { useFetchFollowingsCount } from '@/composables/user/getFollowingsCount'
 import { useFetchUserById } from '@/composables/user/getUserById'
 import { useFetchUserStories } from '@/composables/user/fetchUserStories'
 const { fetchUserStories, userStoriesList, loading: loadingUserStories } = useFetchUserStories()
+const { fetchFollowingsCount, followingsCount, loading: loadingFollowings } = useFetchFollowingsCount()
+const { fetchFollowersCount, followersCount, loading: loadingFollowers } = useFetchFollowersCount()
 const { fetchUser, user, loading } = useFetchUserById()
 fetchUser()
 fetchUserStories()
+fetchFollowersCount()
+fetchFollowingsCount()
 const router = useRouter()
 const route = useRoute()
 const activeTab = ref("default") as any
@@ -59,6 +65,10 @@ const activeProfileView = ref('default')
 const handleSelected = (data: any) => {
     activeProfileView.value = data
     router.push({ path: route.path, query: { page: data } })
+}
+
+const handleSelectedProfileTab = () => {
+    router.push({ path: route.path })
 }
 
 // const activeProfileTab = ref('default')
@@ -70,12 +80,12 @@ const setUserStats = () => {
         {
             title: "Followers",
             key: "followers",
-            count: user?.value?.followersCount ?? 0
+            count:  !loadingFollowers.value ? followersCount?.value : 0
         },
         {
             title: "Following",
             key: "following",
-            count: user?.value?.followingsCount ?? 0
+            count:  !loadingFollowings.value ? followingsCount?.value : 0
         },
         {
             title: "Stories",

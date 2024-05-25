@@ -35,15 +35,18 @@
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                 Last name
               </th>
-              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+              <!-- <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                 Interest(s)
-              </th>
+              </th> -->
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                 Phone no.
               </th>
-              <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                 Email
               </th>
+              <!-- <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
+                No. of (pods)
+              </th> -->
               <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
                 Actions
               </th>
@@ -82,7 +85,7 @@
                 <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.lname ??
       "N/A" }}</nuxt-link>
               </td>
-              <td class="whitespace-nowrap px-3 py-4 text-sm text-[#6941C6] font-semibold">
+              <!-- <td class="whitespace-nowrap px-3 py-4 text-sm text-[#6941C6] font-semibold">
                 <div class="grid grid-cols-2 lg:grid-cols-3 gap-3" v-if="person.categories.length">
                   <span class="bg-[#F9F5FF] rounded-full px-3 py-2 text-xs" v-for="(itm, idx) in  person.categories"
                     :key="idx">{{
@@ -90,16 +93,20 @@
     }}</span>
                 </div>
                 <span v-else class="bg-[#EEF4FF] text-[#6941C6] rounded-full px-3 py-2">N/A</span>
-              </td>
+              </td> -->
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.phone ??
       "N/A" }}</nuxt-link>
               </td>
-              <td class="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
+              <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.email ??
       "N/A" }}</nuxt-link>
               </td>
-              <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-xs font-medium sm:pr-3 relative">
+              <!-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{
+      getUserPods(person) }}</nuxt-link>
+              </td> -->
+              <td class="whitespace-nowrap text-center py-4 pl-3 pr-4 text-xs font-medium sm:pr-3 relative">
                 <button @click="toggleDropdown(index)">
                   <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none"
                     stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -299,12 +306,14 @@
 
 <script setup lang="ts">
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
+import { useFetchUserStories } from '@/composables/user/fetchUserStories'
 import { useEditUser } from '@/composables/user/editUser'
 import { useRemoveUser } from '@/composables/user/removeUser'
 import { useDeactivateUser } from '@/composables/user/deactivateUser'
 const { deactivateUser, loading } = useDeactivateUser()
 const { editUser, loading: editingUser, payload } = useEditUser()
 const { removeUser, loading: processing } = useRemoveUser()
+const { fetchUserStories, userStoriesList, loading: loadingUserStories } = useFetchUserStories()
 const selectedPeople = ref([]) as any;
 const selectedOption = ref('') as any;
 const selectedUser = ref({}) as any
@@ -421,6 +430,12 @@ const toggleUserStatus = (user: any) => {
 const generateInitials = (fname: string, lname: string) => {
   return `${fname.charAt(0).toUpperCase()}${lname.charAt(0).toUpperCase()}`;
 };
+
+// const getUserPods = async (user: any) => {
+//   await fetchUserStories(user.id).then(() => {
+//     return userStoriesList.value.length
+//   })
+// }
 
 
 </script>

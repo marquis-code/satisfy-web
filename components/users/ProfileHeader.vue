@@ -2,11 +2,11 @@
   <div class="flex">
     <div v-if="loadingUser && !Object.keys(user).length" class="rounded-full bg-slate-500 h-16 w-16 animate-pulse">
     </div>
-    <div v-if="user?.profilePicture && !loadingUser" class="lg:w-1/12 flex justify-center items-center">
+    <div @click="handleProfileTabSelection" v-if="user?.profilePicture && !loadingUser" class="lg:w-1/12 flex justify-center items-center">
       <img :src="user?.profilePicture" alt="avatar" class="h-16 w-16 rounded-full cursor-pointer" />
     </div>
-    <div v-if="!loadingUser && user?.profilePicture === null"
-      class="h-16 w-16 mr-4 rounded-full bg-gray-500 text-white flex justify-center items-center">
+    <div @click="handleProfileTabSelection" v-if="!loadingUser && user?.profilePicture === null"
+      class="h-16 w-16 mr-4 rounded-full cursor-pointer bg-gray-500 text-white flex justify-center items-center">
       {{ computedInitials }}
     </div>
     <div class="w-11/12 hidden lg:block ml-14">
@@ -61,6 +61,7 @@ const props = defineProps({
 });
 const emit = defineEmits<{
   (event: "selected", state: string): void;
+  (event: "profileSelected"): void;
 }>();
 const activeTable = ref("insights");
 const setActiveTab = (state: string) => {
@@ -74,4 +75,8 @@ const computedInitials = computed(() => {
       ?.toUpperCase()}`
     : "";
 });
+
+const handleProfileTabSelection = () => {
+  emit("profileSelected");
+}
 </script>

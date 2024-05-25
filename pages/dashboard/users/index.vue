@@ -14,6 +14,39 @@
       <div class="flow-root mt-2">
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 border-[0.7px] rounded-b-lg">
           <div v-if="filteredUsers.length && !loading">
+            <div class="flex items-center justify-between px-4 p-2">
+              <div class="flex rounded border border-gray-100">
+                <button @click="activeTableView = 'grid'" :class="[activeTableView === 'grid' ? 'bg-gray-50 text-gray-700' : '']"
+                  class="inline-flex size-10 items-center justify-center border-e text-gray-600 transition">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="h-7 w-7">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+                  </svg>
+                </button>
+
+                <button @click="activeTableView = 'list'" :class="[activeTableView === 'list' ? 'bg-gray-50 text-gray-700' : '']"
+                  class="inline-flex size-10 items-center justify-center text-gray-600 transition hover:bg-gray-50 hover:text-gray-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="h-7 w-7">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+                  </svg>
+                </button>
+              </div>
+
+              <div>
+                <label for="SortBy" class="sr-only">SortBy</label>
+
+                <select id="SortBy" class="h-10 rounded border-gray-300 text-sm">
+                  <option>Sort By</option>
+                  <option value="Title, DESC">Title, DESC</option>
+                  <option value="Title, ASC">Title, ASC</option>
+                  <option value="Price, DESC">Price, DESC</option>
+                  <option value="Price, ASC">Price, ASC</option>
+                </select>
+              </div>
+            </div>
             <form class="relative flex flex-1 border-[0.9px] py-6" action="#" method="GET">
               <label for="search-field" class="sr-only">Search</label>
               <svg class="pointer-events-none absolute inset-y-0 left-3 h-full w-5 text-gray-400" viewBox="0 0 20 20"
@@ -26,13 +59,20 @@
                 class="block h-full w-full border-0 py-0 pl-10 pr-0 outline-none text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
                 placeholder="Search..." v-model="searchQuery" type="search" name="search">
             </form>
-            <UsersTable :usersList="filteredUsers" :loadingUsers="loading" :pagination="pagination"
-              @selectedUser="handleSelectedUser" />
-            <CorePagination :total="pagination.total" :page="pagination.page" :perPage="pagination.perPage"
-              :pages="pagination.pages" @page-changed="handlePageChange" />
+            <section v-if="activeTableView === 'list'">
+              <UsersTableList :usersList="filteredUsers" :loadingUsers="loading" :pagination="pagination"
+                @selectedUser="handleSelectedUser" />
+              <CorePagination :total="pagination.total" :page="pagination.page" :perPage="pagination.perPage"
+                :pages="pagination.pages" @page-changed="handlePageChange" />
+            </section>
+            <section v-if="activeTableView === 'grid'">
+              <UsersTableGrid :usersList="filteredUsers" :loadingUsers="loading" :pagination="pagination"
+                @selectedUser="handleSelectedUser" />
+              <CorePagination :total="pagination.total" :page="pagination.page" :perPage="pagination.perPage"
+                :pages="pagination.pages" @page-changed="handlePageChange" />
+            </section>
           </div>
-          <CoreEmptyState v-if="filteredUsers.length <= 0 && !loading" title="No User available"
-            desc="">
+          <CoreEmptyState v-if="filteredUsers.length <= 0 && !loading" title="No User available" desc="">
           </CoreEmptyState>
           <LoadingSpinner v-if="loading" />
         </div>
@@ -55,6 +95,7 @@ const indeterminate = computed(() => selectedPeople.value.length > 0 && selected
 definePageMeta({
   layout: 'dashboard'
 })
+const activeTableView = ref('list')
 
 const handleSelectedUser = (data: any) => {
   selectedUser.value = data
