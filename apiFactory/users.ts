@@ -26,10 +26,10 @@ export const userApiFactory = {
     return axiosInstance.get(`/user/${userId}/following`);
   },
   getUserFollowersCount(userId: string) {
-    return axiosInstance.get(`/user/${userId}/follower/count`);
+    return axiosInstance.get(`/users/${userId}/followers/count`);
   },
   getUserFollowingCount(userId: string) {
-    return axiosInstance.get(`/user/${userId}/following/count`);
+    return axiosInstance.get(`/users/${userId}/followings/count`);
   },
   getUserSummary(userId: string) {
     return axiosInstance.get(`/user/${userId}/summary`);

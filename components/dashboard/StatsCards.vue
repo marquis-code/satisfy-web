@@ -40,7 +40,7 @@ const modifyCardTitle = (data: string) => {
         case 'signups':
             return 'Sign ups'
         case 'story':
-            return 'Stories'
+            return 'Pods'
         case 'engagement':
             return 'Engagement'
         default:
