@@ -27,7 +27,7 @@
                     <li>
                       <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
                       <NuxtLink to="/dashboard" @click.prevent="isOpen = false"
-                        class="bg-gray-50 text-indigo-600 group flex gap-x-3 rounded-md p-2 py-3 text-sm leading-6 font-semibold">
+                        class="bg-gray-50 text-indigo-600 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
                         <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                           stroke="currentColor" aria-hidden="true">
                           <path stroke-linecap="round" stroke-linejoin="round"
@@ -38,7 +38,7 @@
                     </li>
                     <li>
                       <NuxtLink to="/dashboard/users" @click.prevent="isOpen = false"
-                        class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-sm leading-6 font-semibold">
+                        class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
                         <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M10.5391 10C11.5336 10 12.4875 9.60491 13.1907 8.90165C13.894 8.19839 14.2891 7.24456 14.2891 6.25C14.2891 5.25544 13.894 4.30161 13.1907 3.59835C12.4875 2.89509 11.5336 2.5 10.5391 2.5C9.5445 2.5 8.59067 2.89509 7.88741 3.59835C7.18415 4.30161 6.78906 5.25544 6.78906 6.25C6.78906 7.24456 7.18415 8.19839 7.88741 8.90165C8.59067 9.60491 9.5445 10 10.5391 10ZM13.0391 6.25C13.0391 6.91304 12.7757 7.54893 12.3068 8.01777C11.838 8.48661 11.2021 8.75 10.5391 8.75C9.87602 8.75 9.24014 8.48661 8.7713 8.01777C8.30245 7.54893 8.03906 6.91304 8.03906 6.25C8.03906 5.58696 8.30245 4.95107 8.7713 4.48223C9.24014 4.01339 9.87602 3.75 10.5391 3.75C11.2021 3.75 11.838 4.01339 12.3068 4.48223C12.7757 4.95107 13.0391 5.58696 13.0391 6.25ZM18.0391 16.25C18.0391 17.5 16.7891 17.5 16.7891 17.5H4.28906C4.28906 17.5 3.03906 17.5 3.03906 16.25C3.03906 15 4.28906 11.25 10.5391 11.25C16.7891 11.25 18.0391 15 18.0391 16.25ZM16.7891 16.245C16.7878 15.9375 16.5966 15.0125 15.7491 14.165C14.9341 13.35 13.4003 12.5 10.5391 12.5C7.67656 12.5 6.14406 13.35 5.32906 14.165C4.48156 15.0125 4.29156 15.9375 4.28906 16.245H16.7891Z"
@@ -49,7 +49,7 @@
                     </li>
                     <li>
                       <NuxtLink to="/dashboard/pods" @click.prevent="isOpen = false"
-                        class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-sm leading-6 font-semibold">
+                        class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M18 15L19 15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
@@ -70,7 +70,7 @@
                     </li>
                     <li>
                       <NuxtLink to="/dashboard/notify" @click.prevent="isOpen = false"
-                        class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-sm leading-6 font-semibold">
+                        class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                           stroke="#4a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                           <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0">
@@ -81,7 +81,7 @@
                     </li>
                     <li>
                       <a href="#" @click.prevent="isOpen = false"
-                        class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-sm leading-6 font-semibold">
+                        class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
                         <!-- <svg class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600" fill="none"
                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -93,7 +93,7 @@
                     </li>
                     <li>
                       <NuxtLink to="/dashboard/admin" @click.prevent="isOpen = false"
-                        class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-sm leading-6 font-semibold">
+                        class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <g clip-path="url(#clip0_7_35209)">
                             <path
@@ -115,7 +115,7 @@
 
                     <li>
                       <NuxtLink to="/dashboard/configuration" @click.prevent="isOpen = false"
-                        class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-sm leading-6 font-semibold">
+                        class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M11.667 15L17.5003 15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
@@ -341,7 +341,7 @@
         </button>
         <div class="h-6 w-px bg-gray-200 lg:hidden" aria-hidden="true"></div>
 
-      <CoreDashboardHeader :username="username" />
+        <CoreDashboardHeader :username="username" />
       </div>
 
       <main class="py-10">

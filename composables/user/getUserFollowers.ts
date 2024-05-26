@@ -8,7 +8,7 @@ export const useFetchFollowers = () => {
     loading.value = true;
     try {
       const response = await userApiFactory.getUserFollowers(userId);
-      followersList.value = response.data;
+      followersList.value = response.data.result || [];
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
         autoClose: 5000,

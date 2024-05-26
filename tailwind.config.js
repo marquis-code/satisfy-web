@@ -29,6 +29,11 @@ module.exports = {
           925: "#0d0d0d",
         },
       },
+      screens: {
+        'tablet': '768px',
+        'laptop': '1024px',
+        'desktop': '1280px',
+      },
     },
   },
   variants: {

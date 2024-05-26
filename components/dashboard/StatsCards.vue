@@ -2,7 +2,7 @@
     <main>
         <div class="">
             <section v-if="!loading && Object.keys(dashboardSummary).length"
-                class="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-4 lg:gap-8">
+                class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4 lg:gap-8">
                 <div class="flex justify-center items-center flex-col gap-y-6 rounded-2xl p-4 lg:p-7"
                     v-for="(value, key) in dashboardSummary" :key="key" :class="computedCardColor(key)">
                     <h1 class="font-semibold text-lg">{{ modifyCardTitle(key) }}</h1>
