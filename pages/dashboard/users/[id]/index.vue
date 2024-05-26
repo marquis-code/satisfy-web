@@ -5,8 +5,9 @@
             <section class="">
                 <div v-if="!loading && Object.keys(user).length" class="space-y-3">
                     <h1 class="text-[#101828] font-medium text-base">User Information</h1>
-                    <UsersProfileHeader @profileSelected="handleSelectedProfileTab" @selected="handleSelectedTab" :user="user" :loadingUser="loading"
-                        :userStats="setUserStats()" :activeTable="activeTable" :activeTab="activeTab" />
+                    <UsersProfileHeader @profileSelected="handleSelectedProfileTab" @selected="handleSelectedTab"
+                        :user="user" :loadingUser="loading" :userStats="setUserStats()" :activeTable="activeTable"
+                        :activeTab="activeTab" />
                 </div>
                 <div class="w-full" v-if="loading && !Object.keys(user).length">
                     <div class="h-[100px] w-full bg-slate-300 rounded-2xl animate-pulse"></div>
@@ -37,6 +38,12 @@
             <section v-else-if="route.query.page === 'wallet'">
                 <UsersWallet />
             </section>
+            <section v-else-if="route.query.page === 'followers'">
+                <UsersFollowers :users="followersList" :loading="loadFollowers" />
+            </section>
+            <section v-else-if="route.query.page === 'following'">
+                <UsersFollowings :users="followingsList" :loading="loadFollowings" />
+            </section>
             <section v-else>
                 <CoreEmptyState title="No Data Available" desc="" />
             </section>
@@ -45,18 +52,18 @@
 </template>
 
 <script lang="ts" setup>
-import { useFetchFollowersCount } from '@/composables/user/getFollowersCount'
-import { useFetchFollowingsCount } from '@/composables/user/getFollowingsCount'
+import { useFetchFollowings } from '@/composables/user/getUserFollowings'
+import { useFetchFollowers } from '@/composables/user/getUserFollowers'
 import { useFetchUserById } from '@/composables/user/getUserById'
 import { useFetchUserStories } from '@/composables/user/fetchUserStories'
 const { fetchUserStories, userStoriesList, loading: loadingUserStories } = useFetchUserStories()
-const { fetchFollowingsCount, followingsCount, loading: loadingFollowings } = useFetchFollowingsCount()
-const { fetchFollowersCount, followersCount, loading: loadingFollowers } = useFetchFollowersCount()
+const { fetchFollowings, followingsList, loading: loadFollowings } = useFetchFollowings()
+const { fetchFollowers, followersList, loading: loadFollowers } = useFetchFollowers()
 const { fetchUser, user, loading } = useFetchUserById()
 fetchUser()
 fetchUserStories()
-fetchFollowersCount()
-fetchFollowingsCount()
+fetchFollowings()
+fetchFollowers()
 const router = useRouter()
 const route = useRoute()
 const activeTab = ref("default") as any
@@ -80,12 +87,12 @@ const setUserStats = () => {
         {
             title: "Followers",
             key: "followers",
-            count:  !loadingFollowers.value ? followersCount?.value : 0
+            count: !loadFollowers.value ? followersList?.value.length : 0
         },
         {
             title: "Following",
             key: "following",
-            count:  !loadingFollowings.value ? followingsCount?.value : 0
+            count: !loadFollowings.value ? followingsList?.value.length : 0
         },
         {
             title: "Stories",

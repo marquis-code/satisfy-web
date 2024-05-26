@@ -40,14 +40,12 @@
 
                 <select id="SortBy" class="h-10 rounded border-gray-300 text-sm">
                   <option>Sort By</option>
-                  <option value="Title, DESC">Title, DESC</option>
-                  <option value="Title, ASC">Title, ASC</option>
-                  <option value="Price, DESC">Price, DESC</option>
-                  <option value="Price, ASC">Price, ASC</option>
+                  <option value="newest">Newest</option>
+                  <option value="latest">Latest</option>
                 </select>
               </div>
             </div>
-            <form class="relative flex flex-1 border-[0.9px] py-6" action="#" method="GET">
+            <form class="relative flex flex-1 w-full border-[0.9px] py-6" action="#" method="GET">
               <label for="search-field" class="sr-only">Search</label>
               <svg class="pointer-events-none absolute inset-y-0 left-3 h-full w-5 text-gray-400" viewBox="0 0 20 20"
                 fill="currentColor" aria-hidden="true">

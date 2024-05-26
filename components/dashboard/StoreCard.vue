@@ -7,25 +7,6 @@
       </select>
     </div>
     <div class="flex flex-col justify-between h-[450px] divide divide-y">
-      <!-- <div class="flex justify-between items-start border-b border-gray-100 py-10 px-7 h-full">
-        <img src="@/assets/icons/dashboard/android-badge.svg" alt="" />
-        <div class="space-y-4">
-          <div class="flex items-center space-x-4">
-            <h2 class="font-bold text-3xl">625</h2>
-            <img src="@/assets/icons/dashboard/increase.svg" alt="" class="h-10 w-10" />
-          </div>
-          <p class="text-gray-400">Downloads</p>
-          <div class="flex items-center gap-x-3">
-            <p class="mt-3">4.5</p>
-            <div>
-              <img src="@/assets/icons/dashboard/star-group.svg" class="w-32" alt="" />
-            </div>
-          </div>
-        </div>
-        <div>
-          <h2 class="text-green-500 font-medium">+2.4%</h2>
-        </div>
-      </div> -->
       <div class="flex justify-between items-start py-10 px-7  h-1/2">
         <img src="@/assets/icons/dashboard/ios-badge.svg" alt="" />
         <div class="space-y-4">
