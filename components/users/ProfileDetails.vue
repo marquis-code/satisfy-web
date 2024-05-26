@@ -8,7 +8,7 @@
         </div>
       </div>
       <p class="text-gray-500 font-semibold text-sm">
-        Account created | {{ formatDate(user.createdAt) }} | {{ formatDate(user.createdAt) }}
+        Account created | {{ formatDate(user.createdAt) }}
       </p>
     </div>
     <dl class="-my-3 divide-y divide-gray-100 text-sm p-3">
