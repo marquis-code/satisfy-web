@@ -13,7 +13,7 @@
             <div v-if="openDropdownIndex === stori.id"
                 class="absolute mt-1.5 w-32 bg-white top-3 right-2 rounded-lg border-[0.4px] border-gray-200 shadow-xl z-10">
                 <div>
-                    <a href="#" @click.prevent="toggleDropdown(stori.id)"
+                    <a href="#" @click.prevent="handleNotifyUser(stori.id)"
                         class="flex items-center p-3 text-sm text-gray-700 font-bold hover:text-gray-900  capitalize transition-colors duration-300 transform">
                         <span class="mx-1">
                             Notify User
@@ -72,6 +72,45 @@
                 </div>
             </section>
         </CoreBaseModal>
+
+
+        <CoreBaseModal :show="openNotifyUserModal" @update:show="false">
+            <section class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
+                <div>
+                    <h1 class="font-semibold text-xl">Notify user</h1>
+                    <p class="text-gray-500">
+                        Use this form to send a user update
+                    </p>
+                </div>
+                <div>
+                    <select v-model="form.category">
+                        <option>Violation of story policies</option>
+                    </select>
+                </div>
+                <div>
+                    <TextEditor />
+                </div>
+                <!-- <div>
+                    <img src="@/assets/icons/danger.svg" class="h-20 w-20" alt="warning" />
+                </div>
+                <div>
+                    <h1 class="font-semibold text-xl">Remove story</h1>
+                    <p class="text-gray-500">
+                        Are you sure you want to delete this story? This action cannot be undone.
+                    </p>
+                </div>
+                <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+                    <button @click="openRemoveStoryModal = false"
+                        class="text-black text-sm font-medium w-full border-gray-400 border px-3 py-3 rounded-lg">
+                        Cancel
+                    </button>
+                    <button :disabled="processingDelete || processingDelete" @click="handleRemoveUser"
+                        class="bg-[#D92D20] disabled:cursor-not-allowed disabled:opacity-25 text-sm w-full text-white font-medium px-6 py-3 rounded-lg">
+                        {{ processingDelete ? "processing..." : "Remove" }}
+                    </button>
+                </div> -->
+            </section>
+        </CoreBaseModal>
     </main>
 </template>
 
@@ -89,7 +128,17 @@ const handleRemoveStory = (stori: any) => {
     openRemoveStoryModal.value = true
 };
 
+const handleNotifyUser = (stori: any) => {
+    openNotifyUserModal.value = true
+}
+
 const openRemoveStoryModal = ref(false)
+const openNotifyUserModal = ref(false)
+
+const form = ref({
+    category: '',
+    description: ''
+})
 
 const openDropdownIndex = ref(null);
 

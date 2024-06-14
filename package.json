@@ -22,6 +22,9 @@
   "dependencies": {
     "@nuxtjs/moment": "^1.6.1",
     "@nuxtjs/tailwindcss": "^6.11.4",
+    "@tiptap/pm": "^2.4.0",
+    "@tiptap/starter-kit": "^2.4.0",
+    "@tiptap/vue-3": "^2.4.0",
     "@vueuse/core": "^10.9.0",
     "apexcharts": "^3.49.0",
     "axios": "^1.6.8",
