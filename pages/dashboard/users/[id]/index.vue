@@ -4,7 +4,14 @@
         <section class="bg-white p-6 border-[0.1px] border-gray-100 shadow-sm rounded-b-lg space-y-10">
             <section class="">
                 <div v-if="!loading && Object.keys(user).length" class="space-y-3">
-                    <h1 class="text-[#101828] font-medium text-base">User Information</h1>
+                    <div class="w-full border-b flex justify-between">
+                        <h1 class="text-[#101828] font-medium text-base">User Information</h1>
+                        <div>
+                            <NuxtLink :to="`/dashboard/users/${user.id}/create-pod`"
+                                class="bg-[#0ba9b9] text-white font-medium text-sm rounded-md py-2.5 px-4">Add Pods
+                            </NuxtLink>
+                        </div>
+                    </div>
                     <UsersProfileHeader @profileSelected="handleSelectedProfileTab" @selected="handleSelectedTab"
                         :user="user" :loadingUser="loading" :userStats="setUserStats()" :activeTable="activeTable"
                         :activeTab="activeTab" />
@@ -33,6 +40,15 @@
                 </div>
             </section>
             <section v-else-if="route.query.page === 'stories'">
+                <div class="flex justify-end items-end">
+                    <button @click="createPod" class="bg-green-600  rounded-full shadow p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                </div>
                 <UsersStories />
             </section>
             <section v-else-if="route.query.page === 'wallet'">
@@ -48,6 +64,14 @@
                 <CoreEmptyState title="No Data Available" desc="" />
             </section>
         </section>
+
+        <CoreSlideOver type="large" :show="showSlideOver" @update:show="closeSlideOver"
+            :title="`Add new stori to ${user.fname} ${user.lname}`"
+            description="Get started by filling the form below to create a new stori.">
+            <template #content>
+                <StoriesForm />
+            </template>
+        </CoreSlideOver>
     </main>
 </template>
 
@@ -78,9 +102,16 @@ const handleSelectedProfileTab = () => {
     router.push({ path: route.path })
 }
 
-// const activeProfileTab = ref('default')
+const showSlideOver = ref(false)
 
-// router.push({ path: route.path, query: { page: 'insight' } })
+const createPod = () => {
+    // router.push({ path: route.path, query: { action: 'create' } })
+    showSlideOver.value = true
+}
+
+const closeSlideOver = () => {
+    showSlideOver.value = false
+}
 
 const setUserStats = () => {
     return [
@@ -122,9 +153,9 @@ const setUserStats = () => {
     ]
 }
 
-onMounted(() => {
-    setUserStats()
-})
+// onMounted(() => {
+//     setUserStats()
+// })
 
 definePageMeta({
     layout: 'dashboard'

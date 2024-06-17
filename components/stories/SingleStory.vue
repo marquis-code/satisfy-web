@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="px-4">
-                <img v-if="stori?.cover_image" :src="stori?.cover_image" class="h-10 w-10 rounded-full" alt="" />
+                <DashboardImageZoom v-if="stori?.cover_image" class="h-10 w-10 rounded-full object-cover object-center" alt="" :src="stori?.cover_image" />
                 <img v-else src="@/assets/img/stori.png" class="h-10 w-10 rounded-full" alt="" />
             </div>
             <h1 class="px-4 text-sm text-gray-700">{{ stori?.title ?? 'Nil' }}</h1>

@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="w-full border-b">
+    <div class="w-full border-b flex justify-between">
       <nav class="" aria-label="Tabs">
         <div href="#"
           :class="[activeTab === 'users' ? 'border-b-4 border-[#0ba9b9] text-gray-800' : 'text-gray-400 group-hover:text-gray-500']"
@@ -9,6 +9,9 @@
             pagination.total }}</span>
         </div>
       </nav>
+      <div>
+        <NuxtLink to="/dashboard/users/new" class="bg-[#0ba9b9] text-white font-medium text-sm rounded-md py-2.5 px-4">Add User</NuxtLink>
+      </div>
     </div>
     <div class="px-4 sm:px-6 lg:px-8">
       <div class="flow-root mt-2">
@@ -103,64 +106,4 @@ const handlePageChange = (val: any) => {
   pagination.value.page = val
 }
 fetchUsers()
-
-// const users = ref([]);
-// const pagination = ref({
-//   total: 0,
-//   page: 1,
-//   perPage: 20,
-//   pages: 0,
-// });
-
-// const handleFetchUsers = async (page = 1) => {
-//   pagination.value = {
-//     total: metadata.value.total,
-//     page: metadata.value.page,
-//     perPage: metadata.value.perPage,
-//     pages: metadata.value.pages,
-//   };
-// };
-
-// onMounted(() => {
-//   fetchUsers();
-// });
-
-
-// interface Item {
-//   id: number
-//   name: string
-// }
-
-// interface Metadata {
-//   total: number
-//   page: number
-//   perPage: number
-//   pages: number
-// }
-
-// const data = ref<Item[]>([])
-// const metadata = ref<Metadata>({
-//   total: 0,
-//   page: 1,
-//   perPage: 20,
-//   pages: 0,
-// })
-
-// const fetchData = async (page: number = 1) => {
-//   // Replace with your actual API endpoint and logic
-//   // const response = await fetch(/api/items?page=${page}&perPage=${metadata.value.perPage})
-//   const result = await response.json()
-
-//   data.value = result.items
-//   metadata.value = {
-//     total: result.total,
-//     page: result.page,
-//     perPage: result.perPage,
-//     pages: result.pages,
-//   }
-// }
-
-// onMounted(() => {
-//   fetchData()
-// })
 </script>

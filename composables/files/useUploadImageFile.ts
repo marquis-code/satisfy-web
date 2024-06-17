@@ -1,13 +1,13 @@
 import { filesApiFactory } from "@/apiFactory/files";
 
-export const useFetchFilesList = () => {
-  const filesList = ref([]);
+export const useUploadImageFile = () => {
+  const uploadResponse = ref({}) as any;
   const loading = ref(false);
-  const fetchFilesList = async () => {
+  const uploadImageFile = async (payload: any) => {
     loading.value = true;
     try {
-      const response = await filesApiFactory.getFilesList();
-      filesList.value = response.data;
+      const response = await filesApiFactory.uploadFile(payload);
+      uploadResponse.value = response.data;
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
         autoClose: 5000,
@@ -19,5 +19,5 @@ export const useFetchFilesList = () => {
     }
   };
 
-  return { fetchFilesList, filesList, loading };
+  return { uploadImageFile, uploadResponse, loading };
 };

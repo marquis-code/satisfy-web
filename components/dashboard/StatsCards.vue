@@ -1,6 +1,12 @@
 <template>
-    <main>
-        <div class="">
+    <main class="">
+        <div class="space-y-6">
+            <div class="flex justify-end items-end">
+                <div class="w-3/12">
+                    <CoreDateInput v-model="dateFilter" range placeholder="Filter by date" :disabled-date="() => null"
+                        clearable />
+                </div>
+            </div>
             <section v-if="!loading && Object.keys(dashboardSummary).length"
                 class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4 lg:gap-8">
                 <div class="flex justify-center items-center flex-col gap-y-6 rounded-2xl p-4 lg:p-7"
@@ -19,9 +25,9 @@
                     <p class="text-[#6E717C] text-sm">Compared from Last Month</p>
                 </div>
             </section>
-            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-4 lg:gap-8" v-if="loading && !Object.keys(dashboardSummary).length">
-                <div v-for="itm in 4" :key="itm"
-                    class="h-[200px] bg-slate-300 rounded-2xl animate-pulse"></div>
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-4 lg:gap-8"
+                v-if="loading && !Object.keys(dashboardSummary).length">
+                <div v-for="itm in 4" :key="itm" class="h-[200px] bg-slate-300 rounded-2xl animate-pulse"></div>
             </div>
         </div>
     </main>
@@ -30,7 +36,11 @@
 <script setup lang="ts">
 import { useFetchDashboardSummary } from '@/composables/dashboard/getDashboardSummary'
 const { fetchDashboardSummary, dashboardSummary, loading } = useFetchDashboardSummary()
+const dateFilter = ref(null) as any
 
+watch(dateFilter, ((val) => {
+    fetchDashboardSummary()
+}))
 fetchDashboardSummary()
 
 const modifyCardTitle = (data: string) => {
