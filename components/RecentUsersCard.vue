@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div v-if="!loading && usersList.length" class="rounded-2xl bg-white p-6 border-gray-50 border space-y-6">
+    <div v-if="!loading && usersList" class="rounded-2xl bg-white p-6 border-gray-50 border space-y-6">
       <div class="space-y-2">
         <h1 class="font-semibold text-base md:text-lg">
           Most Recent

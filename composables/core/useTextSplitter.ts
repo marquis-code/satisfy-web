@@ -1,4 +1,3 @@
-// composables/useTextSplitter.ts
 import { ref } from 'vue';
 
 export const useTextSplitter = () => {
@@ -15,13 +14,14 @@ export const useTextSplitter = () => {
   const getRandomColor = () => colors[Math.floor(Math.random() * colors.length)];
 
   const splitTextIntoSlides = (text: string) => {
-    const words = text.split(/\s+/);
+    const trimmedText = text.trim().replace(/\s+/g, ' ');
     const chunks = [];
-    for (let i = 0; i < words.length; i += 700) {
-      chunks.push(words.slice(i, i + 700).join(' '));
+    for (let i = 0; i < trimmedText.length; i += 700) {
+      chunks.push(trimmedText.slice(i, i + 700));
     }
     const newSlides = chunks.map(chunk => ({ text: chunk, color: getRandomColor() }));
     slides.value = [...slides.value, ...newSlides].slice(0, 25);
+    return newSlides; // Return the newly created slides
   };
 
   const removeSlide = (index: number) => {

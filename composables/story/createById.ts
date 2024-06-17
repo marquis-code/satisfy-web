@@ -21,7 +21,12 @@ export const useCreateUserStory = () => {
     loading.value = true;
     try {
       const response = await storyApiFactory.createUserStory(payload.value);
-      router.push({ path: `/dashboard/users/${route.params.id}` });
+      useNuxtApp().$toast.success("Story was published successfully", {
+        autoClose: 5000,
+        dangerouslyHTMLString: true,
+      })
+      location.href = '/dashboard/users'
+      // router.push({ path: `/dashboard/users/${route.params.id}` });
       return response;
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
