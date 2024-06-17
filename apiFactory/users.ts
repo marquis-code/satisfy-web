@@ -1,10 +1,12 @@
 import { axiosInstance, storipodAxiosInstance } from "./axios.config";
 
 export const userApiFactory = {
-  getUsersList(metadata: { page: number; perPage: number }) {
-    return axiosInstance.get(
-      `/user/all?page=${metadata.page}&perPage=${metadata.perPage}`
-    );
+  getUsersList(metadata: { page: number; perPage: number }, searchQuery: any) {
+    let endpoint = `/user/all?page=${metadata.page}&perPage=${metadata.perPage}`;
+    if (searchQuery && searchQuery.trim() !== "") {
+      endpoint += `&search=${encodeURIComponent(searchQuery.trim())}`;
+    }
+    return axiosInstance.get(endpoint);
   },
   getUserById(id: string) {
     return axiosInstance.get(`/user/${id}`);

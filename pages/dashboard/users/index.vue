@@ -16,7 +16,7 @@
     <div class="px-4 sm:px-6 lg:px-8">
       <div class="flow-root mt-2">
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 border-[0.7px] rounded-b-lg">
-          <div v-if="filteredUsers.length && !loading">
+          <div>
             <div class="flex items-center justify-between px-4 p-2">
               <div class="flex rounded border border-gray-100">
                 <button @click="activeTableView = 'grid'" :class="[activeTableView === 'grid' ? 'bg-gray-50 text-gray-700' : '']"
@@ -61,25 +61,25 @@
                 placeholder="Search..." v-model="searchQuery" type="search" name="search">
             </form>
             <section v-if="activeTableView === 'list'">
-              <UsersTableList :usersList="filteredUsers" :loadingUsers="loading" :pagination="pagination"
+              <UsersTableList :usersList="usersList" :loadingUsers="loading" :pagination="pagination"
                 @selectedUser="handleSelectedUser" />
               <CorePagination :total="pagination.total" :page="pagination.page" :perPage="pagination.perPage"
                 :pages="pagination.pages" @page-changed="handlePageChange" />
             </section>
             <section v-if="activeTableView === 'grid'">
-              <UsersTableGrid :usersList="filteredUsers" :loadingUsers="loading" :pagination="pagination"
+              <UsersTableGrid :usersList="usersList" :loadingUsers="loading" :pagination="pagination"
                 @selectedUser="handleSelectedUser" />
               <CorePagination :total="pagination.total" :page="pagination.page" :perPage="pagination.perPage"
                 :pages="pagination.pages" @page-changed="handlePageChange" />
             </section>
           </div>
-          <CoreEmptyState v-if="filteredUsers.length <= 0 && !loading" title="No User available" desc="">
+          <CoreEmptyState v-if="usersList.length <= 0 && !loading" title="No User available" desc="">
           </CoreEmptyState>
           <LoadingSpinner v-if="loading" />
         </div>
       </div>
     </div>
-    <div class="w-full" v-if="loading && !filteredUsers.length">
+    <div class="w-full" v-if="loading && !usersList.length">
       <div class="h-[500px] w-full bg-slate-300 rounded-2xl animate-pulse"></div>
     </div>
   </main>
@@ -87,8 +87,7 @@
 
 <script setup lang="ts">
 import { useFetchUsers } from '@/composables/user/fetch'
-const { fetchUsers, usersList, searchQuery,
-  filteredUsers, loading, pagination } = useFetchUsers()
+const { fetchUsers, usersList, searchQuery, loading, pagination } = useFetchUsers()
 const selectedUser = ref({}) as any
 const activeTab = ref('users')
 const selectedPeople = ref([])

@@ -148,6 +148,7 @@ const handleStoriContent = (data: any) => {
 };
 
 const handleManualContent = (data: any) => {
+    console.log(data, 'my data')
     manualContentList.value = data;
 }
 
@@ -156,7 +157,7 @@ const handleCreateUserStory = () => {
         mediaType: "text/plain",
         title: payload.value.title,
         content: item.text,
-        coverImage: null,
+        coverImage: uploadResponse.value.url,
         backgroundColor: slideColor.value || '0xFF39349A',
         isVisible: true,
         mediaUrl: null,
@@ -167,13 +168,14 @@ const handleCreateUserStory = () => {
         mediaType: "text/plain",
         title: payload.value.title,
         content: item.text,
-        coverImage: null,
+        coverImage: uploadResponse.value.url,
         backgroundColor: slideColor.value || '0xFF39349A',
         isVisible: true,
         mediaUrl: null,
         fontFamily: "DancingScript_regular"
     }));
 
+    console.log(manualContentList, 'her pl')
     const computedStoryCategories = uploadedTagsList.value.map((item: any) => ({
         categoryId: item.id,
     }));
@@ -190,10 +192,17 @@ const handleCreateUserStory = () => {
 
     // Set the payload and then call the createUserStory function
     setPayload(finalPayload);
+    console.log(finalPayload, 'final pay')
     createUserStory().then(response => {
-        console.log('User story created successfully', response);
+        useNuxtApp().$toast.success("Story was published successfully", {
+        autoClose: 5000,
+        dangerouslyHTMLString: true,
+      })
     }).catch(error => {
-        console.error('Error creating user story', error);
+        useNuxtApp().$toast.error("Something went wrong!", {
+        autoClose: 5000,
+        dangerouslyHTMLString: true,
+      });
     });
 };
 
@@ -202,7 +211,6 @@ const handleTagContent = (data: any) => {
 }
 
 const handleColorChange = (e: any) => {
-    console.log(e.target.value, 'selectd')
     slideColor.value = e.target.value
 }
 
