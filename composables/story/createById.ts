@@ -1,28 +1,27 @@
 import { storyApiFactory } from "@/apiFactory/story";
-import { useRoute } from 'vue-router';
-import { ref, computed } from 'vue';
-
+import { ref, computed } from "vue";
+import { useRouter, useRoute } from 'vue-router';
 const loading = ref(false);
-const router = useRouter()
 const payload = ref({
   isPublished: true,
   title: "",
   tags: "",
-  userId: '',
-  coverImage: '',
+  userId: "",
+  coverImage: "",
   storyCategories: [],
   slides: [],
 }) as any;
 const descriptionLength = ref(700) as any;
+const router = useRouter();
+const route = useRoute();
+console.log(router, route, 'here ooo')
 
 export const useCreateUserStory = () => {
-  const route = useRoute()
   const createUserStory = async () => {
     loading.value = true;
     try {
-      console.log(payload.value, 'value here')
       const response = await storyApiFactory.createUserStory(payload.value);
-      router.push(`/dashboard/users/${route.params.id}`)
+      router.push({ path: `/dashboard/users/${route.params.id}` });
       return response;
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
@@ -49,5 +48,12 @@ export const useCreateUserStory = () => {
     payload.value.coverImage = data.coverImage;
   };
 
-  return { createUserStory, payload, loading, disabled, descriptionLength, setPayload };
+  return {
+    createUserStory,
+    payload,
+    loading,
+    disabled,
+    descriptionLength,
+    setPayload,
+  };
 };

@@ -31,11 +31,11 @@
                 <fieldset class="flex flex-wrap gap-3">
                     <legend class="sr-only">Color</legend>
 
-                    <label v-for="color in colors" :key="color.name" :for="color.code"
+                    <label v-for="color in colors" :key="color.key" :for="color.key"
                         :style="{ backgroundColor: color.code }"
                         class="block size-8 cursor-pointer rounded-full bg-black shadow-sm has-[:checked]:ring-2 has-[:checked]:ring-black has-[:checked]:ring-offset-2">
-                        <input type="radio" @change="handleColorChange" name="ColorOption" :value="color.code"
-                            :id="color.code" class="sr-only" />
+                        <input type="radio" @change="handleColorChange" name="ColorOption" :value="color.key"
+                            :id="color.key" class="sr-only" />
 
                         <span class="sr-only"> {{ color.name }}: {{ color.code }} </span>
                     </label>
@@ -115,7 +115,6 @@ const setDescriptionLength = (value: string) => {
 const onFileChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
     const file = target.files ? target.files[0] : null;
-    console.log(file, 'file here');
     if (file && file.type.startsWith("image/")) {
         const formData = new FormData();
         formData.append('file', file);
@@ -158,7 +157,7 @@ const handleCreateUserStory = () => {
         title: payload.value.title,
         content: item.text,
         coverImage: null,
-        backgroundColor: slideColor.value,
+        backgroundColor: slideColor.value || '0xFF39349A',
         isVisible: true,
         mediaUrl: null,
         fontFamily: "DancingScript_regular"
@@ -169,7 +168,7 @@ const handleCreateUserStory = () => {
         title: payload.value.title,
         content: item.text,
         coverImage: null,
-        backgroundColor: slideColor.value,
+        backgroundColor: slideColor.value || '0xFF39349A',
         isVisible: true,
         mediaUrl: null,
         fontFamily: "DancingScript_regular"
@@ -203,6 +202,7 @@ const handleTagContent = (data: any) => {
 }
 
 const handleColorChange = (e: any) => {
+    console.log(e.target.value, 'selectd')
     slideColor.value = e.target.value
 }
 

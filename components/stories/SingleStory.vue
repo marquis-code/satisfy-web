@@ -74,7 +74,7 @@
         </CoreBaseModal>
 
 
-        <CoreBaseModal :show="openNotifyUserModal" @update:show="false">
+        <CoreBaseModal :show="openNotifyUserModal" @update:show="openNotifyUserModal = false">
             <section class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
                 <div>
                     <h1 class="font-semibold text-xl">Notify user</h1>
