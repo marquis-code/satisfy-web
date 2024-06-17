@@ -7,12 +7,10 @@ export const useFetchDashboardSummary = () => {
     loading.value = true;
     try {
       const response = await dashboardApiFactory.getDashboardSummary();
-      console.log(response, 'res here')
       if(typeof response !== 'undefined'){
         dashboardSummary.value = response.data;
       }
     } catch (error: any) {
-      console.log(error, 'error here')
       // useNuxtApp().$toast.error(error.message, {
       //   autoClose: 5000,
       //   dangerouslyHTMLString: true,

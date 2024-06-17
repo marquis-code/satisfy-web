@@ -49,7 +49,7 @@
                         </svg>
                     </button>
                 </div>
-                <UsersStories />
+                <UsersStories :stories="userStoriesList" />
             </section>
             <section v-else-if="route.query.page === 'wallet'">
                 <UsersWallet />
@@ -153,9 +153,9 @@ const setUserStats = () => {
     ]
 }
 
-// onMounted(() => {
-//     setUserStats()
-// })
+onMounted(() => {
+    router.push({ path: route.path, query: { page: 'insight' } })
+})
 
 definePageMeta({
     layout: 'dashboard'

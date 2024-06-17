@@ -29,7 +29,6 @@ export const useFetchUsers = () => {
 
   const filteredUsers = computed(() => {
     const query = searchQuery.value.trim().toLowerCase();
-    console.log(query, 'query here');
     if (!query) return usersList.value;
 
     return usersList.value.filter(
