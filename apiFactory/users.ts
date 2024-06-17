@@ -1,8 +1,10 @@
-import { axiosInstance } from "./axios.config";
+import { axiosInstance, storipodAxiosInstance } from "./axios.config";
 
 export const userApiFactory = {
-  getUsersList(metadata: { page: number, perPage: number}) {
-    return axiosInstance.get(`/user/all?page=${metadata.page}&perPage=${metadata.perPage}`);
+  getUsersList(metadata: { page: number; perPage: number }) {
+    return axiosInstance.get(
+      `/user/all?page=${metadata.page}&perPage=${metadata.perPage}`
+    );
   },
   getUserById(id: string) {
     return axiosInstance.get(`/user/${id}`);
@@ -38,11 +40,20 @@ export const userApiFactory = {
     return axiosInstance.post(`/user/${userId}/status`, payload);
   },
   removeUser(id: string | number) {
-    const url = `/users/${id}`
-    return axiosInstance.delete(url)
+    const url = `/users/${id}`;
+    return axiosInstance.delete(url);
   },
   editUser(id: string | number, payload: any) {
-    const url = `/users/${id}/edit`
-    return axiosInstance.patch(url, payload)
-  }
+    const url = `/users/${id}/edit`;
+    return axiosInstance.patch(url, payload);
+  },
+  createUser(payload: any) {
+    return axiosInstance.post("/user/create-user", payload);
+  },
+  getUserInterests(metadata: { page: number; perPage: number }) {
+    return storipodAxiosInstance.get(`/categories/all?page=${metadata.page}&perPage=${metadata.perPage}`);
+  },
+  getUserInterestsBySearch(metadata: { page: number; perPage: number, search: string }) {
+    return storipodAxiosInstance.get(`/categories?page=${metadata.page}&perPage=${metadata.perPage}&search=${metadata.search}`);
+  },
 };

@@ -6,7 +6,7 @@
         <div class="fixed inset-0 overflow-hidden">
             <div class="absolute inset-0 overflow-hidden">
                 <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
-                    <div class="pointer-events-auto w-screen max-w-md">
+                    <div class="pointer-events-auto w-screen" :class="[type === 'large' ? 'max-w-xl' : 'max-w-md']">
                         <div class="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl">
                             <div class="h-0 flex-1 overflow-y-auto">
                                 <div class="bg-indigo-700 px-4 py-6 sm:px-6">
@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ show: boolean, title: string, description: string }>();
+defineProps<{ show: boolean, title: string, description: string, type: string }>();
 const emit = defineEmits(['update:show']);
 
 const closeModal = () => {
