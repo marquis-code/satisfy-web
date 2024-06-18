@@ -175,7 +175,7 @@ const computedReportedUsersList = computed(() => {
 })
 fetchUsers()
 fetchReportedUsers()
-const activeTable = ref("reserved_usernames")
+const activeTable = ref("recent_signup")
 const setActiveTable = (val: string) => {
   activeTable.value = val;
 }

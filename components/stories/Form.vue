@@ -1,7 +1,7 @@
 <template>
     <main>
         <section class="pt-6 lg:px-6 space-y-4 h-full">
-            <p class="flex justify-end items-end text-sm">created by {{ user.user.firstname }} {{ user.user.lastname }}
+            <p class="flex justify-end items-end text-sm">created by {{ user?.firstname || 'Nil' }} {{ user?.lastname || 'Nil' }}
                 on 15th September 2022, 10:14 AM</p>
             <div class="space-y-3">
                 <p class="text-gray-900 font-medium text-sm">Pod Cover</p>
