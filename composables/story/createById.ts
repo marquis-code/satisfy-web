@@ -14,7 +14,6 @@ const payload = ref({
 const descriptionLength = ref(700) as any;
 const router = useRouter();
 const route = useRoute();
-console.log(router, route, 'here ooo')
 
 export const useCreateUserStory = () => {
   const createUserStory = async () => {

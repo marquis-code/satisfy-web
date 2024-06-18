@@ -33,7 +33,6 @@ export const useFetchStories = () => {
 
   const filteredStories = computed(() => {
     const query = searchQuery.value.trim().toLowerCase();
-    console.log(query, "query here");
     if (!query) return storiesList.value;
 
     return storiesList.value.filter(

@@ -263,7 +263,6 @@ const handleStoriContent = (data: any) => {
 };
 
 const handleManualContent = (data: any) => {
-    console.log(data, 'my data')
     manualContentList.value = data;
 }
 
@@ -313,7 +312,6 @@ const handleCreateUserStory = () => {
 
     // Set the payload and then call the createUserStory function
     setPayload(finalPayload);
-    console.log(finalPayload, 'final pay')
     createUserStory().then(response => {
         useNuxtApp().$toast.success("Story was published successfully", {
             autoClose: 5000,
