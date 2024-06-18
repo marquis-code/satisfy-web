@@ -42,7 +42,6 @@ export const useLogin = () => {
         password: loginPayload.value.password,
       };
       const response = await authApiFactory.login(payload);
-      console.log(response, "res here");
       runtimeData.user.value = response.data.user;
       localstorageData.token.value = response.data?.token.accessToken;
       localstorageData.expiry.value = response.data?.token.expiresIn

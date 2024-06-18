@@ -1,12 +1,15 @@
 // composables/user/getRecentSignups.ts
 import { useFetchUsers } from '@/composables/user/fetch'
+import { computed } from 'vue'
+import moment from 'moment'
+
 export function useRecentSignups() {
   const { fetchUsers, usersList, loading } = useFetchUsers();
   
   const recentSignups = computed(() => {
     return usersList.value
       .slice()
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      .sort((a, b) => moment(b.createdAt).valueOf() - moment(a.createdAt).valueOf())
       .slice(0, 5);
   });
 

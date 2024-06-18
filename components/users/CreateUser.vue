@@ -133,7 +133,6 @@ const eye = computed(() => {
 const onFileChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
     const file = target.files ? target.files[0] : null;
-    console.log(file, 'file here');
     if (file && file.type.startsWith("image/")) {
         const formData = new FormData();
         formData.append('file', file);
