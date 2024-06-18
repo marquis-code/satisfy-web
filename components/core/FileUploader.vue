@@ -16,21 +16,38 @@
       </svg>
     </div>
 
-    <div v-else>
-      <div v-if="editingIndex !== null" class="mb-4 p-4 rounded shadow-md">
-        <textarea v-model="editingText"
-          class="w-full border-gray-200 outline-none text-sm ring-0 leading-snug p-3 h-32 border rounded resize-none mb-2"></textarea>
-        <div class="flex justify-end space-x-2">
-          <button @click="saveEditing"
-            class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Save</button>
-          <button @click="cancelEditing"
-            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Cancel</button>
+    <div v-else class="">
+      <div v-if="editingIndex !== null" class="mb-4 p-4 rounded shadow-md space-y-3">
+        <div class="flex justify-between items-center">
+          <p class="text-sm text-gray-700 font-semibold">Character count should not exceed 380 characters and 12
+            lines.</p>
+          <p
+            :class="`text-sm text-gray-700 font-semibold ${editingText.length > 380 ? 'text-red-600' : editingText.length === 380 ? 'text-green-700' : ''}`">
+            {{ editingText.length }}/380</p>
+        </div>
+        <div class="flex space-x-6">
+          <div class="w-9/12">
+            <textarea v-model="editingText"
+              class="w-full h-60 border-gray-200 outline-none text-sm ring-0 leading-snug p-3 border rounded resize-none mb-2"></textarea>
+            <div class="flex justify-end space-x-2">
+              <button @click="saveEditing"
+                class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Save</button>
+              <button @click="cancelEditing"
+                class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Cancel</button>
+            </div>
+          </div>
+          <div :style="{ backgroundColor: color }"
+            :class="`w-3/12 h-[300px] overflow-y-auto rounded-md ${!color.length ? 'border border-gray-600' : ''}`">
+            <p :style="{ fontFamily: selectedFont }" class="text-preview"
+              :class="`text-base leading-relaxed p-3 ${!color.length ? 'text-gray-700' : 'text-white'}`">{{ editingText
+              }}</p>
+          </div>
         </div>
       </div>
 
-      <div class="space-y-2 grid grid-cols-4 lg:grid-cols-12 gap-2">
+      <div class="grid grid-cols-4 lg:grid-cols-12 gap-2">
         <div v-for="(chunk, chunkIndex) in textChunks" :key="chunkIndex" @click="startEditing(chunkIndex)"
-          :class="[chunk.color, 'relative p-3 rounded shadow-md flex items-center justify-center cursor-pointer', { 'border-2 border-green-500': chunkIndex === editingIndex }]"
+          :class="[chunk.color, 'relative p-3 rounded shadow flex border border-gray-200 items-center justify-center cursor-pointer', { 'border-2 border-green-500': chunkIndex === editingIndex }]"
           class="w-24 h-24">
           <div class="flex flex-col items-center justify-center space-y-2">
             <div class="pt-3">
@@ -49,7 +66,6 @@
                 <p class="pb-4 text-sm font-semibold">{{ chunkIndex + 1 }}</p>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -75,4 +91,15 @@ const onFileChange = (event: Event) => {
       });
   }
 };
+
+
+defineProps({
+  color: {
+    type: String,
+    default: ''
+  },
+  selectedFont: {
+    type: String
+  }
+})
 </script>

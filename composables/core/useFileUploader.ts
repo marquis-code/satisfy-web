@@ -1,5 +1,6 @@
+import Swal from "sweetalert2";
 export const useFileUploader = () => {
-  const textChunks = ref<{ text: string; color: string }[]>([]);
+  const textChunks = ref<{ text: string }[]>([]);
   const editingIndex = ref<number | null>(null);
   const editingText = ref<string>("");
   const isLoading = ref<boolean>(false);
@@ -29,32 +30,31 @@ export const useFileUploader = () => {
   };
 
   const processText = (text: string) => {
-    const chunks: { text: string; color: string }[] = [];
-    for (let i = 0; i < text.length; i += 700) {
+    const chunks: { text: string }[] = [];
+    for (let i = 0; i < text.length; i += 380) {
       if (chunks.length >= 25) break; // Stop processing after 25 chunks
-      chunks.push({ text: text.slice(i, i + 700), color: getRandomColor() });
+      chunks.push({ text: text.slice(i, i + 380) });
     }
     textChunks.value = chunks;
   };
 
-  const getRandomColor = () => {
-    const colors = [
-      "bg-red-200",
-      "bg-pink-200",
-      "bg-purple-200",
-      "bg-indigo-200",
-      "bg-blue-200",
-      "bg-teal-200",
-      "bg-green-200",
-      "bg-yellow-200",
-      "bg-orange-200",
-      "bg-gray-200",
-    ];
-    return colors[Math.floor(Math.random() * colors.length)];
-  };
-
   const removeChunk = (index: number) => {
-    textChunks.value.splice(index, 1);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete Slide.",
+      cancelButtonText: "Nah, Just kidding",
+    }).then((result) => {
+      if (result.value) {
+        textChunks.value.splice(index, 1);
+      } else {
+        Swal.fire("Cancelled", "Action was cancelled", "info");
+      }
+    });
   };
 
   const startEditing = (index: number) => {
@@ -87,3 +87,4 @@ export const useFileUploader = () => {
     isLoading,
   };
 };
+

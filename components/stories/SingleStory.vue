@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <CoreBaseModal :show="openRemoveStoryModal" @update:show="false">
+        <CoreBaseModal :show="openRemoveStoryModal" @update:show="openRemoveStoryModal = false">
             <section class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
                 <div>
                     <img src="@/assets/icons/danger.svg" class="h-20 w-20" alt="warning" />

@@ -7,12 +7,17 @@ export const useUploadImageFile = () => {
     loading.value = true;
     try {
       const response = await filesApiFactory.uploadFile(payload);
-      uploadResponse.value = response.data;
+      console.log(response);
+      if (typeof response.data !== 'undefined') {
+        uploadResponse.value = response.data;
+      }
     } catch (error: any) {
-      useNuxtApp().$toast.error(error.message, {
+      if(typeof error.response !== 'undefined'){
+    useNuxtApp().$toast.error(error.message, {
         autoClose: 5000,
         dangerouslyHTMLString: true,
       });
+      }
       return error;
     } finally {
       loading.value = false;
