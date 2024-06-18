@@ -9,6 +9,13 @@
           <div class="">
             <div class="border-b border-gray-200">
               <nav class="-mb-px flex gap-6 overflow-x-auto" aria-label="Tabs">
+                <button @click="setActiveTable('recent_signup')" :class="[
+                  activeTable === 'recent_signup'
+                    ? 'border-sky-500 font-bold text-gray-900'
+                    : 'border-transparent',
+                ]" class="shrink-0 border-b-2 px-1 pb-2 text-sm text-gray-400">
+                              Recent Signup
+                            </button>
                 <button @click="setActiveTable('reserved_usernames')" :class="[
       activeTable === 'reserved_usernames'
         ? 'border-sky-500 border-b-2 font-bold text-gray-900'
@@ -31,14 +38,6 @@
         : 'border-transparent',
     ]" class="shrink-0 border-b-2 px-1 pb-2 text-sm text-gray-400">
                   Reported post
-                </button>
-
-                <button @click="setActiveTable('reported_comment')" :class="[
-      activeTable === 'reported_comment'
-        ? 'border-sky-500 font-bold text-gray-900'
-        : 'border-transparent',
-    ]" class="shrink-0 border-b-2 px-1 pb-2 text-sm text-gray-400">
-                  Reported comment
                 </button>
               </nav>
             </div>
@@ -121,7 +120,7 @@
         <CoreEmptyState title="No Data available" desc="">
         </CoreEmptyState>
       </div>
-      <div v-if="activeTable === 'reported_comment'" class="overflow-x-auto">
+      <div v-if="activeTable === 'recent_signup'" class="overflow-x-auto">
         <CoreEmptyState title="No Data available" desc="">
         </CoreEmptyState>
       </div>

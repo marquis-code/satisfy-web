@@ -44,13 +44,13 @@ export const useCreateUser = () => {
     const createUserPayload = {
       email: form.value.email,
       password: form.value.password,
-      phone: form.value.phone,
+      phone: '',
       fname: form.value.fname,
       lname: form.value.lname,
       profilePicture: form.value.imageSrc,
       handle: form.value.handle,
       dateOfBirth: form.value.dob,
-      countryCode: 'ng'
+      countryCode: ''
     };
     try {
       const response = await userApiFactory.createUser(createUserPayload);

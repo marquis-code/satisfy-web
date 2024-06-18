@@ -38,9 +38,9 @@
               <!-- <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                 Interest(s)
               </th> -->
-              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+              <!-- <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                 Phone no.
-              </th>
+              </th> -->
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                 Email
               </th>
@@ -75,15 +75,15 @@
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 <nuxt-link :to="`/dashboard/users/${person.id}`" class="font-medium text-gray-800 no-underline">{{
-      person.handle ?? "N/A" }}</nuxt-link>
+      person.handle ?? "Nil" }}</nuxt-link>
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.fname ??
-      "N/A" }}</nuxt-link>
+                <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.fname ||
+      "Nil" }}</nuxt-link>
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.lname ??
-      "N/A" }}</nuxt-link>
+                <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.lname ||
+      "Nil" }}</nuxt-link>
               </td>
               <!-- <td class="whitespace-nowrap px-3 py-4 text-sm text-[#6941C6] font-semibold">
                 <div class="grid grid-cols-2 lg:grid-cols-3 gap-3" v-if="person.categories.length">
@@ -92,15 +92,15 @@
       itm.name.length > 10 ? `${itm.name.slice(0, 10)}...` : itm.name
     }}</span>
                 </div>
-                <span v-else class="bg-[#EEF4FF] text-[#6941C6] rounded-full px-3 py-2">N/A</span>
+                <span v-else class="bg-[#EEF4FF] text-[#6941C6] rounded-full px-3 py-2">Nil</span>
+              </td> -->
+              <!-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.phone ??
+      "Nil" }}</nuxt-link>
               </td> -->
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.phone ??
-      "N/A" }}</nuxt-link>
-              </td>
-              <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.email ??
-      "N/A" }}</nuxt-link>
+      "Nil" }}</nuxt-link>
               </td>
               <!-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{

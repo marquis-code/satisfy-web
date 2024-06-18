@@ -21,11 +21,6 @@
             type="text" />
         </div>
         <div class="w-full space-y-1">
-          <label class="text-xs md:text-sm font-medium">Phone</label>
-          <input v-model="form.phone" class="bg-gray-50 rounded-md w-full outline-none py-3 border-gray-300 border pl-3"
-            type="tel" />
-        </div>
-        <div class="w-full space-y-1">
           <label class="text-xs md:text-sm font-medium">Last name</label>
           <input v-model="form.lname" class="bg-gray-50 rounded-md w-full outline-none py-3 border-gray-300 border pl-3"
             type="text" />

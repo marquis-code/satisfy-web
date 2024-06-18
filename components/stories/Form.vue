@@ -1,6 +1,8 @@
 <template>
     <main>
         <section class="pt-6 lg:px-6 space-y-4 h-full">
+            <p class="flex justify-end items-end text-sm">created by {{ user.user.firstname }} {{ user.user.lastname }}
+                on 15th September 2022, 10:14 AM</p>
             <div class="space-y-3">
                 <p class="text-gray-900 font-medium text-sm">Pod Cover</p>
                 <div>
@@ -20,7 +22,7 @@
                 <input v-model="payload.title" name="title" id="title"
                     class="bg-gray-50 rounded-md w-full outline-none py-3 border-gray-300 border pl-3" type="text" />
             </div>
-            <div class="flex justify-between items-center">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 <div>
                     <p class="text-sm font-medium">Select mode of uploading stori</p>
                     <select v-model="uploadType" class="border rounded-lg py-2 text-sm outline-none mt-3">
@@ -28,54 +30,60 @@
                         <option value="upload">Create pod via Upload</option>
                     </select>
                 </div>
+
                 <fieldset class="flex flex-wrap gap-3">
-                    <legend class="sr-only">Color</legend>
+                    <legend class="text-sm font-medium">Select stori background color</legend>
 
                     <label v-for="color in colors" :key="color.key" :for="color.key"
                         :style="{ backgroundColor: color.code }"
                         class="block size-8 cursor-pointer rounded-full bg-black shadow-sm has-[:checked]:ring-2 has-[:checked]:ring-black has-[:checked]:ring-offset-2">
-                        <input type="radio" @change="handleColorChange" name="ColorOption" :value="color.key"
-                            :id="color.key" class="sr-only" />
+                        <input type="radio" @change="handleColorChange(color, $event)" name="ColorOption"
+                            :value="color.key" :id="color.key" class="sr-only" />
 
                         <span class="sr-only"> {{ color.name }}: {{ color.code }} </span>
                     </label>
-
-                    <label for="ColorRed"
-                        class="block size-8 cursor-pointer rounded-full bg-red-500 shadow-sm has-[:checked]:ring-2 has-[:checked]:ring-red-500 has-[:checked]:ring-offset-2">
-                        <input type="radio" name="ColorOption" value="ColorRed" id="ColorRed" class="sr-only" />
-
-                        <span class="sr-only">Fiesta Red</span>
-                    </label>
-
-                    <label for="ColorBlue"
-                        class="block size-8 cursor-pointer rounded-full bg-blue-500 shadow-sm has-[:checked]:ring-2 has-[:checked]:ring-blue-500 has-[:checked]:ring-offset-2">
-                        <input type="radio" name="ColorOption" value="ColorBlue" id="ColorBlue" class="sr-only" />
-
-                        <span class="sr-only">Cobalt Blue</span>
-                    </label>
-
-                    <label for="ColorGold"
-                        class="block size-8 cursor-pointer rounded-full bg-amber-500 shadow-sm has-[:checked]:ring-2 has-[:checked]:ring-amber-500 has-[:checked]:ring-offset-2">
-                        <input type="radio" name="ColorOption" value="ColorGold" id="ColorGold" class="sr-only" />
-
-                        <span class="sr-only">Goldtop</span>
-                    </label>
                 </fieldset>
+                <div>
+                    <p class="text-sm font-medium">Select stori font</p>
+                    <select @change="applyFont" v-model="selectedFont"
+                        class="border rounded-lg py-2 text-sm outline-none mt-3">
+                        <option :value="item.code" v-for="item in fontsList" :key="item.code">{{ item.name }}</option>
+                    </select>
+                </div>
+
+                <div>
+                    <p class="text-sm font-medium">Select stori visibility</p>
+                    <select v-model="selectedVisibilityStatus" class="border rounded-lg py-2 text-sm outline-none mt-3">
+                        <option :value="item.code" v-for="item in storiVisibilityList" :key="item.name">{{ item.name }}
+                        </option>
+                    </select>
+                </div>
+
+                <div>
+                    <p class="text-sm font-medium">Select stori publication status</p>
+                    <select v-model="selectedPublicationStatus"
+                        class="border rounded-lg py-2 text-sm outline-none mt-3">
+                        <option :value="item.code" v-for="item in storiPublicationStatusList" :key="item.name">{{
+                item.name }}</option>
+                    </select>
+                </div>
             </div>
 
-            <StoriesSlidesManager @content="handleManualContent" v-if="uploadType === 'manual'" />
+            <StoriesSlidesManager :selectedFont="selectedFont" :color="hexaColor" @content="handleManualContent"
+                v-if="uploadType === 'manual'" />
             <div v-if="uploadType === 'upload'">
                 <h1 class="text-sm font-medium">Upload a PDF or TXT file</h1>
-                <CoreFileUploader @content="handleStoriContent" :description="payload.description" />
+                <CoreFileUploader :selectedFont="selectedFont" :color="hexaColor" @content="handleStoriContent"
+                    :description="payload.description" />
             </div>
             <StoriesTagInput @content="handleTagContent" />
 
             <div class="flex justify-end items-end pt-32">
                 <div class="flex gap-x-3">
-                    <button type="button"
+                    <button type="button" @click="handleCancellation"
                         class="text-[#0BA9B9] border border-gray-400 text-sm font-semibold rounded-lg px-6 py-3 w-full">Cancel</button>
-                    <button type="button" @click="handleCreateUserStory"
-                        class="text-white bg-[#0BA9B9] font-semibold text-sm rounded-lg px-6 py-3 w-full">
+                    <button :disabled="!isButtonEnabled" type="button" @click="handleCreateUserStory"
+                        class="text-white disabled:cursor-not-allowed disabled:opacity-25 bg-[#0BA9B9] font-semibold text-sm rounded-lg px-6 py-3 w-full">
                         {{ loading ? 'processing..' : 'Pod it' }}
                     </button>
                 </div>
@@ -86,14 +94,20 @@
 
 
 <script setup lang="ts">
+import Swal from "sweetalert2";
+import { useLogin } from '@/composables/auth/login'
 import { useColors } from '@/composables/core/useColors';
+import { useFontFamily } from '@/composables/core/useFontFamily'
 const { colors } = useColors();
 import { useRoute } from 'vue-router'
 import { useCreateUserStory } from "@/composables/story/createById";
 import { useUploadImageFile } from '@/composables/files/useUploadImageFile'
 const { uploadImageFile, uploadResponse, loading: uploading } = useUploadImageFile()
+const { user } = useLogin()
+const selectedFont = ref('Lato') as any
 
 const { createUserStory, payload, loading, descriptionLength, setPayload } = useCreateUserStory();
+const { fontsList } = useFontFamily()
 const uploadType = ref('upload');
 const manualPodList = ref<string[]>([]);
 const actualManualPod = ref<string>('');
@@ -102,11 +116,40 @@ const uploadedTagsList = ref<any[]>([]);
 const uploadedPodCover = ref('') as any;
 const slideColor = ref('') as any;
 const manualContentList = ref([]) as any
+const hexaColor = ref('') as any
 // const coverImage = ref('') as any
 const route = useRoute();
 
+const storiVisibilityList = ref([
+    {
+        code: true,
+        name: 'True'
+    },
+    {
+        code: false,
+        name: 'False'
+    }
+])
+
+const storiPublicationStatusList = ref([
+    {
+        code: true,
+        name: 'True'
+    },
+    {
+        code: false,
+        name: 'False'
+    }
+])
+
+const selectedPublicationStatus = ref(true) as any
+const selectedVisibilityStatus = ref(true) as any
+
 const imagePreview = ref('') as any
 
+const applyFont = () => {
+    document.querySelector('.text-preview')?.setAttribute('style', `font-family: ${selectedFont.value}`);
+};
 
 const setDescriptionLength = (value: string) => {
     payload.value.description = value;
@@ -152,41 +195,45 @@ const handleManualContent = (data: any) => {
     manualContentList.value = data;
 }
 
-const handleCreateUserStory = () => {
-    const computedSlides = uploadedFileList.value.map((item: any) => ({
+const computedSlides = computed(() => {
+    return uploadedFileList.value.map((item: any) => ({
         mediaType: "text/plain",
         title: payload.value.title,
         content: item.text,
         coverImage: uploadResponse.value.url,
         backgroundColor: slideColor.value || '0xFF39349A',
-        isVisible: true,
+        isVisible: selectedVisibilityStatus.value || true,
         mediaUrl: null,
-        fontFamily: "DancingScript_regular"
+        fontFamily: selectedFont.value
     }));
+})
 
-    const computedManualSlides = manualContentList.value.map((item: any) => ({
+const computedManualSlides = computed(() => {
+    return manualContentList.value.map((item: any) => ({
         mediaType: "text/plain",
         title: payload.value.title,
         content: item.text,
         coverImage: uploadResponse.value.url,
         backgroundColor: slideColor.value || '0xFF39349A',
-        isVisible: true,
+        isVisible: selectedVisibilityStatus.value || true,
         mediaUrl: null,
-        fontFamily: "DancingScript_regular"
+        fontFamily: selectedFont.value
     }));
-
-    console.log(manualContentList, 'her pl')
-    const computedStoryCategories = uploadedTagsList.value.map((item: any) => ({
+})
+const computedStoryCategories = computed(() => {
+    return uploadedTagsList.value.map((item: any) => ({
         categoryId: item.id,
     }));
+})
 
+const handleCreateUserStory = () => {
     const finalPayload = {
-        isPublished: true,
+        isPublished: selectedPublicationStatus.value,
         title: payload.value.title,
         tags: "",
         coverImage: uploadResponse.value.url,
         userId: route.params.id,
-        slides: uploadType.value === 'manual' ? computedManualSlides : computedSlides,
+        slides: uploadType.value === 'manual' ? computedManualSlides.value : computedSlides.value,
         storyCategories: computedStoryCategories
     };
 
@@ -195,14 +242,14 @@ const handleCreateUserStory = () => {
     console.log(finalPayload, 'final pay')
     createUserStory().then(response => {
         useNuxtApp().$toast.success("Story was published successfully", {
-        autoClose: 5000,
-        dangerouslyHTMLString: true,
-      })
+            autoClose: 5000,
+            dangerouslyHTMLString: true,
+        })
     }).catch(error => {
         useNuxtApp().$toast.error("Something went wrong!", {
-        autoClose: 5000,
-        dangerouslyHTMLString: true,
-      });
+            autoClose: 5000,
+            dangerouslyHTMLString: true,
+        });
     });
 };
 
@@ -210,8 +257,41 @@ const handleTagContent = (data: any) => {
     uploadedTagsList.value = data.value
 }
 
-const handleColorChange = (e: any) => {
+const handleColorChange = (color: any, e: any) => {
+    hexaColor.value = color.code
     slideColor.value = e.target.value
 }
 
+const isButtonEnabled = computed(() => {
+    return !!(selectedPublicationStatus.value && payload.value.title && uploadResponse.value.url && route.params.id && (computedManualSlides.value || computedSlides.value) && computedStoryCategories.value)
+})
+
+const handleCancellation = () => {
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Cancel Story",
+        cancelButtonText: "Nah, Just kidding",
+    }).then((result: any) => {
+        if (result.value) {
+            // selectedPublicationStatus.value = null
+            payload.value.title = null
+            // uploadResponse.value.url = null
+            uploadedFileList.value = []
+            uploadedTagsList.value = []
+            // uploadedPodCover.value = ''
+            manualPodList.value = []
+            slideColor.value = ''
+            manualContentList.value = []
+            hexaColor.value = ''
+        } else {
+            Swal.fire("Cancelled", "Action was cancelled", "info");
+        }
+    });
+}
 </script>
