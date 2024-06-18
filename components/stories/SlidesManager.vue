@@ -1,4 +1,4 @@
- <template>
+<template>
     <div class="">
         <textarea v-model="textInput" class="w-full h-40 p-2 border rounded mb-4"
             placeholder="Enter your text here..."></textarea>
@@ -15,11 +15,13 @@
             </button>
         </div>
 
-        <div v-if="editingIndex !== null" class="my-4 p-4 border border-gray-500 rounded-lg space-x-6 space-y-3 shadow-md">
+        <div v-if="editingIndex !== null"
+            class="my-4 p-4 border border-gray-500 rounded-lg space-x-6 space-y-3 shadow-md">
             <div class="flex justify-between items-center pl-6">
                 <p class="text-sm text-gray-700 font-semibold">Character count should not exceed 380 characters and 12
                     lines.</p>
-                <p :class="`text-sm text-gray-700 font-semibold ${editingText.length > 380 ? 'text-red-600' : editingText.length === 380 ? 'text-green-700' : ''}`">
+                <p
+                    :class="`text-sm text-gray-700 font-semibold ${editingText.length > 380 ? 'text-red-600' : editingText.length === 380 ? 'text-green-700' : ''}`">
                     {{ editingText.length }}/380</p>
             </div>
             <div class="flex space-x-6">
@@ -33,8 +35,11 @@
                             class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Cancel</button>
                     </div>
                 </div>
-                <div :style="{ backgroundColor: color }" :class="`w-3/12 overflow-y-auto rounded-md ${!color.length ? 'border border-gray-600' : '' }`">
-                    <p :style="{ fontFamily: selectedFont }" class="text-preview" :class="`leading-relaxed p-3 ${!color.length ? 'text-gray-700' : 'text-white' }`">{{ editingText }}</p>
+                <div :style="{ backgroundColor: color }"
+                    :class="`w-3/12 overflow-y-auto rounded-md ${!color.length ? 'border border-gray-600' : ''}`">
+                    <p :style="previewStyles" class="text-preview"
+                        :class="`leading-relaxed p-3 ${!color.length ? 'text-gray-700' : 'text-white'}`">{{ editingText
+                        }}</p>
                 </div>
             </div>
         </div>
@@ -78,20 +83,31 @@ const splitText = () => {
     emit('content', newSlides);
 };
 
-defineProps({
+const props = defineProps({
     color: {
         type: String,
         default: ''
     },
     selectedFont: {
-        type: String
+        type: String,
+        default: 'Lato'
+    },
+    selectedTextAlignment: {
+        type: String,
+        default: 'center'
     }
 })
+
+const previewStyles = {
+  fontFamily: props.selectedFont,
+  textAlign: props.selectedTextAlignment // Ensure this is a valid CSS value
+}
+
 </script>
 
 <style scoped>
 .text-preview {
-  font-size: 24px;
-  margin-top: 10px;
+    font-size: 24px;
+    margin-top: 10px;
 }
 </style>

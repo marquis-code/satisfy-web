@@ -52,6 +52,15 @@
                 </div>
 
                 <div>
+                    <p class="text-sm font-medium">Select stori alignment</p>
+                    <select @change="applyAlignment" v-model="selectedTextAlignment"
+                        class="border rounded-lg py-2 text-sm outline-none mt-3">
+                        <option :value="item.code" v-for="item in textAlignmentList" :key="item.code">{{ item.name }}
+                        </option>
+                    </select>
+                </div>
+
+                <div>
                     <p class="text-sm font-medium">Select stori visibility</p>
                     <select v-model="selectedVisibilityStatus" class="border rounded-lg py-2 text-sm outline-none mt-3">
                         <option :value="item.code" v-for="item in storiVisibilityList" :key="item.name">{{ item.name }}
@@ -69,8 +78,8 @@
                 </div>
             </div>
 
-            <StoriesSlidesManager :selectedFont="selectedFont" :color="hexaColor" @content="handleManualContent"
-                v-if="uploadType === 'manual'" />
+            <StoriesSlidesManager :selectedTextAlignment="selectedTextAlignment" :selectedFont="selectedFont"
+                :color="hexaColor" @content="handleManualContent" v-if="uploadType === 'manual'" />
             <div v-if="uploadType === 'upload'">
                 <h1 class="text-sm font-medium">Upload a PDF or TXT file</h1>
                 <CoreFileUploader :selectedFont="selectedFont" :color="hexaColor" @content="handleStoriContent"
@@ -102,9 +111,12 @@ const { colors } = useColors();
 import { useRoute } from 'vue-router'
 import { useCreateUserStory } from "@/composables/story/createById";
 import { useUploadImageFile } from '@/composables/files/useUploadImageFile'
+import { useTextAlignment } from '@/composables/core/useTextAlignment'
+const { textAlignmentList } = useTextAlignment()
 const { uploadImageFile, uploadResponse, loading: uploading } = useUploadImageFile()
 const { user } = useLogin()
 const selectedFont = ref('Lato') as any
+const selectedTextAlignment = ref('center') as any
 
 const { createUserStory, payload, loading, descriptionLength, setPayload } = useCreateUserStory();
 const { fontsList } = useFontFamily()
@@ -148,29 +160,89 @@ const selectedVisibilityStatus = ref(true) as any
 const imagePreview = ref('') as any
 
 const applyFont = () => {
-    document.querySelector('.text-preview')?.setAttribute('style', `font-family: ${selectedFont.value}`);
+    document.querySelector('.text-preview')?.setAttribute('style', `font-family: ${selectedFont.value}`)
 };
+
+const applyAlignment = () => {
+    document.querySelector('.text-preview')?.setAttribute('style', `text-align: ${selectedTextAlignment.value}`)
+};
+
 
 const setDescriptionLength = (value: string) => {
     payload.value.description = value;
 };
 
+
 const onFileChange = (e: Event) => {
+    const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+    const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png'];
+
     const target = e.target as HTMLInputElement;
     const file = target.files ? target.files[0] : null;
-    if (file && file.type.startsWith("image/")) {
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('fileType', 'asset');
 
-        uploadImageFile(formData);
+    if (file) {
+        // Check file type
+        if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+            useNuxtApp().$toast.error("Please upload a file in JPG, JPEG, or PNG format.", {
+                autoClose: 5000,
+                dangerouslyHTMLString: true,
+            });
+            // alert("");
+            imagePreview.value = null;
+            return;
+        }
 
-        uploadedPodCover.value = file;
-        imagePreview.value = URL.createObjectURL(file);
+        // Check file size
+        if (file.size > MAX_FILE_SIZE) {
+            useNuxtApp().$toast.error("File size exceeds the maximum limit of 5MB.", {
+                autoClose: 5000,
+                dangerouslyHTMLString: true,
+            });
+            // alert("");
+            imagePreview.value = null;
+            return;
+        }
+
+        // If file is valid
+        if (file.type.startsWith("image/")) {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('fileType', 'asset');
+
+            uploadImageFile(formData);
+
+            uploadedPodCover.value = file;
+            imagePreview.value = URL.createObjectURL(file);
+        } else {
+            imagePreview.value = null;
+        }
     } else {
         imagePreview.value = null;
     }
 };
+
+// Placeholder function for uploadImageFile, replace it with your actual implementation.
+// const uploadImageFile = (formData: FormData) => {
+//     // Your upload logic here
+// };
+
+
+// const onFileChange = (e: Event) => {
+//     const target = e.target as HTMLInputElement;
+//     const file = target.files ? target.files[0] : null;
+//     if (file && file.type.startsWith("image/")) {
+//         const formData = new FormData();
+//         formData.append('file', file);
+//         formData.append('fileType', 'asset');
+
+//         uploadImageFile(formData);
+
+//         uploadedPodCover.value = file;
+//         imagePreview.value = URL.createObjectURL(file);
+//     } else {
+//         imagePreview.value = null;
+//     }
+// };
 
 const handleSelectedType = (e: Event) => {
     const target = e.target as HTMLSelectElement;
@@ -204,7 +276,8 @@ const computedSlides = computed(() => {
         backgroundColor: slideColor.value || '0xFF39349A',
         isVisible: selectedVisibilityStatus.value || true,
         mediaUrl: null,
-        fontFamily: selectedFont.value
+        fontFamily: selectedFont.value || 'Lato',
+        textAlignment: selectedTextAlignment.value || 'center'
     }));
 })
 
@@ -217,7 +290,8 @@ const computedManualSlides = computed(() => {
         backgroundColor: slideColor.value || '0xFF39349A',
         isVisible: selectedVisibilityStatus.value || true,
         mediaUrl: null,
-        fontFamily: selectedFont.value
+        fontFamily: selectedFont.value || 'Lato',
+        textAlignment: selectedTextAlignment.value || 'center'
     }));
 })
 const computedStoryCategories = computed(() => {
@@ -234,7 +308,7 @@ const handleCreateUserStory = () => {
         coverImage: uploadResponse.value.url,
         userId: route.params.id,
         slides: uploadType.value === 'manual' ? computedManualSlides.value : computedSlides.value,
-        storyCategories: computedStoryCategories
+        storyCategories: computedStoryCategories.value,
     };
 
     // Set the payload and then call the createUserStory function

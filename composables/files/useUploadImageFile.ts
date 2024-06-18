@@ -7,7 +7,6 @@ export const useUploadImageFile = () => {
     loading.value = true;
     try {
       const response = await filesApiFactory.uploadFile(payload);
-      console.log(response);
       if (typeof response.data !== 'undefined') {
         uploadResponse.value = response.data;
       }
