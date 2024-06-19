@@ -154,7 +154,7 @@ const setUserStats = () => {
 }
 
 onMounted(() => {
-    router.push({ path: route.path, query: { page: 'insight' } })
+    router.push({ path: route.path })
 })
 
 definePageMeta({

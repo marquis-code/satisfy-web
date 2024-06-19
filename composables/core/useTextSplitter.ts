@@ -1,4 +1,5 @@
 import { ref } from 'vue';
+import Swal from "sweetalert2";
 export const useTextSplitter = () => {
   const slides = ref<{ text: string; color?: string }[]>([]);
   const editingIndex = ref<number | null>(null);

@@ -4,7 +4,7 @@ import { computed } from 'vue'
 import moment from 'moment'
 
 export function useRecentSignups() {
-  const { fetchUsers, usersList, loading } = useFetchUsers();
+  const { fetchUsers, usersList, loading, orderBy } = useFetchUsers();
   
   const recentSignups = computed(() => {
     return usersList.value
@@ -14,6 +14,7 @@ export function useRecentSignups() {
   });
 
   // Fetch the users when the composable is used
+  // orderBy.value = 'ASC'
   fetchUsers();
 
   return {

@@ -27,7 +27,7 @@
             <div class="flex space-x-6">
                 <div class="w-9/12">
                     <textarea v-model="editingText" rows="5" cols="10"
-                        :class="`w-full p-2 border h-60 rounded leading-relaxed outline-none text-xl resize-none mb-2 ${editingText.length > 700 ? 'border-2 border-red-500' : ''}`"></textarea>
+                        :class="`w-full p-2 border h-60 rounded leading-relaxed outline-none text-xl resize-none mb-2 ${editingText.length > 380 ? 'border-2 border-red-500' : ''}`"></textarea>
                     <div class="flex justify-end space-x-2">
                         <button @click="saveEditing"
                             class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Save</button>
