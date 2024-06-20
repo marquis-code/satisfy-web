@@ -1,0 +1,56 @@
+name: Deploy Homepod App CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build React app
+        run: yarn run build
+
+      - name: Archive production artifacts
+        run: tar -czvf build.tar.gz build
+
+      - name: Install SSH client
+        run: sudo apt-get install -y openssh-client
+
+      - name: Copy artifacts to VM
+        uses: appleboy/scp-action@v0.1.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "build.tar.gz"
+          target: "/home/${{ secrets.SSH_USERNAME }}/build.tar.gz"
+
+      - name: Execute SSH commands
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/${{ secrets.SSH_USERNAME }}/homepod_app/
+            docker build -t homepod:latest .
+            docker system prune --volumes --force
+            docker stop homepod-box || true && sudo docker rm homepod-box || true
+            docker run --name homepod-box -d -p 3000:3000 --restart unless-stopped homepod:latest
