@@ -24,7 +24,7 @@ jobs:
         run: npm install -g yarn
 
       - name: Install dependencies
-        run: yarn install
+        run: npm cache clean --force && yarn install
 
       - name: Build React app
         run: yarn run build
