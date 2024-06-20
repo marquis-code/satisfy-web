@@ -81,7 +81,7 @@
           <span class="h-3 w-3 bg-green-600 rounded-full p-1.5"></span>Active
         </dd>
         <dd v-else class="font-semibold text-gray-900 text-[14px] flex items-center gap-x-3">
-          <img src="@/assets/icons/dashboard/suspended.svg" alt="" />Suspended
+          <img src="@/assets/icons/dashboard/suspended.svg" alt="" />In active
         </dd>
       </div>
 

@@ -40,38 +40,21 @@
                 </div>
             </section>
             <section v-else-if="route.query.page === 'stories'">
-                <div class="flex justify-end items-end">
-                    <button @click="createPod" class="bg-green-600  rounded-full shadow p-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                    </button>
-                </div>
-                <UsersStories :stories="userStoriesList" />
+                <UsersStories :stories="userStoriesList" :loading="loadingUserStories" />
             </section>
             <section v-else-if="route.query.page === 'wallet'">
                 <UsersWallet />
             </section>
             <section v-else-if="route.query.page === 'followers'">
-                <UsersFollowers :users="followersList" :loading="loadFollowers" />
+                <UsersFollowers :users="followersList" :pagination="pagination" :loading="loadFollowers" />
             </section>
             <section v-else-if="route.query.page === 'following'">
-                <UsersFollowings :users="followingsList" :loading="loadFollowings" />
+                <UsersFollowings :pagination="followingsPagination" :users="followingsList" :loading="loadFollowings" />
             </section>
             <section v-else>
                 <CoreEmptyState title="No Data Available" desc="" />
             </section>
         </section>
-
-        <CoreSlideOver type="large" :show="showSlideOver" @update:show="closeSlideOver"
-            :title="`Add new stori to ${user.fname} ${user.lname}`"
-            description="Get started by filling the form below to create a new stori.">
-            <template #content>
-                <StoriesForm />
-            </template>
-        </CoreSlideOver>
     </main>
 </template>
 
@@ -81,8 +64,8 @@ import { useFetchFollowers } from '@/composables/user/getUserFollowers'
 import { useFetchUserById } from '@/composables/user/getUserById'
 import { useFetchUserStories } from '@/composables/user/fetchUserStories'
 const { fetchUserStories, userStoriesList, loading: loadingUserStories } = useFetchUserStories()
-const { fetchFollowings, followingsList, loading: loadFollowings } = useFetchFollowings()
-const { fetchFollowers, followersList, loading: loadFollowers } = useFetchFollowers()
+const { fetchFollowings, followingsList, pagination: followingsPagination, loading: loadFollowings } = useFetchFollowings()
+const { fetchFollowers, followersList, pagination, loading: loadFollowers } = useFetchFollowers()
 const { fetchUser, user, loading } = useFetchUserById()
 fetchUser()
 fetchUserStories()
@@ -118,17 +101,17 @@ const setUserStats = () => {
         {
             title: "Followers",
             key: "followers",
-            count: !loadFollowers.value ? followersList?.value.length : 0
+            count: !loadFollowers?.value ? followersList?.value.length : 0
         },
         {
             title: "Following",
             key: "following",
-            count: !loadFollowings.value ? followingsList?.value.length : 0
+            count: !loadFollowings?.value ? followingsList?.value.length : 0
         },
         {
             title: "Stories",
             key: "stories",
-            count: !loadingUserStories.value ? userStoriesList?.value?.length : 0
+            count: !loadingUserStories?.value ? userStoriesList?.value?.length : 0
         },
         {
             title: "Premium stories",
@@ -138,22 +121,23 @@ const setUserStats = () => {
         {
             title: "Views",
             key: "views",
-            count: user?.value?.views ?? 0
+            count: user?.value?.total_views_count ?? 0
         },
         {
             title: "Reactions",
             key: "reactions",
-            count: user?.value?.reactions ?? 0
+            count: user?.value?.reactions_count ?? 0
         },
         {
             title: "Estimated Payout",
             key: "estimated_payout",
-            count: user?.value?.estimatedPayout ?? 0,
+            count: user?.value?.estimatedPayout || 0,
         }
     ]
 }
 
 onMounted(() => {
+    setUserStats()
     router.push({ path: route.path })
 })
 

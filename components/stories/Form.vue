@@ -1,8 +1,9 @@
 <template>
     <main>
         <section class="pt-6 lg:px-6 space-y-4 h-full">
-            <p class="flex justify-end items-end text-sm">created by {{ user?.firstname || 'Nil' }} {{ user?.lastname || 'Nil' }}
-                on 15th September 2022, 10:14 AM</p>
+            <p class="flex justify-end items-end text-sm">created by {{ user?.firstname || 'Nil' }} {{ user?.lastname ||
+                'Nil' }}
+                on {{ formattedDate || 'Nil' }}</p>
             <div class="space-y-3">
                 <p class="text-gray-900 font-medium text-sm">Pod Cover</p>
                 <div>
@@ -103,6 +104,7 @@
 
 
 <script setup lang="ts">
+import moment from 'moment'
 import Swal from "sweetalert2";
 import { useLogin } from '@/composables/auth/login'
 import { useColors } from '@/composables/core/useColors';
@@ -174,7 +176,7 @@ const setDescriptionLength = (value: string) => {
 
 
 const onFileChange = (e: Event) => {
-    const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+    const MAX_FILE_SIZE = 2 * 1024 * 1024; // 5MB
     const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png'];
 
     const target = e.target as HTMLInputElement;
@@ -366,4 +368,7 @@ const handleCancellation = () => {
         }
     });
 }
+
+const today = moment().format('Do MMMM YYYY, h:mm A');
+const formattedDate = computed(() => today);
 </script>

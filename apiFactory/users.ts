@@ -26,11 +26,11 @@ export const userApiFactory = {
   getUserProfile() {
     return axiosInstance.get("/user/profile");
   },
-  getUserFollowers(userId: string) {
-    return axiosInstance.get(`/user/${userId}/followers`);
+  getUserFollowers(userId: string, metadata: { page: number; perPage: number }) {
+    return axiosInstance.get(`/user/${userId}/followers?page=${metadata.page}&perPage=${metadata.perPage}`);
   },
-  getUserFollowing(userId: string) {
-    return axiosInstance.get(`/user/${userId}/following`);
+  getUserFollowing(userId: string, metadata: { page: number; perPage: number }) {
+    return axiosInstance.get(`/user/${userId}/following?page=${metadata.page}&perPage=${metadata.perPage}`);
   },
   getUserFollowersCount(userId: string) {
     return axiosInstance.get(`/users/${userId}/followers/count`);
@@ -63,5 +63,9 @@ export const userApiFactory = {
   },
   getMostRecentUsers(id: string) {
     return axiosInstance.get(`/user/${id}`);
+  },
+  getTotalUsers() {
+    let endpoint = `/user/all`;
+    return axiosInstance.get(endpoint);
   },
 };
