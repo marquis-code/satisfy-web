@@ -1,5 +1,8 @@
 <template>
     <main>
-        Pod details page
+        <div>
+            <h1>Upload and Extract File Content</h1>
+            <FileUpload />
+        </div>
     </main>
 </template>

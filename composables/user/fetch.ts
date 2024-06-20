@@ -23,7 +23,7 @@ export const useFetchUsers = () => {
   const pagination = ref({
     page: 1,
     perPage: 10,
-    total: 0,
+    total: 100,
     pages: 0,
   });
 

@@ -10,10 +10,10 @@
                         pagination.total }}</span>
                 </div>
             </nav>
-            <div>
+            <!-- <div>
                 <NuxtLink to="/dashboard/users/new"
                     class="bg-[#0ba9b9] text-white font-medium text-sm rounded-md py-2.5 px-4">Add Stori</NuxtLink>
-            </div>
+            </div> -->
         </div>
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="flow-root mt-2">

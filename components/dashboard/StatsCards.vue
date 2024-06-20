@@ -57,7 +57,6 @@ const modifyCardTitle = (data: string) => {
             return 'Pods'
     }
 }
-
 const computedCardColor = (data: string) => {
     switch (data) {
         case 'active_users':

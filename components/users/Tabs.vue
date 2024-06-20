@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-const activeTable = ref("stories")
+const activeTable = ref("insight")
 // const router = useRouter()
 // const route = useRoute()
 

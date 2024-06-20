@@ -31,6 +31,9 @@
                                 Title
                             </th>
                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                Author
+                            </th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                 Tags
                             </th>
                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -70,9 +73,14 @@
                                 <DashboardImageZoom class="h-10 w-10" :src="stori.cover_image" />
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                <p
-                                    class="font-medium text-gray-800 no-underline">{{
-            stori.title ?? "N/A" }}</p>
+                                <p class="font-medium text-gray-800 no-underline">{{
+            stori?.title ?? "N/A" }}</p>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                <p v-if="stori?.user" class="font-medium text-gray-800 no-underline">
+                                    {{ `${stori?.user?.fname} ${stori?.user?.lname}` }}</p>
+                                <p v-else class="font-medium text-gray-800 no-underline">
+                                    Nil</p>
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                 <div class="flex flex-wrap gap-2">

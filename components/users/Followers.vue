@@ -1,101 +1,27 @@
 <template>
-    <main>
-    <div v-if="users.length && !loading">
-        <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 p-4"
-      >
-        <div
-          v-for="person in users"
-          :key="person.email"
-          class="flex justify-center items-center flex-col gap-y-3 bg-white rounded-lg border border-gray-200 py-10"
-        >
-          <image-zoom
-            class="h-20 w-20 cursor-pointer"
-            :src="require(`@/assets/icons/dashboard/${person.avatar}.svg`)"
-          />
-          <p class="font-bold text-lg">{{ person.fname }}</p>
-          <p class="text-gray-400">{{ person.username }}</p>
-        </div>
-      </div>
+  <main>
+    <div v-if="users.length">
+      <UsersTableList :usersList="users" :loadingUsers="loading" :pagination="pagination" />
     </div>
     <CoreEmptyState v-if="users.length <= 0 && !loading" title="No Followers available" desc="">
     </CoreEmptyState>
     <LoadingSpinner v-if="loading" />
-    </main>
-  </template>
-  
-  <script>
-  import ImageZoom from "@/components/dashboard/ImageZoom.vue";
-  export default {
-    components: {
-      ImageZoom,
-    },
-    props: {
-      users: {
-        type: Array,
-        required: true,
-      },
-      loading: {
-        type: Boolean,
-        required: true,
-      },
-    },
-    methods: {
-      handleSuspendConfirmation() {
-        this.isSuspendConfirmationModal = false;
-        this.isSuspendSuccessModal = true;
-      },
-      handleFormCompletion() {
-        this.isSuspendModal = false;
-        this.isSuspendConfirmationModal = true;
-        // this.isSuspendConfirmationModal = true;
-      },
-      handleTableView(itm) {
-        this.tableView = itm;
-      },
-      updateCurrentPage(newPage) {
-        this.currentPage = newPage;
-      },
-      toggleDropdown(rowId) {
-        if (this.openDropdown === rowId) {
-          this.openDropdown = null;
-        } else {
-          this.openDropdown = rowId;
-        }
-      },
-      closeDropdown() {
-        this.openDropdown = null;
-      },
-      editUser(user) {
-        this.openDropdown = null;
-      },
-      removeUser(user) {
-        this.isConfirmingRemoveUser = true;
-        this.openDropdown = null;
-      },
-      toggleUserStatus(user) {
-        if (user.isActive) {
-          this.isSuspendModal = true;
-        } else {
-          this.isConfirmingActivateUser = true;
-        }
-        this.openDropdown = null;
-      },
-      handleProceedRemoval() {
-        this.isConfirmingRemoveUser = false;
-        this.isRemoveUserSuccess = true;
-      },
-      handleProceedActivation() {
-        this.isConfirmingActivateUser = false;
-        this.isActivateUserSuccess = true;
-      },
-      handleSearch(val) {
-        console.log(val, "search val here from users");
-      },
-    },
-  };
-  </script>
-  
-  <style>
-  </style>
-  
+  </main>
+</template>
+
+<script setup lang="ts">
+defineProps({
+  users: {
+    type: Array,
+    required: true,
+  },
+  loading: {
+    type: Boolean,
+    required: true,
+  },
+  pagination: {
+    type: Object,
+    required: true,
+  },
+})
+</script>
