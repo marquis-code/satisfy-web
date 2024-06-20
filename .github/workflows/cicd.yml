@@ -28,21 +28,21 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Build React app
-        run: yarn run build
+    #   - name: Build React app
+    #     run: yarn run build
 
     #   - name: Archive production artifacts
     #     run: tar -czvf build.tar.gz build
-      - name: Create artifact
-        run: |
-            find . -type f -not -path "./node_modules/*" -exec echo "::set-output name=files::{}" \; > files.txt
+    #   - name: Create artifact
+    #     run: |
+    #         find . -type f -not -path "./node_modules/*" -exec echo "::set-output name=files::{}" \; > files.txt
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-            path: ./
-            if-no-files-found: error
-            retention-days: 0.1
+    #   - name: Upload Artifact
+    #     uses: actions/upload-artifact@v3
+    #     with:
+    #         path: ./
+    #         if-no-files-found: error
+    #         retention-days: 0.1
 
     #   - name: Install SSH client
     #     run: sudo apt-get install -y openssh-client
