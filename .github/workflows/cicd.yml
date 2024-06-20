@@ -8,11 +8,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+        NODE_ENV: production
 
     steps:
-      - name: Print environment variables
-        run: env
-
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -69,7 +68,7 @@ jobs:
       - name: Execute SSH commands
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ vars.SSH_HOST }}
+          host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
