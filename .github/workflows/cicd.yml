@@ -27,26 +27,48 @@ jobs:
       - name: Build React app
         run: yarn run build
 
-      - name: Archive production artifacts
-        run: tar -czvf build.tar.gz build
+      - name: Create artifact
+        run: |
+          find . -type f -not -path "./node_modules/*" -exec echo "::set-output name=files::{}" \; > files.txt
+
+    #   - name: Archive production artifacts
+    #     run: tar -czvf build.tar.gz build
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+            path: ./
+            if-no-files-found: error
+            retention-days: 0.1
 
       - name: Install SSH client
         run: sudo apt-get install -y openssh-client
 
-      - name: Copy artifacts to VM
-        uses: appleboy/scp-action@v0.1.3
+    #   - name: Copy artifacts to VM
+    #     uses: appleboy/scp-action@v0.1.3
+    #     with:
+    #       host: ${{ secrets.SSH_HOST }}
+    #       username: ${{ secrets.SSH_USERNAME }}
+    #       key: ${{ secrets.SSH_PRIVATE_KEY }}
+    #       source: "build.tar.gz"
+    #       target: "/home/${{ secrets.SSH_USERNAME }}/build.tar.gz"
+
+      - name: Deploy Artifacts
+        uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "build.tar.gz"
-          target: "/home/${{ secrets.SSH_USERNAME }}/build.tar.gz"
+            host: ${{ secrets.SSH_HOST }}
+            username: ${{ secrets.SSH_USERNAME }}
+            port: ${{ secrets.SSH_PORT }}
+            key: ${{ secrets.SSH_PRIVATE_KEY }} 
+            source: ./
+            target: /home/${{ secrets.SSH_USERNAME }}/homepod_app
 
       - name: Execute SSH commands
-        uses: appleboy/ssh-action@v0.1.6
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
+          port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /home/${{ secrets.SSH_USERNAME }}/homepod_app/
