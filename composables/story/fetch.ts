@@ -5,8 +5,8 @@ export const useFetchStories = () => {
   const loading = ref(false);
   const searchQuery = ref<string>("");
   const queryObj = ref({
-    sortBy: 'date',
-    orderBy: 'DESC'
+    sortBy: 'createdAt',
+    orderBy: 'desc'
   }) as any
   const pagination = ref({
     page: 1,

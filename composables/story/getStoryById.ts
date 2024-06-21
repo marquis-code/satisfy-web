@@ -8,7 +8,7 @@ export const useFetchStoryById = () => {
     loading.value = true;
     try {
       const response = await storyApiFactory.getAllStoryById(storyId);
-      story.value = response.data.result;
+      story.value = response.data;
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
         autoClose: 5000,

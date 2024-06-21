@@ -70,19 +70,22 @@
                 ? 'text-indigo-600'
                 : 'text-gray-900',
         ]">
-                                <DashboardImageZoom class="h-10 w-10" :src="stori.cover_image" />
+                                <DashboardImageZoom class="h-10 w-10" :src="stori.coverImage" />
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <td @click="viewStory(stori)"
+                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
                                 <p class="font-medium text-gray-800 no-underline">{{
             stori?.title ?? "N/A" }}</p>
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <td @click="viewStory(stori)"
+                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
                                 <p v-if="stori?.user" class="font-medium text-gray-800 no-underline">
                                     {{ `${stori?.user?.fname} ${stori?.user?.lname}` }}</p>
                                 <p v-else class="font-medium text-gray-800 no-underline">
                                     Nil</p>
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <td @click="viewStory(stori)"
+                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
                                 <div class="flex flex-wrap gap-2">
                                     <p v-for="category in splitCategories(stori.tags)" :key="category"
                                         class="no-underline text-gray-800 border border-gray-500 text-xs rounded-xl px-3 py-1">
@@ -90,62 +93,44 @@
                                     </p>
                                 </div>
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <td @click="viewStory(stori)"
+                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
                                 <p class="no-underline text-gray-800">{{
-            stori.comments_count ??
+            stori.commentsCount ??
             "N/A" }}</p>
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <td @click="viewStory(stori)"
+                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
                                 <p class="no-underline text-gray-800">{{
-            stori.reactions_count ??
+            stori.reactionsCount ??
             "N/A" }}</p>
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <td @click="viewStory(stori)"
+                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
                                 <p class="no-underline text-gray-800">{{
-            stori.total_views_count ??
+            stori.totalViewsCount ??
             "N/A" }}</p>
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <td @click="viewStory(stori)"
+                                class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
                                 <p class="no-underline text-gray-800">{{
-            stori.is_published ??
-            "N/A" }}</p>
+                                    stori.isPublished ??
+                                    "N/A" }}</p>
                             </td>
                             <td
                                 class="whitespace-nowrap text-center py-4 pl-3 pr-4 text-xs font-medium sm:pr-3 relative">
-                                <button @click="toggleDropdown(index)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24"
-                                        fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round"
+                                <button @click="handleDeleteStory(stori.id)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"
+                                        fill="none" stroke="#d0021b" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round">
-                                        <circle cx="12" cy="12" r="1"></circle>
-                                        <circle cx="12" cy="5" r="1"></circle>
-                                        <circle cx="12" cy="19" r="1"></circle>
+                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                        <path
+                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                        </path>
+                                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                                        <line x1="14" y1="11" x2="14" y2="17"></line>
                                     </svg>
                                 </button>
-                                <div v-if="openDropdownIndex === index"
-                                    class="absolute mt-1.5 w-32 bg-white -left-14 rounded-lg shadow-xl z-10">
-                                    <div>
-                                        <a href="#" @click.prevent="handleEditUer(stori)"
-                                            class="flex items-center p-3 text-sm text-gray-800 font-semibold capitalize transition-colors duration-300 transform">
-                                            <span class="mx-1">
-                                                Edit
-                                            </span>
-                                        </a>
-
-                                        <a href="#" @click.prevent="deleteStory(stori.id)"
-                                            class="flex items-center p-3 text-sm text-red-500 font-semibold capitalize transition-colors duration-300 transform">
-                                            <span class="mx-1">
-                                                Remove
-                                            </span>
-                                        </a>
-
-                                        <a href="#" @click.prevent="toggleUserStatus(stori)"
-                                            class="flex items-center p-3 text-sm text-gray-800 font-semibold capitalize transition-colors duration-300 transform">
-                                            <span class="mx-1">
-                                                {{ stori.isActive ? "Suspend" : "Unsuspend" }}
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -165,6 +150,12 @@ const {
     loading: loadingUserStories,
 } = useFetchUserStories();
 const { deleteStory } = useDeleteStory()
+
+
+const handleDeleteStory = (id: any) => {
+    deleteStory(id)
+}
+const router = useRouter()
 const selectedStori = ref([]) as any;
 const selectedOption = ref("") as any;
 const selectedUser = ref({}) as any;
@@ -231,6 +222,10 @@ const toggleUserStatus = (user: any) => {
         selectedStatus.value = "reactivate";
     }
 };
+
+const viewStory = (data: any) => {
+    router.push({ path: `/dashboard/pods/${data.id}` })
+}
 </script>
 
 <style></style>

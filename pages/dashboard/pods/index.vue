@@ -47,18 +47,19 @@
                                     <label for="SortBy" class="text-sm text-gray-700 font-medium">SortBy:</label>
                                     <select v-model="queryObj.sortBy" id="SortBy"
                                         class="h-10 rounded border-gray-300 text-sm">
-                                        <option value="date">Date</option>
-                                        <option value="popularity">Popularity</option>
-                                        <option value="comment">Comment</option>
-                                        <option value="reaction">Reaction</option>
+                                        <option value="createdAt">Created At</option>
+                                        <option value="title">Title</option>
+                                        <option value="commentsCount">Comment Count</option>
+                                        <option value="reactionsCount">Reaction Count</option>
+                                        <option value="totalViewsCount">Total View Count</option>
                                     </select>
                                 </div>
                                 <div class="space-x-2">
                                     <label for="SortBy" class="text-sm text-gray-700 font-medium">OrderBy:</label>
                                     <select v-model="queryObj.orderBy" id="SortBy"
                                         class="h-10 rounded border-gray-300 text-sm">
-                                        <option value="ASC">Ascending Order</option>
-                                        <option value="DESC">Descending Order</option>
+                                        <option value="asc">Ascending Order</option>
+                                        <option value="desc">Descending Order</option>
                                     </select>
                                 </div>
                             </div>
