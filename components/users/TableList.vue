@@ -229,7 +229,7 @@
       </section>
     </CoreBaseModal>
 
-    <CoreSlideOver :show="showEditModal" @update:show="showEditModal = false" title="Edit User Information"
+    <!-- <CoreSlideOver :show="showEditModal" @update:show="showEditModal = false" title="Edit User Information"
       description="Get started by filling in the information below to update a user">
       <template #content>
         <div>
@@ -299,7 +299,7 @@
             ? 'editing...' : 'Save'}}</button>
         </div>
       </template>
-    </CoreSlideOver>
+    </CoreSlideOver> -->
   </main>
 </template>
 
