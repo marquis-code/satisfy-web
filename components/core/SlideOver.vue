@@ -14,7 +14,7 @@
                                         <h2 class="text-base font-semibold leading-6 text-white" id="slide-over-title">
                                             {{ title }}</h2>
                                         <div class="ml-3 flex h-7 items-center">
-                                            <button type="button" @click="show = false"
+                                            <button type="button" @click="closeModal"
                                                 class="relative rounded-md bg-indigo-700 text-indigo-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
                                                 <span class="absolute -inset-2.5"></span>
                                                 <span class="sr-only">Close panel</span>
