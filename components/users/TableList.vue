@@ -171,7 +171,7 @@
       </section>
     </CoreBaseModal>
 
-    <CoreBaseModal :show="updateUserStatusModal" @update:show="false">
+    <CoreBaseModal :show="updateUserStatusModal" @update:show="updateUserStatusModal = false">
       <section v-if="selectedStatus === 'suspend'" class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
         <h1 class="font-semibold text-xl text-gray-900 py-1">Suspend</h1>
         <div class="space-y-6">
@@ -229,65 +229,64 @@
       </section>
     </CoreBaseModal>
 
-    <CoreSlideOver :show="showEditModal" @update:show="false" title="Edit User Information"
+    <CoreSlideOver :show="showEditModal" @update:show="showEditModal = false" title="Edit User Information"
       description="Get started by filling in the information below to update a user">
       <template #content>
-        <div class="pt-6 px-6 space-y-4">
-          <div>
-            <label for="first-name" class="block text-xs font-medium leading-6 text-gray-900">First Name</label>
-            <div class="mt-1">
-              <input type="text" v-model="payload.fname" name="first-name" id="first-name"
-                class="block w-full rounded-md border-[0.6px] px-3  outline-none font-light py-3 text-gray-900 shadow-sm ">
-            </div>
+        <div>
+          <label for="first-name" class="block text-xs font-medium leading-6 text-gray-900">First Name</label>
+          <div class="mt-1">
+            <input type="text" v-model="payload.fname" name="first-name" id="first-name"
+              class="block w-full rounded-md border-[0.6px] px-3  outline-none font-light py-3 text-gray-900 shadow-sm ">
           </div>
+        </div>
 
-          <div>
-            <label for="last-name" class="block text-xs font-medium leading-6 text-gray-900">Last Name</label>
-            <div class="mt-1">
-              <input type="text" v-model="payload.lname" name="last-name" id="last-name"
-                class="block w-full rounded-md border-[0.6px] px-3  outline-none font-light py-3 text-gray-900 shadow-sm ">
-            </div>
+        <div>
+          <label for="last-name" class="block text-xs font-medium leading-6 text-gray-900">Last Name</label>
+          <div class="mt-1">
+            <input type="text" v-model="payload.lname" name="last-name" id="last-name"
+              class="block w-full rounded-md border-[0.6px] px-3  outline-none font-light py-3 text-gray-900 shadow-sm ">
           </div>
+        </div>
 
-          <div>
-            <label for="email" class="block text-xs font-medium leading-6 text-gray-900">Email</label>
-            <div class="mt-1">
-              <input type="email" v-model="payload.email" name="email" id="email"
-                class="block w-full rounded-md border-[0.6px] px-3  outline-none font-light py-3 text-gray-900 shadow-sm ">
-            </div>
+        <div>
+          <label for="email" class="block text-xs font-medium leading-6 text-gray-900">Email</label>
+          <div class="mt-1">
+            <input type="email" v-model="payload.email" name="email" id="email"
+              class="block w-full rounded-md border-[0.6px] px-3  outline-none font-light py-3 text-gray-900 shadow-sm ">
           </div>
+        </div>
 
-          <div>
-            <label for="password" class="block text-xs font-medium leading-6 text-gray-900">Password</label>
-            <div class="mt-1">
-              <input type="password" v-model="payload.password" name="password" id="password"
-                class="block w-full rounded-md border-[0.6px] px-3  outline-none font-light py-3 text-gray-900 shadow-sm ">
-            </div>
+        <div>
+          <label for="password" class="block text-xs font-medium leading-6 text-gray-900">Password</label>
+          <div class="mt-1">
+            <input type="password" v-model="payload.password" name="password" id="password"
+              class="block w-full rounded-md border-[0.6px] px-3  outline-none font-light py-3 text-gray-900 shadow-sm ">
           </div>
+        </div>
 
-          <div>
-            <label for="country-code" class="block text-xs font-medium leading-6 text-gray-900">Country Code</label>
-            <div class="mt-1">
-              <input type="tel" v-model="payload.countryCode" name="country-code" id="country-code"
-                class="block w-full rounded-md border-[0.6px] px-3  outline-none font-light py-3 text-gray-900 shadow-sm ">
-            </div>
+        <div>
+          <label for="country-code" class="block text-xs font-medium leading-6 text-gray-900">Country Code</label>
+          <div class="mt-1">
+            <input type="tel" v-model="payload.countryCode" name="country-code" id="country-code"
+              class="block w-full rounded-md border-[0.6px] px-3  outline-none font-light py-3 text-gray-900 shadow-sm ">
           </div>
+        </div>
 
-          <div>
-            <label for="phone" class="block text-xs font-medium leading-6 text-gray-900">Phone</label>
-            <div class="mt-1">
-              <input type="tel" v-model="payload.phone" name="phon" id="phone"
-                class="block w-full rounded-md border-[0.6px] px-3  outline-none font-light py-3 text-gray-900 shadow-sm ">
-            </div>
+        <div>
+          <label for="phone" class="block text-xs font-medium leading-6 text-gray-900">Phone</label>
+          <div class="mt-1">
+            <input type="tel" v-model="payload.phone" name="phon" id="phone"
+              class="block w-full rounded-md border-[0.6px] px-3  outline-none font-light py-3 text-gray-900 shadow-sm ">
           </div>
+        </div>
 
-          <div>
-            <label for="handle" class="block text-xs font-medium leading-6 text-gray-900">Handle</label>
-            <div class="mt-1">
-              <input type="text" v-model="payload.handle" name="handle" id="handle"
-                class="block w-full rounded-md border-[0.6px] px-3  outline-none font-light py-3 text-gray-900 shadow-sm ">
-            </div>
+        <div>
+          <label for="handle" class="block text-xs font-medium leading-6 text-gray-900">Handle</label>
+          <div class="mt-1">
+            <input type="text" v-model="payload.handle" name="handle" id="handle"
+              class="block w-full rounded-md border-[0.6px] px-3  outline-none font-light py-3 text-gray-900 shadow-sm ">
           </div>
+        </div>
         </div>
       </template>
 

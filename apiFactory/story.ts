@@ -1,9 +1,9 @@
-import { axiosInstance, storipodAxiosInstance } from "./axios.config";
+import { axiosInstance } from "./axios.config";
 
 export const storyApiFactory = {
   getAllStories(queryObj: {sortBy: string, orderBy: string}, metadata: { page: number; perPage: number }) {
     return axiosInstance.get(
-      `/story?sortBy=${queryObj.sortBy}&page=${Number(metadata.page)}&perPage=${Number(metadata.perPage)}&userId=&orderBy=${queryObj.orderBy}&limit=`
+      `/story?sortBy=${queryObj.sortBy}:${queryObj.orderBy}&page=${Number(metadata.page)}&perPage=${Number(metadata.perPage)}`
     );
   },
   getStoryByUserId(userId: string | number) {
@@ -27,6 +27,6 @@ export const storyApiFactory = {
     return axiosInstance.post('/story', payload);
   },
   deleteUserStory(id: string | number) {
-    return storipodAxiosInstance.delete(`/stories/${id}`);
+    return axiosInstance.delete(`/story/${id}`);
   },
 };
