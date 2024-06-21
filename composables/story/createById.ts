@@ -24,7 +24,7 @@ export const useCreateUserStory = () => {
         autoClose: 5000,
         dangerouslyHTMLString: true,
       })
-      location.href = '/dashboard/users'
+      // location.href = '/dashboard/users'
       // router.push({ path: `/dashboard/users/${route.params.id}` });
       return response;
     } catch (error: any) {
