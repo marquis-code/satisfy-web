@@ -25,11 +25,20 @@
             </div>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 <div>
-                    <p class="text-sm font-medium">Select mode of uploading stori</p>
-                    <select v-model="uploadType" class="border rounded-lg py-2 text-sm outline-none mt-3">
-                        <option value="manual">Create pod manually</option>
-                        <option value="upload">Create pod via Upload</option>
-                    </select>
+                    <fieldset>
+                        <legend class="text-sm font-semibold leading-6 text-gray-900">Select upload method
+                        </legend>
+                        <div class="mt-2 space-y-6 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
+                            <div class="flex items-center" v-for="item in podCreationMethodsList" :key="item.name">
+                                <input v-model="uploadType" :id="item.code" :value="item.code"
+                                    name="notification-method" type="radio"
+                                    class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                <label :for="item.code"
+                                    class="ml-3 block text-sm font-medium leading-6 text-gray-900">{{ item.name
+                                    }}</label>
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
 
                 <fieldset class="flex flex-wrap gap-3">
@@ -37,7 +46,7 @@
 
                     <label v-for="color in colors" :key="color.key" :for="color.key"
                         :style="{ backgroundColor: color.code }"
-                        class="block size-8 cursor-pointer rounded-full bg-black shadow-sm has-[:checked]:ring-2 has-[:checked]:ring-black has-[:checked]:ring-offset-2">
+                        class="block size-6 cursor-pointer rounded-full bg-black shadow-sm has-[:checked]:ring-2 has-[:checked]:ring-black has-[:checked]:ring-offset-2">
                         <input type="radio" @change="handleColorChange(color, $event)" name="ColorOption"
                             :value="color.key" :id="color.key" class="sr-only" />
 
@@ -53,36 +62,58 @@
                 </div>
 
                 <div>
-                    <p class="text-sm font-medium">Select stori alignment</p>
-                    <select @change="applyAlignment" v-model="selectedTextAlignment"
-                        class="border rounded-lg py-2 text-sm outline-none mt-3">
-                        <option :value="item.code" v-for="item in textAlignmentList" :key="item.code">{{ item.name }}
-                        </option>
-                    </select>
+                    <fieldset>
+                        <legend class="text-sm font-semibold leading-6 text-gray-900">Select stori alignment
+                        </legend>
+                        <div class="mt-2 space-y-6 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
+                            <div class="flex items-center" v-for="item in textAlignmentList" :key="item.code">
+                                <input @change="applyAlignment" v-model="selectedTextAlignment" :id="item.code"
+                                    :value="item.code" name="notification-method" type="radio"
+                                    class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                <label :for="item.code"
+                                    class="ml-3 block text-sm font-medium leading-6 text-gray-900">{{ item.name
+                                    }}</label>
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
 
                 <div>
-                    <p class="text-sm font-medium">Select stori visibility</p>
-                    <select v-model="selectedVisibilityStatus" class="border rounded-lg py-2 text-sm outline-none mt-3">
-                        <option :value="item.code" v-for="item in storiVisibilityList" :key="item.name">{{ item.name }}
-                        </option>
-                    </select>
+                    <fieldset>
+                        <legend class="text-sm font-semibold leading-6 text-gray-900">Select stori visibility status
+                        </legend>
+                        <div class="mt-2 space-y-6 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
+                            <div class="flex items-center" v-for="item in storiVisibilityList" :key="item.name">
+                                <input v-model="selectedVisibilityStatus" :id="item.code" :value="item.code"
+                                    name="notification-method" type="radio"
+                                    class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                <label :for="item.code"
+                                    class="ml-3 block text-sm font-medium leading-6 text-gray-900">{{ item.name
+                                    }}</label>
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
-
-                <div>
-                    <p class="text-sm font-medium">Select stori publication status</p>
-                    <select v-model="selectedPublicationStatus"
-                        class="border rounded-lg py-2 text-sm outline-none mt-3">
-                        <option :value="item.code" v-for="item in storiPublicationStatusList" :key="item.name">{{
-                item.name }}</option>
-                    </select>
-                </div>
+                <fieldset>
+                    <legend class="text-sm font-semibold leading-6 text-gray-900">Select stori publication status
+                    </legend>
+                    <div class="mt-2 space-y-6 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
+                        <div class="flex items-center" v-for="item in storiPublicationStatusList" :key="item.name">
+                            <input v-model="selectedPublicationStatus" :id="item.code" :value="item.code"
+                                name="notification-method" type="radio"
+                                class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                            <label :for="item.code" class="ml-3 block text-sm font-medium leading-6 text-gray-900">{{
+                item.name
+            }}</label>
+                        </div>
+                    </div>
+                </fieldset>
             </div>
 
             <StoriesSlidesManager :selectedTextAlignment="selectedTextAlignment" :selectedFont="selectedFont"
                 :color="hexaColor" @content="handleManualContent" v-if="uploadType === 'manual'" />
             <div v-if="uploadType === 'upload'">
-                <h1 class="text-sm font-medium">Upload a PDF or TXT file</h1>
+                <h1 class="text-sm font-bold">Upload file in TXT or DOCX format</h1>
                 <CoreFileUploader :selectedFont="selectedFont" :color="hexaColor" @content="handleStoriContent"
                     :description="payload.description" />
             </div>
@@ -142,6 +173,17 @@ const storiVisibilityList = ref([
     {
         code: false,
         name: 'False'
+    }
+])
+
+const podCreationMethodsList = ref([
+    {
+        code: 'manual',
+        name: 'Manually'
+    },
+    {
+        code: 'upload',
+        name: 'Upload'
     }
 ])
 
