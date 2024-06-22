@@ -28,8 +28,11 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                 </dt>
-                                <dd class="text-sm font-medium leading-6 text-gray-900">{{ story?.user?.fname }}
-                                    {{ story?.user?.lname }}</dd>
+                                <dd class="text-sm font-medium leading-6 text-gray-900">
+                                    <NuxtLink :to="`/dashboard/users/${story.user.id}`" class="underline"> {{
+                    story?.user?.fname }}
+                                        {{ story?.user?.lname }}</NuxtLink>
+                                </dd>
                             </div>
                             <div class="mt-4 flex w-full flex-none gap-x-4 px-6">
                                 <dt class="flex-none">
@@ -44,7 +47,8 @@
                                     </svg>
                                 </dt>
                                 <dd class="text-sm leading-6 text-gray-500">
-                                    <time datetime="2023-01-31">{{ story?.user?.email || 'Nil' }}</time>
+                                    <NuxtLink v-if="story?.user?.email" :to="`/dashboard/users/${story.user.id}`" class="underline">{{ story?.user?.email }}</NuxtLink>
+                                    <span v-else>Nil</span>
                                 </dd>
                             </div>
                             <div class="mt-4 flex w-full flex-none gap-x-4 px-6">
@@ -68,7 +72,8 @@
                         </div>
                     </div>
                 </div>
-                <div v-if="Object.keys(selectedSlide).length" class="lg:col-start-3 lg:row-end-1 lg:sticky lg:top-[490px]">
+                <div v-if="Object.keys(selectedSlide).length"
+                    class="lg:col-start-3 lg:row-end-1 lg:sticky lg:top-[490px]">
                     <h2 class="sr-only">Summary</h2>
                     <div class="rounded-lg bg-gray-50 shadow-sm ring-1 ring-gray-900/5">
                         <dl class="flex flex-wrap">
@@ -89,7 +94,8 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                 </dt>
-                                <dd class="text-sm font-medium leading-6 text-gray-900">{{ selectedSlide.title || 'Nil' }}</dd>
+                                <dd class="text-sm font-medium leading-6 text-gray-900">{{ selectedSlide.title || 'Nil'
+                                    }}</dd>
                             </div>
                             <div class="mt-4 flex w-full flex-none gap-x-4 px-6">
                                 <dt class="flex-none">
@@ -223,8 +229,7 @@
                                         Content
                                     </th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        View
-                                        Count
+                                        Views
                                     </th>
                                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
                                         <span class="sr-only">Edit</span>
@@ -239,18 +244,18 @@
                                             class="h-10 w-10 rounded-full object-cover object-center" alt="avatar" />
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        <div class="truncate font-medium text-gray-900">{{ item.title }}</div>
+                                        <div class="truncate font-medium text-gray-900">{{ `${item.title.slice(0, 20)}...` }}</div>
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        <div class="truncate text-gray-500">{{ `${item.content.slice(0, 40)}...` }}
+                                        <div class="truncate text-gray-500">{{ `${item.content.slice(0, 20)}...` }}
                                         </div>
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        <div class="truncate text-gray-500">{{ item.viewsCount }}</div>
+                                        <div class="truncate text-gray-500">{{ item.viewsCount ?? 'Nil' }}</div>
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                         <a href.prevent="#" @click="previewSlideDetails(item)"
-                                            class="text-indigo-600 hover:text-indigo-900">
+                                            class="text-indigo-600 hover:text-indigo-900 cursor-pointer">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                 viewBox="0 0 24 24" fill="none" stroke="#4a4a4a" stroke-width="1.5"
                                                 stroke-linecap="round" stroke-linejoin="round">

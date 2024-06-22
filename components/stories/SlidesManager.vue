@@ -18,16 +18,16 @@
         <div v-if="editingIndex !== null"
             class="my-4 p-4 border border-gray-500 rounded-lg space-x-6 space-y-3 shadow-md">
             <div class="flex justify-between items-center pl-6">
-                <p class="text-sm text-gray-700 font-semibold">( Max 380 characters )
+                <p class="text-sm text-gray-700 font-semibold">( Max {{ character_count }} characters )
                     lines.</p>
                 <p
-                    :class="`text-sm text-gray-700 font-semibold ${editingText.length > 380 ? 'text-red-600' : editingText.length === 380 ? 'text-green-700' : ''}`">
-                    {{ editingText.length }}/380</p>
+                    :class="`text-sm text-gray-700 font-semibold ${editingText.length > character_count ? 'text-red-600' : editingText.length === character_count ? 'text-green-700' : ''}`">
+                    {{ editingText.length }}/{{character_count}}</p>
             </div>
             <div class="flex space-x-6">
                 <div class="w-9/12">
                     <textarea v-model="editingText" rows="5" cols="10"
-                        :class="`w-full p-2 border h-60 rounded leading-relaxed outline-none text-xl resize-none mb-2 ${editingText.length > 380 ? 'border-2 border-red-500' : ''}`"></textarea>
+                        :class="`w-full p-2 border h-60 rounded leading-relaxed outline-none text-xl resize-none mb-2 ${editingText.length > character_count ? 'border-2 border-red-500' : ''}`"></textarea>
                     <div class="flex justify-end space-x-2">
                         <button @click="saveEditing"
                             class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Save</button>
@@ -76,6 +76,7 @@ const { slides, splitTextIntoSlides, removeSlide, editingIndex, editingText, sta
 
 const textInput = ref<string>('');
 const emit = defineEmits(['content'])
+const character_count = ref(340)
 
 const splitText = () => {
     const newSlides = splitTextIntoSlides(textInput.value);

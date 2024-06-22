@@ -84,7 +84,7 @@
 import Swal from "sweetalert2";
 import mammoth from 'mammoth';
 import { PDFDocument } from 'pdf-lib';
-const character_count = import.meta.VITE_MAX_CHARACTER_COUNT;
+const character_count = ref(340)
 
 const slides = ref<{ text: string; color?: string }[]>([]);
 const editingIndex = ref<number | null>(null);
