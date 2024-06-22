@@ -25,7 +25,7 @@
                                     @change="selectedStori = $event.target.checked ? storiesList.map((p) => p.id) : []" />
                             </th>
                             <th scope="col" class="py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">
-                                Cover Image
+                                Image
                             </th>
                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                 Title
@@ -37,16 +37,16 @@
                                 Tags
                             </th>
                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                Comment Count
+                                Comments
                             </th>
                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                Reactions Count
+                                Reactions
                             </th>
                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                Total Views Count
+                                Views
                             </th>
                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                Is Published
+                                Date Created
                             </th>
                             <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
                                 Actions
@@ -79,19 +79,24 @@
                             </td>
                             <td @click="viewStory(stori)"
                                 class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
-                                <p v-if="stori?.user" class="font-medium text-gray-800 no-underline">
+                                <!-- <p v-if="stori?.admin !== null" class="font-medium text-gray-800 no-underline">
+                                    {{ `${stori?.admin?.firstname} ${stori?.admin?.lastname}` }}</p> -->
+                                <p class="font-medium text-gray-800 no-underline">
                                     {{ `${stori?.user?.fname} ${stori?.user?.lname}` }}</p>
-                                <p v-else class="font-medium text-gray-800 no-underline">
-                                    Nil</p>
+                                <span v-if="stori?.admin !== null"
+                                    class="text-[10px] bg-black text-white rounded-full font-semibold px-2 py-1">by {{ `${stori?.admin?.firstname} ${stori?.admin?.lastname}` }}</span>
+                                <!-- <span v-else
+                                    class="text-[10px] bg-green-500 text-white rounded-full font-semibold px-2 py-1">User</span> -->
                             </td>
                             <td @click="viewStory(stori)"
                                 class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
-                                <div class="flex flex-wrap gap-2">
+                                <div v-if="stori.tags" class="flex flex-wrap gap-2">
                                     <p v-for="category in splitCategories(stori.tags)" :key="category"
                                         class="no-underline text-gray-800 border border-gray-500 text-xs rounded-xl px-3 py-1">
                                         {{ category }}
                                     </p>
                                 </div>
+                                <p v-else>Nil</p>
                             </td>
                             <td @click="viewStory(stori)"
                                 class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
@@ -114,8 +119,8 @@
                             <td @click="viewStory(stori)"
                                 class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
                                 <p class="no-underline text-gray-800">{{
-                                    stori.isPublished ??
-                                    "N/A" }}</p>
+                                    moment.utc(stori.createdAt).format('MMMM Do YYYY, h:mm:ss a') || 'Nil'
+                                    }}</p>
                             </td>
                             <td
                                 class="whitespace-nowrap text-center py-4 pl-3 pr-4 text-xs font-medium sm:pr-3 relative">
@@ -141,6 +146,7 @@
 </template>
 
 <script setup lang="ts">
+import moment from 'moment'
 import { useDeleteStory } from '@/composables/story/deleteUserStory';
 import { useFetchUserStories } from "@/composables/user/fetchUserStories";
 import { splitCategories } from "@/utils/splitCategories";

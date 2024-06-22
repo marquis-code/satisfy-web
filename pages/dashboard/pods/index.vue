@@ -5,15 +5,11 @@
                 <div href="#"
                     :class="[activeTab === 'stories' ? 'border-b-4 border-[#0ba9b9] text-gray-800' : 'text-gray-400 group-hover:text-gray-500']"
                     class="uppercase group inline-flex items-center py-2 px-1 text-xs font-semibold">
-                    <span>Stories </span><span
-                        class="font-semibold ml-2 rounded-3xl px-2 py-2 bg-[#0ba9b9] text-white">{{
+                    <span>Pods </span><span
+                        class="font-semibold ml-2 text-[10px] rounded-3xl px-2 py-1.5 bg-[#0ba9b9] text-white">{{
                         pagination.total }}</span>
                 </div>
             </nav>
-            <!-- <div>
-                <NuxtLink to="/dashboard/users/new"
-                    class="bg-[#0ba9b9] text-white font-medium text-sm rounded-md py-2.5 px-4">Add Stori</NuxtLink>
-            </div> -->
         </div>
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="flow-root mt-2">

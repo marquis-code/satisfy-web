@@ -19,7 +19,7 @@ export const useFetchUsers = () => {
   const usersList = ref([]) as any;
   const loading = ref(false);
   const searchQuery = ref<string>("");
-  const orderBy = ref<string>("");
+  const sortBy = ref<string>("DESC");
   const pagination = ref({
     page: 1,
     perPage: 10,
@@ -30,7 +30,7 @@ export const useFetchUsers = () => {
   const fetchUsers = async () => {
     loading.value = true;
     try {
-      const response = await userApiFactory.getUsersList(pagination.value, searchQuery.value, orderBy.value);
+      const response = await userApiFactory.getUsersList(pagination.value, searchQuery.value, sortBy.value);
       usersList.value = response.data.result;
       pagination.value = response.data.metadata;
     } catch (error: any) {
@@ -52,7 +52,7 @@ export const useFetchUsers = () => {
   });
 
 
-  watch(orderBy, (newQuery) => {
+  watch(sortBy, (newQuery) => {
     setPaginationObj(1); // Reset to the first page when search query changes
     debouncedFetchUsers();
   });
@@ -76,6 +76,6 @@ export const useFetchUsers = () => {
     loading,
     pagination,
     searchQuery,
-    orderBy
+    sortBy
   };
 };

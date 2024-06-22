@@ -4,11 +4,11 @@
       <div class="flex items-center gap-x-6">
         <p class="font-semibold text-lg">{{ user ? `${user.fname} ${user.lname}` : 'Nil' }}</p>
         <div class="mb-3">
-          <span class="text-[#175CD3] bg-blue-50 rounded-full text-xs px-3 py-2">@{{ user.handle ?? 'Nil' }}</span>
+          <span class="text-[#175CD3] bg-blue-50 rounded-full text-xs px-3 py-2">{{ user.handle ?? 'Nil' }}</span>
         </div>
       </div>
       <p class="text-gray-500 font-semibold text-sm">
-        Account created | {{ formatDate(user.createdAt) }}
+        Account created | {{ moment(user?.createdAt).format("MMM DD, YYYY") }}
       </p>
     </div>
     <dl class="-my-3 divide-y divide-gray-100 text-sm p-3">
@@ -77,11 +77,11 @@
 
       <div class="flex justify-between items-center py-5">
         <dt class="font-semibold text-gray-900 text-[14px]">Status</dt>
-        <dd v-if="user.isActive" class="font-semibold text-green-900 text-[14px] flex items-center gap-x-3">
+        <dd v-if="user.blockedAt === null" class="font-semibold text-green-900 text-[14px] flex items-center gap-x-3">
           <span class="h-3 w-3 bg-green-600 rounded-full p-1.5"></span>Active
         </dd>
         <dd v-else class="font-semibold text-gray-900 text-[14px] flex items-center gap-x-3">
-          <img src="@/assets/icons/dashboard/suspended.svg" alt="" />In active
+          <img src="@/assets/icons/dashboard/suspended.svg" alt="" />InActive
         </dd>
       </div>
 
@@ -101,6 +101,7 @@
 </template>
 
 <script lang="ts" setup>
+import moment from "moment"
 import { formatDate } from '@/composables/core/dateUtils';
 defineProps({
   user: {
