@@ -1,13 +1,13 @@
 import { axiosInstance, storipodAxiosInstance } from "./axios.config";
 
 export const userApiFactory = {
-  getUsersList(metadata: { page: number; perPage: number }, searchQuery: any, orderBy?: string) {
+  getUsersList(metadata: { page: number; perPage: number }, searchQuery: any, sortBy?: string) {
     let endpoint = `/user/all?page=${metadata.page}&perPage=${metadata.perPage}`;
     if (searchQuery && searchQuery.trim() !== "") {
       endpoint += `&search=${encodeURIComponent(searchQuery.trim())}`;
     }
-    if (orderBy && orderBy.trim() !== "") {
-      endpoint += `&orderBy=${encodeURIComponent(orderBy.trim())}`; //DESC or ASC
+    if (sortBy && sortBy.trim() !== "") {
+      endpoint += `&sort=${encodeURIComponent(sortBy.trim())}`; //DESC or ASC
     }
     return axiosInstance.get(endpoint);
   },
@@ -55,12 +55,12 @@ export const userApiFactory = {
   createUser(payload: any) {
     return axiosInstance.post("/user/create-user", payload);
   },
-  getUserInterests(metadata: { page: number; perPage: number }) {
-    return storipodAxiosInstance.get(`/categories/all?page=${metadata.page}&perPage=${metadata.perPage}`);
+  getUserInterests(metadata: { page: number; perPage: number, search?: string }) {
+    return storipodAxiosInstance.get(`/categories/all?page=${metadata.page}&perPage=${metadata.perPage}&hasStories=false&search=${metadata.search}`);
   },
-  getUserInterestsBySearch(metadata: { page: number; perPage: number, search: string }) {
-    return storipodAxiosInstance.get(`/categories?page=${metadata.page}&perPage=${metadata.perPage}&search=${metadata.search}`);
-  },
+  // getUserInterestsBySearch(metadata: { page: number; perPage: number, search: string }) {
+  //   return storipodAxiosInstance.get(`/categories?page=${metadata.page}&perPage=${metadata.perPage}&search=${metadata.search}`);
+  // },
   getMostRecentUsers(id: string) {
     return axiosInstance.get(`/user/${id}`);
   },

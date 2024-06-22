@@ -41,10 +41,9 @@
               <div>
                 <label for="SortBy" class="sr-only">SortBy</label>
 
-                <select id="SortBy" class="h-10 rounded border-gray-300 text-sm">
-                  <option>Sort By</option>
-                  <option value="newest">Newest</option>
-                  <option value="latest">Latest</option>
+                <select v-model="sortBy" id="SortBy" class="h-10 rounded border-gray-300 text-sm">
+                  <option value="ASC">Ascending</option>
+                  <option value="DESC">Descending</option>
                 </select>
               </div>
             </div>
@@ -87,7 +86,7 @@
 
 <script setup lang="ts">
 import { useFetchUsers } from '@/composables/user/fetch'
-const { fetchUsers, usersList, searchQuery, loading, pagination } = useFetchUsers()
+const { fetchUsers, usersList, searchQuery, loading, pagination, sortBy } = useFetchUsers()
 const selectedUser = ref({}) as any
 const activeTab = ref('users')
 const selectedPeople = ref([])

@@ -29,20 +29,27 @@
                 </div>
             </div>
             <div class="px-4">
-                <DashboardImageZoom v-if="stori?.cover_image" class="h-10 w-10 rounded-full object-cover object-center" alt="" :src="stori?.cover_image" />
+                <DashboardImageZoom v-if="stori?.coverImage"
+                    class="h-10 w-10 cursor-pointer rounded-full object-cover object-center" alt=""
+                    :src="stori?.coverImage" />
                 <img v-else src="@/assets/img/stori.png" class="h-10 w-10 rounded-full" alt="" />
             </div>
-            <h1 class="px-4 text-sm text-gray-700">{{ stori?.title ?? 'Nil' }}</h1>
+            <div class="mt-1">
+                <NuxtLink :to="`/dashboard/pods/${stori.id}`" class="px-4 underline text-sm text-gray-700 font-semibold">{{
+                    stori?.title ?? 'Nil' }}</NuxtLink>
+            </div>
             <div class="flex justify-between items-center px-4 pb-14">
-                <div class="flex items-center gap-x-2 font-medium text-gray-600"><img src="@/assets/icons/reactions.svg"
-                        alt="" /> {{
-                    stori?.reactions_count ?? 'Nil' }}</div>
+                <div class="flex items-center gap-x-2 font-medium text-gray-600">
+                    <img src="@/assets/icons/reactions.svg" alt="" />
+                    {{
+                    stori?.reactionsCount ?? 'Nil' }}
+                </div>
                 <img src="@/assets/icons/stori-eclipse.svg" alt="" />
             </div>
             <div class="absolute w-full bottom-0">
                 <div class="border-t border-gray-300 flex justify-end items-end">
                     <p class="text-gray-400 text-xs font-light px-4 py-3">
-                        <span v-if="stori?.created_at">{{ moment(stori?.created_at).format("MMM DD, YYYY") }}</span>
+                        <span v-if="stori?.createdAt">{{ moment(stori?.createdAt).format("MMM DD, YYYY, h:mm:ss a") }}</span>
                         <span v-else>Nil</span>
                     </p>
                 </div>

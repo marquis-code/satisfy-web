@@ -1,19 +1,19 @@
 
 export const useFontFamily = () => {
     const fontsList = ref([
-      { name: 'Lato', code: 'Lato' },
+      { name: 'Anton', code: 'Anton' },
+      { name: 'Bebas Neue', code: 'BebasNeue' },
       { name: 'Bangers', code: 'Bangers' },
       { name: 'Baskervville', code: 'Baskervville' },
-      { name: 'Roboto Condensed', code: 'RobotoCondensed' },
-      { name: 'Playfair Display', code: 'PlayfairDisplay' },
-      { name: 'Kanit', code: 'Kanit' },
-      { name: 'Noto Serif', code: 'NotoSerif' },
-      { name: 'Bebas Neue', code: 'BebasNeue' },
-      { name: 'Anton', code: 'Anton' },
-      { name: 'Lobster', code: 'Lobster' },
-      { name: 'Pacifico', code: 'Pacifico' },
-      { name: 'Source Code Pro', code: 'SourceCodePro' },
       { name: 'Caveat', code: 'Caveat' },
+      { name: 'Kanit', code: 'Kanit' },
+      { name: 'Lobster', code: 'Lobster' },
+      { name: 'Lato', code: 'Lato' },
+      { name: 'Noto Serif', code: 'NotoSerif' },
+      { name: 'Pacifico', code: 'Pacifico' },
+      { name: 'Playfair Display', code: 'PlayfairDisplay' },
+      { name: 'Roboto Condensed', code: 'RobotoCondensed' },
+      { name: 'Source Code Pro', code: 'SourceCodePro' },
     ]);
   
     return { fontsList };

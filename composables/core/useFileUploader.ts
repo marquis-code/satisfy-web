@@ -31,9 +31,9 @@ export const useFileUploader = () => {
 
   const processText = (text: string) => {
     const chunks: { text: string }[] = [];
-    for (let i = 0; i < text.length; i += 380) {
+    for (let i = 0; i < text.length; i += 360) {
       if (chunks.length >= 25) break; // Stop processing after 25 chunks
-      chunks.push({ text: text.slice(i, i + 380) });
+      chunks.push({ text: text.slice(i, i + 360) });
     }
     textChunks.value = chunks;
   };

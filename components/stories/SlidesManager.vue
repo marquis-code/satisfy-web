@@ -18,7 +18,7 @@
         <div v-if="editingIndex !== null"
             class="my-4 p-4 border border-gray-500 rounded-lg space-x-6 space-y-3 shadow-md">
             <div class="flex justify-between items-center pl-6">
-                <p class="text-sm text-gray-700 font-semibold">Character count should not exceed 380 characters and 12
+                <p class="text-sm text-gray-700 font-semibold">( Max 380 characters )
                     lines.</p>
                 <p
                     :class="`text-sm text-gray-700 font-semibold ${editingText.length > 380 ? 'text-red-600' : editingText.length === 380 ? 'text-green-700' : ''}`">

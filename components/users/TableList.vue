@@ -35,18 +35,12 @@
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                 Last name
               </th>
-              <!-- <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                Interest(s)
-              </th> -->
-              <!-- <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                Phone no.
-              </th> -->
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                 Email
               </th>
-              <!-- <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
-                No. of (pods)
-              </th> -->
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                Date Created
+              </th>
               <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
                 Actions
               </th>
@@ -85,27 +79,16 @@
                 <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.lname ||
       "Nil" }}</nuxt-link>
               </td>
-              <!-- <td class="whitespace-nowrap px-3 py-4 text-sm text-[#6941C6] font-semibold">
-                <div class="grid grid-cols-2 lg:grid-cols-3 gap-3" v-if="person.categories.length">
-                  <span class="bg-[#F9F5FF] rounded-full px-3 py-2 text-xs" v-for="(itm, idx) in  person.categories"
-                    :key="idx">{{
-      itm.name.length > 10 ? `${itm.name.slice(0, 10)}...` : itm.name
-    }}</span>
-                </div>
-                <span v-else class="bg-[#EEF4FF] text-[#6941C6] rounded-full px-3 py-2">Nil</span>
-              </td> -->
-              <!-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.phone ??
-      "Nil" }}</nuxt-link>
-              </td> -->
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.email ??
       "Nil" }}</nuxt-link>
               </td>
-              <!-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{
-      getUserPods(person) }}</nuxt-link>
-              </td> -->
+              <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                <nuxt-link class="no-underline font-semibold text-gray-800" :to="`/dashboard/users/${person.id}`">{{
+      moment.utc(person.createdAt).format('MMMM Do YYYY h:mm:ss a') || 'Nil'
+    }}
+                </nuxt-link>
+              </td>
               <td class="whitespace-nowrap text-center py-4 pl-3 pr-4 text-xs font-medium sm:pr-3 relative">
                 <button @click="toggleDropdown(index)">
                   <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none"
@@ -290,7 +273,7 @@
         </div>
       </template>
 
-      <template #actionsBtn>
+<template #actionsBtn>
         <div class="flex flex-shrink-0 justify-end px-4 py-4">
           <button type="button" @click="showEditModal = false"
             class="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Cancel</button>
@@ -299,11 +282,12 @@
             ? 'editing...' : 'Save'}}</button>
         </div>
       </template>
-    </CoreSlideOver> -->
+</CoreSlideOver> -->
   </main>
 </template>
 
 <script setup lang="ts">
+import moment from 'moment'
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
 import { useFetchUserStories } from '@/composables/user/fetchUserStories'
 import { useEditUser } from '@/composables/user/editUser'
@@ -326,10 +310,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  // searchQuery: {
-  //   type: String,
-  //   default: ''
-  // }
 });
 const formatter = ref({
   date: "DD MMM YYYY",

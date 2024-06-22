@@ -19,7 +19,7 @@
             </div>
 
             <div class="w-full space-y-1">
-                <label for="title" class="text-xs md:text-sm font-medium">Title</label>
+                <label for="title" class="text-xs md:text-sm font-medium">Title by {{userObj.fname}} {{userObj.lname}}</label>
                 <input v-model="payload.title" name="title" id="title"
                     class="bg-gray-50 rounded-md w-full outline-none py-3 border-gray-300 border pl-3" type="text" />
             </div>
@@ -30,9 +30,8 @@
                         </legend>
                         <div class="mt-2 space-y-6 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
                             <div class="flex items-center" v-for="item in podCreationMethodsList" :key="item.name">
-                                <input v-model="uploadType" :id="item.code" :value="item.code"
-                                    name="notification-method" type="radio"
-                                    class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                <input v-model="uploadType" :id="item.code" :value="item.code" name="upload-method"
+                                    type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                 <label :for="item.code"
                                     class="ml-3 block text-sm font-medium leading-6 text-gray-900">{{ item.name
                                     }}</label>
@@ -48,7 +47,7 @@
                         :style="{ backgroundColor: color.code }"
                         class="block size-6 cursor-pointer rounded-full bg-black shadow-sm has-[:checked]:ring-2 has-[:checked]:ring-black has-[:checked]:ring-offset-2">
                         <input type="radio" @change="handleColorChange(color, $event)" name="ColorOption"
-                            :value="color.key" :id="color.key" class="sr-only" />
+                            :value="color.key" v-model="slideColor" :id="color.key" class="sr-only" />
 
                         <span class="sr-only"> {{ color.name }}: {{ color.code }} </span>
                     </label>
@@ -68,7 +67,7 @@
                         <div class="mt-2 space-y-6 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
                             <div class="flex items-center" v-for="item in textAlignmentList" :key="item.code">
                                 <input @change="applyAlignment" v-model="selectedTextAlignment" :id="item.code"
-                                    :value="item.code" name="notification-method" type="radio"
+                                    :value="item.code" name="stori-alignment" type="radio"
                                     class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                 <label :for="item.code"
                                     class="ml-3 block text-sm font-medium leading-6 text-gray-900">{{ item.name
@@ -85,7 +84,7 @@
                         <div class="mt-2 space-y-6 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
                             <div class="flex items-center" v-for="item in storiVisibilityList" :key="item.name">
                                 <input v-model="selectedVisibilityStatus" :id="item.code" :value="item.code"
-                                    name="notification-method" type="radio"
+                                    name="stori-visibility-status" type="radio"
                                     class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                 <label :for="item.code"
                                     class="ml-3 block text-sm font-medium leading-6 text-gray-900">{{ item.name
@@ -100,7 +99,7 @@
                     <div class="mt-2 space-y-6 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
                         <div class="flex items-center" v-for="item in storiPublicationStatusList" :key="item.name">
                             <input v-model="selectedPublicationStatus" :id="item.code" :value="item.code"
-                                name="notification-method" type="radio"
+                                name="publication-status" type="radio"
                                 class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
                             <label :for="item.code" class="ml-3 block text-sm font-medium leading-6 text-gray-900">{{
                 item.name
@@ -138,6 +137,7 @@
 import moment from 'moment'
 import Swal from "sweetalert2";
 import { useLogin } from '@/composables/auth/login'
+import { useFetchUserById } from '@/composables/user/getUserById'
 import { useColors } from '@/composables/core/useColors';
 import { useFontFamily } from '@/composables/core/useFontFamily'
 const { colors } = useColors();
@@ -147,6 +147,8 @@ import { useUploadImageFile } from '@/composables/files/useUploadImageFile'
 import { useTextAlignment } from '@/composables/core/useTextAlignment'
 const { textAlignmentList } = useTextAlignment()
 const { uploadImageFile, uploadResponse, loading: uploading } = useUploadImageFile()
+const { fetchUser, user: userObj, loading: loadingUserObj } = useFetchUserById()
+fetchUser()
 const { user } = useLogin()
 const selectedFont = ref('Lato') as any
 const selectedTextAlignment = ref('center') as any
@@ -159,7 +161,7 @@ const actualManualPod = ref<string>('');
 const uploadedFileList = ref<any[]>([]);
 const uploadedTagsList = ref<any[]>([]);
 const uploadedPodCover = ref('') as any;
-const slideColor = ref('') as any;
+const slideColor = ref('0xFF39349A') as any;
 const manualContentList = ref([]) as any
 const hexaColor = ref('') as any
 // const coverImage = ref('') as any
@@ -265,28 +267,7 @@ const onFileChange = (e: Event) => {
     }
 };
 
-// Placeholder function for uploadImageFile, replace it with your actual implementation.
-// const uploadImageFile = (formData: FormData) => {
-//     // Your upload logic here
-// };
 
-
-// const onFileChange = (e: Event) => {
-//     const target = e.target as HTMLInputElement;
-//     const file = target.files ? target.files[0] : null;
-//     if (file && file.type.startsWith("image/")) {
-//         const formData = new FormData();
-//         formData.append('file', file);
-//         formData.append('fileType', 'asset');
-
-//         uploadImageFile(formData);
-
-//         uploadedPodCover.value = file;
-//         imagePreview.value = URL.createObjectURL(file);
-//     } else {
-//         imagePreview.value = null;
-//     }
-// };
 
 const handleSelectedType = (e: Event) => {
     const target = e.target as HTMLSelectElement;
@@ -378,8 +359,10 @@ const handleColorChange = (color: any, e: any) => {
     slideColor.value = e.target.value
 }
 
+// const selectedPublicationStatus = ref(true) as any
+// const selectedVisibilityStatus = ref(true) as any
 const isButtonEnabled = computed(() => {
-    return !!(selectedPublicationStatus.value && payload.value.title && uploadResponse.value.url && route.params.id && (computedManualSlides.value || computedSlides.value) && computedStoryCategories.value)
+    return !!(payload.value.title && uploadResponse.value.url && (manualContentList.value.length || uploadedFileList.value.length) && uploadedTagsList.value.length && selectedPublicationStatus.value && selectedVisibilityStatus.value && selectedFont.value.length && slideColor.value.length && selectedTextAlignment.value.length)
 })
 
 const handleCancellation = () => {
