@@ -19,7 +19,8 @@
             </div>
 
             <div class="w-full space-y-1">
-                <label for="title" class="text-xs md:text-sm font-medium">Title by {{userObj.fname}} {{userObj.lname}}</label>
+                <label for="title" class="text-xs md:text-sm font-medium">{{ payload.title ? payload.title : 'Title' }} by {{ userObj.fname }}
+                    {{ userObj.lname }}</label>
                 <input v-model="payload.title" name="title" id="title"
                     class="bg-gray-50 rounded-md w-full outline-none py-3 border-gray-300 border pl-3" type="text" />
             </div>
@@ -129,6 +130,30 @@
                 </div>
             </div>
         </section>
+
+        <CoreBaseModal :show="showOptionsModal" @update:show="showOptionsModal = false">
+            <section class="bg-white p-6 space-y-6 max-w-screen-lg rounded-md">
+                <div>
+                    <img src="@/assets/icons/success.svg" class="h-20 w-20" alt="warning" />
+                </div>
+                <div>
+                    <h1 class="font-semibold text-xl">Congratulations!!!</h1>
+                    <p class="text-gray-500">
+                        Pod was created successfully.
+                    </p>
+                </div>
+                <div class="flex justify-end items-end gap-x-3 w-full pt-6">
+                    <button @click="handleAddPod"
+                        class="text-black text-sm font-medium w-full border-gray-400 border px-3 py-3 rounded-lg">
+                        Add new pod
+                    </button>
+                    <button @click="handleViewPod"
+                        class="bg-[#D92D20] disabled:cursor-not-allowed disabled:opacity-25 text-sm w-full text-white font-medium px-6 py-3 rounded-lg">
+                        View pod
+                    </button>
+                </div>
+            </section>
+        </CoreBaseModal>
     </main>
 </template>
 
@@ -148,10 +173,17 @@ import { useTextAlignment } from '@/composables/core/useTextAlignment'
 const { textAlignmentList } = useTextAlignment()
 const { uploadImageFile, uploadResponse, loading: uploading } = useUploadImageFile()
 const { fetchUser, user: userObj, loading: loadingUserObj } = useFetchUserById()
+const showOptionsModal = ref(false)
 fetchUser()
 const { user } = useLogin()
 const selectedFont = ref('Lato') as any
 const selectedTextAlignment = ref('center') as any
+const podSuccessObj = ref({}) as any
+const router = useRouter()
+
+const refreshPage = () => {
+  router.replace({ path: route.path, query: route.query, hash: route.hash })
+}
 
 const { createUserStory, payload, loading, descriptionLength, setPayload } = useCreateUserStory();
 const { fontsList } = useFontFamily()
@@ -338,10 +370,9 @@ const handleCreateUserStory = () => {
     // Set the payload and then call the createUserStory function
     setPayload(finalPayload);
     createUserStory().then(response => {
-        useNuxtApp().$toast.success("Story was published successfully", {
-            autoClose: 5000,
-            dangerouslyHTMLString: true,
-        })
+        podSuccessObj.value = response.data
+        showOptionsModal.value = true
+
     }).catch(error => {
         useNuxtApp().$toast.error("Something went wrong!", {
             autoClose: 5000,
@@ -349,6 +380,15 @@ const handleCreateUserStory = () => {
         });
     });
 };
+
+const handleViewPod = () => {
+    showOptionsModal.value = false
+    router.push({ path: `/dashboard/pods/${podSuccessObj.value.id}` })
+}
+const handleAddPod = () => {
+    showOptionsModal.value = false
+    refreshPage()
+}
 
 const handleTagContent = (data: any) => {
     uploadedTagsList.value = data.value
@@ -358,13 +398,9 @@ const handleColorChange = (color: any, e: any) => {
     hexaColor.value = color.code
     slideColor.value = e.target.value
 }
-
-// const selectedPublicationStatus = ref(true) as any
-// const selectedVisibilityStatus = ref(true) as any
 const isButtonEnabled = computed(() => {
     return !!(payload.value.title && uploadResponse.value.url && (manualContentList.value.length || uploadedFileList.value.length) && uploadedTagsList.value.length && selectedPublicationStatus.value && selectedVisibilityStatus.value && selectedFont.value.length && slideColor.value.length && selectedTextAlignment.value.length)
 })
-
 const handleCancellation = () => {
 
     Swal.fire({
