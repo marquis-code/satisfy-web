@@ -3,7 +3,7 @@
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto">
-                    <h1 class="text-base font-semibold leading-6 text-gray-900">Sponsored Ads</h1>
+                    <h1 class="text-base font-semibold leading-6 text-gray-900">Sponsored Ads {{loading}}</h1>
                     <p class="mt-2 text-sm text-gray-700">A list of all the sponsored ads in your account including
                         their name,
                         title, email and role.</p>
@@ -16,7 +16,7 @@
             </div>
             <div class="mt-8 flow-root">
                 <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <div v-if="adsList.length && !loading" class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                         <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
                             <table class="min-w-full divide-y divide-gray-300">
                                 <thead class="bg-gray-50">
@@ -45,12 +45,15 @@
                                     <tr v-for="(ads, idx) in adsList" :key="idx">
                                         <td
                                             class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                            {{ ads.client_name ?? 'Nil' }}</td>
+                                            {{ ads.clientName ?? 'Nil' }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            <img :src="ads.file_upload" alt="" class="rounded-full h-16 w-16">
+                                            <DashboardImageZoom v-if="ads.image" class="rounded-full h-10 w-10" :src="ads.image" />
+                                            <span v-else>Nil</span>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ ads.target_link ?? 'Nil' }}</td>
+                                            <a v-if="ads.link" :href="ads.link" class="underline text-green-600">{{ads.link}}</a>
+                                            <span v-else>Nil</span>
+                                        </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ ads.start_date
                         ?? 'Nil' }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ ads.end_date ??
@@ -82,16 +85,6 @@
                                                         <line x1="14" y1="11" x2="14" y2="17"></line>
                                                     </svg>
                                                 </a>
-                                                <a href.prevent="#" @click="handleAds('view', ads)"
-                                                    class="text-indigo-600 hover:text-indigo-900 cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
-                                                        viewBox="0 0 24 24" fill="none" stroke="#4a4a4a"
-                                                        stroke-width="2.5" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                                        <circle cx="12" cy="12" r="3"></circle>
-                                                    </svg>
-                                                </a>
                                             </div>
                                         </td>
                                     </tr>
@@ -99,15 +92,17 @@
                             </table>
                         </div>
                     </div>
+                    <CoreEmptyState v-if="adsList.length <= 0 && !loading" title="No Ads available" desc="">
+                    </CoreEmptyState>
+                    <div v-if="loading" class="h-32 bg-slate-100 rounded"></div>
                 </div>
             </div>
         </div>
 
-        <CoreSlideOver :show="showSlideOver" @update:show="false" :title="computedSlideOverHeader.title"
+        <CoreSlideOver :show="showSlideOver" @update:show="closeSideModal" :title="computedSlideOverHeader.title"
             :description="computedSlideOverHeader.desc">
             <template #content>
-                <AdsForm :ads="selectedAds" v-if="route.query.action === 'edit' || route.query.action === 'create'" />
-                <AdsDetails :ads="selectedAds" v-if="route.query.action === 'preview'" />
+                <AdsForm @success="showSlideOver = false" :ads="selectedAds" v-if="route.query.action === 'edit' || route.query.action === 'create'" />
             </template>
         </CoreSlideOver>
     </main>
@@ -118,20 +113,16 @@ import { useGetAllSponsoredAds } from '@/composables/sponsored-ads/fetch'
 import { useDeleteSponsoredAds } from '@/composables/sponsored-ads/delete'
 const { deleteSponsoredAds, loading: deleting } = useDeleteSponsoredAds()
 const { getAllSponsoredAds, ads: adsList, loading } = useGetAllSponsoredAds()
-const showSlideOver = ref(false)
+const showSlideOver = ref(false) 
 const selectedAds = ref({}) as Record<string, any>
 const route = useRoute()
 const router = useRouter()
 getAllSponsoredAds()
 
-const handleAds = (action: string, data?: Record<string, any>) => {
-    if (action === 'view') {
-        selectedAds.value = data
-        router.push({ path: route.path, query: { action: 'preview' } })
-    }
+const handleAds = (action: string, data?: any) => {
     if (action === 'edit') {
         selectedAds.value = data
-        router.push({ path: route.path, query: { action: 'edit' } })
+        router.push({ path: route.path, query: { action: 'edit', id: data.id } })
         showSlideOver.value = true
     }
     if (action === 'delete') {
@@ -168,4 +159,9 @@ const computedSlideOverHeader = computed(() => {
             }
     }
 })
+
+const closeSideModal = () => {
+    router.push({ path: router.path})
+    showSlideOver.value = false
+}
 </script>
