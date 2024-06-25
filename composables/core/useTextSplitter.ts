@@ -2,7 +2,6 @@ import { ref } from "vue";
 import Swal from "sweetalert2";
 import mammoth from "mammoth";
 import { PDFDocument } from "pdf-lib";
-// import wrap from "word-wrap";
 import wrap from "wrap-ansi";
 
 export const useTextSplitter = () => {
@@ -11,25 +10,13 @@ export const useTextSplitter = () => {
   const previousEditingIndex = ref<number | null>(null);
   const editingText = ref<string>("");
 
-  // const splitTextIntoSlides = (text: string) => {
-  //   // Use the wrap function with the options to prevent word splitting
-  //   const modified = text.replace("\n", "").replace("\t", "")
-  //   const wrappedText = wrap(modified, 360, { hard: true, wordWrap: true, trim: true });
-  //   console.log(wrappedText, 'wrapped')
-  //   const chunks = wrappedText.trim().split('\n').filter(chunk => chunk.length > 0);
-
-  //   const newSlides = chunks.map((chunk) => ({ text: chunk }));
-  //   slides.value = [...slides.value, ...newSlides].slice(0, 25);
-  //   return newSlides;
-  // };
-
   function splitTextIntoSlides(text) {
     let modified = text
       .replace("\n", "")
       .replace("\t", "")
       .replace(/\s+/g, " ");
     console.log(modified, "modified");
-    const chunkSize = 340;
+    const chunkSize = 320;
     const whitespaceChars = [" ", "\n", "\t"];
     modified = String(modified);
     const textLength = modified.length;

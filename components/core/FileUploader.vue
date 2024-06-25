@@ -23,7 +23,7 @@
           </p>
           <p
             :class="`text-sm text-gray-800 font-bold ${editingText.length > character_count ? 'text-red-800' : editingText.length === character_count ? 'text-green-800' : ''}`">
-            {{ editingText.length }}/340</p>
+            {{ editingText.length }}/320</p>
         </div>
         <div class="flex space-x-6">
           <div class="w-9/12">
@@ -84,7 +84,7 @@
 import Swal from "sweetalert2";
 import mammoth from 'mammoth';
 import { PDFDocument } from 'pdf-lib';
-const character_count = ref(340)
+const character_count = ref(320)
 
 const slides = ref<{ text: string; color?: string }[]>([]);
 const editingIndex = ref<number | null>(null);
@@ -97,8 +97,8 @@ const currentIndex = ref<number | null>(null);
 const splitTextIntoSlides = (text: string) => {
   const trimmedText = text.trim().replace(/\s+/g, ' ');
   const chunks = [];
-  for (let i = 0; i < trimmedText.length; i += 340) {
-    chunks.push(trimmedText.slice(i, i + 340));
+  for (let i = 0; i < trimmedText.length; i += 320) {
+    chunks.push(trimmedText.slice(i, i + 320));
   }
   const newSlides = chunks.map(chunk => ({ text: chunk }));
   slides.value = [...slides.value, ...newSlides].slice(0, 25);
