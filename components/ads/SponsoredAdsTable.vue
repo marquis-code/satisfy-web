@@ -3,7 +3,7 @@
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto">
-                    <h1 class="text-base font-semibold leading-6 text-gray-900">Sponsored Ads {{loading}}</h1>
+                    <h1 class="text-base font-semibold leading-6 text-gray-900">Sponsored Ads</h1>
                     <p class="mt-2 text-sm text-gray-700">A list of all the sponsored ads in your account including
                         their name,
                         title, email and role.</p>
@@ -16,14 +16,14 @@
             </div>
             <div class="mt-8 flow-root">
                 <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div v-if="adsList.length && !loading" class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <div v-if="adsList.length && !loading"
+                        class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                         <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
                             <table class="min-w-full divide-y divide-gray-300">
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th scope="col"
-                                            class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                            Client Name</th>
+                                            class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Client Name</th>
                                         <th scope="col"
                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">File
                                             Upload</th>
@@ -31,10 +31,18 @@
                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Target
                                             Link</th>
                                         <th scope="col"
+                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status
+                                        </th>
+                                        <th scope="col"
+                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Hits</th>
+                                        <th scope="col"
                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Start date
                                         </th>
                                         <th scope="col"
                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">End date
+                                        </th>
+                                        <th scope="col"
+                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Date Created
                                         </th>
                                         <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                                             <span class="sr-only">Edit</span>
@@ -47,17 +55,35 @@
                                             class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                             {{ ads.clientName ?? 'Nil' }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            <DashboardImageZoom v-if="ads.image" class="rounded-full h-10 w-10" :src="ads.image" />
+                                            <DashboardImageZoom v-if="ads.image" class="rounded-full h-10 w-10"
+                                                :src="ads.image" />
                                             <span v-else>Nil</span>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            <a v-if="ads.link" :href="ads.link" class="underline text-green-600">{{ads.link}}</a>
+                                            <a target="__blank" v-if="ads.link" :href="ads.link"
+                                                class="underline text-green-600">{{ ads.link.slice(0, 10) + '.....' }}</a>
                                             <span v-else>Nil</span>
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ ads.start_date
-                        ?? 'Nil' }}</td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ ads.end_date ??
-                        'Nil' }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {{ ads.status
+                                                ?? 'Nil' }}
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {{ ads.hits
+                                                ?? 'Nil' }}
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            <span v-if="ads?.startDate">{{ moment(ads?.startDate).format("MMM DD, YYYY, h:mm a") }}</span>
+                                            <span v-else>Nil</span>
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            <span v-if="ads?.endDate">{{ moment(ads?.endDate).format("MMM DD, YYYY, h:mm a") }}</span>
+                                            <span v-else>Nil</span>
+                                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <span v-if="ads?.createdAt">{{ moment(ads?.createdAt).format("MMM DD, YYYY, h:mm a") }}</span>
+                            <span v-else>Nil</span>
+                        </td>
                                         <td
                                             class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                             <div class="flex items-center gap-x-3">
@@ -102,18 +128,20 @@
         <CoreSlideOver :show="showSlideOver" @update:show="closeSideModal" :title="computedSlideOverHeader.title"
             :description="computedSlideOverHeader.desc">
             <template #content>
-                <AdsForm @success="showSlideOver = false" :ads="selectedAds" v-if="route.query.action === 'edit' || route.query.action === 'create'" />
+                <AdsForm @success="showSlideOver = false" :ads="selectedAds"
+                    v-if="route.query.action === 'edit' || route.query.action === 'create'" />
             </template>
         </CoreSlideOver>
     </main>
 </template>
 
 <script setup lang="ts">
+import moment from "moment"
 import { useGetAllSponsoredAds } from '@/composables/sponsored-ads/fetch'
 import { useDeleteSponsoredAds } from '@/composables/sponsored-ads/delete'
 const { deleteSponsoredAds, loading: deleting } = useDeleteSponsoredAds()
 const { getAllSponsoredAds, ads: adsList, loading } = useGetAllSponsoredAds()
-const showSlideOver = ref(false) 
+const showSlideOver = ref(false)
 const selectedAds = ref({}) as Record<string, any>
 const route = useRoute()
 const router = useRouter()
@@ -127,7 +155,7 @@ const handleAds = (action: string, data?: any) => {
     }
     if (action === 'delete') {
         deleteSponsoredAds(data.id)
-     }
+    }
 
     if (action === 'create') {
         router.push({ path: route.path, query: { action: 'create' } })
@@ -161,7 +189,7 @@ const computedSlideOverHeader = computed(() => {
 })
 
 const closeSideModal = () => {
-    router.push({ path: router.path})
+    router.push({ path: router.path })
     showSlideOver.value = false
 }
 </script>
