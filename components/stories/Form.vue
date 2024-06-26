@@ -191,7 +191,7 @@ const refreshPage = () => {
 
 const { createUserStory, payload, loading, descriptionLength, setPayload } = useCreateUserStory();
 const { fontsList } = useFontFamily()
-const uploadType = ref('upload');
+const uploadType = ref('manual');
 const manualPodList = ref<string[]>([]);
 const actualManualPod = ref<string>('');
 const uploadedFileList = ref<any[]>([]);

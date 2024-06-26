@@ -29,13 +29,13 @@
                             :class="`text-base text-gray-700 font-semibold ${editingText.length > character_count ? 'text-red-600' : editingText.length === character_count ? 'text-green-700' : ''}`">
                             {{ editingText.length }}/{{ character_count }}</p>
                     </div>
-                    <textarea v-model="editingText" rows="5" cols="10"
+                    <textarea v-model="editingText" rows="5" cols="10" @blur="handleBlur"
                         :class="`w-full p-2 !border h-60 rounded leading-relaxed !outline-none text-xl resize-none mb-2 ${editingText.length > character_count ? 'border-2 border-red-500' : ''}`"></textarea>
                     <div class="flex justify-end items-end space-x-2">
                         <div class="space-x-3">
-                            <button @click="saveEditing" :disabled="editingText.length > character_count"
+                            <!-- <button @click="saveEditing" :disabled="editingText.length > character_count"
                                 :class="[editingText.length > character_count ? 'cursor-not-allowed opacity-25' : '']"
-                                class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Save</button>
+                                class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Save</button> -->
                             <button @click="cancelEditing"
                                 class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Cancel</button>
                         </div>
@@ -90,6 +90,14 @@ const splitText = () => {
     emit('content', newSlides);
     emit('slides', slides.value)
 };
+
+watch(editingText, (val) => {
+  console.log(val, 'fghjk text')
+})
+
+const handleBlur = () => {
+    saveEditing()
+}
 
 const props = defineProps({
     color: {

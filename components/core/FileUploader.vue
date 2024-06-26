@@ -38,7 +38,7 @@
                 :class="`text-base text-gray-800 font-bold ${editingText.length > character_count ? 'text-red-800' : editingText.length === character_count ? 'text-green-800' : ''}`">
                 {{ editingText.length }}/320</p>
             </div>
-            <textarea v-model="editingText"
+            <textarea v-model="editingText" @blur="handleBlur"
               class="w-full h-60 border-gray-200 outline-none text-sm ring-0 leading-snug p-3 border rounded resize-none mb-2"></textarea>
             <div class="flex justify-end items-end space-x-2">
               <!-- <div>
@@ -120,6 +120,10 @@ const splitTextIntoSlides = (text: string) => {
   slides.value = [...slides.value, ...newSlides].slice(0, 25);
   return newSlides; // Return the newly created slides
 };
+
+const handleBlur = () => {
+    saveEditing()
+}
 
 const removeSlide = (index: number) => {
   Swal.fire({
