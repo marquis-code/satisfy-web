@@ -19,7 +19,8 @@
             </div>
 
             <div class="w-full space-y-1">
-                <label for="title" class="text-xs md:text-sm font-medium">{{ payload.title ? payload.title : 'Title' }} by {{ userObj.fname }}
+                <label for="title" class="text-xs md:text-sm font-medium">{{ payload.title ? payload.title : 'Title' }}
+                    by {{ userObj.fname }}
                     {{ userObj.lname }}</label>
                 <input v-model="payload.title" name="title" id="title"
                     class="bg-gray-50 rounded-md w-full outline-none py-3 border-gray-300 border pl-3" type="text" />
@@ -109,9 +110,9 @@
                     </div>
                 </fieldset>
             </div>
-
-            <StoriesSlidesManager :selectedTextAlignment="selectedTextAlignment" :selectedFont="selectedFont"
-                :color="hexaColor" @content="handleManualContent" v-if="uploadType === 'manual'" />
+            <StoriesSlidesManager @slides="handleSlides" :selectedTextAlignment="selectedTextAlignment"
+                :selectedFont="selectedFont" :color="hexaColor" @content="handleManualContent"
+                v-if="uploadType === 'manual'" />
             <div v-if="uploadType === 'upload'">
                 <h1 class="text-sm font-bold">Upload file in TXT or DOCX format</h1>
                 <CoreFileUploader :selectedFont="selectedFont" :color="hexaColor" @content="handleStoriContent"
@@ -122,7 +123,7 @@
             <div class="flex justify-end items-end pt-32">
                 <div class="flex gap-x-3">
                     <button type="button" @click="handleCancellation"
-                        class="text-[#0BA9B9] border border-gray-400 text-sm font-semibold rounded-lg px-6 py-3 w-full">Cancel</button>
+                        class="border border-gray-400 bg-red-500 text-white text-sm font-semibold rounded-lg px-6 py-3 w-full">Cancel</button>
                     <button :disabled="!isButtonEnabled" type="button" @click="handleCreateUserStory"
                         class="text-white disabled:cursor-not-allowed disabled:opacity-25 bg-[#0BA9B9] font-semibold text-sm rounded-lg px-6 py-3 w-full">
                         {{ loading ? 'processing..' : 'Pod it' }}
@@ -161,6 +162,7 @@
 <script setup lang="ts">
 import moment from 'moment'
 import Swal from "sweetalert2";
+import { useTextSplitter } from '@/composables/core/useTextSplitter'
 import { useLogin } from '@/composables/auth/login'
 import { useFetchUserById } from '@/composables/user/getUserById'
 import { useColors } from '@/composables/core/useColors';
@@ -173,6 +175,7 @@ import { useTextAlignment } from '@/composables/core/useTextAlignment'
 const { textAlignmentList } = useTextAlignment()
 const { uploadImageFile, uploadResponse, loading: uploading } = useUploadImageFile()
 const { fetchUser, user: userObj, loading: loadingUserObj } = useFetchUserById()
+const { clearSlides } = useTextSplitter()
 const showOptionsModal = ref(false)
 fetchUser()
 const { user } = useLogin()
@@ -182,7 +185,7 @@ const podSuccessObj = ref({}) as any
 const router = useRouter()
 
 const refreshPage = () => {
-  router.replace({ path: route.path, query: route.query, hash: route.hash })
+    router.replace({ path: route.path, query: route.query, hash: route.hash })
 }
 
 const { createUserStory, payload, loading, descriptionLength, setPayload } = useCreateUserStory();
@@ -196,6 +199,7 @@ const uploadedPodCover = ref('') as any;
 const slideColor = ref('0xFF39349A') as any;
 const manualContentList = ref([]) as any
 const hexaColor = ref('') as any
+const emittedSlides = ref([]) as any
 // const coverImage = ref('') as any
 const route = useRoute();
 
@@ -209,6 +213,10 @@ const storiVisibilityList = ref([
         name: 'False'
     }
 ])
+
+const handleSlides = (data: any) => {
+    emittedSlides.value = data
+}
 
 const podCreationMethodsList = ref([
     {
@@ -417,12 +425,14 @@ const handleCancellation = () => {
             // selectedPublicationStatus.value = null
             payload.value.title = null
             // uploadResponse.value.url = null
-            uploadedFileList.value = []
-            uploadedTagsList.value = []
+            uploadedFileList.value.length = 0
+            uploadedTagsList.value.length = 0
             // uploadedPodCover.value = ''
-            manualPodList.value = []
+            manualPodList.value.length = 0
             slideColor.value = ''
             manualContentList.value = []
+            emittedSlides.value = []
+            clearSlides()
             hexaColor.value = ''
         } else {
             Swal.fire("Cancelled", "Action was cancelled", "info");
