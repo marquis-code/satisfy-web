@@ -18,22 +18,35 @@
 
     <div v-else class="">
       <div v-if="editingIndex !== null" class="mb-4 p-4 rounded border shadow space-y-3">
-        <div class="flex justify-between items-center">
+        <!-- <div class="flex justify-between items-center">
           <p class="text-sm text-gray-800 font-bold">Slide {{ currentIndex }} (max. {{ character_count }} characters)
           </p>
           <p
             :class="`text-sm text-gray-800 font-bold ${editingText.length > character_count ? 'text-red-800' : editingText.length === character_count ? 'text-green-800' : ''}`">
             {{ editingText.length }}/320</p>
-        </div>
+        </div> -->
         <div class="flex space-x-6">
           <div class="w-9/12">
+            <div class="flex justify-between items-center pb-4">
+              <p class="text-sm text-gray-800 font-bold">Slide {{ currentIndex }} (max. {{ character_count }}
+                characters)
+              </p>
+              <p
+                :class="`text-sm text-gray-800 font-bold ${editingText.length > character_count ? 'text-red-800' : editingText.length === character_count ? 'text-green-800' : ''}`">
+                {{ editingText.length }}/320</p>
+            </div>
             <textarea v-model="editingText"
               class="w-full h-60 border-gray-200 outline-none text-sm ring-0 leading-snug p-3 border rounded resize-none mb-2"></textarea>
-            <div class="flex justify-end space-x-2">
-              <button @click="saveEditing" :disabled="editingText.length > character_count"
-                class="px-4 py-2 bg-green-500 disabled:cursor-not-allowed disabled:opacity-25 text-white rounded hover:bg-green-600">Save</button>
-              <button @click="cancelEditing"
-                class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Cancel</button>
+            <div class="flex justify-between items-center space-x-2">
+              <div>
+                <p class="font-medium">Editing slide {{ editingIndex + 1 }}</p>
+              </div>
+              <div class="space-x-3">
+                <button @click="saveEditing" :disabled="editingText.length > character_count"
+                  class="px-4 py-2 bg-green-500 disabled:cursor-not-allowed disabled:opacity-25 text-white rounded hover:bg-green-600">Save</button>
+                <button @click="cancelEditing"
+                  class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Cancel</button>
+              </div>
             </div>
           </div>
           <div :style="{ backgroundColor: color }"

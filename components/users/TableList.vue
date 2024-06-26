@@ -30,10 +30,10 @@
                 Username
               </th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                First name
+              FullName
               </th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                Last name
+               Auth Provider
               </th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                 Email
@@ -73,10 +73,11 @@
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.fname ||
-      "Nil" }}</nuxt-link>
+      "" }} {{ person.lname ||
+        "" }}</nuxt-link>
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.lname ||
+                <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.authProvider ||
       "Nil" }}</nuxt-link>
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

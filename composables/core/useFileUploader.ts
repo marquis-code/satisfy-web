@@ -78,7 +78,7 @@ export const useFileUploader = () => {
     // return chunks;
 
     const newSlides = chunks.map((chunk) => ({ text: chunk }));
-    textChunks.value = [...textChunks.value, ...newSlides].slice(0, 25);
+    textChunks.value = [...textChunks.value, ...newSlides].slice(0, 30);
     return newSlides;
   }
 

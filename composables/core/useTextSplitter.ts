@@ -50,7 +50,13 @@ export const useTextSplitter = () => {
     // return chunks;
 
     const newSlides = chunks.map((chunk) => ({ text: chunk }));
-    slides.value = [...slides.value, ...newSlides].slice(0, 25);
+    slides.value = [...slides.value, ...newSlides].slice(0, 30);
+    if (slides.value.length >= 30) {
+      useNuxtApp().$toast.warn("Slides Must not exceed 30", {
+        autoClose: 5000,
+        dangerouslyHTMLString: true,
+      });
+    }
     return newSlides;
   }
 
@@ -135,6 +141,13 @@ export const useTextSplitter = () => {
     splitTextIntoSlides(text);
   };
 
+  const clearSlides = async () => {
+    if (Array.isArray(slides.value)) {
+      slides.value.length = 0;
+      slides.value = [];
+    }
+  };
+
   return {
     slides,
     splitTextIntoSlides,
@@ -146,5 +159,6 @@ export const useTextSplitter = () => {
     saveEditing,
     cancelEditing,
     uploadFile,
+    clearSlides
   };
 };

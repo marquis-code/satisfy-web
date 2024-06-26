@@ -17,22 +17,27 @@
 
         <div v-if="editingIndex !== null"
             class="my-4 p-4 border border-gray-500 rounded-lg space-x-6 space-y-3 shadow-md">
-            <div class="flex justify-between items-center pl-6">
-                <p class="text-sm text-gray-700 font-semibold">( Max {{ character_count }} characters )
-                    lines.</p>
-                <p
-                    :class="`text-sm text-gray-700 font-semibold ${editingText.length > character_count ? 'text-red-600' : editingText.length === character_count ? 'text-green-700' : ''}`">
-                    {{ editingText.length }}/{{character_count}}</p>
-            </div>
             <div class="flex space-x-6">
                 <div class="w-9/12">
+                    <div class="flex justify-between items-center pl-6 pb-4">
+                        <p class="text-sm text-gray-700 font-semibold">( Max {{ character_count }} characters )
+                            lines.</p>
+                        <p
+                            :class="`text-sm text-gray-700 font-semibold ${editingText.length > character_count ? 'text-red-600' : editingText.length === character_count ? 'text-green-700' : ''}`">
+                            {{ editingText.length }}/{{ character_count }}</p>
+                    </div>
                     <textarea v-model="editingText" rows="5" cols="10"
-                        :class="`w-full p-2 border h-60 rounded leading-relaxed outline-none text-xl resize-none mb-2 ${editingText.length > character_count ? 'border-2 border-red-500' : ''}`"></textarea>
-                    <div class="flex justify-end space-x-2">
-                        <button @click="saveEditing"
-                            class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Save</button>
-                        <button @click="cancelEditing"
-                            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Cancel</button>
+                        :class="`w-full p-2 !border h-60 rounded leading-relaxed !outline-none text-xl resize-none mb-2 ${editingText.length > character_count ? 'border-2 border-red-500' : ''}`"></textarea>
+                    <div class="flex justify-between items-center space-x-2">
+                        <div>
+                            <p class="font-medium">Editing slide {{ editingIndex + 1 }}</p>
+                        </div>
+                        <div class="space-x-3">
+                            <button @click="saveEditing" :disabled="editingText.length > character_count" :class="[editingText.length > character_count ? 'cursor-not-allowed opacity-25' : '']"
+                                class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Save</button>
+                            <button @click="cancelEditing"
+                                class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Cancel</button>
+                        </div>
                     </div>
                 </div>
                 <div :style="{ backgroundColor: color }"
@@ -75,13 +80,14 @@ import { useTextSplitter } from '@/composables/core/useTextSplitter';
 const { slides, splitTextIntoSlides, removeSlide, editingIndex, editingText, startEditing, saveEditing, cancelEditing } = useTextSplitter();
 
 const textInput = ref<string>('');
-const emit = defineEmits(['content'])
+const emit = defineEmits(['content', 'slides'])
 const character_count = ref(340)
 
 const splitText = () => {
     const newSlides = splitTextIntoSlides(textInput.value);
     textInput.value = '';
     emit('content', newSlides);
+    emit('slides', slides.value)
 };
 
 const props = defineProps({
@@ -96,12 +102,16 @@ const props = defineProps({
     selectedTextAlignment: {
         type: String,
         default: 'center'
-    }
+    },
+    clearSlides: {
+    type: Function,
+    required: false
+  }
 })
 
 const previewStyles = {
-  fontFamily: props.selectedFont,
-  textAlign: props.selectedTextAlignment // Ensure this is a valid CSS value
+    fontFamily: props.selectedFont,
+    textAlign: props.selectedTextAlignment // Ensure this is a valid CSS value
 }
 
 </script>
