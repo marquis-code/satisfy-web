@@ -1,5 +1,6 @@
 <template>
     <main>
+        <button @click="router.back()" class="bg-black px-3 py-2 text-white text-xs rounded-xl" >Go Back</button>
         <section class="pt-6 lg:px-6 space-y-4 h-full">
             <p class="flex justify-end items-end text-sm">created by {{ user?.firstname || 'Nil' }} {{ user?.lastname ||
                 'Nil' }}
@@ -190,7 +191,7 @@ const refreshPage = () => {
 
 const { createUserStory, payload, loading, descriptionLength, setPayload } = useCreateUserStory();
 const { fontsList } = useFontFamily()
-const uploadType = ref('upload');
+const uploadType = ref('manual');
 const manualPodList = ref<string[]>([]);
 const actualManualPod = ref<string>('');
 const uploadedFileList = ref<any[]>([]);

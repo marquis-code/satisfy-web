@@ -19,22 +19,23 @@
             class="my-4 p-4 border border-gray-500 rounded-lg space-x-6 space-y-3 shadow-md">
             <div class="flex space-x-6">
                 <div class="w-9/12">
-                    <div class="flex justify-between items-center pl-6 pb-4">
-                        <p class="text-sm text-gray-700 font-semibold">( Max {{ character_count }} characters )
+                    <div class="flex justify-between items-center pb-4">
+                        <p class="text-base text-gray-700 font-semibold">( Max {{ character_count }} characters )
                             lines.</p>
+                        <div>
+                            <p class="font-medium text-red-500">Editing slide {{ editingIndex + 1 }}</p>
+                        </div>
                         <p
-                            :class="`text-sm text-gray-700 font-semibold ${editingText.length > character_count ? 'text-red-600' : editingText.length === character_count ? 'text-green-700' : ''}`">
+                            :class="`text-base text-gray-700 font-semibold ${editingText.length > character_count ? 'text-red-600' : editingText.length === character_count ? 'text-green-700' : ''}`">
                             {{ editingText.length }}/{{ character_count }}</p>
                     </div>
-                    <textarea v-model="editingText" rows="5" cols="10"
+                    <textarea v-model="editingText" rows="5" cols="10" @blur="handleBlur"
                         :class="`w-full p-2 !border h-60 rounded leading-relaxed !outline-none text-xl resize-none mb-2 ${editingText.length > character_count ? 'border-2 border-red-500' : ''}`"></textarea>
-                    <div class="flex justify-between items-center space-x-2">
-                        <div>
-                            <p class="font-medium">Editing slide {{ editingIndex + 1 }}</p>
-                        </div>
+                    <div class="flex justify-end items-end space-x-2">
                         <div class="space-x-3">
-                            <button @click="saveEditing" :disabled="editingText.length > character_count" :class="[editingText.length > character_count ? 'cursor-not-allowed opacity-25' : '']"
-                                class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Save</button>
+                            <!-- <button @click="saveEditing" :disabled="editingText.length > character_count"
+                                :class="[editingText.length > character_count ? 'cursor-not-allowed opacity-25' : '']"
+                                class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Save</button> -->
                             <button @click="cancelEditing"
                                 class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Cancel</button>
                         </div>
@@ -49,7 +50,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-4 lg:grid-cols-12 gap-2">
+        <div class="grid grid-cols-4 lg:grid-cols-12 gap-2 mt-4">
             <div v-for="(slide, index) in slides" :key="index"
                 :class="[slide.color, 'relative p-4 rounded border border-gray-200 shadow cursor-pointer w-24 h-24', { 'border-2 border-green-500 overflow-y-auto': index === editingIndex }]"
                 @click="startEditing(index)">
@@ -90,6 +91,14 @@ const splitText = () => {
     emit('slides', slides.value)
 };
 
+watch(editingText, (val) => {
+  console.log(val, 'fghjk text')
+})
+
+const handleBlur = () => {
+    saveEditing()
+}
+
 const props = defineProps({
     color: {
         type: String,
@@ -104,9 +113,9 @@ const props = defineProps({
         default: 'center'
     },
     clearSlides: {
-    type: Function,
-    required: false
-  }
+        type: Function,
+        required: false
+    }
 })
 
 const previewStyles = {
