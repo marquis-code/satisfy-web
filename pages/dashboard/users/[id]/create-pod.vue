@@ -8,4 +8,6 @@
 definePageMeta({
     layout: 'dashboard'
 })
+
+const router = useRouter()
 </script>

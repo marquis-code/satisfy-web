@@ -28,19 +28,22 @@
         <div class="flex space-x-6">
           <div class="w-9/12">
             <div class="flex justify-between items-center pb-4">
-              <p class="text-sm text-gray-800 font-bold">Slide {{ currentIndex }} (max. {{ character_count }}
+              <p class="text-base text-gray-800 font-bold">Slide {{ currentIndex }} (max. {{ character_count }}
                 characters)
               </p>
+              <div>
+                <p class="font-medium text-red-500 text-base">Editing slide {{ editingIndex + 1 }}</p>
+              </div>
               <p
-                :class="`text-sm text-gray-800 font-bold ${editingText.length > character_count ? 'text-red-800' : editingText.length === character_count ? 'text-green-800' : ''}`">
+                :class="`text-base text-gray-800 font-bold ${editingText.length > character_count ? 'text-red-800' : editingText.length === character_count ? 'text-green-800' : ''}`">
                 {{ editingText.length }}/320</p>
             </div>
             <textarea v-model="editingText"
               class="w-full h-60 border-gray-200 outline-none text-sm ring-0 leading-snug p-3 border rounded resize-none mb-2"></textarea>
-            <div class="flex justify-between items-center space-x-2">
-              <div>
+            <div class="flex justify-end items-end space-x-2">
+              <!-- <div>
                 <p class="font-medium">Editing slide {{ editingIndex + 1 }}</p>
-              </div>
+              </div> -->
               <div class="space-x-3">
                 <button @click="saveEditing" :disabled="editingText.length > character_count"
                   class="px-4 py-2 bg-green-500 disabled:cursor-not-allowed disabled:opacity-25 text-white rounded hover:bg-green-600">Save</button>
@@ -65,7 +68,7 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-4 lg:grid-cols-12 gap-2">
+      <div class="grid grid-cols-4 lg:grid-cols-12 gap-2 mt-4">
         <div v-for="(slide, slideIndex) in slides" :key="slideIndex" @click="startEditing(slideIndex)"
           :class="[slide.color, 'relative p-3 rounded shadow flex border border-gray-200 items-center justify-center cursor-pointer', { 'border-2 border-green-500': slideIndex === editingIndex }]"
           class="w-24 h-24">

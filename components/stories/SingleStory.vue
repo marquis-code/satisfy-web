@@ -2,32 +2,17 @@
     <main>
         <div class="rounded-lg border border-gray-200 space-y-6 relative pt-4">
             <div class="flex justify-end items-end pr-4">
-                <svg @click="toggleDropdown(stori.id)" class="cursor-pointer" xmlns="http://www.w3.org/2000/svg"
-                    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="1"></circle>
-                    <circle cx="19" cy="12" r="1"></circle>
-                    <circle cx="5" cy="12" r="1"></circle>
-                </svg>
+                <button @click="handleDeleteStory(stori.id)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="#d0021b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                    </svg>
+                </button>
             </div>
-            <div v-if="openDropdownIndex === stori.id"
-                class="absolute mt-1.5 w-32 bg-white top-3 right-2 rounded-lg border-[0.4px] border-gray-200 shadow-xl z-10">
-                <div>
-                    <a href="#" @click.prevent="handleNotifyUser(stori.id)"
-                        class="flex items-center p-3 text-sm text-gray-700 font-bold hover:text-gray-900  capitalize transition-colors duration-300 transform">
-                        <span class="mx-1">
-                            Notify User
-                        </span>
-                    </a>
 
-                    <a href="#" @click="handleRemoveStory(stori)"
-                        class="flex items-center p-3 text-sm text-red-500 font-bold hover:text-red-700 capitalize transition-colors duration-300 transform ">
-                        <span class="mx-1">
-                            Remove
-                        </span>
-                    </a>
-                </div>
-            </div>
             <div class="px-4">
                 <DashboardImageZoom v-if="stori?.coverImage"
                     class="h-10 w-10 cursor-pointer rounded-full object-cover object-center" alt=""
@@ -35,7 +20,8 @@
                 <img v-else src="@/assets/img/stori.png" class="h-10 w-10 rounded-full" alt="" />
             </div>
             <div class="mt-1">
-                <NuxtLink :to="`/dashboard/pods/${stori.id}`" class="px-4 underline text-sm text-gray-700 font-semibold">{{
+                <NuxtLink :to="`/dashboard/pods/${stori.id}`"
+                    class="px-4 underline text-sm text-gray-700 font-semibold">{{
                     stori?.title ?? 'Nil' }}</NuxtLink>
             </div>
             <div class="flex justify-between items-center px-4 pb-14">
@@ -49,7 +35,8 @@
             <div class="absolute w-full bottom-0">
                 <div class="border-t border-gray-300 flex justify-end items-end">
                     <p class="text-gray-400 text-xs font-light px-4 py-3">
-                        <span v-if="stori?.createdAt">{{ moment(stori?.createdAt).format("MMM DD, YYYY, h:mm:ss a") }}</span>
+                        <span v-if="stori?.createdAt">{{ moment(stori?.createdAt).format("MMM DD, YYYY, h:mm:ss a")
+                            }}</span>
                         <span v-else>Nil</span>
                     </p>
                 </div>
@@ -122,6 +109,8 @@
 </template>
 
 <script setup lang="ts">
+import { useDeleteStory } from '@/composables/story/deleteUserStory';
+const { deleteStory } = useDeleteStory()
 import moment from "moment"
 const activeTab = ref('insight')
 defineProps({
@@ -151,5 +140,9 @@ const openDropdownIndex = ref(null);
 
 function toggleDropdown(id: any) {
     openDropdownIndex.value = openDropdownIndex.value === id ? null : id;
+}
+
+const handleDeleteStory = (id: any) => {
+    deleteStory(id)
 }
 </script>
