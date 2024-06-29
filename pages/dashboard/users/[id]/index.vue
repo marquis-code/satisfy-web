@@ -1,5 +1,6 @@
 <template>
     <main>
+        <button @click="router.back()" class="bg-black mb-3 px-3 py-2 text-white text-xs rounded-xl" >Go Back</button>
         <UsersTabs @selected="handleSelected" />
         <section class="bg-white p-6 border-[0.1px] border-gray-100 shadow-sm rounded-b-lg space-y-10">
             <section class="">
@@ -109,7 +110,7 @@ const setUserStats = () => {
             count: !loadFollowings?.value ? followingsList?.value.length : 0
         },
         {
-            title: "Stories",
+            title: "Pods",
             key: "stories",
             count: !loadingUserStories?.value ? userStoriesList?.value?.length : 0
         },
