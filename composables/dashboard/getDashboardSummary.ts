@@ -6,7 +6,7 @@ export const useFetchDashboardSummary = () => {
   const metaObj = ref({
     startDate: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().substr(0, 10),
     endDate: new Date().toISOString().substr(0, 10),
-    showAll: false,
+    showAll: true,
   });
   const loading = ref(false);
 
