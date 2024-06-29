@@ -9,7 +9,7 @@
               <div class="space-y-5">
                 <div class="relative flex items-start">
                   <div class="flex h-6 items-center">
-                    <input v-model="showAll" id="comments" aria-describedby="comments-description" name="comments"
+                    <input :checked="showAll" :value="showAll" v-model="showAll" id="comments" aria-describedby="comments-description" name="comments"
                       type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                   </div>
                   <div class="ml-3 text-sm leading-6">
@@ -107,7 +107,7 @@ import { useFetchDashboardSummary } from '@/composables/dashboard/getDashboardSu
 
 const { fetchDashboardSummary, dashboardSummary, loading, metaObj, setFilterData } = useFetchDashboardSummary();
 const dateFilter = ref<any>(null);
-const showAll = ref<boolean>(false);
+const showAll = ref<boolean>(true);
 
 // Watch for changes in dateFilter and showAll, then fetch data
 watch([dateFilter, showAll], () => {
