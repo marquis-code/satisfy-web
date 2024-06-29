@@ -73,12 +73,15 @@
                 ? 'text-indigo-600'
                 : 'text-gray-900',
         ]">
-                                <DashboardImageZoom class="h-10 w-10" :src="stori.coverImage" />
+                                <DashboardImageZoom v-if="stori.coverImage" class="h-10 w-10" :src="stori.coverImage" />
+                                <div v-else class="h-10 w-10 rounded-full p-2 bg-gray-500 text-white flex justify-center items-center">
+                                    {{ generateInitials(stori?.user?.fname, stori?.user?.lname) }}
+                                  </div>
                             </td>
                             <td @click="viewStory(stori)"
                                 class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
                                 <p class="font-medium text-gray-800 no-underline">{{
-            stori?.title ?? "N/A" }}</p>
+            stori?.title || "N/A" }}</p>
                             </td>
                             <td @click="viewStory(stori)"
                                 class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
@@ -241,6 +244,11 @@ const toggleUserStatus = (user: any) => {
 const viewStory = (data: any) => {
     router.push({ path: `/dashboard/pods/${data.id}` })
 }
+
+const generateInitials = (fname: string, lname: string) => {
+  return `${fname.charAt(0).toUpperCase()}${lname.charAt(0).toUpperCase()}`;
+};
+
 </script>
 
 <style></style>

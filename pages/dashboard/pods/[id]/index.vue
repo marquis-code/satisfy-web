@@ -14,8 +14,10 @@
                             <div class="flex-auto pl-6 pt-6">
                                 <dt class="text-sm font-semibold leading-6 text-gray-900">Author Details</dt>
                                 <dd class="mt-1 text-am font-semibold leading-6 text-gray-900">
-                                    <img :src="story?.user?.profilePicture"
-                                        class="h-10 w-10 rounded-full object-cover object-center" alt="avatar" />
+                                    <DashboardImageZoom v-if="story?.user?.profilePicture" class="h-10 w-10" :src="story?.user?.profilePicture" />
+                                    <div v-else class="h-10 w-10 rounded-full p-2 bg-gray-500 text-white flex justify-center items-center">
+                                        {{ generateInitials(story?.user?.fname, story?.user?.lname) }}
+                                      </div>
                                 </dd>
                             </div>
                             <div class="mt-6 flex w-full flex-none gap-x-4 border-t border-gray-900/5 px-6 pt-6">
@@ -201,8 +203,12 @@
                         <div class="sm:pr-4">
                             <dt class="inline text-gray-500">Cover Image:</dt>
                             <dd class="inline text-gray-700 ml-2">
-                                <img :src="story?.coverImage" class="h-10 w-10 rounded-full object-cover object-center"
-                                    alt="avatar" />
+                                <!-- <img :src="story?.coverImage" class="h-10 w-10 rounded-full object-cover object-center"
+                                    alt="avatar" /> -->
+                                    <DashboardImageZoom v-if="story.coverImage" class="h-10 w-10" :src="story.coverImage" />
+                                    <div v-else class="h-10 w-10 rounded-full p-2 bg-gray-500 text-white flex justify-center items-center">
+                                        {{ generateInitials(story?.user?.fname, story?.user?.lname) }}
+                                      </div>
                             </dd>
                         </div>
                         <div class="mt-2 sm:mt-0 sm:pl-4">
@@ -222,6 +228,9 @@
                         <table class="min-w-full divide-y divide-gray-300">
                             <thead>
                                 <tr>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Slides #
+                                    </th>
                                     <th scope="col"
                                         class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3">
                                         Cover
@@ -245,8 +254,16 @@
                                 <tr class="even:bg-gray-50" v-for="(item, idx) in story.slides" :key="idx">
                                     <td
                                         class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
-                                        <img :src="item.coverImage"
-                                            class="h-10 w-10 rounded-full object-cover object-center" alt="avatar" />
+                                        {{ idx + 1 }}
+                                    </td>
+                                    <td
+                                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
+                                        <DashboardImageZoom v-if="item.coverImage" class="h-10 w-10" :src="item.coverImage" />
+                                        <div v-else class="h-10 w-10 rounded-full p-2 bg-gray-500 text-white flex justify-center items-center">
+                                            {{ generateInitials(story?.user?.fname, story?.user?.lname) }}
+                                          </div>
+                                        <!-- <img :src="item.coverImage"
+                                            class="h-10 w-10 rounded-full object-cover object-center" alt="avatar" /> -->
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                         <div class="truncate font-medium text-gray-900">{{ `${item.title.slice(0,
@@ -306,6 +323,10 @@ const previewSlideDetails = (data: any) => {
 const computedTagList = computed(() => {
     return story.value.tags.split(',')
 })
+
+const generateInitials = (fname: string, lname: string) => {
+  return `${fname.charAt(0).toUpperCase()}${lname.charAt(0).toUpperCase()}`;
+};
 </script>
 
 <style scoped>
