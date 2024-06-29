@@ -37,6 +37,9 @@
                                 Tags
                             </th>
                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                Slide(s)
+                            </th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                 Comments
                             </th>
                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -98,6 +101,12 @@
                                 </div>
                                 <p v-else>Nil</p>
                             </td>
+                            <td @click="viewStory(stori)"
+                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
+                            <p class="no-underline text-gray-800">{{
+        stori.slidesCount ??
+        "N/A" }}</p>
+                        </td>
                             <td @click="viewStory(stori)"
                                 class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
                                 <p class="no-underline text-gray-800">{{
