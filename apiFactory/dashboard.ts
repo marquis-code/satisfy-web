@@ -1,7 +1,7 @@
 import { axiosInstance } from "./axios.config";
 
 export const dashboardApiFactory = {
-  getDashboardSummary() {
-    return axiosInstance.get('/user/dashboard-summary');
+  getDashboardSummary(metaObj: any) {
+    return axiosInstance.get(`/user/dashboard-totals?showAll=${metaObj.showAll}&startDate=${metaObj.startDate}&endDate=${metaObj.endDate}`);
   },
 };

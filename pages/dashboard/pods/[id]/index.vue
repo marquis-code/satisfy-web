@@ -47,7 +47,8 @@
                                     </svg>
                                 </dt>
                                 <dd class="text-sm leading-6 text-gray-500">
-                                    <NuxtLink v-if="story?.user?.email" :to="`/dashboard/users/${story.user.id}`" class="underline">{{ story?.user?.email }}</NuxtLink>
+                                    <NuxtLink v-if="story?.user?.email" :to="`/dashboard/users/${story.user.id}`"
+                                        class="underline">{{ story?.user?.email }}</NuxtLink>
                                     <span v-else>Nil</span>
                                 </dd>
                             </div>
@@ -159,8 +160,12 @@
                         </div>
                         <div class="mt-2 sm:mt-0 sm:pl-4">
                             <dt class="inline text-gray-500">Tags:</dt>
-                            <dd class="inline text-gray-700 ml-2"><time datetime="2023-31-01">{{ story?.tags || 'Nil'
-                                    }}</time>
+                            <dd class="inline text-gray-700 ml-2">
+                                <div class="flex flex-wrap">
+                                    <p class="bg-black text-white text-xs m-1 flex justify-center items-center rounded-full px-2 py-1"
+                                        v-for="item in story?.tags.split(',')" :key="item">{{ item
+                                        }}</p>
+                                </div>
                             </dd>
                         </div>
                     </dl>
@@ -244,7 +249,8 @@
                                             class="h-10 w-10 rounded-full object-cover object-center" alt="avatar" />
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        <div class="truncate font-medium text-gray-900">{{ `${item.title.slice(0, 20)}...` }}</div>
+                                        <div class="truncate font-medium text-gray-900">{{ `${item.title.slice(0,
+                    20)}...` }}</div>
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                         <div class="truncate text-gray-500">{{ `${item.content.slice(0, 20)}...` }}
@@ -296,6 +302,10 @@ fetchStory()
 const previewSlideDetails = (data: any) => {
     selectedSlide.value = data
 }
+
+const computedTagList = computed(() => {
+    return story.value.tags.split(',')
+})
 </script>
 
 <style scoped>
