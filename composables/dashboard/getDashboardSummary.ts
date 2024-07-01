@@ -19,7 +19,11 @@ export const useFetchDashboardSummary = () => {
         dashboardSummary.value = response.data;
       }
     } catch (error) {
-      // Handle error as needed
+      useNuxtApp().$toast.error(error.message, {
+        autoClose: 5000,
+        dangerouslyHTMLString: true,
+      });
+      return error;
     } finally {
       loading.value = false;
     }

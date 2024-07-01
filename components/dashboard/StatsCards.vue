@@ -52,56 +52,6 @@
   </main>
 </template>
 
-<!-- <script setup lang="ts">
-import { useFetchDashboardSummary } from '@/composables/dashboard/getDashboardSummary'
-const { fetchDashboardSummary, dashboardSummary, loading, metaObj, setFilterData } = useFetchDashboardSummary()
-const dateFilter = ref(null) as any
-
-const showAll = ref(false) as any
-watch(dateFilter, ((val: any) => {
-    const payload = {
-        startDate: dateFilter[0],
-        endDate: dateFilter[0],
-        showAll: showAll.value
-    }
-    setFilterData(payload)
-    fetchDashboardSummary()
-}))
-fetchDashboardSummary()
-
-const modifyCardTitle = (data: string) => {
-    switch (data) {
-        case 'active_users':
-            return 'Total Active Users'
-        case 'signups':
-            return 'Sign ups'
-        case 'story':
-            return 'Pods'
-        case 'engagement':
-            return 'Engagement'
-        default:
-            return 'Pods'
-    }
-}
-const computedCardColor = (data: string) => {
-    switch (data) {
-        case 'active_users':
-            return 'bg-[#FDF5F5]'
-        case 'signups':
-            return 'bg-[#ECFCFE]'
-        case 'story':
-            return 'bg-[#FFF8E3]'
-        case 'engagement':
-            return 'bg-[#f9efff]'
-        default:
-            return 'bg-[#f9efff]'
-    }
-}
-definePageMeta({
-    layout: 'dashboard'
-})
-</script> -->
-
 <script setup lang="ts">
 import { useFetchDashboardSummary } from '@/composables/dashboard/getDashboardSummary';
 

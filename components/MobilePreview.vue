@@ -5,7 +5,7 @@
           {{ device.name }}
         </option>
       </select>
-      <div class="flex justify-center">
+      <div class="flex justify-center border border-red-600">
         <div :class="deviceClass" class="relative bg-gray-900 text-white flex items-center justify-center border-2 border-gray-700">
           <span class="absolute text-center p-2">{{ previewText }}</span>
         </div>

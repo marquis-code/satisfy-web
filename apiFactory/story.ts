@@ -29,4 +29,8 @@ export const storyApiFactory = {
   deleteUserStory(id: string | number) {
     return axiosInstance.delete(`/story/${id}`);
   },
+  getUserStoryChartData(metaData: any){
+    const url = `/story/chart/count?showAll=${metaData.showAll}&startDate=${metaData.startDate}&endDate=${metaData.endDate}&datePart=${metaData.datePart}&userType=${metaData.userType}`
+    return axiosInstance.get(url);
+  }
 };
