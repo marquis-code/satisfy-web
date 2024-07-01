@@ -30,7 +30,7 @@
                             {{ editingText.length }}/{{ character_count }}</p>
                     </div>
                     <textarea v-model="editingText" rows="5" cols="10" @blur="handleBlur"
-                        :class="`w-full p-2 !border h-60 rounded leading-relaxed !outline-none text-xl resize-none mb-2 ${editingText.length > character_count ? 'border-2 border-red-500' : ''}`"></textarea>
+                        :class="`w-full p-2 h-[500px] !border rounded leading-relaxed !outline-none text-xl resize-none mb-2 ${editingText.length > character_count ? 'border-2 border-red-500' : ''}`"></textarea>
                     <div class="flex justify-end items-end space-x-2">
                         <div class="space-x-3">
                             <!-- <button @click="saveEditing" :disabled="editingText.length > character_count"
@@ -41,11 +41,27 @@
                         </div>
                     </div>
                 </div>
-                <div :style="{ backgroundColor: color }"
+                <!-- <div :style="{ backgroundColor: color }"
                     :class="`w-3/12 overflow-y-auto rounded-md ${!color.length ? 'border border-gray-600' : ''}`">
                     <p :style="previewStyles" class="text-preview"
                         :class="`leading-relaxed p-3 ${!color.length ? 'text-gray-700' : 'text-white'}`">{{ editingText
                         }}</p>
+                </div> -->
+                <div class="relative mx-auto border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-xl">
+                    <div class="w-[148px] h-[18px] bg-gray-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
+                    <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
+                    <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
+                    <div class="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
+                    <div class="rounded-[2rem] overflow-hidden w-[272px] h-[572px]" :style="{ backgroundColor: color }">
+                        <div :style="{ backgroundColor: color }"
+                        :class="`${!color.length ? 'border border-gray-600' : ''}`">
+                        <p :style="previewStyles" class="text-preview"
+                            :class="`leading-snug p-3 text-xs ${!color.length ? 'text-gray-700' : 'text-white'}`">{{ editingText
+                            }}</p>
+                    </div>
+                        <!-- <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/mockup-2-light.png" class="dark:hidden w-[272px] h-[572px]" alt="">
+                        <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/mockup-2-dark.png" class="hidden dark:block w-[272px] h-[572px]" alt=""> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -127,7 +143,7 @@ const previewStyles = {
 
 <style scoped>
 .text-preview {
-    font-size: 24px;
+    font-size: 22px;
     margin-top: 10px;
 }
 </style>
