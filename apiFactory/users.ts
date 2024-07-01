@@ -68,4 +68,8 @@ export const userApiFactory = {
     let endpoint = `/user/all`;
     return axiosInstance.get(endpoint);
   },
+  getUserChartData(metaData: any){
+    const url = `/user/chart/count?showAll=${metaData.showAll}&startDate=${metaData.startDate}&endDate=${metaData.endDate}&datePart=${metaData.datePart}&userType=${metaData.userType}`
+    return axiosInstance.get(url);
+  }
 };

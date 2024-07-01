@@ -365,16 +365,26 @@ const computedStoryCategories = computed(() => {
     }));
 })
 
+// const computedTags = computed(() => {
+//   return uploadedTagsList.value.map((item: any) => item.name);
+// });
+
+const computedTags = computed(() => {
+  return uploadedTagsList.value.map((item: any) => item.name).join(', ');
+});
+
 const handleCreateUserStory = () => {
     const finalPayload = {
         isPublished: selectedPublicationStatus.value,
         title: payload.value.title,
-        tags: "",
+        tags: computedTags.value,
         coverImage: uploadResponse.value.url,
         userId: route.params.id,
         slides: uploadType.value === 'manual' ? computedManualSlides.value : computedSlides.value,
         storyCategories: computedStoryCategories.value,
     };
+
+    // console.log(finalPayload, 'final payload here')
 
     // Set the payload and then call the createUserStory function
     setPayload(finalPayload);
