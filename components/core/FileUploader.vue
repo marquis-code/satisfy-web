@@ -41,9 +41,6 @@
             <textarea v-model="editingText" @blur="handleBlur"
               class="w-full h-[500px] border-gray-200 outline-none text-sm ring-0 leading-snug p-3 border rounded resize-none mb-2"></textarea>
             <div class="flex justify-end items-end space-x-2">
-              <!-- <div>
-                <p class="font-medium">Editing slide {{ editingIndex + 1 }}</p>
-              </div> -->
               <div class="space-x-3">
                 <button @click="saveEditing" :disabled="editingText.length > character_count"
                   class="px-4 py-2 bg-green-500 disabled:cursor-not-allowed disabled:opacity-25 text-white rounded hover:bg-green-600">Save</button>
@@ -52,12 +49,6 @@
               </div>
             </div>
           </div>
-          <!-- <div :style="{ backgroundColor: color }"
-            :class="`w-3/12 h-[300px] overflow-y-auto rounded-md ${!color.length ? 'border border-gray-600' : ''}`">
-            <p :style="{ fontFamily: selectedFont }" class="text-preview"
-              :class="`text-base leading-relaxed p-3 ${!color.length ? 'text-gray-700' : 'text-white'}`">{{ editingText
-              }}</p>
-          </div> -->
           <div class="relative mx-auto border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-xl">
             <div class="w-[148px] h-[18px] bg-gray-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
             <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
@@ -70,8 +61,6 @@
                 :class="`text-base leading-relaxed p-3 ${!color.length ? 'text-gray-700' : 'text-white'}`">{{ editingText
                 }}</p>
             </div>
-                <!-- <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/mockup-2-light.png" class="dark:hidden w-[272px] h-[572px]" alt="">
-                <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/mockup-2-dark.png" class="hidden dark:block w-[272px] h-[572px]" alt=""> -->
             </div>
         </div>
         </div>
