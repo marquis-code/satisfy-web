@@ -79,7 +79,7 @@ const modifyCardTitle = (data: string) => {
     case 'active_users':
       return 'Total Active Users';
     case 'signups':
-      return 'Sign ups';
+      return 'Total Users';
     case 'story':
       return 'Pods';
     case 'engagement':
