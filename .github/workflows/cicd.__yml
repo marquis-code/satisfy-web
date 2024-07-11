@@ -1,0 +1,72 @@
+name: Deploy Homepod App CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+        NODE_ENV: "production"
+        SHA_512_HASH: Bin8E8ccCv6aERSUsnkyoqfIsS0Mzuii
+        CRYPTOGRAPHIC_KEY: rN43B1Y8fzjGcUXLQ9OGoGvAk5PD9jQQ
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn install
+
+    #   - name: Build React app
+    #     run: yarn run build
+
+    #   - name: Archive production artifacts
+    #     run: tar -czvf build.tar.gz build
+    #   - name: Create artifact
+    #     run: |
+    #         find . -type f -not -path "./node_modules/*" -exec echo "::set-output name=files::{}" \; > files.txt
+
+    #   - name: Upload Artifact
+    #     uses: actions/upload-artifact@v3
+    #     with:
+    #         path: ./
+    #         if-no-files-found: error
+    #         retention-days: 0.1
+
+    #   - name: Install SSH client
+    #     run: sudo apt-get install -y openssh-client
+
+    #   - name: Copy artifacts to VM
+    #     uses: appleboy/scp-action@master
+    #     with:
+    #       host: ${{ secrets.SSH_HOST }}
+    #       port: 22
+    #       username: ${{ secrets.SSH_USERNAME }}
+    #       key: ${{ secrets.SSH_PRIVATE_KEY }}
+    #       source: "build.tar.gz"
+    #       target: "/home/${{ secrets.SSH_USERNAME }}/build.tar.gz"
+
+      - name: Execute SSH commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: 22
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/${{ secrets.SSH_USERNAME }}/homepod_app/
+            docker build -t homepod:latest .
+            docker system prune --volumes --force
+            docker stop homepod-box || true && sudo docker rm homepod-box || true
+            docker run --name homepod-box -d -p 3000:3000 --restart unless-stopped homepod:latest
