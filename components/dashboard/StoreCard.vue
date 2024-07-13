@@ -46,24 +46,6 @@
     </div>
   </section>
 </template>
-<!-- 
-<script setup lang="ts">
-const props = defineProps({
-  androidObj: {
-    type: Object
-  },
-  iosObj: {
-    type: Object
-  },
-  loadingAndroidStat: {
-    type: Boolean
-  },
-  loadingIosStat: {
-    type: Boolean
-  }
-})
-</script> -->
-
 <script setup lang="ts">
 defineProps<{
   androidObj: {
