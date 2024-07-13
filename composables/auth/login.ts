@@ -45,6 +45,7 @@ export const useLogin = () => {
       runtimeData.user.value = response.data.user;
       localstorageData.token.value = response.data?.token.accessToken;
       localstorageData.expiry.value = response.data?.token.expiresIn
+      localstorageData.user.value = response.data?.user
       runtimeData.token.value = response.data?.token;
       useNuxtApp().$toast.success("Welcome back.", {
         autoClose: 5000,

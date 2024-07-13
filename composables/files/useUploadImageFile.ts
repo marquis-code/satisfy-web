@@ -10,6 +10,7 @@ export const useUploadImageFile = () => {
       if (typeof response.data !== 'undefined') {
         uploadResponse.value = response.data;
       }
+      return response;
     } catch (error: any) {
       if(typeof error.response !== 'undefined'){
     useNuxtApp().$toast.error(error.message, {

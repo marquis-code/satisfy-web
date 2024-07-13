@@ -13,7 +13,7 @@
                             class="has-animation h-20 w-20 object-cover object-center border-[0.8px] border-gray-400 shadow rounded-full" />
                         <div v-if="uploading && !Object.keys(uploadResponse).length"
                             class="h-20 w-20 rounded-full bg-slate-100"></div>
-                        <img v-if="!imagePreview" src="@/assets/icons/dashboard/camera.svg" alt="" class="h-20 w-20" />
+                        <img v-if="!imagePreview?.length && !uploading" src="@/assets/icons/dashboard/camera.svg" alt="" class="h-20 w-20" />
                         <input @change="onFileChange" type="file" class="hidden" />
                     </label>
                 </div>
@@ -296,10 +296,11 @@ const onFileChange = (e: Event) => {
             formData.append('file', file);
             formData.append('fileType', 'asset');
 
-            uploadImageFile(formData);
-
+            uploadImageFile(formData).then(() => {
             uploadedPodCover.value = file;
             imagePreview.value = URL.createObjectURL(file);
+            });
+
         } else {
             imagePreview.value = null;
         }

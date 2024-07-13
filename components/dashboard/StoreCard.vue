@@ -1,7 +1,7 @@
 <template>
   <section class="shadow border-[0.6px] rounded-lg">
     <div class="flex items-center justify-between px-7 py-4 border-b-[0.8px] border-gray-100">
-      <h6 class="font-medium text-gray-500">App Store information </h6>
+      <h6 class="font-medium text-gray-500">App Store information {{ loadingAndroidStat }} {{ androidStatObj }}dd </h6>
       <select class="text-sm font-medium outline-none bg-gray-50 rounded-md px-2.5 py-2">
         <option>All Time</option>
       </select>
@@ -10,8 +10,8 @@
       <div class="flex justify-between items-start py-10 px-7  h-1/2">
         <img src="@/assets/icons/dashboard/ios-badge.svg" alt="" />
         <div class="space-y-4">
-          <div class="flex items-center space-x-4">
-            <h2 class="font-bold text-3xl">902</h2>
+          <div class="flex items-center space-x-4" v-if="!loadingAndroidStat">
+            <h2 class="font-bold text-3xl">{{androidStatObj?.download  || 'Nil' }}</h2>
             <img src="@/assets/icons/dashboard/decrease.svg" alt="" />
           </div>
           <p class="text-gray-400">Downloads</p>
@@ -27,8 +27,8 @@
       <div class="flex justify-between items-start py-10 px-7  h-1/2">
         <img src="@/assets/icons/dashboard/ios-badge.svg" alt="" />
         <div class="space-y-4">
-          <div class="flex items-center space-x-4">
-            <h2 class="font-bold text-3xl">902</h2>
+          <div class="flex items-center space-x-4" v-if="!loadingIosStat">
+            <h2 class="font-bold text-3xl">{{ iosStatObj?.download  || 'Nil' }}</h2>
             <img src="@/assets/icons/dashboard/decrease.svg" alt="" />
           </div>
           <p class="text-gray-400">Downloads</p>
@@ -44,3 +44,14 @@
     </div>
   </section>
 </template>
+
+<script lang="ts">
+import { useFetchAndroidStat } from '@/composables/dashboard/getAndroidStat'
+import { useFetchIosStat } from '@/composables/dashboard/getIosStat'
+const { androidStatObj, loading: loadingAndroidStat, fetchAndroidStat } = useFetchAndroidStat()
+const { iosStatObj, loading: loadingIosStat, fetchIosStat } = useFetchIosStat()
+
+onMounted(() => {
+  fetchAndroidStat();
+});
+</script>
