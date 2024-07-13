@@ -1,13 +1,13 @@
 import { dashboardApiFactory } from "@/apiFactory/dashboard";
 
 export const useFetchIosStat = () => {
-  const statObj = ref([]);
+  const iosStatObj = ref({});
   const loading = ref(false);
   const fetchIosStat = async () => {
     loading.value = true;
     try {
       const response = await dashboardApiFactory.getIosStat();
-      statObj.value = response.data;
+      iosStatObj.value = response.data;
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
         autoClose: 5000,
@@ -18,10 +18,5 @@ export const useFetchIosStat = () => {
       loading.value = false;
     }
   };
-
-  onMounted(() => {
-    fetchIosStat()
-  })
-
-  return { fetchIosStat, statObj, loading };
+  return { fetchIosStat, iosStatObj, loading };
 };
