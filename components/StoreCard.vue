@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <section class="shadow border-[0.6px] rounded-lg">
     <div class="flex items-center justify-between px-7 py-4">
       <h6 class="font-medium text-gray-500">App Store information</h6>
@@ -47,4 +47,4 @@
       </div>
     </div>
   </section>
-</template>
+</template> -->
