@@ -7,7 +7,7 @@ export const useFetchIosStat = () => {
     loading.value = true;
     try {
       const response = await dashboardApiFactory.getIosStat();
-      iosStatObj.value = response.data;
+      iosStatObj.value = response?.data ?? {};
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
         autoClose: 5000,

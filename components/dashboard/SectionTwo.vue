@@ -16,7 +16,7 @@
       <ChartsUserStoryChart v-if="activeChartType === 'pods'" />
     </div>
     <div class="rounded-lg h-full">
-      <DashboardStoreCard />
+      <DashboardStoreCard :androidObj="androidStatObj" :loadingAndroidStat="loadingAndroidStat" :loadingIosStat="loadingIosStat" :iosObj="iosStatObj" />
     </div>
   </div>
 </template>
@@ -34,4 +34,14 @@ const chartTypes = ref([
     code: 'pods'
   }
 ])
+
+import { useFetchAndroidStat } from '@/composables/dashboard/getAndroidStat'
+import { useFetchIosStat } from '@/composables/dashboard/getIosStat'
+const { androidStatObj, loading: loadingAndroidStat, fetchAndroidStat } = useFetchAndroidStat()
+const { iosStatObj, loading: loadingIosStat, fetchIosStat } = useFetchIosStat()
+
+onMounted(() => {
+  fetchAndroidStat();
+  fetchIosStat()
+});
 </script>
