@@ -261,31 +261,36 @@
   const chartOptions = ref({
     chart: {
       id: "vuechart-example",
-      toolbar: { show: false },
-      type: "bar",
+    // stacked: true,
+    fontFamily: "'Plus Jakarta Sans', sans-serif;",
+    toolbar: { show: false },
+    height: 380,
+    type: "bar"
     },
     dataLabels: {
-      enabled: true,
-      formatter: function (val) {
-        return val;
-      },
-      style: {
-        colors: ['#ffffff']
-      },
-      offsetY: -20,
-      background: {
-        enabled: false,
+    enabled: true,
+    formatter: function (val: number) {
+      return val.toString();
+    },
+    style: {
+      colors: ['#000'],
+    },
+    offsetX: -10,
+    offsetY: -20,
+    textAnchor: "start"
+  },
+  plotOptions: {
+    bar: {
+      horizontal: false,
+      borderRadius: 4,
+      columnWidth: '40%',
+      barHeight: '40%',
+      endingShape: 'rounded',
+      dataLabels: {
+        position: 'top',
       },
     },
-    plotOptions: {
-      bar: {
-        borderRadius: 10,
-        horizontal: false,
-        borderRadiusApplication: "around",
-        columnWidth: "40%",
-        barHeight: "100%",
-      },
-    },
+  },
     colors: [
       function ({ value, seriesIndex, w }) {
         if (value > 50) {

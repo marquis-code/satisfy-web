@@ -15,10 +15,10 @@
             <!-- <img src="@/assets/icons/dashboard/decrease.svg" alt="" /> -->
           </div>
           <p class="text-gray-400">Downloads</p>
-          <!-- <div class="flex items-center gap-x-3">
+          <div class="flex items-center gap-x-3">
             <p class="mt-3">4.8</p>
             <img src="@/assets/icons/dashboard/star-group.svg" class="w-32" alt="" />
-          </div> -->
+          </div>
         </div>
         <div>
           <!-- <h2 class="text-green-500 font-medium ">+2.4%</h2> -->
@@ -33,10 +33,10 @@
             <!-- <img src="@/assets/icons/dashboard/decrease.svg" alt="" /> -->
           </div>
           <p class="text-gray-400">Downloads</p>
-          <!-- <div class="flex items-center gap-x-3">
+          <div class="flex items-center gap-x-3">
             <p class="mt-3">4.8</p>
             <img src="@/assets/icons/dashboard/star-group.svg" class="w-32" alt="" />
-          </div> -->
+          </div>
         </div>
         <div>
           <!-- <h2 class="text-green-500 font-medium ">+2.4%</h2> -->
