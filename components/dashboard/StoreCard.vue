@@ -11,7 +11,7 @@
         <img src="@/assets/icons/dashboard/android-badge.svg" alt="" />
         <div class="space-y-4">
           <div class="flex items-center space-x-4">
-            <h2 class="font-bold text-3xl">{{ androidObj?.download  || 'Nil' }}</h2>
+            <h2 class="font-bold text-3xl">{{ androidObj?.download  ?? 'Nil' }}</h2>
             <!-- <img src="@/assets/icons/dashboard/decrease.svg" alt="" /> -->
           </div>
           <p class="text-gray-400">Downloads</p>
@@ -29,7 +29,7 @@
         <img src="@/assets/icons/dashboard/ios-badge.svg" alt="" />
         <div class="space-y-4">
           <div class="flex items-center space-x-4" v-if="!loadingIosStat">
-            <h2 class="font-bold text-3xl">{{ iosObj?.download  || 'Nil' }}</h2>
+            <h2 class="font-bold text-3xl">{{ iosObj?.download  ?? 'Nil' }}</h2>
             <!-- <img src="@/assets/icons/dashboard/decrease.svg" alt="" /> -->
           </div>
           <p class="text-gray-400">Downloads</p>
