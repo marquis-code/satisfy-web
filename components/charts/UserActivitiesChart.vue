@@ -48,7 +48,7 @@ export default {
             if (value > 50) {
               return "#000000";
             } else {
-              return "#0ba9b9";
+              return "#000000";
             }
           },
         ],
