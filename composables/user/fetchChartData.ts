@@ -32,7 +32,7 @@ export const useFetchUserChartData = () => {
     metaObj.value.startDate = data.startDate || new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().substr(0, 10);;
     metaObj.value.endDate = data.endDate || new Date().toISOString().substr(0, 10);;
     metaObj.value.datePart = data.datePart;
-    metaObj.value.userType = data.userType;
+    metaObj.value.userType = data.userType || 'signups';
     metaObj.value.showAll = data.showAll || false
   };
 
@@ -49,7 +49,7 @@ export const useFetchUserChartData = () => {
   metaObj.value.startDate = firstDay.toISOString().split('T')[0];
   metaObj.value.endDate = lastDay.toISOString().split('T')[0];
   metaObj.value.datePart = 'month';
-  metaObj.value.userType = 'active';
+  metaObj.value.userType = 'signups';
 
   return { fetchChartData, chartDataObj, loading, setChartData, metaObj };
 };

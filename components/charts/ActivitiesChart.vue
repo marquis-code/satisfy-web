@@ -30,8 +30,8 @@
       <div class="flex items-center gap-x-3">
         <select v-model="metaObj.userType" @change="updateChartData"
           class="text-sm outline-none font-medium bg-gray-100 rounded-md px-2.5 py-2 w-full">
+          <option value="signups">Signup</option>
           <option value="active">Active</option>
-          <option value="signups">Signups</option>
         </select>
         <select v-model="metaObj.datePart" @change="updateChartData"
           class="text-sm outline-none font-medium bg-gray-100 rounded-md px-2.5 py-2 w-full">

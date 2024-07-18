@@ -48,7 +48,7 @@ export const useFetchUserStoryChartData = () => {
   metaObj.value.startDate = firstDay.toISOString().split('T')[0];
   metaObj.value.endDate = lastDay.toISOString().split('T')[0];
   metaObj.value.datePart = 'month';
-  metaObj.value.userType = 'active';
+  metaObj.value.userType = 'signups';
 
   return { fetchChartData, chartDataObj, loading, setChartData, metaObj };
 };
