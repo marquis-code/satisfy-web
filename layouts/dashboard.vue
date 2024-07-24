@@ -169,7 +169,7 @@
                             d="M8.75033 7.08332C9.90092 7.08332 10.8337 6.15058 10.8337 4.99999C10.8337 3.8494 9.90092 2.91666 8.75033 2.91666C7.59973 2.91666 6.66699 3.8494 6.66699 4.99999C6.66699 6.15058 7.59973 7.08332 8.75033 7.08332Z"
                             stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        Sponsored Ads
+                        Banner Ads
                       </NuxtLink>
                     </li>
                   </ul>
@@ -338,7 +338,7 @@
                         stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
 
-                    Sponsored Ads
+                    Banner Ads
                   </NuxtLink>
                 </li>
               </ul>

@@ -20,26 +20,28 @@
                     </div>
                     <div class="flex flex-col items-center justify-center">
                         <p v-if="route.query.page === 'login'"
-                            class="text-lg font-medium leading-loose tracking-wider py-0 my-0">
-                            “Transforming data into actionable insights.”
+                            class="text-xl max-w-xs text-center font-medium leading-loose tracking-wider py-0 my-0">
+                            Get started with business tools from Storipod
                         </p>
                         <!-- <div class=""> -->
-                        <img alt="Login Animated Image" src="@/assets/icons/animated-login.svg"
+                        <!-- <img alt="Login Animated Image" src="@/assets/icons/animated-login.svg"
+                            class="object-cover object-center" /> -->
+                            <img alt="Login Animated Image" src="@/assets/img/pod-plus.png"
                             class="object-cover object-center" />
                         <!-- </div> -->
                         <div v-if="route.query.page === 'login'" class="">
                             <h2 class="mt-6 text-center text-2xl font-bold sm:text-3xl md:text-xl">
-                                Read. Write . Create
+                                Create <span class="font-black text-3xl text-gray-900" >.</span>  Analyse <span class="font-black text-3xl text-gray-900" >.</span> Decide
                             </h2>
-                            <p class="mt-0 text-center leading-relaxed text-[#737876]">
-                                Homepod Tells us about Storipod and Storipod is feeling
+                            <p class="mt-5 max-w-md leading-relaxed text-[#737876]">
+                                By logging in, you can navigate to all business tools such as Storipod Business Suite, Business Manager, Ads Manager and more to help you connect with your customers and get better business results.
                             </p>
                         </div>
                         <p v-else-if="route.query.page === 'forgot'"
                             class="mt-4 text-center leading-relaxed text-[#737876]">
                             Easily retrieve your password via email recovery.
                         </p>
-                        <div v-if="route.query.page === 'login'" class="flex w-full items-center justify-between pt-10">
+                        <div v-if="route.query.page === 'login'" class="flex w-full max-w-screen-sm items-center justify-between pt-10">
                             <div>
                                 <img src="@/assets/icons/arrow-left.svg" alt="" />
                             </div>
