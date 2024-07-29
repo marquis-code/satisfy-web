@@ -143,7 +143,7 @@
                       </NuxtLink>
                     </li>
 
-                    <li>
+                    <li>x
                       <NuxtLink to="/dashboard/ads" @click.prevent="isOpen = false"
                         class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -169,7 +169,7 @@
                             d="M8.75033 7.08332C9.90092 7.08332 10.8337 6.15058 10.8337 4.99999C10.8337 3.8494 9.90092 2.91666 8.75033 2.91666C7.59973 2.91666 6.66699 3.8494 6.66699 4.99999C6.66699 6.15058 7.59973 7.08332 8.75033 7.08332Z"
                             stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        Banner Ads
+                        Sponsored Ads
                       </NuxtLink>
                     </li>
                   </ul>
@@ -338,7 +338,7 @@
                         stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
 
-                    Banner Ads
+                    Sponsored Ads
                   </NuxtLink>
                 </li>
               </ul>

@@ -8,7 +8,7 @@ export const useCreateSponsoredAds = () => {
     targetLink: "",
     startDate: "",
     endDate: "",
-    status: "",
+    status: "active",
   });
   const createSponsoredAds = async () => {
     loading.value = true;
@@ -36,7 +36,7 @@ export const useCreateSponsoredAds = () => {
     payload.value.targetLink = data.targetLink
     payload.value.startDate  = data.startDate
     payload.value.endDate  = data.endDate
-    payload.value.status  = data.status
+    // payload.value.status  = data.status
   }
 
   return { createSponsoredAds, payload, loading, setSponsoredAds };

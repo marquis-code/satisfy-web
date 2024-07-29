@@ -3,7 +3,8 @@
     <img
       :src="src"
       @click="toggleImage"
-      class="cursor-pointer rounded-full h-10 w-10"
+      :class="[type === 'ads' ? 'rounded h-10 w-40' : 'rounded-full h-10 w-10']"
+      class="cursor-pointer"
       alt=""
     />
     <div
@@ -25,6 +26,11 @@
 export default {
   props: {
     src: String,
+    type: {
+      type: String,
+      default: 'normal'
+
+    }
   },
   data() {
     return {

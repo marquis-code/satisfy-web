@@ -48,7 +48,7 @@
                 </div>
             </div>
 
-            <div>
+            <!-- <div>
                 <label for="status" class="block text-xs font-medium leading-6 text-gray-900">Status</label>
                 <div class="mt-1">
                     <select v-model="payload.status"
@@ -56,7 +56,7 @@
                         <option :value="item.code" v-for="item in statusList" :key="item.code">{{ item.name }}</option>
                     </select>
                 </div>
-            </div>
+            </div> -->
 
             <div class="w-full pt-10">
                 <button type="submit" :disabled="route.query.action === 'create' ? creating : updating"
@@ -98,7 +98,7 @@ onMounted(() => {
         payload.value.targetLink = props.ads.link
         payload.value.startDate = props.ads.startDate
         payload.value.endDate = props.ads.endDate
-        payload.value.status = props.ads.status
+        // payload.value.status = props.ads.status
         imagePreview.value = props.ads.image
     }
 })
@@ -191,7 +191,7 @@ const handleCreateSponsoredAds = () => {
         targetLink: payload.value.targetLink,
         startDate: payload.value.startDate,
         endDate: payload.value.endDate,
-        status: payload.value.status,
+        // status: payload.value.status,
     }
     setSponsoredAds(formData)
     createSponsoredAds().then(() => {
@@ -206,7 +206,7 @@ const handleUpdateSponsoredAds = () => {
         targetLink: payload.value.targetLink,
         startDate: payload.value.startDate,
         endDate: payload.value.endDate,
-        status: payload.value.status,
+        // status: payload.value.status,
     }
     setSponsoredAdsUpdate(formData)
     updateSponsoredAds().then(() => {
