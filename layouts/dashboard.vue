@@ -143,7 +143,7 @@
                       </NuxtLink>
                     </li>
 
-                    <li>
+                    <li>x
                       <NuxtLink to="/dashboard/ads" @click.prevent="isOpen = false"
                         class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

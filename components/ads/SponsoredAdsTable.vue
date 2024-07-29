@@ -55,11 +55,11 @@
                                             class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                             {{ ads.clientName ?? 'Nil' }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            <!-- <DashboardImageZoom v-if="ads.image" class="rounded-lg h-10 w-10"
+                                            <DashboardImageZoom type="ads" v-if="ads.image" class="rounded-lg h-10 w-10"
                                                 :src="ads.image" />
-                                            <span v-else>Nil</span> -->
-                                            <img v-if="ads.image" :src="ads.image" class="rounded-xl object-cover object-center" />
                                             <span v-else>Nil</span>
+                                            <!-- <img v-if="ads.image" :src="ads.image" class="rounded-xl object-cover object-center" />
+                                            <span v-else>Nil</span> -->
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             <a target="__blank" v-if="ads.link" :href="ads.link"

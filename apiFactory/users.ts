@@ -69,7 +69,8 @@ export const userApiFactory = {
     return axiosInstance.get(endpoint);
   },
   getUserChartData(metaData: any){
-    const url = `/user/chart/count?showAll=${metaData.showAll}&startDate=${metaData.startDate}&endDate=${metaData.endDate}&datePart=${metaData.datePart}&userType=${metaData.userType}`
+    const userType = metaData.userType || 'signups';
+    const url = `/user/chart/count?showAll=${metaData.showAll}&startDate=${metaData.startDate}&endDate=${metaData.endDate}&datePart=${metaData.datePart}&userType=${userType}`;
     return axiosInstance.get(url);
   }
 };
