@@ -28,17 +28,15 @@ export const useFetchUserStoryChartData = () => {
   };
 
   const setChartData = (data) => {
-    metaObj.value.startDate = data.startDate || new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().substr(0, 10);;
-    metaObj.value.endDate = data.endDate || new Date().toISOString().substr(0, 10);;
+    metaObj.value.startDate = data.startDate || new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().substr(0, 10);
+    metaObj.value.endDate = data.endDate || new Date().toISOString().substr(0, 10);
     metaObj.value.datePart = data.datePart;
     metaObj.value.userType = data.userType;
-    metaObj.value.showAll = data.showAll || false
+    metaObj.value.showAll = data.showAll || false;
   };
 
-  //Re-order chart data
+  // Re-order chart data
   const reorderChartData = (data: any) => {
-    const currentMonth = new Date().toLocaleString('default', { month: 'short' }) + '-' + new Date().getFullYear();
-    
     const { labels, datasets } = data;
     const { data: userData } = datasets[0];
 
@@ -48,12 +46,15 @@ export const useFetchUserStoryChartData = () => {
       value: userData[index]
     }));
 
-    // Sort data: current month first, then rest in descending order
-    const sortedData = combinedData.sort((a, b) => {
-      if (a.label === currentMonth) return -1;
-      if (b.label === currentMonth) return 1;
-      return a.label < b.label ? 1 : -1;
+    // Parse labels into Date objects for sorting
+    const parsedData = combinedData.map(item => {
+      const [monthStr, yearStr] = item.label.split('-');
+      const date = new Date(`${monthStr} 1, ${yearStr}`);
+      return { ...item, date };
     });
+
+    // Sort data by date in descending order
+    const sortedData = parsedData.sort((a, b) => b.date.getTime() - a.date.getTime());
 
     // Split the sorted data back into labels and user data
     const newLabels = sortedData.map(item => item.label);
