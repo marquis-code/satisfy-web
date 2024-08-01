@@ -15,7 +15,7 @@ export const useFetchUserStoryChartData = () => {
     loading.value = true;
     try {
       const response = await storyApiFactory.getUserStoryChartData(metaObj.value);
-      chartDataObj.value = response?.data ?? {};
+      chartDataObj.value = reorderChartData(response?.data ?? {});
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
         autoClose: 5000,
@@ -33,6 +33,36 @@ export const useFetchUserStoryChartData = () => {
     metaObj.value.datePart = data.datePart;
     metaObj.value.userType = data.userType;
     metaObj.value.showAll = data.showAll || false
+  };
+
+  //Re-order chart data
+  const reorderChartData = (data: any) => {
+    const currentMonth = new Date().toLocaleString('default', { month: 'short' }) + '-' + new Date().getFullYear();
+    
+    const { labels, datasets } = data;
+    const { data: userData } = datasets[0];
+
+    // Create a combined array of labels and user data
+    const combinedData = labels.map((label: string, index: number) => ({
+      label,
+      value: userData[index]
+    }));
+
+    // Sort data: current month first, then rest in descending order
+    const sortedData = combinedData.sort((a, b) => {
+      if (a.label === currentMonth) return -1;
+      if (b.label === currentMonth) return 1;
+      return a.label < b.label ? 1 : -1;
+    });
+
+    // Split the sorted data back into labels and user data
+    const newLabels = sortedData.map(item => item.label);
+    const newUserData = sortedData.map(item => item.value);
+
+    return {
+      labels: newLabels,
+      datasets: [{ label: datasets[0].label, data: newUserData }]
+    };
   };
 
   // Helper function to get the first and last day of the current month

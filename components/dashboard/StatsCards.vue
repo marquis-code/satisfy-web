@@ -28,7 +28,7 @@
       </div>
       <section v-if="!loading && Object.keys(dashboardSummary).length"
         class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4 lg:gap-8">
-        <div class="flex justify-center items-center flex-col gap-y-6 rounded-2xl p-4 lg:p-7"
+        <div @click="handleSelectedCard(key)" class="flex cursor-pointer justify-center items-center flex-col gap-y-6 rounded-2xl p-4 lg:p-7"
           v-for="(value, key) in dashboardSummary" :key="key" :class="computedCardColor(key)">
           <h1 class="font-semibold text-lg">{{ modifyCardTitle(key) }}</h1>
           <div class="flex items-center flex-col gap-x-4 lg:gap-x-6 mt-3 gap-y-6">
@@ -54,6 +54,7 @@
 
 <script setup lang="ts">
 import { useFetchDashboardSummary } from '@/composables/dashboard/getDashboardSummary';
+const router = useRouter()
 
 const { fetchDashboardSummary, dashboardSummary, loading, metaObj, setFilterData } = useFetchDashboardSummary();
 const dateFilter = ref<any>(null);
@@ -109,4 +110,14 @@ const computedCardColor = (data: string) => {
 definePageMeta({
   layout: 'dashboard',
 });
+
+const handleSelectedCard = (item: string) => {
+  if(item === 'active_users' || item === 'signups'){
+   router.push('/dashboard/users')
+  }
+
+  if(item === 'story' || item === 'engagement'){
+   router.push('/dashboard/pods')
+  }
+}
 </script>
