@@ -385,9 +385,7 @@ const handleCreateUserStory = () => {
         storyCategories: computedStoryCategories.value,
     };
 
-    // console.log(finalPayload, 'final payload here')
 
-    // Set the payload and then call the createUserStory function
     setPayload(finalPayload);
     createUserStory().then(response => {
         podSuccessObj.value = response.data

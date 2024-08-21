@@ -222,7 +222,6 @@ const onFileChange = (event: Event) => {
         emit('content', slides.value);
       })
       .catch(error => {
-        console.error('Error processing file', error);
         isLoading.value = false;
       });
   }
