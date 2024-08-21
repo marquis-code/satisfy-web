@@ -38,14 +38,27 @@
                 </button>
               </div>
 
-              <div>
-                <label for="SortBy" class="sr-only">SortBy</label>
 
-                <select v-model="sortBy" id="SortBy" class="h-10 rounded border-gray-300 text-sm">
-                  <option value="ASC">Ascending</option>
-                  <option value="DESC">Descending</option>
-                </select>
-              </div>
+           <div class="flex gap-x-3">
+            <!-- <div>
+              <label for="SortBy" class="sr-only">SortBy</label>
+              <select v-model="sortBy" id="SortBy" class="h-10 rounded border-gray-300 text-sm">
+                <option value="DESC">Active</option>
+                <option value="DESC">Inactive</option>
+                <option value="DESC">Last seen</option>
+                <option value="DESC">No pods</option>
+              </select>
+            </div> -->
+
+            <div>
+              <label for="SortBy" class="sr-only">SortBy</label>
+
+              <select v-model="sortBy" id="SortBy" class="h-10 rounded border-gray-300 text-sm">
+                <option value="ASC">Ascending</option>
+                <option value="DESC">Descending</option>
+              </select>
+            </div>
+           </div>
             </div>
             <form class="relative flex flex-1 w-full border-[0.9px] py-6" action="#" method="GET">
               <label for="search-field" class="sr-only">Search</label>

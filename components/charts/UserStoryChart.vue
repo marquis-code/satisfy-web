@@ -1,5 +1,5 @@
    <template>
-    <div class="bg-white shadow rounded-md p-6 md:p-6 space-y-3">
+    <div class="bg-white p-6 md:p-6 space-y-3">
       <div class="md:flex space-y-4 md:space-y-0 justify-between items-center">
         <div class="flex justify-end items-end">
           <div class="flex">
@@ -11,11 +11,10 @@
                     <div class="flex h-6 items-center">
                       <input :checked="showAll" :value="showAll" v-model="showAll" id="comments"
                         aria-describedby="comments-description" name="comments" type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                        class="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                     </div>
                     <div class="ml-3 text-sm leading-6">
-                      <label for="comments" class="font-medium text-gray-900"
-                        alt="Get all statistics data across storipod.">Show All</label>
+                      <label for="comments" class="font-semibold text-base text-gray-900" alt="Get all statistics data across storipod.">Show All</label>
                     </div>
                   </div>
                 </div>
@@ -29,12 +28,12 @@
         </div>
         <div class="flex items-center gap-x-3">
           <select v-model="metaObj.userType" @change="updateChartData"
-            class="text-sm outline-none font-medium bg-gray-100 rounded-md px-2.5 py-2 w-full">
+            class="text-sm outline-none font-medium bg-gray-100 rounded-md px-6 py-2 w-full">
             <option value="active">Active</option>
             <option value="signups">Signups</option>
           </select>
           <select v-model="metaObj.datePart" @change="updateChartData"
-            class="text-sm outline-none font-medium bg-gray-100 rounded-md px-2.5 py-2 w-full">
+            class="text-sm outline-none font-medium bg-gray-100 rounded-md px-6 py-2 w-full">
             <option value="day">Daily</option>
             <option value="week">Weekly</option>
             <option value="month">Monthly</option>
