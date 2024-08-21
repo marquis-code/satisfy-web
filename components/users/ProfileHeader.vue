@@ -4,7 +4,7 @@
     </div>
     <div @click="handleProfileTabSelection" v-if="user?.profilePicture && !loadingUser"
       class="lg:w-1/12 flex justify-center items-center">
-      <img :src="user?.profilePicture" alt="avatar" class="h-16 w-16 rounded-full cursor-pointer" />
+      <DashboardImageZoom type="user-details" class="rounded-full cursor-pointer" :src="user?.profilePicture" />
     </div>
     <div @click="handleProfileTabSelection" v-if="!loadingUser && user?.profilePicture === null"
       class="h-16 w-16 mr-4 rounded-full cursor-pointer bg-gray-500 text-white flex justify-center items-center">

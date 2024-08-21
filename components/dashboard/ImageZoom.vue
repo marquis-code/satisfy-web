@@ -3,7 +3,7 @@
     <img
       :src="src"
       @click="toggleImage"
-      :class="[type === 'ads' ? 'rounded h-10 w-40' : 'rounded-full h-10 w-10']"
+      :class="[type === 'ads' ? 'rounded h-10 w-[300px]' : type === 'user-details' ? 'h-16 w-16 rounded-full' : 'rounded-full h-10 w-10']"
       class="cursor-pointer"
       alt=""
     />

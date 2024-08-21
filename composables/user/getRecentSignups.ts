@@ -10,7 +10,7 @@ export function useRecentSignups() {
     return usersList.value
       .slice()
       .sort((a, b) => moment(b.createdAt).valueOf() - moment(a.createdAt).valueOf())
-      .slice(0, 5);
+      .slice(0, 10);
   });
 
   // Fetch the users when the composable is used
