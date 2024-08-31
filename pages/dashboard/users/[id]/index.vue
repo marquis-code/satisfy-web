@@ -5,9 +5,9 @@
         <section class="bg-white p-6 border-[0.1px] border-gray-100 shadow-sm rounded-b-lg space-y-10">
             <section class="">
                 <div v-if="!loading && Object.keys(user).length" class="space-y-3">
-                    <div class="w-full border-b flex justify-between">
+                    <div class="w-full border-b flex justify-between items-center">
                         <h1 class="text-[#101828] font-medium text-base">User Information</h1>
-                        <div>
+                        <div class="mb-4">
                             <NuxtLink :to="`/dashboard/users/${user.id}/create-pod`"
                                 class="bg-[#0ba9b9] text-white font-medium text-sm rounded-md py-2.5 px-4">Add Pods
                             </NuxtLink>
@@ -52,6 +52,9 @@
             <section v-else-if="route.query.page === 'following'">
                 <UsersFollowings :pagination="followingsPagination" :users="followingsList" :loading="loadFollowings" />
             </section>
+            <section v-else-if="route.query.page === 'referrals'">
+               <UsersReferrals :pagination="referralsPagination" :fields="referralList" :loading="loadRefferals" />
+            </section>
             <section v-else>
                 <CoreEmptyState title="No Data Available" desc="" />
             </section>
@@ -64,14 +67,17 @@ import { useFetchFollowings } from '@/composables/user/getUserFollowings'
 import { useFetchFollowers } from '@/composables/user/getUserFollowers'
 import { useFetchUserById } from '@/composables/user/getUserById'
 import { useFetchUserStories } from '@/composables/user/fetchUserStories'
+import {useFetchReferalls } from '@/composables/user/getReferrals'
 const { fetchUserStories, userStoriesList, loading: loadingUserStories } = useFetchUserStories()
 const { fetchFollowings, followingsList, pagination: followingsPagination, loading: loadFollowings } = useFetchFollowings()
 const { fetchFollowers, followersList, pagination, loading: loadFollowers } = useFetchFollowers()
 const { fetchUser, user, loading } = useFetchUserById()
-fetchUser()
+const { fetchReferalls, referralList, loading:loadRefferals, pagination:referralsPagination } = useFetchReferalls(user.value.referralCode) 
+fetchUser(), 
 fetchUserStories()
 fetchFollowings()
 fetchFollowers()
+fetchReferalls()
 const router = useRouter()
 const route = useRoute()
 const activeTab = ref("default") as any
@@ -115,9 +121,9 @@ const setUserStats = () => {
             count: !loadingUserStories?.value ? userStoriesList?.value?.length : 0
         },
         {
-            title: "Premium stories",
-            key: "premium_stories",
-            count: user?.value?.premiumStories ?? 0
+            title: "Referrals",
+            key: "referrals",
+            count: !loadRefferals?.value ? referralList?.value.length : 0
         },
         {
             title: "Views",

@@ -72,5 +72,9 @@ export const userApiFactory = {
     const userType = metaData.userType || 'signups';
     const url = `/user/chart/count?showAll=${metaData.showAll}&startDate=${metaData.startDate}&endDate=${metaData.endDate}&datePart=${metaData.datePart}&userType=${userType}`;
     return axiosInstance.get(url);
+  },
+  getRefferals(referralCode: string,metadata: { page: number; perPage: number }){
+    const url = `promotion?page=${metadata.page}&perPage=${metadata.perPage}&referralCode=${referralCode}&sortBy=createdAt:DESC`;
+    return axiosInstance.get(url)
   }
 };
