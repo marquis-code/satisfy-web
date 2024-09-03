@@ -2,7 +2,7 @@
   <div class="bg-white p-6 md:p-6 space-y-3">
     <div class="md:flex space-y-4 md:space-y-0 justify-between items-center">
       <div class="flex justify-end items-end">
-        <div class="flex">
+        <div class="flex items-center gap-3">
           <div>
             <fieldset>
               <legend class="sr-only">Notifications</legend>
