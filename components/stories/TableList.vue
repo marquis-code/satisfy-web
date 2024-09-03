@@ -130,9 +130,12 @@
                             </td>
                             <td @click="viewStory(stori)"
                                 class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
-                                <p class="no-underline text-gray-800">{{
+                                <p class="no-underline text-gray-800">
+                                    <!-- {{
                                     moment.utc(stori.createdAt).format('MMMM Do YYYY, h:mm:ss a') || 'Nil'
-                                    }}</p>
+                                    }} -->
+                                    {{ moment.utc(stori.createdAt).format('DD-MMM-YY') || 'Nil' }}
+                                </p>
                             </td>
                             <td
                                 class="whitespace-nowrap text-center py-4 pl-3 pr-4 text-xs font-medium sm:pr-3 relative">

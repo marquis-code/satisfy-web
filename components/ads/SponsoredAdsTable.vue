@@ -3,8 +3,8 @@
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto">
-                    <h1 class="text-base font-semibold leading-6 text-gray-900">Sponsored Ads</h1>
-                    <p class="mt-2 text-sm text-gray-700">A list of all the sponsored ads in your account including
+                    <h1 class="text-base font-semibold leading-6 text-gray-900">Banner Ads</h1>
+                    <p class="mt-2 text-sm text-gray-700">A list of all the banner ads in your account including
                         their name,
                         title, email and role.</p>
                 </div>
@@ -75,15 +75,21 @@
                                                 ?? 'Nil' }}
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            <span v-if="ads?.startDate">{{ moment(ads?.startDate).format("MMM DD, YYYY, h:mm a") }}</span>
+                                            <span v-if="ads?.startDate">
+                                                <!-- {{ moment(ads?.startDate).format("MMM DD, YYYY, h:mm a") }} -->
+                                                {{ formatDateTime(ads?.startDate) }}
+                                            </span>
                                             <span v-else>Nil</span>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            <span v-if="ads?.endDate">{{ moment(ads?.endDate).format("MMM DD, YYYY, h:mm a") }}</span>
+                                            <span v-if="ads?.endDate">
+                                                <!-- {{ moment(ads?.endDate).format("MMM DD, YYYY, h:mm a") }} -->
+                                                {{ formatDateTime(ads?.endDate) }}
+                                            </span>
                                             <span v-else>Nil</span>
                                         </td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            <span v-if="ads?.createdAt">{{ moment(ads?.createdAt).format("MMM DD, YYYY, h:mm a") }}</span>
+                            <span v-if="ads?.createdAt">{{ formatDateTime(ads?.createdAt) }}</span>
                             <span v-else>Nil</span>
                         </td>
                                         <td
@@ -138,7 +144,7 @@
 </template>
 
 <script setup lang="ts">
-import moment from "moment"
+import { formatDateTime } from '@/utils/generateDate'
 import { useGetAllSponsoredAds } from '@/composables/sponsored-ads/fetch'
 import { useDeleteSponsoredAds } from '@/composables/sponsored-ads/delete'
 const { deleteSponsoredAds, loading: deleting } = useDeleteSponsoredAds()
@@ -169,17 +175,17 @@ const computedSlideOverHeader = computed(() => {
     switch (route.query.action) {
         case 'create':
             return {
-                title: 'Create Sponsored Ads',
+                title: 'Create Banner Ads',
                 desc: 'Enter client name, upload sponsored file, start date, end date and target link to begin'
             }
         case 'edit':
             return {
-                title: 'Edit Sponsored Ads',
+                title: 'Edit Banner Ads',
                 desc: 'Enter client name, upload sponsored file, start date, end date and target link to begin update'
             }
         case 'preview':
             return {
-                title: 'Preview Sponsored Ads',
+                title: 'Preview Banner Ads',
                 desc: 'View sponsored ads details below.'
             }
         default:
