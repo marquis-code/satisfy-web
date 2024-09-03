@@ -73,8 +73,8 @@ export const userApiFactory = {
     const url = `/user/chart/count?showAll=${metaData.showAll}&startDate=${metaData.startDate}&endDate=${metaData.endDate}&datePart=${metaData.datePart}&userType=${userType}`;
     return axiosInstance.get(url);
   },
-  getRefferals(referralCode: string,metadata: { page: number; perPage: number }){
-    const url = `/promotion?page=${metadata.page}&perPage=${metadata.perPage}&referralCode=${referralCode}&sortBy=createdAt:DESC`;
+  getRefferals(userId: string, metadata: { page: number; perPage: number }){
+    const url = `/promotion?page=${metadata.page}&perPage=${metadata.perPage}&referrerId=${userId}&sortBy=createdAt:DESC`;
     return axiosInstance.get(url)
   }
 };

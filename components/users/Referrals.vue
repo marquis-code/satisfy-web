@@ -8,6 +8,20 @@
                                 <p>{{ moment.utc(item.createdAt).format('MMMM Do YYYY h:mm:ss a')  }} </p>
                             </div>
                 </template> 
+                <template #item-user="item">
+                        <div>
+                            <p>
+                                <RouterLink :to="`/dashboard/users/${item.userId}`">{{ item.user }}</RouterLink>
+                            </p>
+                        </div>
+                </template>
+                <template #item-referrer="item">
+                        <div>
+                            <p>
+                                <RouterLink :to="`/dashboard/users/${item.referrerId}`">{{ item.referrer }}</RouterLink>
+                            </p>
+                        </div>
+                </template>
             </UsersReferralList>
         </div>
         <CoreEmptyState v-if="fields.length <= 0 && !loading" title="No Referrals available" desc="">
@@ -18,6 +32,7 @@
 
 <script setup lang="ts">
 import moment from 'moment'
+
 
 const formatter = ref({
   date: "DD MMM YYYY",
@@ -55,6 +70,10 @@ let tableHeader = reactive([
     {
         label: "Referral Code",
         key: "referralCode"
+    },
+    {
+        label: "Is Rewarded",
+        key: "isRewarded"
     }
 ]);
 </script>

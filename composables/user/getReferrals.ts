@@ -1,8 +1,8 @@
 import { userApiFactory } from "@/apiFactory/users";
 
-export const useFetchReferalls = (userReferralCode) => {
+export const useFetchReferalls = () => {
   const referralList = ref([]);
-//   const userReferralCode = useRoute().params.id //user
+  const userId = useRoute().params.id;
   const loading = ref(false);
   const pagination = ref({
     page: 1,
@@ -10,11 +10,10 @@ export const useFetchReferalls = (userReferralCode) => {
     total: 100,
     pages: 0,
   });
-  const fetchReferalls  = async () => {
+  const fetchReferalls = async () => {
     loading.value = true;
     try {
-      const response = await userApiFactory.getRefferals(userReferralCode, pagination.value);
-      console.log(response)
+      const response = await userApiFactory.getRefferals(userId, pagination.value);
       referralList.value = response.data.result || [];
       pagination.value = response.data.metadata;
     } catch (error: any) {
@@ -31,7 +30,7 @@ export const useFetchReferalls = (userReferralCode) => {
   watch(
     () => pagination.value.page,
     () => {
-        fetchReferalls();
+      fetchReferalls();
     }
   );
 

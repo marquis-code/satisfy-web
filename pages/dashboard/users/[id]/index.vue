@@ -1,6 +1,6 @@
 <template>
     <main>
-        <button @click="router.back()" class="bg-black mb-3 px-3 py-2 text-white text-xs rounded-xl" >Go Back</button>
+        <button @click="router.back()" class="bg-black mb-3 px-3 py-2 text-white text-xs rounded-xl">Go Back</button>
         <UsersTabs @selected="handleSelected" />
         <section class="bg-white p-6 border-[0.1px] border-gray-100 shadow-sm rounded-b-lg space-y-10">
             <section class="">
@@ -53,7 +53,7 @@
                 <UsersFollowings :pagination="followingsPagination" :users="followingsList" :loading="loadFollowings" />
             </section>
             <section v-else-if="route.query.page === 'referrals'">
-               <UsersReferrals :pagination="referralsPagination" :fields="referralList" :loading="loadRefferals" />
+                <UsersReferrals :pagination="referralsPagination" :fields="referralList" :loading="loadRefferals" />
             </section>
             <section v-else>
                 <CoreEmptyState title="No Data Available" desc="" />
@@ -67,13 +67,13 @@ import { useFetchFollowings } from '@/composables/user/getUserFollowings'
 import { useFetchFollowers } from '@/composables/user/getUserFollowers'
 import { useFetchUserById } from '@/composables/user/getUserById'
 import { useFetchUserStories } from '@/composables/user/fetchUserStories'
-import {useFetchReferalls } from '@/composables/user/getReferrals'
+import { useFetchReferalls } from '@/composables/user/getReferrals'
 const { fetchUserStories, userStoriesList, loading: loadingUserStories } = useFetchUserStories()
 const { fetchFollowings, followingsList, pagination: followingsPagination, loading: loadFollowings } = useFetchFollowings()
 const { fetchFollowers, followersList, pagination, loading: loadFollowers } = useFetchFollowers()
 const { fetchUser, user, loading } = useFetchUserById()
-const { fetchReferalls, referralList, loading:loadRefferals, pagination:referralsPagination } = useFetchReferalls(user.value.referralCode) 
-fetchUser(), 
+const { fetchReferalls, referralList, loading: loadRefferals, pagination: referralsPagination } = useFetchReferalls()
+fetchUser(),
 fetchUserStories()
 fetchFollowings()
 fetchFollowers()
@@ -82,6 +82,7 @@ const router = useRouter()
 const route = useRoute()
 const activeTab = ref("default") as any
 const activeProfileView = ref('default')
+
 
 const handleSelected = (data: any) => {
     activeProfileView.value = data
@@ -146,6 +147,7 @@ const setUserStats = () => {
 onMounted(() => {
     setUserStats()
     router.push({ path: route.path })
+    localStorage.removeItem("selectedUSerCode")
 })
 
 definePageMeta({
