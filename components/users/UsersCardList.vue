@@ -116,7 +116,7 @@ export default {
       this.isActivateUserSuccess = true;
     },
     handleSearch(val) {
-      console.log(val, "search val here from users");
+
     },
   },
 };
