@@ -43,7 +43,6 @@ export const useFileUploader = () => {
       .replace("\n", "")
       .replace("\t", "")
       .replace(/\s+/g, " ");
-    console.log(modified, "modified");
     const chunkSize = 320;
     const whitespaceChars = [" ", "\n", "\t"];
     modified = String(modified);
@@ -74,8 +73,6 @@ export const useFileUploader = () => {
         end += chunkSize;
       }
     }
-    console.log(chunks);
-    // return chunks;
 
     const newSlides = chunks.map((chunk) => ({ text: chunk }));
     textChunks.value = [...textChunks.value, ...newSlides].slice(0, 30);
