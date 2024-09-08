@@ -21,11 +21,6 @@
                         <div class="bg-red-50 p-6 rounded-lg ">
                             <div class="flex items-center justify-between">
                             <h3 class="text-gray-700 font-semibold">Total payment</h3>
-                            <!-- <div class="bg-red-100 p-1 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-red-500">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                                </svg>
-                            </div> -->
                             </div>
                             <svg width="204" height="56" viewBox="0 0 204 56" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M203 44.5469C203 44.5469 191.876 30.2469 173.5 30.2469C158 30.2469 151.983 47.2969 138.5 47.2969C120 47.2969 120 18.6969 100.5 18.6969C83.5 18.6969 76.9411 54.9969 51.5 54.9969C25 54.9969 31.0532 14.2969 1 14.2969" stroke="#E13D45" stroke-width="2" stroke-linecap="round"/>
@@ -48,11 +43,6 @@
                         <div class="bg-green-50 p-6 rounded-lg ">
                             <div class="flex items-center justify-between">
                             <h3 class="text-gray-700 font-semibold">Wallet balance</h3>
-                            <!-- <div class="bg-green-100 p-1 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-green-500">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                                </svg>
-                            </div> -->
                             </div>
                             <svg width="204" height="62" viewBox="0 0 204 62" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1 31.65C1 31.65 12.1236 45.95 30.5 45.95C46 45.95 52.017 39.9 65.5 39.9C84 39.9 84 60.8 103.5 60.8C120.5 60.8 127.059 42.1 152.5 42.1C179 42.1 172.947 8 203 8" stroke="#20E682" stroke-width="2" stroke-linecap="round"/>

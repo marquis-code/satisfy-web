@@ -317,7 +317,6 @@ const handleSwitchToOriginal = (payloadObj: any) => {
     isOriginal: !payloadObj.isOriginal,
     storyId: payloadObj.id
   });
-  console.log(payload, 'here')
     setPayloadObj(payload)
     setOriginal()
 }
