@@ -37,8 +37,10 @@ export const useFetchStories = () => {
 
     return storiesList.value.filter(
       (story) =>
-        story.fname.toLowerCase().includes(query) ||
-        story.lname.toLowerCase().includes(query)
+        story?.title.toLowerCase().includes(query) ||
+        story?.tags.toLowerCase().includes(query) ||
+        story?.user?.fname.toLowerCase().includes(query) ||
+        story?.user?.lname.toLowerCase().includes(query)
     );
   });
 

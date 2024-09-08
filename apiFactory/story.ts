@@ -32,5 +32,9 @@ export const storyApiFactory = {
   getUserStoryChartData(metaData: any){
     const url = `/story/chart/count?showAll=${metaData.showAll}&startDate=${metaData.startDate}&endDate=${metaData.endDate}&datePart=${metaData.datePart}&userType=${metaData.userType}`
     return axiosInstance.get(url);
+  },
+  setOriginal(data: any){
+   const url = '/story/set-original'
+   return axiosInstance.post(url, data);
   }
 };

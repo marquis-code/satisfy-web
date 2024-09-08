@@ -80,7 +80,7 @@
                     </fieldset>
                 </div>
 
-                <div>
+                <!-- <div>
                     <fieldset>
                         <legend class="text-sm font-semibold leading-6 text-gray-900">Select stori visibility status
                         </legend>
@@ -95,8 +95,8 @@
                             </div>
                         </div>
                     </fieldset>
-                </div>
-                <fieldset>
+                </div> -->
+                <!-- <fieldset>
                     <legend class="text-sm font-semibold leading-6 text-gray-900">Select stori publication status
                     </legend>
                     <div class="mt-2 space-y-6 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
@@ -109,7 +109,7 @@
             }}</label>
                         </div>
                     </div>
-                </fieldset>
+                </fieldset> -->
             </div>
             <StoriesSlidesManager @slides="handleSlides" :selectedTextAlignment="selectedTextAlignment"
                 :selectedFont="selectedFont" :color="hexaColor" @content="handleManualContent"
