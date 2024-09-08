@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main>          
         <AdsSponsoredAdsTable />
     </main>
 </template>

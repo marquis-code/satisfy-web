@@ -137,7 +137,7 @@
                                     {{ moment.utc(stori.createdAt).format('DD-MMM-YY') || 'Nil' }}
                                 </p>
                             </td>
-                            <td
+                            <!-- <td
                                 class="whitespace-nowrap text-center py-4 pl-3 pr-4 text-xs font-medium sm:pr-3 relative">
                                 <button @click="handleDeleteStory(stori.id)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"
@@ -151,69 +151,112 @@
                                         <line x1="14" y1="11" x2="14" y2="17"></line>
                                     </svg>
                                 </button>
-                            </td>
+                            </td> -->
+                            <td class="py-5 px-5 whitespace-nowrap text-sm text-right">
+                                <button @click="toggleDropdown(index)" class="inline-flex items-center text-sm font-medium text-[#667185] hover:text-black">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#4a4a4a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                                </button>
+                                           <!-- Dropdown Menu -->
+                                           <div
+                                           v-if="activeDropdown === index"
+                                           class="absolute right-10 z-50 mt-2 bg-white border border-gray-200 rounded-md shadow-lg"
+                                         >
+                                           <ul class="py-1 text-sm text-gray-700">
+                                             <li>
+                                               <a
+                                               @click.prevent="handleDropdownClick('switch-type', stori)"
+                                                 href="#"
+                                                 class="flex items-center gap-x-2 font-medium px-4 py-2 hover:bg-gray-100 text-start"
+                                                 >
+                                                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#417505" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.1l4 4-4 4"/><path d="M3 12.2v-2a4 4 0 0 1 4-4h12.8M7 21.9l-4-4 4-4"/><path d="M21 11.8v2a4 4 0 0 1-4 4H4.2"/></svg>
+                                                 {{  stori?.isOriginal ? 'Remove From storipod originals' : 'Make storipod original' }}</a>
+                                             </li>
+                                             <li>
+                                               <a
+                                               @click.prevent="handleDropdownClick('delete', stori)"
+                                                 href="#"
+                                                 class="flex items-center gap-x-2 font-medium text-red-600 px-4 py-2 hover:bg-gray-100 text-start"
+                                                 >
+                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M16.25 4.58301L15.9152 10.0048M3.75 4.58301L4.25384 12.937C4.38287 15.0765 4.4474 16.1463 4.98223 16.9155C5.24667 17.2958 5.58733 17.6169 5.98254 17.8582C6.54196 18.1997 7.23423 18.3023 8.33333 18.333" stroke="#326543" stroke-width="1.5" stroke-linecap="round"/>
+                                                    <path d="M16.6654 12.5L10.832 18.3329M16.6654 18.3333L10.832 12.5004" stroke="#326543" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    <path d="M2.5 4.58366H17.5M13.3797 4.58366L12.8109 3.4101C12.433 2.63054 12.244 2.24076 11.9181 1.99767C11.8458 1.94374 11.7693 1.89578 11.6892 1.85424C11.3283 1.66699 10.8951 1.66699 10.0287 1.66699C9.14067 1.66699 8.69667 1.66699 8.32973 1.86209C8.24842 1.90533 8.17082 1.95524 8.09774 2.0113C7.76803 2.26424 7.58386 2.66828 7.21551 3.47638L6.71077 4.58366" stroke="#326543" stroke-width="1.5" stroke-linecap="round"/>
+                                                    </svg>
+                                                 Delete pod</a
+                                               >
+                                             </li>
+                                           </ul>
+                                         </div>
+                              </td>
                         </tr>
                     </tbody>
                 </table>
+                   <!-- Screen Overlay -->
             </div>
         </div>
+        <div
+        v-if="activeDropdown !== null"
+        @click="closeDropdown"
+        class="fixed inset-0 z-40 bg-black opacity-25"
+      ></div>
     </main>
 </template>
 
 <script setup lang="ts">
-import moment from 'moment'
-import { useDeleteStory } from '@/composables/story/deleteUserStory';
+import moment from "moment";
+import { useDeleteStory } from "@/composables/story/deleteUserStory";
 import { useFetchUserStories } from "@/composables/user/fetchUserStories";
 import { splitCategories } from "@/utils/splitCategories";
+import  { useSetOriginal } from '@/composables/story/setOriginal'
+const { setOriginal, setPayloadObj, loading } = useSetOriginal()
 const {
-    fetchUserStories,
-    userStoriesList,
-    loading: loadingUserStories,
+  fetchUserStories,
+  userStoriesList,
+  loading: loadingUserStories,
 } = useFetchUserStories();
-const { deleteStory } = useDeleteStory()
-
+const { deleteStory } = useDeleteStory();
 
 const handleDeleteStory = (id: any) => {
-    deleteStory(id)
-}
-const router = useRouter()
+  deleteStory(id);
+};
+const router = useRouter();
 const selectedStori = ref([]) as any;
 const selectedOption = ref("") as any;
 const selectedUser = ref({}) as any;
 const showEditModal = ref(false) as any;
 
 const props = defineProps({
-    storiesList: {
-        type: Array,
-        default: () => [],
-    },
-    loadingStories: {
-        type: Boolean,
-        default: false,
-    },
+  storiesList: {
+    type: Array,
+    default: () => [],
+  },
+  loadingStories: {
+    type: Boolean,
+    default: false,
+  },
 });
 const formatter = ref({
-    date: "DD MMM YYYY",
-    month: "MMM",
+  date: "DD MMM YYYY",
+  month: "MMM",
 });
 
 const form = ref({
-    category: "",
-    isIndefinately: false,
-    date: [] as any,
+  category: "",
+  isIndefinately: false,
+  date: [] as any,
 });
 
 const isFormEmpty = computed(() => {
-    if (form.value.isIndefinately) {
-        return !!(form.value.category && form.value.date);
-    } else {
-        return !!form.value.category;
-    }
+  if (form.value.isIndefinately) {
+    return !!(form.value.category && form.value.date);
+  } else {
+    return !!form.value.category;
+  }
 });
 
 const handleRemoveUser = (stori: any) => {
-    openRemoveUserModal.value = true;
-    selectedUser.value = stori;
+  openRemoveUserModal.value = true;
+  selectedUser.value = stori;
 };
 const selectedStatus = ref("");
 
@@ -222,36 +265,75 @@ const updateUserStatusModal = ref(false);
 
 const openDropdownIndex = ref(null);
 
-function toggleDropdown(index: any) {
-    openDropdownIndex.value = openDropdownIndex.value === index ? null : index;
-}
+// function toggleDropdown(index: any) {
+//   openDropdownIndex.value = openDropdownIndex.value === index ? null : index;
+// }
 
 const indeterminate = computed(() => {
-    return (
-        selectedStori.value.length > 0 &&
-        selectedStori.value.length < props.storiesList.length
-    );
+  return (
+    selectedStori.value.length > 0 &&
+    selectedStori.value.length < props.storiesList.length
+  );
 });
 const toggleUserStatus = (user: any) => {
-    selectedUser.value = user;
-    updateUserStatusModal.value = true;
-    if (user.isActive) {
-        selectedStatus.value = "suspend";
-    }
+  selectedUser.value = user;
+  updateUserStatusModal.value = true;
+  if (user.isActive) {
+    selectedStatus.value = "suspend";
+  }
 
-    if (!user.isActive) {
-        selectedStatus.value = "reactivate";
-    }
+  if (!user.isActive) {
+    selectedStatus.value = "reactivate";
+  }
 };
 
 const viewStory = (data: any) => {
-    router.push({ path: `/dashboard/pods/${data.id}` })
-}
+  router.push({ path: `/dashboard/pods/${data.id}` });
+};
 
 const generateInitials = (fname: string, lname: string) => {
   return `${fname.charAt(0).toUpperCase()}${lname.charAt(0).toUpperCase()}`;
 };
 
+// State to manage which dropdown is active
+const activeDropdown = ref<number | null>(null);
+
+// Function to toggle the dropdown visibility
+const toggleDropdown = (index: number) => {
+  if (activeDropdown.value === index) {
+    activeDropdown.value = null;
+  } else {
+    activeDropdown.value = index;
+  }
+};
+
+// Function to close the dropdown
+const closeDropdown = () => {
+  activeDropdown.value = null;
+};
+
+const handleSwitchToOriginal = (payloadObj: any) => {
+    const payload = ref({
+    isOriginal: !payloadObj.isOriginal,
+    storyId: payloadObj.id
+  });
+  console.log(payload, 'here')
+    setPayloadObj(payload)
+    setOriginal()
+}
+
+// Function to handle dropdown option click
+const handleDropdownClick = (action: any, data: any) => {
+  closeDropdown();
+  if (action === "switch-type") {
+    handleSwitchToOriginal(data);
+  }
+
+  if (action === "delete") {
+    handleDeleteStory(data.id);
+  }
+  // Additional logic for handling the selected option can be added here
+};
 </script>
 
 <style></style>

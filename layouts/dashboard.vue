@@ -48,6 +48,36 @@
                       </NuxtLink>
                     </li>
                     <li>
+                      <NuxtLink to="/dashboard/payment" @click.prevent="isOpen = false"
+                        class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
+                        <svg fill="#000000"  width="24" height="24" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                        viewBox="0 0 511.999 511.999" xml:space="preserve">
+                     <g>
+                       <g>
+                         <path d="M493.714,66.178h-69.659H197.661h-69.661c-10.099,0-18.286,8.187-18.286,18.286v63.563h18.286h18.286h10.203h32.195
+                           c12.566-12.003,21.598-27.666,25.337-45.277h193.674c7.188,33.842,33.891,60.545,67.734,67.734v89.183
+                           c-33.843,7.186-60.547,33.891-67.734,67.734h-17.598v36.572h33.958h69.659c10.099,0,18.286-8.186,18.286-18.286v-69.66V154.121
+                           V84.464C512,74.364,503.813,66.178,493.714,66.178z"/>
+                       </g>
+                     </g>
+                     <g>
+                       <g>
+                         <path d="M335.24,184.597H146.285h-36.572H18.286C8.187,184.597,0,192.784,0,202.882v54.857h353.526v-54.857
+                           C353.526,192.784,345.339,184.597,335.24,184.597z"/>
+                       </g>
+                     </g>
+                     <g>
+                       <g>
+                         <path d="M0,294.311v133.224c0,10.099,8.187,18.286,18.286,18.286H335.24c10.099,0,18.286-8.186,18.286-18.286v-63.564V327.4
+                           v-33.089H0z M152.383,367.454H91.429c-10.099,0-18.286-8.187-18.286-18.286c0-10.099,8.187-18.286,18.286-18.286h60.954
+                           c10.099,0,18.286,8.187,18.286,18.286C170.668,359.267,162.481,367.454,152.383,367.454z"/>
+                       </g>
+                     </g>
+                     </svg>
+                        Payment
+                      </NuxtLink>
+                    </li>
+                    <li>
                       <NuxtLink to="/dashboard/pods" @click.prevent="isOpen = false"
                         class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -241,6 +271,52 @@
                     </svg>
 
                     Pods
+                  </NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/dashboard/payment"
+                    class="flex w-full text-gray-700 items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose">
+                    <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18 15L19 15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                      <path d="M9 15H15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                      <path d="M6 15H5" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                      <path d="M5 12H19" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                      <path d="M5 9H19" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                      <path
+                        d="M21 6H3C2.44772 6 2 6.44772 2 7V17C2 17.5523 2.44772 18 3 18H21C21.5523 18 22 17.5523 22 17V7C22 6.44772 21.5523 6 21 6Z"
+                        stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg> -->
+                    <svg fill="#000000"  width="24" height="24" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 viewBox="0 0 511.999 511.999" xml:space="preserve">
+<g>
+	<g>
+		<path d="M493.714,66.178h-69.659H197.661h-69.661c-10.099,0-18.286,8.187-18.286,18.286v63.563h18.286h18.286h10.203h32.195
+			c12.566-12.003,21.598-27.666,25.337-45.277h193.674c7.188,33.842,33.891,60.545,67.734,67.734v89.183
+			c-33.843,7.186-60.547,33.891-67.734,67.734h-17.598v36.572h33.958h69.659c10.099,0,18.286-8.186,18.286-18.286v-69.66V154.121
+			V84.464C512,74.364,503.813,66.178,493.714,66.178z"/>
+	</g>
+</g>
+<g>
+	<g>
+		<path d="M335.24,184.597H146.285h-36.572H18.286C8.187,184.597,0,192.784,0,202.882v54.857h353.526v-54.857
+			C353.526,192.784,345.339,184.597,335.24,184.597z"/>
+	</g>
+</g>
+<g>
+	<g>
+		<path d="M0,294.311v133.224c0,10.099,8.187,18.286,18.286,18.286H335.24c10.099,0,18.286-8.186,18.286-18.286v-63.564V327.4
+			v-33.089H0z M152.383,367.454H91.429c-10.099,0-18.286-8.187-18.286-18.286c0-10.099,8.187-18.286,18.286-18.286h60.954
+			c10.099,0,18.286,8.187,18.286,18.286C170.668,359.267,162.481,367.454,152.383,367.454z"/>
+	</g>
+</g>
+</svg>
+
+                    Payment
                   </NuxtLink>
                 </li>
                 <!-- <li>
