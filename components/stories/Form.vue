@@ -216,7 +216,14 @@ const storiVisibilityList = ref([
 ])
 
 const handleSlides = (data: any) => {
-    emittedSlides.value = data
+    // emittedSlides.value = data
+    if (emittedSlides.value && emittedSlides.value.length > 0) {
+        // Append the new data to the existing content
+        emittedSlides.value = [...emittedSlides.value, ...data];
+    } else {
+        // If no existing content, just set it to the new data
+        emittedSlides.value = data;
+    }
 }
 
 const podCreationMethodsList = ref([
@@ -326,11 +333,23 @@ const handlePodSave = () => {
 };
 
 const handleStoriContent = (data: any) => {
-    uploadedFileList.value = data;
+    if (uploadedFileList.value && uploadedFileList.value.length > 0) {
+        // Append the new data to the existing content
+        uploadedFileList.value = [...uploadedFileList.value, ...data];
+    } else {
+        // If no existing content, just set it to the new data
+        uploadedFileList.value = data;
+    }
 };
 
 const handleManualContent = (data: any) => {
-    manualContentList.value = data;
+   if (manualContentList.value && manualContentList.value.length > 0) {
+        // Append the new data to the existing content
+        manualContentList.value = [...manualContentList.value, ...data];
+    } else {
+        // If no existing content, just set it to the new data
+        manualContentList.value = data;
+    }
 }
 
 const computedSlides = computed(() => {

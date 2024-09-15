@@ -19,7 +19,7 @@
                 <div>
                     <label class="">
                         <img v-if="imagePreview" :src="imagePreview" alt=""
-                            class="has-animation h-20 w-20 object-cover object-center border-[0.8px] border-gray-400 shadow rounded-md" />
+                            class="has-animation h-20 w-full object-cover object-center mt-3 border-[0.8px] border-gray-400 shadow rounded-md" />
                         <img v-else src="@/assets/icons/dashboard/image-placeholder.svg" alt="" class="h-20 w-20 border-4" />
                         <input @change="onFileChange" type="file" class="hidden" />
                     </label>
