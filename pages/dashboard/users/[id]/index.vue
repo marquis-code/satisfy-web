@@ -41,7 +41,7 @@
                 </div>
             </section>
             <section v-else-if="route.query.page === 'stories'">
-                <UsersStories :stories="userStoriesList" :loading="loadingUserStories" />
+                <UsersStories :stories="userStoriesList" :loading="loadingUserStories" :pagination="storyPagination" :queryObj="queryObj" />
             </section>
             <section v-else-if="route.query.page === 'wallet'">
                 <UsersWallet />
@@ -64,7 +64,7 @@ import { useFetchFollowings } from '@/composables/user/getUserFollowings'
 import { useFetchFollowers } from '@/composables/user/getUserFollowers'
 import { useFetchUserById } from '@/composables/user/getUserById'
 import { useFetchUserStories } from '@/composables/user/fetchUserStories'
-const { fetchUserStories, userStoriesList, loading: loadingUserStories } = useFetchUserStories()
+const { fetchUserStories, userStoriesList, loading: loadingUserStories, pagination: storyPagination, queryObj } = useFetchUserStories()
 const { fetchFollowings, followingsList, pagination: followingsPagination, loading: loadFollowings } = useFetchFollowings()
 const { fetchFollowers, followersList, pagination, loading: loadFollowers } = useFetchFollowers()
 const { fetchUser, user, loading } = useFetchUserById()
