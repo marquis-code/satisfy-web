@@ -6,11 +6,11 @@ export const storyApiFactory = {
       `/story?sortBy=${queryObj.sortBy}:${queryObj.orderBy}&page=${Number(metadata.page)}&perPage=${Number(metadata.perPage)}`
     );
   },
-  getStoryByUserId(userId: string | number) {
-    return axiosInstance.get(`/story?userId=${userId}`);
+  getStoryByUserId(userId: string | number, queryObj: {sortBy: string, orderBy: string}, metadata: { page: number; perPage: number }) {
+    return axiosInstance.get(`/story?userId=${userId}&sortBy=${queryObj.sortBy}:${queryObj.orderBy}&page=${Number(metadata.page)}&perPage=${Number(metadata.perPage)}`);
   },
-  getAllStoryById(id: string) {
-    return axiosInstance.get(`/story/${id}`);
+  getAllStoryById(id: string, queryObj: {sortBy: string, orderBy: string}) {
+    return axiosInstance.get(`/story/${id}?sortBy=${queryObj.sortBy}:${queryObj.orderBy}`);
   },
   getAllStorySummary() {
     return axiosInstance.get("/story/summary");
@@ -32,5 +32,9 @@ export const storyApiFactory = {
   getUserStoryChartData(metaData: any){
     const url = `/story/chart/count?showAll=${metaData.showAll}&startDate=${metaData.startDate}&endDate=${metaData.endDate}&datePart=${metaData.datePart}&userType=${metaData.userType}`
     return axiosInstance.get(url);
+  },
+  setOriginal(data: any){
+   const url = '/story/set-original'
+   return axiosInstance.post(url, data);
   }
 };

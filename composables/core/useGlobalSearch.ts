@@ -16,7 +16,7 @@ export const useFetchGlobalSearch = () => {
     loading.value = true;
     try {
       const response = await coreApiFactory.$_global_search(query.value);
-      console.log(response, 'search result')
+
       queryResult.value = response?.data || {};
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {

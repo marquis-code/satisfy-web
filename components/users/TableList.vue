@@ -85,9 +85,10 @@
       "Nil" }}</nuxt-link>
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                <nuxt-link class="no-underline font-semibold text-gray-800" :to="`/dashboard/users/${person.id}`">{{
-      moment.utc(person.createdAt).format('MMMM Do YYYY h:mm:ss a') || 'Nil'
-    }}
+                <nuxt-link class="no-underline font-semibold text-gray-800" :to="`/dashboard/users/${person.id}`">
+                    {{
+                      formatDate(person.createdAt)
+                    }}
                 </nuxt-link>
               </td>
               <td class="whitespace-nowrap text-center py-4 pl-3 pr-4 text-xs font-medium sm:pr-3 relative">
@@ -288,7 +289,7 @@
 </template>
 
 <script setup lang="ts">
-import moment from 'moment'
+import { formatDate } from '@/utils/generateDate'
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
 import { useFetchUserStories } from '@/composables/user/fetchUserStories'
 import { useEditUser } from '@/composables/user/editUser'

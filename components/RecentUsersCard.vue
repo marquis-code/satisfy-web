@@ -59,7 +59,7 @@
               </td>
               <td class="whitespace-nowrap text-base md:text-sm px-4 text-gray-700">
                 <nuxt-link class=" no-underline hover:underline" :to="`/dashboard/users/${itm.id}`">{{
-                  moment.utc(itm.createdAt).format('MMMM Do YYYY, h:mm:ss a') || 'Nil'
+                  formatDateTime(itm.createdAt)
                   }}</nuxt-link>
               </td>
               <td class="whitespace-nowrap text-base md:text-sm px-4 text-gray-700">
@@ -140,7 +140,7 @@
               </td>
               <td class="whitespace-nowrap text-base md:text-sm px-4 text-gray-700">
                 <nuxt-link class=" no-underline hover:underline" :to="`/dashboard/users/${itm.id}`">{{
-                  moment.utc(itm.createdAt).format('MMMM Do YYYY, h:mm:ss a') || 'Nil'
+                  formatDateTime(itm.createdAt)
                   }}</nuxt-link>
               </td>
               <td class="whitespace-nowrap text-base md:text-sm px-4 text-gray-700">
@@ -160,7 +160,7 @@
 
 
 <script setup lang="ts">
-import moment from 'moment'
+import { formatDateTime } from '@/utils/generateDate'
 import { useFetchReportedUsers } from '@/composables/reports/getReportedUsers'
 import { useRecentSignups } from '@/composables/user/getRecentSignups'
 import { useFetchUsers } from '@/composables/user/fetch'

@@ -12,11 +12,15 @@
 
             <div>
                 <label for="ads_image" class="block text-xs font-medium leading-6 text-gray-900">Uploaded Ads File</label>
+                <p class="text-xs flex items-center font-medium gap-x-2 text-red-500">
+                    <img src="@/assets/icons/info-icon.svg" alt="" class="h-4 w-4" />
+                    NOTE: IMAGE WILL RENDER IN A RECTANGULAR FORM
+                </p>
                 <div>
                     <label class="">
                         <img v-if="imagePreview" :src="imagePreview" alt=""
-                            class="has-animation h-20 w-20 object-cover object-center border-[0.8px] border-gray-400 shadow rounded-full" />
-                        <img v-else src="@/assets/icons/dashboard/camera.svg" alt="" class="h-20 w-20" />
+                            class="has-animation h-20 w-full object-cover object-center mt-3 border-[0.8px] border-gray-400 shadow rounded-md" />
+                        <img v-else src="@/assets/icons/dashboard/image-placeholder.svg" alt="" class="h-20 w-20 border-4" />
                         <input @change="onFileChange" type="file" class="hidden" />
                     </label>
                 </div>

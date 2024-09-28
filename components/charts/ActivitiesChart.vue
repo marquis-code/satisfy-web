@@ -26,20 +26,11 @@
           </div>
         </div>
       </div>
-      <div class="flex items-center gap-x-3">
-        <select v-model="metaObj.userType" @change="updateChartData"
-          class="text-sm outline-none font-medium bg-gray-100 rounded-md px-6 py-2 w-full border">
-          <option value="signups">Signup</option>
-          <option value="active">Active</option>
-        </select>
-        <select v-model="metaObj.datePart" @change="updateChartData"
-          class="text-sm outline-none font-medium bg-gray-100 rounded-md px-6 py-2 w-full border">
-          <option value="day">Daily</option>
-          <option value="week">Weekly</option>
-          <option value="month">Monthly</option>
-          <option value="year">Yearly</option>
-        </select>
+      <div class="flex items-center gap-x-3 w-1/2">
+        <CoreCustomDropdown class="w-full" :items="userTypes" @update:selected="handleUserTypeSelection" />
+        <CoreCustomDropdown class="w-full" :items="dateParts" @update:selected="handleDatePartSelection" />
       </div>
+      
     </div>
     <client-only>
       <div class="chart-wrapper md:w-full overflow-x-auto hide-scrollbar">
@@ -91,6 +82,33 @@ const getCurrentMonthRange = () => {
 const { firstDay, lastDay } = getCurrentMonthRange();
 metaObj.value.startDate = firstDay.toISOString().split('T')[0];
 metaObj.value.endDate = lastDay.toISOString().split('T')[0];
+
+interface DropdownItem {
+  label: string;
+  code: string;
+}
+
+const userTypes = ref<DropdownItem[]>([
+  { label: 'Signup', code: 'signups' },
+  { label: 'Active', code: 'active' }
+]);
+
+const dateParts = ref<DropdownItem[]>([
+  { label: 'Daily', code: 'day' },
+  { label: 'Weekly', code: 'week' },
+  { label: 'Monthly', code: 'month' },
+  { label: 'Yearly', code: 'year' }
+]);
+
+const handleUserTypeSelection = (selectedItem: DropdownItem) => {
+  metaObj.value.userType = selectedItem.code
+  updateChartData()
+};
+
+const handleDatePartSelection = (selectedItem: DropdownItem) => {
+  metaObj.value.datePart = selectedItem.code
+  updateChartData()
+};
 
 const chartOptions = ref({
   chart: {
@@ -161,6 +179,35 @@ watch(chartDataObj, (newData) => {
     }));
   }
 }, { immediate: true });
+
+const options = ref<string[]>(['Wade Cooper', 'Arlene Mccoy', 'Devon Webb', 'Tom Cook', 'Tanya Fox', 'Hellen Schmidt', 'Caroline Schultz']);
+const selectedOption = ref<string>('Tom Cook');
+const isOpen = ref(false);
+const dropdownRef = ref<HTMLElement | null>(null);
+
+const toggleDropdown = () => {
+  isOpen.value = !isOpen.value;
+};
+
+const selectOption = (option: string) => {
+  selectedOption.value = option;
+  isOpen.value = false;
+};
+
+const handleClickOutside = (event: MouseEvent) => {
+  if (dropdownRef.value && !dropdownRef.value.contains(event.target as Node)) {
+    isOpen.value = false;
+  }
+};
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside);
+});
+
 </script>
 
 <style scoped>

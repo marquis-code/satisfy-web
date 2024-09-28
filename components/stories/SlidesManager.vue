@@ -108,7 +108,7 @@ const splitText = () => {
 };
 
 watch(editingText, (val) => {
-  console.log(val, 'fghjk text')
+
 })
 const handleBlur = () => {
     saveEditing()

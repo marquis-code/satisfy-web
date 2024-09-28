@@ -10,7 +10,6 @@ export const useFetchAndroidStat = () => {
     loading.value = true;
     try {
       const response = await dashboardApiFactory.getAndroidStat();
-      console.log(response.data.download, 'here');
       androidStatObj.value = response?.data ?? {}
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {

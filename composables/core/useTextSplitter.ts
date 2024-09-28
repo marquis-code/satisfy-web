@@ -15,7 +15,6 @@ export const useTextSplitter = () => {
       .replace("\n", "")
       .replace("\t", "")
       .replace(/\s+/g, " ");
-    console.log(modified, "modified");
     const chunkSize = 320;
     const whitespaceChars = [" ", "\n", "\t"];
     modified = String(modified);
@@ -46,8 +45,6 @@ export const useTextSplitter = () => {
         end += chunkSize;
       }
     }
-    console.log(chunks);
-    // return chunks;
 
     const newSlides = chunks.map((chunk) => ({ text: chunk }));
     slides.value = [...slides.value, ...newSlides].slice(0, 30);

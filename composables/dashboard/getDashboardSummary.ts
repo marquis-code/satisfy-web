@@ -14,7 +14,6 @@ export const useFetchDashboardSummary = () => {
     loading.value = true;
     try {
       const response = await dashboardApiFactory.getDashboardSummary(metaObj.value);
-      console.log(response, 'res here');
       if (response && response.data) {
         dashboardSummary.value = response.data;
       }
