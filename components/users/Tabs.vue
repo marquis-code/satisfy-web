@@ -12,14 +12,16 @@
     </div>
 </template>
 
+
+
 <script setup lang="ts">
-const activeTable = ref("insight")
+const activeTable = ref("insights")
 // const router = useRouter()
 // const route = useRoute()
 
 const breadcrumbTabs = ref([
     {
-        key: 'insight',
+        key: 'insights',
         text: "Insight",
     },
     {

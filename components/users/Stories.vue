@@ -14,6 +14,7 @@
 <script setup lang="ts">
 import { useFetchUserStories } from '@/composables/user/fetchUserStories'
 const { fetchUserStories, userStoriesList, loading, pagination, queryObj } = useFetchUserStories()
+
 fetchUserStories()
 
 const handlePageChange = (val: any) => {

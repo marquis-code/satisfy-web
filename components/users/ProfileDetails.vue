@@ -26,11 +26,12 @@
           Phone number
         </dt>
         <dd class="font-semibold text-gray-900 text-[14px]">
-          {{ user.phone ?? 'Nil' }}
+          <!-- {{ user.phone ?? 'Nil' }} -->
+          {{ user.phone ? user.phone : 'Nil' }}
         </dd>
       </div>
 
-      <div class="flex justify-between items-center py-5">
+      <!-- <div class="flex justify-between items-center py-5">
         <dt class="font-semibold text-gray-900 text-[14px]">Password</dt>
         <dd class="font-semibold text-gray-900 text-[14px]">
           <div class="flex items-center gap-x-2">
@@ -38,7 +39,7 @@
             <img src="@/assets/icons/eye-open.svg" alt="" />
           </div>
         </dd>
-      </div>
+      </div> -->
 
       <div class="flex justify-between space-x-6 items-center py-5">
         <dt class="font-semibold text-gray-900 text-[14px] ">Interests</dt>
