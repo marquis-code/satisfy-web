@@ -7,7 +7,8 @@ export const useFetchFollowings = () => {
   const pagination = ref({
     page: 1,
     perPage: 10,
-    total: 100,
+    total: 0,
+    // total: 100,
     pages: 0,
   });
   const fetchFollowings = async () => {
@@ -34,5 +35,5 @@ export const useFetchFollowings = () => {
     }
   );
 
-  return { fetchFollowings, pagination, followingsList, loading };
+  return { fetchFollowings, pagination, followingsList, loading, totalFollowings: computed(() => pagination.value.total) };
 };

@@ -22,6 +22,7 @@ export const useFetchUserStories = () => {
     try {
       const response = await storyApiFactory.getStoryByUserId(route.params.id || userId, queryObj.value, pagination.value);
       userStoriesList.value = response?.data?.result ?? [];
+      console.log(userStoriesList.value )
       pagination.value = response.data.metadata;
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
@@ -64,7 +65,8 @@ export const useFetchUserStories = () => {
   const setPaginationObj = (val: any) => {
     pagination.value.page = val;
   };
+  const totalPods =  computed(() => pagination.value.total)
 
 
-  return { fetchUserStories, userStoriesList, loading, pagination, queryObj };
+  return { fetchUserStories, userStoriesList, loading, pagination, queryObj, totalPods };
 };

@@ -7,7 +7,8 @@ export const useFetchFollowers = () => {
   const pagination = ref({
     page: 1,
     perPage: 10,
-    total: 100,
+    total: 0,
+    // total: 100,  
     pages: 0,
   });
   const fetchFollowers = async () => {
@@ -18,6 +19,7 @@ export const useFetchFollowers = () => {
         pagination.value
       );
       followersList.value = response?.data?.result || [];
+      // console.log(followersList)
       pagination.value = response.data.metadata;
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
@@ -36,5 +38,5 @@ export const useFetchFollowers = () => {
       fetchFollowers();
     }
   );
-  return { fetchFollowers, pagination, followersList, loading };
+  return { fetchFollowers, pagination, followersList, loading, totalFollowers: computed(() => pagination.value.total) };
 };
