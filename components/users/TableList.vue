@@ -21,7 +21,8 @@
                 <input type="checkbox"
                   class="absolute left-4 top-1/2 -mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                   :checked="indeterminate || selectedPeople.length === usersList.length" :indeterminate="indeterminate"
-                  @change="selectedPeople = $event.target.checked ? usersList.map((p) => p.email) : []" />
+                  @change="selectedPeople = $event.target.checked ? (usersList || []).map((p) => p?.email) : []"
+/>
               </th>
               <th scope="col" class="py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">
                 Avatar
