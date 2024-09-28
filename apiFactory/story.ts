@@ -1,6 +1,6 @@
 import { axiosInstance } from "./axios.config";
 
-export const storyApiFactory = {
+export const storyApiFactory = { 
   getAllStories(queryObj: {sortBy: string, orderBy: string}, metadata: { page: number; perPage: number }) {
     return axiosInstance.get(
       `/story?sortBy=${queryObj.sortBy}:${queryObj.orderBy}&page=${Number(metadata.page)}&perPage=${Number(metadata.perPage)}`
@@ -11,6 +11,9 @@ export const storyApiFactory = {
   },
   getAllStoryById(id: string, queryObj: {sortBy: string, orderBy: string}) {
     return axiosInstance.get(`/story/${id}?sortBy=${queryObj.sortBy}:${queryObj.orderBy}`);
+  },
+  getStoryById(id: string) {
+    return axiosInstance.get(`/story/${id}`);
   },
   getAllStorySummary() {
     return axiosInstance.get("/story/summary");

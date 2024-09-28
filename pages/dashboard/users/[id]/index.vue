@@ -21,7 +21,8 @@
                     <div class="h-[100px] w-full bg-slate-300 rounded-2xl animate-pulse"></div>
                 </div>
             </section>
-            <section v-if="!Object.keys(route.query).length" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- <section v-if="!Object.keys(route.query).length" class="grid grid-cols-1 lg:grid-cols-2 gap-6"> -->
+            <section v-if="!Object.keys(route.query).length || route.query.page === 'insights'" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
                     <UsersProfileDetails v-if="!loading && Object.keys(user).length" class="w-full"
                         :userStats="setUserStats()" :user="user" :loadingUser="loading" />
@@ -67,10 +68,10 @@ import { useFetchFollowings } from '@/composables/user/getUserFollowings'
 import { useFetchFollowers } from '@/composables/user/getUserFollowers'
 import { useFetchUserById } from '@/composables/user/getUserById'
 import { useFetchUserStories } from '@/composables/user/fetchUserStories'
-const { fetchUserStories, userStoriesList, loading: loadingUserStories, pagination: storyPagination, queryObj } = useFetchUserStories()
+const { fetchUserStories, userStoriesList, loading: loadingUserStories, pagination: storyPagination, queryObj, totalPods } = useFetchUserStories()
 import { useFetchReferalls } from '@/composables/user/getReferrals'
-const { fetchFollowings, followingsList, pagination: followingsPagination, loading: loadFollowings } = useFetchFollowings()
-const { fetchFollowers, followersList, pagination, loading: loadFollowers } = useFetchFollowers()
+const { fetchFollowings, followingsList, pagination: followingsPagination, loading: loadFollowings, totalFollowings } = useFetchFollowings()
+const { fetchFollowers, followersList, pagination, loading: loadFollowers, totalFollowers } = useFetchFollowers()
 const { fetchUser, user, loading } = useFetchUserById()
 const { fetchReferalls, referralList, loading: loadRefferals, pagination: referralsPagination } = useFetchReferalls()
 fetchUser(),
@@ -81,7 +82,7 @@ fetchReferalls()
 const router = useRouter()
 const route = useRoute()
 const activeTab = ref("default") as any
-const activeProfileView = ref('default')
+const activeProfileView = ref('insights')
 
 
 const handleSelected = (data: any) => {
@@ -109,17 +110,20 @@ const setUserStats = () => {
         {
             title: "Followers",
             key: "followers",
-            count: !loadFollowers?.value ? followersList?.value.length : 0
+            count: !loadFollowers?.value ? totalFollowers?.value : 0
+            // count: !loadFollowers?.value ? followersList?.value.length : 0
         },
         {
             title: "Following",
             key: "following",
-            count: !loadFollowings?.value ? followingsList?.value.length : 0
+            count: !loadFollowings?.value ? totalFollowings?.value : 0
+            // count: !loadFollowings?.value ? followingsList?.value.length : 0
         },
         {
             title: "Pods",
             key: "stories",
-            count: !loadingUserStories?.value ? userStoriesList?.value?.length : 0
+            count: !loadingUserStories?.value ? totalPods?.value : 0
+            // count: !loadingUserStories?.value ? userStoriesList?.value?.length : 0
         },
         {
             title: "Referrals",
