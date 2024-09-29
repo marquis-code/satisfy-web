@@ -3,7 +3,7 @@
       <!-- <div v-if="users.length">
         <UsersTableList :usersList="users" :loadingUsers="loading" :pagination="pagination" />
       </div> -->
-      <UsersTableList v-if="followingsList?.length && !loading" :usersList="followingsList" :loadingUsers="loading" :pagination="pagination" />
+      <UsersTableList v-if="followingsList?.length && !loading" :usersList="followingsList.filter(Boolean)" :loadingUsers="loading" :pagination="pagination" />
       <CorePagination :total="pagination.total" :page="pagination.page" :perPage="pagination.perPage"
         :pages="pagination.pages" @page-changed="handlePageChange" />
       <CoreEmptyState v-if="followingsList.length <= 0 && !loading" title="No Followings available" desc="">

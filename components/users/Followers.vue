@@ -2,7 +2,7 @@
   <main>
     <!-- <div v-if="users.length"> -->
       <!-- <UsersTableList :usersList="users" :loadingUsers="loading" :pagination="pagination" /> -->
-      <UsersTableList v-if="followersList?.length && !loading" :usersList="followersList" :loadingUsers="loading" :pagination="pagination" />
+      <UsersTableList v-if="followersList?.length && !loading" :usersList="followersList.filter(Boolean)" :loadingUsers="loading" :pagination="pagination" />
       <CorePagination :total="pagination.total" :page="pagination.page" :perPage="pagination.perPage"
         :pages="pagination.pages" @page-changed="handlePageChange" />
     <!-- </div> -->

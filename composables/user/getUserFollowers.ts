@@ -19,7 +19,7 @@ export const useFetchFollowers = () => {
         pagination.value
       );
       followersList.value = response?.data?.result || [];
-      // console.log(followersList)
+      // console.log(followersList.value)
       pagination.value = response.data.metadata;
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {

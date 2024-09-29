@@ -22,7 +22,7 @@ export const useFetchUserStories = () => {
     try {
       const response = await storyApiFactory.getStoryByUserId(route.params.id || userId, queryObj.value, pagination.value);
       userStoriesList.value = response?.data?.result ?? [];
-      console.log(userStoriesList.value )
+      // console.log(userStoriesList.value )
       pagination.value = response.data.metadata;
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
