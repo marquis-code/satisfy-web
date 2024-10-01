@@ -1,6 +1,6 @@
 <template>
-  <!-- <div class="grid grid-cols-1 gap-y-10 xl:space-y-0 gap-4 xl:grid-cols-3 lg:gap-8" style="height: 600px;"> -->
-    <div class="grid lg:grid-cols-3 lg:gap-8 lg:space-y-0 gap-4" style="height: 600px;">
+  <div class="grid grid-cols-1 gap-y-10 xl:space-y-0 gap-4 xl:grid-cols-3 lg:gap-8" style="height: 600px;">
+    <!-- <div class="grid lg:grid-cols-3 lg:gap-8 lg:space-y-0 gap-4" style="height: 600px;"> -->
     <div class="rounded-lg lg:col-span-2 h-full border pt-6">
       <fieldset class="pl-6" >
         <legend class="text-sm font-semibold leading-6 text-gray-900">Chart Statistics Type</legend>
