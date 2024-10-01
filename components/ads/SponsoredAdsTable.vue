@@ -30,20 +30,25 @@
             class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-10 sm:px-6 xl:px-8">
             <dt class="text-sm font-medium leading-6 text-gray-500">Total Clicks</dt>
             <dd class="text-xs font-medium text-rose-600">+54.02%</dd>
-            <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">200</dd>
+            <!-- <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">200</dd> -->
+            <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">
+              {{ adsDashboardTotals.clicks }}</dd>
+
           </div>
           <div
             class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-10 sm:px-6 xl:px-8">
             <dt class="text-sm font-medium leading-6 text-gray-500">Total Impressions</dt>
             <dd class="text-xs font-medium text-gray-700">-1.39%</dd>
-            <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">300</dd>
+            <!-- <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">300</dd> -->
+            <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">
+              {{ adsDashboardTotals.impressions }}</dd>
           </div>
           <!-- <div
             class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 text-white bg-[#00A1C1] px-4 py-6 sm:px-6 xl:px-8">
             <h1 class="text-xl font-semibold">Create new Banner Ads</h1>
             <p class="text-sm">Give your business the visibility it need to grow</p>
           </div> -->
-          <div  @click="handleAds('create')"
+          <div @click="handleAds('create')"
             class="cursor-pointer flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 text-white bg-[#00A1C1] px-4 py-6 sm:px-6 xl:px-8">
             <h1 class="text-xl font-semibold">Create new Banner Ads</h1>
             <p class="text-sm">Give your business the visibility it need to grow</p>
@@ -166,10 +171,40 @@
             </div> -->
       <div class="mt-8 flow-root">
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div v-if="paginatedAds.length && !loading" class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <div v-if="paginatedAds.length && !loading" class="inline-block  min-w-full py-2 align-middle sm:px-6 lg:px-8">
+            <div class="mb-4 flex justify-end mr-6">
+              <!-- <label for="sortSelect" class="block text-sm font-medium text-gray-700">Sort by:</label> -->
+              <select class="text-sm font-semibold text-gray-900" id="sortSelect" v-model="sortKey" @change="applySorting">
+                <option class="text-sm font-semibold text-gray-900" value="clientName">Client Name (A-Z)</option>
+                <option class="text-sm font-semibold text-gray-900" value="clientNameDesc">Client Name (Z-A)</option>
+                <option class="text-sm font-semibold text-gray-900" value="status">Status</option>
+                <option class="text-sm font-semibold text-gray-900" value="startDate">Start Date</option>
+                <option class="text-sm font-semibold text-gray-900" value="endDate">End Date</option>
+                <option class="text-sm font-semibold text-gray-900" value="createdAt">Date Created</option>
+              </select>
+            </div>
+
             <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
               <table class="min-w-full divide-y divide-gray-300">
                 <thead class="bg-gray-50">
+                  <tr>
+                    <th scope="col" class="px-3 py-3.5 pl-4 text-left text-sm font-semibold text-gray-900">S/N</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                      Client Name</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">File Upload</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Ads Link</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Hits</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Start date</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">End date</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Date Created</th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                      <span class="sr-only">Edit</span>
+                    </th>
+                  </tr>
+                </thead>
+
+                <!-- <thead class="bg-gray-50">
                   <tr>
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
                       Client Name</th>
@@ -184,12 +219,18 @@
                       <span class="sr-only">Edit</span>
                     </th>
                   </tr>
-                </thead>
+                </thead> -->
                 <tbody class="divide-y divide-gray-200 bg-white">
                   <tr v-for="(ads, idx) in paginatedAds" :key="idx">
+                    <td class="whitespace-nowrap  text-sm font-medium text-gray-900 sm:pl-4">
+                      {{ (currentPage - 1) * itemsPerPage + (idx + 1) }}</td>
                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                       {{ ads.clientName ?? 'Nil' }}</td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <!-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      <DashboardImageZoom type="ads" v-if="ads.image" class="rounded-lg h-10 w-10" :src="ads.image" />
+                      <span v-else>Nil</span>
+                    </td> -->
+                    <td class="whitespace-nowrap px-3 py-4 pl-6 pr-9 text-sm text-gray-500">
                       <DashboardImageZoom type="ads" v-if="ads.image" class="rounded-lg h-10 w-10" :src="ads.image" />
                       <span v-else>Nil</span>
                     </td>
@@ -278,6 +319,8 @@
         </div>
       </div>
 
+
+
     </div>
 
     <CoreSlideOver :show="showSlideOver" @update:show="closeSideModal" :title="computedSlideOverHeader.title"
@@ -294,22 +337,73 @@
 import { formatDateTime } from '@/utils/generateDate'
 import { useGetAllSponsoredAds } from '@/composables/sponsored-ads/fetch'
 import { useDeleteSponsoredAds } from '@/composables/sponsored-ads/delete'
+import { useGetAdsDashboardTotal } from '@/composables/sponsored-ads/adsDashboard';
 const { deleteSponsoredAds, loading: deleting } = useDeleteSponsoredAds()
 const { getAllSponsoredAds, ads: adsList, loading } = useGetAllSponsoredAds()
+const { getAdsDahboardTotals, adsDashboardTotals, loading: showing } = useGetAdsDashboardTotal()
 const showSlideOver = ref(false)
 const selectedAds = ref({}) as Record<string, any>
 const route = useRoute()
 const router = useRouter()
 getAllSponsoredAds()
 
+onMounted(() => {
+  getAdsDahboardTotals();
+});
+
 const itemsPerPage = 10;
 const currentPage = ref(1);
 
+//new
+const sortKey = ref('clientName'); 
+const sortOrder = ref('asc'); 
+
+const sortedAds = computed(() => {
+  const sorted = [...adsList.value].sort((a, b) => {
+    let comparison = 0;
+
+    switch (sortKey.value) {
+      case 'clientName':
+        comparison = a.clientName.localeCompare(b.clientName);
+        break;
+      case 'clientNameDesc':
+        comparison = b.clientName.localeCompare(a.clientName);
+        break;
+      case 'status':
+        comparison = a.status.localeCompare(b.status);
+        break;
+      case 'startDate':
+        comparison = new Date(a.startDate) - new Date(b.startDate);
+        break;
+      case 'endDate':
+        comparison = new Date(a.endDate) - new Date(b.endDate);
+        break;
+      case 'createdAt':
+        comparison = new Date(a.createdAt) - new Date(b.createdAt);
+        break;
+      default:
+        break;
+    }
+
+    return comparison;
+  });
+  return sorted;
+});
+
+
+
 // Computed property to get paginated data
+
+// const paginatedAds = computed(() => {
+//   const start = (currentPage.value - 1) * itemsPerPage;
+//   const end = start + itemsPerPage;
+//   return adsList.value.slice(start, end);
+// });
+
 const paginatedAds = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage;
   const end = start + itemsPerPage;
-  return adsList.value.slice(start, end);
+  return sortedAds.value.slice(start, end);
 });
 
 // Total pages calculation

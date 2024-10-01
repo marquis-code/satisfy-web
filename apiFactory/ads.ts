@@ -20,4 +20,8 @@ export const adsApiFactory = {
   $_delete_ads(id: string | number) {
     return axiosInstance.delete(`/adverts/${id}`);
   },
+
+  $_fetch_dashboard_totals(metaObj: any) {
+    return axiosInstance.get(`/adverts/dashboard-totals?showAll=${metaObj.showAll}&startDate=${metaObj.startDate}&endDate=${metaObj.endDate}`);
+  }
 };

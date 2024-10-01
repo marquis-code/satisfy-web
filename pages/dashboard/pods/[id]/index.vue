@@ -1,4 +1,4 @@
-<template>
+v<template>
     <main>
         <div class="px-2 sm:px-4 lg:px-6 space-y-4">
             <div>
@@ -14,10 +14,12 @@
                             <div class="flex-auto pl-6 pt-6">
                                 <dt class="text-sm font-semibold leading-6 text-gray-900">Author Details</dt>
                                 <dd class="mt-1 text-am font-semibold leading-6 text-gray-900">
-                                    <DashboardImageZoom v-if="story?.user?.profilePicture" class="h-10 w-10" :src="story?.user?.profilePicture" />
-                                    <div v-else class="h-10 w-10 rounded-full p-2 bg-gray-500 text-white flex justify-center items-center">
+                                    <DashboardImageZoom v-if="story?.user?.profilePicture" class="h-10 w-10"
+                                        :src="story?.user?.profilePicture" />
+                                    <div v-else
+                                        class="h-10 w-10 rounded-full p-2 bg-gray-500 text-white flex justify-center items-center">
                                         {{ generateInitials(story?.user?.fname, story?.user?.lname) }}
-                                      </div>
+                                    </div>
                                 </dd>
                             </div>
                             <div class="mt-6 flex w-full flex-none gap-x-4 border-t border-gray-900/5 px-6 pt-6">
@@ -32,7 +34,7 @@
                                 </dt>
                                 <dd class="text-sm font-medium leading-6 text-gray-900">
                                     <NuxtLink :to="`/dashboard/users/${story.user.id}`" class="underline"> {{
-                    story?.user?.fname }}
+                                        story?.user?.fname }}
                                         {{ story?.user?.lname }}</NuxtLink>
                                 </dd>
                             </div>
@@ -175,13 +177,13 @@
                         <div class="sm:pr-4">
                             <dt class="inline text-gray-500">Comments Count:</dt>
                             <dd class="inline text-gray-700 ml-2"><time datetime="2023-23-01">{{ story?.commentsCount ||
-                    'Nil'
+                                'Nil'
                                     }}</time></dd>
                         </div>
                         <div class="mt-2 sm:mt-0 sm:pl-4">
                             <dt class="inline text-gray-500">Total Views Count:</dt>
                             <dd class="inline text-gray-700 ml-2"><time datetime="2023-31-01">{{ story?.totalViewsCount
-                    || 'Nil'
+                                || 'Nil'
                                     }}</time></dd>
                         </div>
                     </dl>
@@ -189,13 +191,13 @@
                         <div class="sm:pr-4">
                             <dt class="inline text-gray-500">Reactions count:</dt>
                             <dd class="inline text-gray-700 ml-2"><time datetime="2023-23-01">{{ story?.reactionsCount
-                    || 'Nil'
+                                || 'Nil'
                                     }}</time></dd>
                         </div>
                         <div class="mt-2 sm:mt-0 sm:pl-4">
                             <dt class="inline text-gray-500">Created At:</dt>
                             <dd class="inline text-gray-700 ml-2"><time datetime="2023-31-01">{{ story?.createdAt ||
-                    'Nil'
+                                'Nil'
                                     }}</time></dd>
                         </div>
                     </dl>
@@ -205,26 +207,29 @@
                             <dd class="inline text-gray-700 ml-2">
                                 <!-- <img :src="story?.coverImage" class="h-10 w-10 rounded-full object-cover object-center"
                                     alt="avatar" /> -->
-                                    <DashboardImageZoom v-if="story.coverImage" class="h-10 w-10" :src="story.coverImage" />
-                                    <div v-else class="h-10 w-10 rounded-full p-2 bg-gray-500 text-white flex justify-center items-center">
-                                        {{ generateInitials(story?.user?.fname, story?.user?.lname) }}
-                                      </div>
+                                <DashboardImageZoom v-if="story.coverImage" class="h-10 w-10" :src="story.coverImage" />
+                                <div v-else
+                                    class="h-10 w-10 rounded-full p-2 bg-gray-500 text-white flex justify-center items-center">
+                                    {{ generateInitials(story?.user?.fname, story?.user?.lname) }}
+                                </div>
                             </dd>
                         </div>
                         <div class="mt-2 sm:mt-0 sm:pl-4">
                             <dt class="inline text-gray-500">Slides Count:</dt>
                             <dd class="inline text-gray-700 ml-2"><time datetime="2023-31-01">{{ story?.slidesCount ||
-                    'Nil'
+                                'Nil'
                                     }}</time></dd>
                         </div>
                     </dl>
                     <div class="sm:flex sm:items-center pt-4">
                         <div class="sm:flex-auto">
                             <h1 class="text-base font-semibold leading-6 text-gray-900">Slides</h1>
-                            <p class="mt-2 text-sm text-gray-700">A list of all the stori slides.</p>
+                            <!-- <p class="mt-2 text-sm text-gray-700">A list of all the stori slides.</p> -->
+                            <p class="mt-2 text-sm text-gray-700">Stori slides.</p>
                         </div>
                     </div>
-                    <div class="border border-gray-300 rounded-lg bg-white shadow mt-3">
+
+                    <!-- <div class="border border-gray-300 rounded-lg bg-white shadow mt-3">
                         <table class="min-w-full divide-y divide-gray-300">
                             <thead>
                                 <tr>
@@ -262,8 +267,8 @@
                                         <div v-else class="h-10 w-10 rounded-full p-2 bg-gray-500 text-white flex justify-center items-center">
                                             {{ generateInitials(story?.user?.fname, story?.user?.lname) }}
                                           </div>
-                                        <!-- <img :src="item.coverImage"
-                                            class="h-10 w-10 rounded-full object-cover object-center" alt="avatar" /> -->
+                                        <img :src="item.coverImage"
+                                            class="h-10 w-10 rounded-full object-cover object-center" alt="avatar" />
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                         <div class="truncate font-medium text-gray-900">{{ `${item.title.slice(0,
@@ -290,7 +295,16 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div> -->
+
+
+                    <swiper class="mt-4 shadow-lg rounded-sm  bg-gray-50 border-gray-600 p-4" :modules="modules"  :slides-per-view="1" navigation @swiper="onSwiper"
+                        @slideChange="onSlideChange">
+                        <swiper-slide v-for="(item, idx) in story.slides" :key="idx">
+                            <StoriSlides :item="item" :story="story" />
+                        </swiper-slide>
+                    </swiper>
+
                 </div>
             </div>
             <LoadingSpinner v-if="loading && !Object.keys(story).length" />
@@ -300,11 +314,27 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
+import StoriSlides from '@/components/users/StoriSlides.vue';
 import { useFetchStoryById } from '@/composables/story/getStoryById';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/swiper-bundle.css';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 const { fetchStory, story, loading } = useFetchStoryById()
 definePageMeta({
     layout: 'dashboard'
 })
+
+
+const modules = [Navigation, Pagination, Scrollbar, A11y];
+
+const onSwiper = (swiper) => {
+    console.log(swiper);
+};
+
+const onSlideChange = () => {
+    console.log('slide change');
+};
+
 
 const selectedSlide = ref({}) as Record<string, any>
 
@@ -325,11 +355,29 @@ const computedTagList = computed(() => {
 })
 
 const generateInitials = (fname: string, lname: string) => {
-  return `${fname.charAt(0).toUpperCase()}${lname.charAt(0).toUpperCase()}`;
+    return `${fname.charAt(0).toUpperCase()}${lname.charAt(0).toUpperCase()}`;
 };
 </script>
 
-<style scoped>
+<style >
+.swiper-button-prev, .swiper-button-next {
+    color: #000 !important;
+    height: auto !important;
+    width: auto !important;
+    border-radius: 50%;
+}
+.swiper-button-prev::after {
+    content: '<';
+    font-size: 30px; 
+    font-weight: 700;
+}
+
+.swiper-button-next::after {
+    content: '>';
+    font-size: 30px; 
+    font-weight: 700;
+}
+
 @media (max-width: 1024px) {
     .lg\:sticky {
         position: static !important;
