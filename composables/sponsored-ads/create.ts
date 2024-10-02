@@ -13,10 +13,10 @@ export const useCreateSponsoredAds = () => {
     endDate: "",
     status: "active",
     // status: "",
-    userId: "",
+    // userId: "",
     // userId: generateUUID(),
     audience: "auto",
-    amountPaid: 0,
+    amountPaid: "0",
     countryCode: "NG",
     sponsoredAdCategories: [],
   });
@@ -50,7 +50,7 @@ export const useCreateSponsoredAds = () => {
     payload.value.startDate = data.startDate;
     payload.value.endDate = data.endDate;
     payload.value.status  = data.status
-    payload.value.userId = data.userId ;
+    // payload.value.userId = data.userId ;
     payload.value.audience = data.audience || "auto";
     payload.value.amountPaid = data.amountPaid;
     payload.value.countryCode = data.countryCode || payload.value.countryCode;
