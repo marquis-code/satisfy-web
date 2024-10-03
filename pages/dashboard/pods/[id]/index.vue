@@ -154,7 +154,56 @@ v<template>
                 </div>
                 <div
                     class="-mx-4 px-4 py-8 shadow-sm ring-1 ring-gray-900/5 sm:mx-0 sm:rounded-lg sm:px-8 sm:pb-14 lg:col-span-2 lg:row-span-2 lg:row-end-2 xl:px-16 xl:pb-20 xl:pt-16">
-                    <h2 class="text-base font-semibold leading-6 text-gray-900">Story Details</h2>
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-base font-semibold leading-6 text-gray-900">Story Details</h2>
+                        <div>
+                            <button @click="toggleDropdown"
+                                class="inline-flex items-center text-sm font-medium text-[#667185] hover:text-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24"
+                                    fill="none" stroke="#4a4a4a" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="1"></circle>
+                                    <circle cx="12" cy="5" r="1"></circle>
+                                    <circle cx="12" cy="19" r="1"></circle>
+                                </svg>
+                            </button>
+
+                            <div  v-if="isDropdownOpen"
+                                class="absolute z-50  bg-white border border-gray-200 rounded-md shadow-lg">
+                                <ul class="py-1 text-sm text-gray-700">
+                                    <li>
+                                        <a @click.prevent="handleSwitchToOriginal(story)" href="#"
+                                            class="flex items-center gap-x-2 font-medium px-4 py-2 hover:bg-gray-100 text-start">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21"
+                                                viewBox="0 0 24 24" fill="none" stroke="#417505" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M17 2.1l4 4-4 4" />
+                                                <path d="M3 12.2v-2a4 4 0 0 1 4-4h12.8M7 21.9l-4-4 4-4" />
+                                                <path d="M21 11.8v2a4 4 0 0 1-4 4H4.2" />
+                                            </svg>
+                                            {{ story?.isOriginal ? 'Remove From storipod originals' : 'Make storipod original' }} </a>
+                                    </li>
+                                    <li>
+                                        <a @click.prevent="handleDeleteStory(story.id)" href="#"
+                                            class="flex items-center gap-x-2 font-medium text-red-600 px-4 py-2 hover:bg-gray-100 text-start">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M16.25 4.58301L15.9152 10.0048M3.75 4.58301L4.25384 12.937C4.38287 15.0765 4.4474 16.1463 4.98223 16.9155C5.24667 17.2958 5.58733 17.6169 5.98254 17.8582C6.54196 18.1997 7.23423 18.3023 8.33333 18.333"
+                                                    stroke="#326543" stroke-width="1.5" stroke-linecap="round" />
+                                                <path d="M16.6654 12.5L10.832 18.3329M16.6654 18.3333L10.832 12.5004"
+                                                    stroke="#326543" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M2.5 4.58366H17.5M13.3797 4.58366L12.8109 3.4101C12.433 2.63054 12.244 2.24076 11.9181 1.99767C11.8458 1.94374 11.7693 1.89578 11.6892 1.85424C11.3283 1.66699 10.8951 1.66699 10.0287 1.66699C9.14067 1.66699 8.69667 1.66699 8.32973 1.86209C8.24842 1.90533 8.17082 1.95524 8.09774 2.0113C7.76803 2.26424 7.58386 2.66828 7.21551 3.47638L6.71077 4.58366"
+                                                    stroke="#326543" stroke-width="1.5" stroke-linecap="round" />
+                                            </svg>
+                                            Delete pod</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                     <dl class="mt-6 grid grid-cols-1 text-sm leading-6 sm:grid-cols-2">
                         <div class="sm:pr-4">
                             <dt class="inline text-gray-500">Title:</dt>
@@ -298,10 +347,10 @@ v<template>
                     </div> -->
 
 
-                    <swiper class="mt-4 shadow-lg rounded-sm  bg-gray-50 border-gray-600 p-4" :modules="modules"  :slides-per-view="1" navigation @swiper="onSwiper"
-                        @slideChange="onSlideChange">
+                    <swiper class="mt-4 shadow-lg rounded-sm  bg-gray-50 border-gray-600 p-4" :modules="modules"
+                        :slides-per-view="1" navigation @slideChange="handleSlideChange">
                         <swiper-slide v-for="(item, idx) in story.slides" :key="idx">
-                            <StoriSlides :item="item" :story="story" />
+                            <StoriSlides :item="item" :story="story" :is-active="activeSlide === idx" />
                         </swiper-slide>
                     </swiper>
 
@@ -316,25 +365,49 @@ v<template>
 import { useRouter } from 'vue-router';
 import StoriSlides from '@/components/users/StoriSlides.vue';
 import { useFetchStoryById } from '@/composables/story/getStoryById';
+import { useDeleteStory } from "@/composables/story/deleteUserStory";
+import { useFetchSlideComments } from '@/composables/story/getStorySlideComments';
+import { useSetOriginal } from '@/composables/story/setOriginal'
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 const { fetchStory, story, loading } = useFetchStoryById()
+const { deleteStory } = useDeleteStory();
+const { setOriginal, setPayloadObj} = useSetOriginal()
+
+
+
 definePageMeta({
     layout: 'dashboard'
 })
 
+const isDropdownOpen = ref(false);
+
+const toggleDropdown = () => {
+    isDropdownOpen.value = !isDropdownOpen.value
+}
+
+const handleDeleteStory = (id: any) => {
+  deleteStory(id);
+};
+
+const handleSwitchToOriginal = (payloadObj: any) => {
+  const payload = ref({
+    isOriginal: !payloadObj.isOriginal,
+    storyId: payloadObj.id
+  });
+  setPayloadObj(payload)
+  setOriginal()
+}
+
+
+const activeSlide = ref(0);
+
+const handleSlideChange = (swiper) => {
+    activeSlide.value = swiper.activeIndex;
+};
 
 const modules = [Navigation, Pagination, Scrollbar, A11y];
-
-const onSwiper = (swiper) => {
-    console.log(swiper);
-};
-
-const onSlideChange = () => {
-    console.log('slide change');
-};
-
 
 const selectedSlide = ref({}) as Record<string, any>
 
@@ -359,22 +432,25 @@ const generateInitials = (fname: string, lname: string) => {
 };
 </script>
 
-<style >
-.swiper-button-prev, .swiper-button-next {
+<style>
+.swiper-button-prev,
+.swiper-button-next {
     color: #000 !important;
     height: auto !important;
     width: auto !important;
-    border-radius: 50%;
+    border: none !important;
+    outline: none !important;
 }
+
 .swiper-button-prev::after {
     content: '<';
-    font-size: 30px; 
+    font-size: 30px;
     font-weight: 700;
 }
 
 .swiper-button-next::after {
     content: '>';
-    font-size: 30px; 
+    font-size: 30px;
     font-weight: 700;
 }
 

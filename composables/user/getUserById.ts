@@ -9,6 +9,7 @@ export const useFetchUserById = () => {
     try {
       const response = await userApiFactory.getUserById(userId);
       user.value = response.data;
+      // console.log('user', user.value)
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
         autoClose: 5000,
