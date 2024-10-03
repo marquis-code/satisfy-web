@@ -20,6 +20,7 @@ export const useFetchStories = () => {
       const response = await storyApiFactory.getAllStories(queryObj.value, pagination.value);
       storiesList.value = response?.data?.result || [];
       pagination.value = response.data.metadata;
+      console.log(storiesList.value)
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
         autoClose: 5000,

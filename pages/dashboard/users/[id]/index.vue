@@ -68,8 +68,10 @@ import { useFetchFollowings } from '@/composables/user/getUserFollowings'
 import { useFetchFollowers } from '@/composables/user/getUserFollowers'
 import { useFetchUserById } from '@/composables/user/getUserById'
 import { useFetchUserStories } from '@/composables/user/fetchUserStories'
-const { fetchUserStories, userStoriesList, loading: loadingUserStories, pagination: storyPagination, queryObj, totalPods } = useFetchUserStories()
 import { useFetchReferalls } from '@/composables/user/getReferrals'
+import { useFetchUserSummary } from '@/composables/user/getUserSummary';
+
+const { fetchUserStories, userStoriesList, loading: loadingUserStories, pagination: storyPagination, queryObj, totalPods } = useFetchUserStories()
 const { fetchFollowings, followingsList, pagination: followingsPagination, loading: loadFollowings, totalFollowings } = useFetchFollowings()
 const { fetchFollowers, followersList, pagination, loading: loadFollowers, totalFollowers } = useFetchFollowers()
 const { fetchUser, user, loading } = useFetchUserById()
@@ -135,16 +137,26 @@ const setUserStats = () => {
             key: "views",
             count: user?.value?.total_views_count ?? 0
         },
+        // {
+        //     title: "Reactions",
+        //     key: "reactions",
+        //     count: user?.value?.reactions_count ?? 0
+        // },
         {
-            title: "Reactions",
-            key: "reactions",
+            title: "Wallet",
+            key: "wallet",
             count: user?.value?.reactions_count ?? 0
         },
         {
-            title: "Estimated Payout",
-            key: "estimated_payout",
+            title: "Payout",
+            key: "payout",
             count: user?.value?.estimatedPayout || 0,
         }
+        // {
+        //     title: "Estimated Payout",
+        //     key: "estimated_payout",
+        //     count: user?.value?.estimatedPayout || 0,
+        // }
     ]
 }
 

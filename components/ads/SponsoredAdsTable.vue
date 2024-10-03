@@ -170,19 +170,32 @@
                 </div>
             </div> -->
       <div class="mt-8 flow-root">
+        <div class="flex items-center justify-end gap-x-6 mb-5">
+          <div class="space-x-2">
+            <label for="sortBy" class="text-sm text-gray-700 font-medium">Sort By:</label>
+            <select id="sortBy" v-model="sortKey" @change="applySorting"
+              class="h-10 rounded border-gray-300 text-sm">
+              <option value="clientName">Client Name</option>
+              <option value="status">Status</option>
+              <option value="startDate">Start Date</option>
+              <option value="endDate">End Date</option>
+              <option value="createdAt">Date Created</option>
+            </select>
+          </div>
+          <div class="space-x-2">
+            <label for="orderBy" class="text-sm text-gray-700 font-medium">Order by:</label>
+            <select id="orderBy" v-model="sortOrder" @change="applySorting"
+              class="h-10 rounded border-gray-300 text-sm">
+              <option value="asc">Ascending Order</option>
+              <option value="desc">Descending Order</option>
+            </select>
+          </div>
+        </div>
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div v-if="paginatedAds.length && !loading" class="inline-block  min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <div class="mb-4 flex justify-end mr-6">
-              <!-- <label for="sortSelect" class="block text-sm font-medium text-gray-700">Sort by:</label> -->
-              <select class="text-sm font-semibold text-gray-900" id="sortSelect" v-model="sortKey" @change="applySorting">
-                <option class="text-sm font-semibold text-gray-900" value="clientName">Client Name (A-Z)</option>
-                <option class="text-sm font-semibold text-gray-900" value="clientNameDesc">Client Name (Z-A)</option>
-                <option class="text-sm font-semibold text-gray-900" value="status">Status</option>
-                <option class="text-sm font-semibold text-gray-900" value="startDate">Start Date</option>
-                <option class="text-sm font-semibold text-gray-900" value="endDate">End Date</option>
-                <option class="text-sm font-semibold text-gray-900" value="createdAt">Date Created</option>
-              </select>
-            </div>
+          <div v-if="paginatedAds.length && !loading"
+            class="inline-block  min-w-full py-2 align-middle sm:px-6 lg:px-8">
+
+
 
             <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
               <table class="min-w-full divide-y divide-gray-300">
@@ -195,6 +208,7 @@
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Ads Link</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Hits</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Amount Paid</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Start date</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">End date</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Date Created</th>
@@ -244,6 +258,9 @@
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {{ ads.hits ?? 'Nil' }}
+                    </td>
+                    <td class="whitespace-nowrap pl-5 pr-20 py-4text-sm text-gray-500">
+                      {{ ads.amountPaid ?? 'Nil' }}
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       <span v-if="ads?.startDate">
@@ -355,8 +372,8 @@ const itemsPerPage = 10;
 const currentPage = ref(1);
 
 //new
-const sortKey = ref('clientName'); 
-const sortOrder = ref('asc'); 
+const sortKey = ref('clientName');
+const sortOrder = ref('asc');
 
 const sortedAds = computed(() => {
   const sorted = [...adsList.value].sort((a, b) => {
@@ -365,9 +382,6 @@ const sortedAds = computed(() => {
     switch (sortKey.value) {
       case 'clientName':
         comparison = a.clientName.localeCompare(b.clientName);
-        break;
-      case 'clientNameDesc':
-        comparison = b.clientName.localeCompare(a.clientName);
         break;
       case 'status':
         comparison = a.status.localeCompare(b.status);
@@ -385,10 +399,14 @@ const sortedAds = computed(() => {
         break;
     }
 
-    return comparison;
+    return sortOrder.value === 'asc' ? comparison : -comparison;
   });
   return sorted;
 });
+
+const applySorting = () => {
+  sortedAds.value; 
+};
 
 
 

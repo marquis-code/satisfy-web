@@ -5,11 +5,11 @@ export const useFetchStoryById = () => {
   const storyId = useRoute().params.id;
   const loading = ref(false);
   const fetchStory = async () => {
-    loading.value = true;
+    loading.value = true; 
     try {
       const response = await storyApiFactory.getStoryById(storyId);
       story.value = response.data;
-      // console.log(story.value.slides)
+      console.log('hm', story.value)
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
         autoClose: 5000,
