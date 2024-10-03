@@ -16,7 +16,7 @@ export const useCreateSponsoredAds = () => {
     // userId: "",
     // userId: generateUUID(),
     audience: "auto",
-    amountPaid: "0",
+    amountPaid: 0,
     countryCode: "NG",
     sponsoredAdCategories: [],
   });
