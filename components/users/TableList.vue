@@ -17,15 +17,16 @@
         <table class="min-w-full table-fixed divide-y divide-gray-300">
           <thead class="">
             <tr>
-              <th scope="col" class="relative px-7 sm:w-12 sm:px-6">
+              <th scope="col" class="px-6 py-3.5 pl-4 text-left text-sm font-semibold text-gray-900">S/N</th>
+              <!-- <th scope="col" class="relative px-7 sm:w-12 sm:px-6">
                 <input type="checkbox"
                   class="absolute left-4 top-1/2 -mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                   :checked="indeterminate || selectedPeople.length === usersList.length" :indeterminate="indeterminate"
                   @change="selectedPeople = $event.target.checked ? (usersList || []).map((p) => p?.email) : []"
 />
-              </th>
+              </th> -->
               <th scope="col" class="py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">
-                Avatar
+                Avatar 
               </th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                 Username
@@ -50,13 +51,15 @@
           <tbody class="divide-y divide-gray-100 bg-white">
             <tr class="odd:bg-gray-50" v-for="(person, index) in usersList" :key="index"
               :class="[selectedPeople.includes(person.email) && 'bg-gray-50']">
-              <td class="relative px-7 sm:w-12 sm:px-6">
+              <td class="whitespace-nowrap  text-sm font-medium text-gray-900 sm:pl-4">
+                {{ (pagination.page - 1) * pagination.perPage + (index + 1) }}</td>
+              <!-- <td class="relative px-7 sm:w-12 sm:px-6">
                 <div v-if="selectedPeople.includes(person.email)" class="absolute inset-y-0 left-0 w-0.5 bg-indigo-600">
                 </div>
                 <input type="checkbox"
                   class="absolute left-4 top-1/2 -mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                   :value="person.email" v-model="selectedPeople" />
-              </td>
+              </td> -->
               <td :class="[
       'whitespace-nowrap py-4 pr-3 text-xs font-medium',
       selectedPeople.includes(person.email)
@@ -312,6 +315,9 @@ const props = defineProps({
   loadingUsers: {
     type: Boolean,
     default: false,
+  },
+  pagination: {
+    type: Object,
   },
 });
 const formatter = ref({
