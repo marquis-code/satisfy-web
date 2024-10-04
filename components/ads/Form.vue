@@ -271,7 +271,6 @@ const handleCreateSponsoredAds = () => {
     setSponsoredAds(formData);
     createSponsoredAds().then(() => {
         emit('success');
-        console.log('sucesccdxgh')
     }).catch(error => {
         console.error("Error creating sponsored ad:", error);
     });

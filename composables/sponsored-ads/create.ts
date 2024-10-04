@@ -16,7 +16,7 @@ export const useCreateSponsoredAds = () => {
     // userId: "",
     // userId: generateUUID(),
     audience: "auto",
-    amountPaid: "0",
+    amountPaid: 0,
     countryCode: "NG",
     sponsoredAdCategories: [],
   });
@@ -34,7 +34,7 @@ export const useCreateSponsoredAds = () => {
         autoClose: 5000,
         dangerouslyHTMLString: true,
       });
-      console.log('hhbb', error)
+      // console.log('hhbb', error)
       return error;
     } finally {
       loading.value = false;

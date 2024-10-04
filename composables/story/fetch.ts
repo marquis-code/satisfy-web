@@ -1,4 +1,5 @@
 import { storyApiFactory } from "@/apiFactory/story";
+import { ref, computed, watch } from "vue";
 
 export const useFetchStories = () => {
   const storiesList = ref([]) as any;
@@ -7,20 +8,37 @@ export const useFetchStories = () => {
   const queryObj = ref({
     sortBy: 'createdAt',
     orderBy: 'desc'
-  }) as any
+  }) as any;
+
   const pagination = ref({
     page: 1,
     perPage: 10,
     total: 0,
     pages: 0,
   });
+
+  const paginationOriginal = ref({
+    page: 1,
+    perPage: 10,
+    total: 0,
+    pages: 0,
+  });
+
+  const isOriginal = ref<boolean | null>(null);
+
   const fetchStories = async () => {
     loading.value = true;
     try {
-      const response = await storyApiFactory.getAllStories(queryObj.value, pagination.value);
+      const currentPagination = isOriginal.value ? paginationOriginal.value : pagination.value;
+
+      const response = await storyApiFactory.getAllStories(queryObj.value, currentPagination, isOriginal.value);
       storiesList.value = response?.data?.result || [];
-      pagination.value = response.data.metadata;
-      console.log(storiesList.value)
+      
+      if (isOriginal.value) {
+        paginationOriginal.value = response.data.metadata;
+      } else {
+        pagination.value = response.data.metadata;
+      }
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
         autoClose: 5000,
@@ -46,9 +64,9 @@ export const useFetchStories = () => {
   });
 
   watch(
-    () => pagination.value.page,
+    () => (isOriginal.value ? paginationOriginal.value.page : pagination.value.page),
     (newPage) => {
-      setPaginationObj(newPage);
+      setPaginationObj(newPage)
       fetchStories();
     }
   );
@@ -71,8 +89,12 @@ export const useFetchStories = () => {
     }
   );
 
-  const setPaginationObj = (val: any) => {
-    pagination.value.page = val;
+  const setPaginationObj = (val: number) => {
+    if (isOriginal.value) {
+      paginationOriginal.value.page = val;
+    } else {
+      pagination.value.page = val;
+    }
   };
 
   return {
@@ -80,8 +102,10 @@ export const useFetchStories = () => {
     storiesList,
     loading,
     pagination,
+    paginationOriginal,
     searchQuery,
     filteredStories,
-    queryObj
+    queryObj,
+    isOriginal
   };
 };

@@ -8,7 +8,7 @@ export const useGetAllSponsoredAds = () => {
     try {
       const response = await adsApiFactory.$_fetch_ads();
       ads.value = response.data;
-      console.log('ads value:', ads.value)
+      // console.log('ads value:', ads.value)
       return response;
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {

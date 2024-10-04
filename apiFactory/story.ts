@@ -1,9 +1,10 @@
 import { axiosInstance } from "./axios.config";
 
 export const storyApiFactory = { 
-  getAllStories(queryObj: {sortBy: string, orderBy: string}, metadata: { page: number; perPage: number }) {
+  getAllStories(queryObj: {sortBy: string, orderBy: string}, metadata: { page: number; perPage: number }, isOriginal: boolean | null) {
+    const isOriginalParam = isOriginal !== null ? `&isOriginal=${isOriginal}` : '';
     return axiosInstance.get(
-      `/story?sortBy=${queryObj.sortBy}:${queryObj.orderBy}&page=${Number(metadata.page)}&perPage=${Number(metadata.perPage)}`
+      `/story?sortBy=${queryObj.sortBy}:${queryObj.orderBy}&page=${Number(metadata.page)}&perPage=${Number(metadata.perPage)}${isOriginalParam}`
     );
   },
   getStoryByUserId(userId: string | number, queryObj: {sortBy: string, orderBy: string}, metadata: { page: number; perPage: number }) {
