@@ -1,6 +1,7 @@
 <template>
     <main>
-        <div class="rounded-lg border border-gray-200 space-y-6 relative pt-4">
+        <!-- <div class="rounded-lg border border-gray-200 space-y-6 relative pt-4"> -->
+        <div class="rounded-lg border border-gray-200 space-y-2 relative pt-4">
             <div class="flex justify-end items-end pr-4">
                 <button @click="handleDeleteStory(stori.id)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -19,9 +20,9 @@
                     :src="stori?.coverImage" />
                 <img v-else src="@/assets/img/stori.png" class="h-10 w-10 rounded-full" alt="" />
             </div>
-            <div class="mt-1">
+            <div class="mt-1 px-4 w-full">
                 <NuxtLink :to="`/dashboard/pods/${stori.id}`"
-                    class="px-4 underline text-sm text-gray-700 font-semibold">{{
+                    class="underline text-sm text-center text-gray-700 font-semibold">{{
                     stori?.title ?? 'Nil' }}</NuxtLink>
             </div>
             <div class="flex justify-between items-center px-4 pb-14">

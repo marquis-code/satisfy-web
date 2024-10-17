@@ -82,7 +82,7 @@
                 </div>
               </td>
               <td @click="viewStory(stori)" class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
-                <p class="font-medium text-gray-800 no-underline">{{
+                <p class="font-medium text-gray-800 no-underline text-wrap w-64">{{
                   stori?.title || "N/A" }}</p>
               </td>
               <td @click="viewStory(stori)" class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
