@@ -51,7 +51,7 @@
           <div @click="handleAds('create')"
             class="cursor-pointer flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 text-white bg-[#00A1C1] px-4 py-6 sm:px-6 xl:px-8">
             <h1 class="text-xl font-semibold">Create new Banner Ads</h1>
-            <p class="text-sm">Give your business the visibility it need to grow</p>
+            <p class="text-sm">Give your business the visibility it needs to grow</p>
           </div>
         </dl>
       </div>

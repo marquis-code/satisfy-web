@@ -14,7 +14,7 @@
                     :class="[activeTab === 'original' ? 'border-b-4 border-[#0ba9b9] text-gray-800' : 'text-gray-400 group-hover:text-gray-500']"
                     @click="setActiveTab('original')"
                     class="uppercase group cursor-pointer ml-5 inline-flex items-center py-2 px-1 text-xs font-semibold">
-                    <span>Original Pods</span>
+                    <span>Storipod Original</span>
                     <span v-if="activeTab === 'original'"
                         class="font-semibold ml-2 text-[10px] rounded-3xl px-2 py-1.5 bg-[#0ba9b9] text-white">{{
                             paginationOriginal.total }}</span>
@@ -22,7 +22,7 @@
             </nav>
 
         </div>
-        <div class="px-4 sm:px-6 lg:px-8">
+        <div class="px-4 sm:px-6 lg:px-8"> 
             <div class="flow-root mt-2">
                 <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 border-[0.7px] rounded-b-lg">
                     <div v-if="filteredStories.length && !loading">

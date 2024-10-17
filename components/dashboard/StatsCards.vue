@@ -4,48 +4,62 @@
       <div class="flex justify-end items-end">
         <div class="flex items-center gap-3">
           <div>
-            <fieldset>
+            <!-- <fieldset>
               <legend class="sr-only">Notifications</legend>
               <div class="space-y-5">
                 <div class="relative flex items-start">
                   <div class="flex h-6 items-center">
-                    <input :checked="showAll" :value="showAll" v-model="showAll" id="comments" aria-describedby="comments-description" name="comments"
-                      type="checkbox" class="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                    <input :checked="showAll" :value="showAll" v-model="showAll" id="comments"
+                      aria-describedby="comments-description" name="comments" type="checkbox"
+                      class="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                   </div>
                   <div class="ml-3 text-sm leading-6">
-                    <label for="comments" class="font-semibold text-base text-gray-900" alt="Get all statistics data across storipod.">Show All</label>
-                    <!-- <p id="comments-description" class="text-gray-500">Get all statistics data across storipod.</p> -->
+                    <label for="comments" class="font-semibold text-base text-gray-900"
+                      alt="Get all statistics data across storipod.">Show All</label>
+                    <p id="comments-description" class="text-gray-500">Get all statistics data across storipod.</p> \\comment this line out
                   </div>
                 </div>
               </div>
-            </fieldset>
+            </fieldset> -->
+            <select class=" rounded focus:border-none border-gray-300" v-model="selectedRange" @change="onRangeChange">
+              <option value="today">Today</option>
+              <option value="yesterday">Yesterday</option>
+              <option value="this_week">This Week</option>
+              <option value="this_month">This Month</option>
+              <option value="last_7_days">Last 7 Days</option>
+              <option value="last_30_days">Last 30 Days</option>
+              <option value="last_60_days">Last 60 Days</option>
+            </select>
           </div>
-          <div>
-            <CoreDateInput :disabled="showAll" v-model="dateFilter" range placeholder="Filter by date" :disabled-date="() => null"
+          <!-- <div>
+            <CoreDateInput v-model="dateFilter" range placeholder="Filter by date" :disabled-date="() => null"
               clearable />
-          </div>
+          </div> -->
         </div>
       </div>
-      <section v-if="!loading && Object.keys(dashboardSummary).length"
+      <section v-if="!loading && Object.keys(detailedDashboardSummary).length"
         class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div @click="handleSelectedCard(key)" class="flex cursor-pointer justify-center items-center flex-col gap-y-6 rounded-2xl p-4 lg:p-7"
-          v-for="(value, key) in dashboardSummary" :key="key" :class="computedCardColor(key)">
+        <div @click="handleSelectedCard(key)"
+          class="flex cursor-pointer justify-center items-center flex-col gap-y-6 rounded-2xl p-4 lg:p-7"
+          v-for="(value, key) in detailedDashboardSummary" :key="key" :class="computedCardColor(key)">
           <h1 class="font-semibold text-lg">{{ modifyCardTitle(key) }}</h1>
-          <div class="flex items-center flex-col gap-x-4 lg:gap-x-6 mt-3 gap-y-6">
-            <h1 class="text-xl lg:text-2xl font-semibold">{{ value || 0 }}</h1>
+          <div class="flex items-center flex-col gap-x-4 lg:gap-x-6 mt-2 gap-y-3">
+            <h1 class="text-xl lg:text-2xl font-bold">{{ value.total || 0 }}</h1>
             <div class="flex items-center gap-x-2">
-              <img v-if="value.growth >= 0" src="@/assets/icons/dashboard/increase.svg" alt="" />
-              <img v-if="value.growth < 0" src="@/assets/icons/dashboard/decrease.svg" alt="" />
-              <!-- <p class="" :class="[value.growth >= 0 ? 'text-green-600' : 'text-red-600']">
-                                {{ Math.round(value.growth) || 0 }}%
-                            </p> -->
+              <img v-if="parseFloat(value.growth) >= 0" src="@/assets/icons/dashboard/increase.svg" alt="nill" />
+              <img v-if="parseFloat(value.growth) < 0" src="@/assets/icons/dashboard/decrease.svg" alt="" />
+              <p class="" :class="[parseFloat(value.growth) >= 0 ? 'text-green-600' : 'text-red-600']">
+                {{ value.growth || 0 }}
+              </p>
             </div>
+            <p class=" text-gray-700 text-md">{{ formatRange(metaObj.range) }}</p>
+
           </div>
           <!-- <p class="text-[#6E717C] text-sm">Compared from Last Month</p> -->
         </div>
       </section>
       <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-4 lg:gap-8"
-        v-if="loading && !Object.keys(dashboardSummary).length">
+        v-if="loading && !Object.keys(detailedDashboardSummary).length">
         <div v-for="itm in 4" :key="itm" class="h-[200px] bg-slate-300 rounded-2xl animate-pulse"></div>
       </div>
     </div>
@@ -53,26 +67,60 @@
 </template>
 
 <script setup lang="ts">
-import { useFetchDashboardSummary } from '@/composables/dashboard/getDashboardSummary';
+// import { useFetchDashboardSummary } from '@/composables/dashboard/getDashboardSummary';
+import { useFetchDetailedDashboardSummary } from '@/composables/dashboard/getDetailedDashboardSummary';
 const router = useRouter()
 
-const { fetchDashboardSummary, dashboardSummary, loading, metaObj, setFilterData } = useFetchDashboardSummary();
-const dateFilter = ref<any>(null);
+// const { fetchDashboardSummary, dashboardSummary, loading, metaObj, setFilterData } = useFetchDashboardSummary();
+const { fetchDetailedDashboardSummary, detailedDashboardSummary, loading, metaObj, setFilterData, } = useFetchDetailedDashboardSummary();
+// const dateFilter = ref<any>(null);
+const dateFilter = ref<any>([]);
 const showAll = ref<boolean>(true);
 
-// Watch for changes in dateFilter and showAll, then fetch data
-watch([dateFilter, showAll], () => {
+const selectedRange = ref('last_7_days');
+
+const onRangeChange = () => {
   const payload = {
-    startDate: dateFilter?.value?.[0] || metaObj.value.startDate,
-    endDate: dateFilter?.value?.[1] || metaObj.value.endDate,
+    range: selectedRange.value,
+    startDate: dateFilter.value[0] || metaObj.value.startDate,
+    endDate: dateFilter.value[1] || metaObj.value.endDate,
     showAll: showAll.value,
   };
+
   setFilterData(payload);
-  fetchDashboardSummary();
+  fetchDetailedDashboardSummary();
+};
+
+
+watch([dateFilter, showAll], () => {
+  const payload = {
+    range: selectedRange.value,
+    startDate: dateFilter.value[0] || metaObj.value.startDate,
+    endDate: dateFilter.value[1] || metaObj.value.endDate,
+    showAll: showAll.value,
+  };
+
+  setFilterData(payload);
+  fetchDetailedDashboardSummary();
 });
 
+
+// Watch for changes in dateFilter and showAll, then fetch data
+// watch([dateFilter, showAll], () => {
+//   const payload = {
+//     startDate: dateFilter?.value?.[0] || metaObj.value.startDate,
+//     endDate: dateFilter?.value?.[1] || metaObj.value.endDate,
+//     showAll: showAll.value,
+//   };
+//   setFilterData(payload);
+//   // fetchDashboardSummary();
+//   fetchDetailedDashboardSummary();
+// });
+
 // Initial fetch of dashboard summary data
-fetchDashboardSummary();
+// fetchDashboardSummary();
+fetchDetailedDashboardSummary();
+
 
 // Function to modify card titles based on data keys
 const modifyCardTitle = (data: string) => {
@@ -106,18 +154,23 @@ const computedCardColor = (data: string) => {
   }
 };
 
+const formatRange = (range) => {
+  return range.replace(/_/g, ' ')
+};
+
+
 // Define page metadata
 definePageMeta({
   layout: 'dashboard',
 });
 
 const handleSelectedCard = (item: string) => {
-  if(item === 'active_users' || item === 'signups'){
-   router.push('/dashboard/users')
+  if (item === 'active_users' || item === 'signups') {
+    router.push('/dashboard/users')
   }
 
-  if(item === 'story' || item === 'engagement'){
-   router.push('/dashboard/pods')
+  if (item === 'story' || item === 'engagement') {
+    router.push('/dashboard/pods')
   }
 }
 </script>
