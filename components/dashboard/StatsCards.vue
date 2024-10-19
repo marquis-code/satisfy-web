@@ -29,6 +29,8 @@
               <option value="last_7_days">Last 7 Days</option>
               <option value="last_30_days">Last 30 Days</option>
               <option value="last_60_days">Last 60 Days</option>
+              <!-- <option value="this_year">This Year</option>
+              <option value="last_60_days">Last Year</option> -->
             </select>
           </div>
           <!-- <div>

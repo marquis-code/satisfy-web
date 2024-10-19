@@ -26,7 +26,8 @@
                 <input v-model="payload.title" name="title" id="title"
                     class="bg-gray-50 rounded-md w-full outline-none py-3 border-gray-300 border pl-3" type="text" />
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <!-- <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"> -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <div>
                     <fieldset>
                         <legend class="text-sm font-semibold leading-6 text-gray-900">Select upload method
@@ -44,7 +45,7 @@
                 </div>
 
                 <fieldset class="flex flex-wrap gap-3">
-                    <legend class="text-sm font-medium">Select stori background color</legend>
+                    <legend class="text-sm font-medium mb-2">Select stori background color</legend>
 
                     <label v-for="color in colors" :key="color.key" :for="color.key"
                         :style="{ backgroundColor: color.code }"
