@@ -15,14 +15,13 @@
                     @click="setActiveTab('original')"
                     class="uppercase group cursor-pointer ml-5 inline-flex items-center py-2 px-1 text-xs font-semibold">
                     <span>Storipod Original</span>
-                    <span v-if="activeTab === 'original'"
-                        class="font-semibold ml-2 text-[10px] rounded-3xl px-2 py-1.5 bg-[#0ba9b9] text-white">{{
-                            paginationOriginal.total }}</span>
+                    <span class="font-semibold ml-2 text-[10px] rounded-3xl px-2 py-1.5 bg-[#0ba9b9] text-white">{{
+                        paginationOriginal.total }}</span>
                 </div>
             </nav>
 
         </div>
-        <div class="px-4 sm:px-6 lg:px-8"> 
+        <div class="px-4 sm:px-6 lg:px-8">
             <div class="flow-root mt-2">
                 <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 border-[0.7px] rounded-b-lg">
                     <div v-if="filteredStories.length && !loading">
@@ -85,20 +84,24 @@
                         </form>
                         <section v-if="activeTableView === 'list'">
                             <StoriesTableList :storiesList="filteredStories" :loadingUsers="loading"
-                                :pagination="isOriginal ? paginationOriginal : pagination" @selectedStory="handleSelectedStory" />
+                                :pagination="isOriginal ? paginationOriginal : pagination"
+                                @selectedStory="handleSelectedStory" />
                             <CorePagination :total="isOriginal ? paginationOriginal.total : pagination.total"
                                 :page="isOriginal ? paginationOriginal.page : pagination.page"
                                 :perPage="isOriginal ? paginationOriginal.perPage : pagination.perPage"
-                                :pages="isOriginal ? paginationOriginal.pages : pagination.pages" @page-changed="handlePageChange" />
+                                :pages="isOriginal ? paginationOriginal.pages : pagination.pages"
+                                @page-changed="handlePageChange" />
                         </section>
 
                         <section v-if="activeTableView === 'grid'">
                             <StoriesTableGrid :storiesList="filteredStories" :loadingStories="loading"
-                                :pagination="isOriginal ? paginationOriginal : pagination" @selectedStory="handleSelectedStory" />
+                                :pagination="isOriginal ? paginationOriginal : pagination"
+                                @selectedStory="handleSelectedStory" />
                             <CorePagination :total="isOriginal ? paginationOriginal.total : pagination.total"
                                 :page="isOriginal ? paginationOriginal.page : pagination.page"
                                 :perPage="isOriginal ? paginationOriginal.perPage : pagination.perPage"
-                                :pages="isOriginal ? paginationOriginal.pages : pagination.pages" @page-changed="handlePageChange" />
+                                :pages="isOriginal ? paginationOriginal.pages : pagination.pages"
+                                @page-changed="handlePageChange" />
                         </section>
 
                     </div>
@@ -116,7 +119,7 @@
 
 <script setup lang="ts">
 import { useFetchStories } from '@/composables/story/fetch'
-const { fetchStories, storiesList, loading, searchQuery, filteredStories, pagination, paginationOriginal, queryObj, isOriginal } = useFetchStories()
+const { fetchStories, storiesList, loading, searchQuery, filteredStories, pagination, paginationOriginal, queryObj, isOriginal, fetchOriginalStories } = useFetchStories()
 definePageMeta({
     layout: 'dashboard'
 })
@@ -126,17 +129,25 @@ const selectedStories = ref([])
 const activeTableView = ref('list')
 const activeTab = ref('stories')
 
+
+onMounted(() => {
+    fetchStories();
+    fetchOriginalStories();
+});
+
 const setActiveTab = (tab) => {
     activeTab.value = tab;
     if (tab === 'original') {
         isOriginal.value = true;
-        paginationOriginal.value.page = 1; 
+        paginationOriginal.value.page = 1;
+        fetchStories();
     } else {
         isOriginal.value = null;
-        pagination.value.page = 1; 
+        pagination.value.page = 1;
+        fetchStories();
     }
-    fetchStories();  
 };
+
 
 const handleSelectedStory = (data: any) => {
     selectedStory.value = data
@@ -144,11 +155,11 @@ const handleSelectedStory = (data: any) => {
 
 const handlePageChange = (val: number) => {
     if (isOriginal.value) {
-        paginationOriginal.value.page = val;  
+        paginationOriginal.value.page = val;
     } else {
-        pagination.value.page = val;  
+        pagination.value.page = val;
     }
-    fetchStories(); 
+    fetchStories();
 };
 
 fetchStories()
