@@ -6,8 +6,8 @@ export const useFetchStories = () => {
   const loading = ref(false);
   const searchQuery = ref<string>("");
   const queryObj = ref({
-    sortBy: 'createdAt',
-    orderBy: 'desc'
+    sortBy: "createdAt",
+    orderBy: "desc",
   }) as any;
 
   const pagination = ref({
@@ -29,11 +29,17 @@ export const useFetchStories = () => {
   const fetchStories = async () => {
     loading.value = true;
     try {
-      const currentPagination = isOriginal.value ? paginationOriginal.value : pagination.value;
+      const currentPagination = isOriginal.value
+        ? paginationOriginal.value
+        : pagination.value;
 
-      const response = await storyApiFactory.getAllStories(queryObj.value, currentPagination, isOriginal.value);
+      const response = await storyApiFactory.getAllStories(
+        queryObj.value,
+        currentPagination,
+        isOriginal.value
+      );
       storiesList.value = response?.data?.result || [];
-      
+
       if (isOriginal.value) {
         paginationOriginal.value = response.data.metadata;
       } else {
@@ -44,7 +50,26 @@ export const useFetchStories = () => {
         autoClose: 5000,
         dangerouslyHTMLString: true,
       });
-      return error;
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  const fetchOriginalStories = async () => {
+    loading.value = true;
+    try {
+      const response = await storyApiFactory.getAllStories(
+        queryObj.value,
+        paginationOriginal.value,
+        true
+      );
+      paginationOriginal.value = response.data.metadata;
+      storiesList.value = response?.data?.result || [];
+    } catch (error: any) {
+      useNuxtApp().$toast.error(error.message, {
+        autoClose: 5000,
+        dangerouslyHTMLString: true,
+      });
     } finally {
       loading.value = false;
     }
@@ -64,9 +89,10 @@ export const useFetchStories = () => {
   });
 
   watch(
-    () => (isOriginal.value ? paginationOriginal.value.page : pagination.value.page),
+    () =>
+      isOriginal.value ? paginationOriginal.value.page : pagination.value.page,
     (newPage) => {
-      setPaginationObj(newPage)
+      setPaginationObj(newPage);
       fetchStories();
     }
   );
@@ -99,6 +125,7 @@ export const useFetchStories = () => {
 
   return {
     fetchStories,
+    fetchOriginalStories,
     storiesList,
     loading,
     pagination,
@@ -106,6 +133,6 @@ export const useFetchStories = () => {
     searchQuery,
     filteredStories,
     queryObj,
-    isOriginal
+    isOriginal,
   };
 };

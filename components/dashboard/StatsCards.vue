@@ -22,7 +22,8 @@
               </div>
             </fieldset> -->
             <select class=" rounded focus:border-none border-gray-300" v-model="selectedRange" @change="onRangeChange">
-              <option value="today">Today</option>
+              <option value="today">All Time</option>
+              <!-- <option value="today">Today</option> -->
               <option value="yesterday">Yesterday</option>
               <option value="this_week">This Week</option>
               <option value="this_month">This Month</option>
@@ -55,11 +56,25 @@
               </p>
             </div>
             <p class=" text-gray-700 text-md">{{ formatRange(metaObj.range) }}</p>
-
           </div>
           <!-- <p class="text-[#6E717C] text-sm">Compared from Last Month</p> -->
         </div>
       </section>
+
+      <!-- <section v-if="!loading && Object.keys(dashboardSummary).length" class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+  <div 
+    @click="handleSelectedCard(key)"
+    class="flex cursor-pointer justify-center items-center flex-col gap-y-6 rounded-2xl p-4 lg:p-7"
+    v-for="(value, key) in dashboardSummary" 
+    :key="key" 
+    :class="computedCardColor(key)"
+  >
+    <h1 class="font-semibold text-lg">{{ modifyCardTitle(key) }}</h1>
+    <div class="flex items-center flex-col gap-x-4 lg:gap-x-6 mt-2 gap-y-3">
+      <h1 class="text-xl lg:text-2xl font-bold">{{ value }}</h1>
+    </div>
+  </div>
+</section> -->
       <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-4 lg:gap-8"
         v-if="loading && !Object.keys(detailedDashboardSummary).length">
         <div v-for="itm in 4" :key="itm" class="h-[200px] bg-slate-300 rounded-2xl animate-pulse"></div>
@@ -74,12 +89,13 @@ import { useFetchDetailedDashboardSummary } from '@/composables/dashboard/getDet
 const router = useRouter()
 
 // const { fetchDashboardSummary, dashboardSummary, loading, metaObj, setFilterData } = useFetchDashboardSummary();
+// const { fetchDashboardSummary, dashboardSummary, loading: loadingD, metaObj: metaD, setFilterData: setFilterDataD } = useFetchDashboardSummary();
 const { fetchDetailedDashboardSummary, detailedDashboardSummary, loading, metaObj, setFilterData, } = useFetchDetailedDashboardSummary();
 // const dateFilter = ref<any>(null);
 const dateFilter = ref<any>([]);
 const showAll = ref<boolean>(true);
 
-const selectedRange = ref('last_7_days');
+const selectedRange = ref('today');
 
 const onRangeChange = () => {
   const payload = {
@@ -94,17 +110,17 @@ const onRangeChange = () => {
 };
 
 
-watch([dateFilter, showAll], () => {
-  const payload = {
-    range: selectedRange.value,
-    startDate: dateFilter.value[0] || metaObj.value.startDate,
-    endDate: dateFilter.value[1] || metaObj.value.endDate,
-    showAll: showAll.value,
-  };
+// watch([dateFilter, showAll], () => {
+//   const payload = {
+//     startDate: dateFilter.value[0] || metaD.value.startDate,
+//     endDate: dateFilter.value[1] || metaD.value.endDate,
+//     showAll: false,
+//   };
+//   console.log('object', payload)
 
-  setFilterData(payload);
-  fetchDetailedDashboardSummary();
-});
+//   setFilterDataD(payload);
+//   fetchDashboardSummary();
+// });
 
 
 // Watch for changes in dateFilter and showAll, then fetch data
