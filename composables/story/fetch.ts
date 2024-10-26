@@ -42,6 +42,8 @@ export const useFetchStories = () => {
 
       if (isOriginal.value) {
         paginationOriginal.value = response.data.metadata;
+        const totalOriginalStories = response.data.metadata.total;
+        console.log("Total original stories:", totalOriginalStories);
       } else {
         pagination.value = response.data.metadata;
       }
@@ -122,6 +124,28 @@ export const useFetchStories = () => {
       pagination.value.page = val;
     }
   };
+  const totalOriginalStories = ref(0);
+
+  const fetchTotalOriginals = async () => {
+    loading.value = true;
+    try {
+      const pagination = { page: 1, perPage: 1 }; 
+      const response = await storyApiFactory.getAllStories(
+        queryObj.value,
+        pagination,
+        true 
+      );
+      totalOriginalStories.value = response.data.metadata.total; 
+      console.log("hbjbj", totalOriginalStories.value);
+    } catch (error) {
+      useNuxtApp().$toast.error(error.message, {
+        autoClose: 5000,
+        dangerouslyHTMLString: true,
+      });
+    } finally {
+      loading.value = false;
+    }
+  };
 
   return {
     fetchStories,
@@ -134,5 +158,7 @@ export const useFetchStories = () => {
     filteredStories,
     queryObj,
     isOriginal,
+    fetchTotalOriginals,
+    totalOriginalStories,
   };
 };

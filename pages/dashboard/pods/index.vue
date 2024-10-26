@@ -5,7 +5,7 @@
                 <div href="#"
                     :class="[activeTab === 'stories' ? 'border-b-4 border-[#0ba9b9] text-gray-800' : 'text-gray-400 group-hover:text-gray-500']"
                     @click="setActiveTab('stories')"
-                    class="uppercase group inline-flex items-center py-2 px-1 text-xs font-semibold">
+                    class="uppercase group cursor-pointer inline-flex items-center py-2 px-1 text-xs font-semibold">
                     <span>Pods </span><span
                         class="font-semibold ml-2 text-[10px] rounded-3xl px-2 py-1.5 bg-[#0ba9b9] text-white">{{
                             pagination.total }}</span>
@@ -16,7 +16,7 @@
                     class="uppercase group cursor-pointer ml-5 inline-flex items-center py-2 px-1 text-xs font-semibold">
                     <span>Storipod Original</span>
                     <span class="font-semibold ml-2 text-[10px] rounded-3xl px-2 py-1.5 bg-[#0ba9b9] text-white">{{
-                        paginationOriginal.total }}</span>
+                        paginationOriginal.total || totalOriginalStories }}</span>
                 </div>
             </nav>
 
@@ -119,7 +119,8 @@
 
 <script setup lang="ts">
 import { useFetchStories } from '@/composables/story/fetch'
-const { fetchStories, storiesList, loading, searchQuery, filteredStories, pagination, paginationOriginal, queryObj, isOriginal, fetchOriginalStories } = useFetchStories()
+const { fetchStories, storiesList, loading, searchQuery, filteredStories, pagination, paginationOriginal, queryObj, isOriginal, fetchOriginalStories, fetchTotalOriginals, 
+    totalOriginalStories } = useFetchStories()
 definePageMeta({
     layout: 'dashboard'
 })
@@ -132,7 +133,7 @@ const activeTab = ref('stories')
 
 onMounted(() => {
     fetchStories();
-    fetchOriginalStories();
+    fetchTotalOriginals()
 });
 
 const setActiveTab = (tab) => {
@@ -140,14 +141,13 @@ const setActiveTab = (tab) => {
     if (tab === 'original') {
         isOriginal.value = true;
         paginationOriginal.value.page = 1;
-        fetchStories();
+        fetchOriginalStories();
     } else {
         isOriginal.value = null;
         pagination.value.page = 1;
         fetchStories();
     }
 };
-
 
 const handleSelectedStory = (data: any) => {
     selectedStory.value = data
@@ -162,5 +162,4 @@ const handlePageChange = (val: number) => {
     fetchStories();
 };
 
-fetchStories()
 </script>
