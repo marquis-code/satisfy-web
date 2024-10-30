@@ -25,11 +25,13 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - run: |
-          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/homepodapp:latest
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/homepodapp:latest
-
-      #docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/homepodapp:${{ github.sha }}
-
+          docker build --build-arg GA_TRACKING_ID=${{ vars.GA_TRACKING_ID }} \
+                       --build-arg VITE_HOMEPOD_BASE_URL=${{ vars.VITE_HOMEPOD_BASE_URL }} \
+                       --build-arg VITE_STORIPOD_BASE_URL=${{ vars.VITE_STORIPOD_BASE_URL }} \
+                       --build-arg VITE_MAX_CHARACTER_COUNT=${{ vars.VITE_MAX_CHARACTER_COUNT }} \
+                       -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/homepodapp:latest .
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/homepodapp:latest 
+      
       #- name: 'Deploy to Azure Container Instances'
       #  uses: 'azure/aci-deploy@v1'
       #  with:

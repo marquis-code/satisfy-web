@@ -3,9 +3,14 @@ FROM node:20-alpine as node-base
 
 RUN apk add --no-cache git
 
-#USER node
+# Set Environment variables
 ENV NPM_CONFIG_PREFIX=/home/node/.npm
-ENV PATH=$PATH:/home/node/.npm/bin
+ENV PATH=$PATH:/home/node/.npm/bin \
+    GA_TRACKING_ID=$GA_TRACKING_ID \
+    VITE_HOMEPOD_BASE_URL=$VITE_HOMEPOD_BASE_URL \
+    VITE_STORIPOD_BASE_URL=$VITE_STORIPOD_BASE_URL \
+    VITE_MAX_CHARACTER_COUNT=$VITE_MAX_CHARACTER_COUNT
+
 
 RUN mkdir -p  "${HOME}/app" \
               "${NPM_CONFIG_PREFIX}/bin"
