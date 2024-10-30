@@ -8,7 +8,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest 
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@main
@@ -40,6 +40,6 @@ jobs:
       #    name: homepodapp
       #    location: 'north europe'
 
-      #- name: logout
-      #  run: |
-      #    az logout
+      - name: logout
+        run: |
+          az logout
