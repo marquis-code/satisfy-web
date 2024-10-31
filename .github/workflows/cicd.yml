@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - develop
 
 jobs:
   build-and-deploy:
@@ -29,20 +30,20 @@ jobs:
                        --build-arg VITE_HOMEPOD_BASE_URL=${{ vars.VITE_HOMEPOD_BASE_URL }} \
                        --build-arg VITE_STORIPOD_BASE_URL=${{ vars.VITE_STORIPOD_BASE_URL }} \
                        --build-arg VITE_MAX_CHARACTER_COUNT=${{ vars.VITE_MAX_CHARACTER_COUNT }} \
-                       -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/homepodapp:latest .
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/homepodapp:latest 
+                       -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/homepodapp:${{ github.sha }} .
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/homepodapp:${{ github.sha }} 
       
-      #- name: 'Deploy to Azure Container Instances'
-      #  uses: 'azure/aci-deploy@v1'
-      #  with:
-      #    resource-group: ${{ secrets.RESOURCE_GROUP }}
-      #    dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
-      #    image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/homepodapp:${{ github.sha }}
-      #    registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-      #    registry-username: ${{ secrets.REGISTRY_USERNAME }}
-      #    registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-      #    name: homepodapp
-      #    location: 'north europe'
+      - name: 'Deploy to Azure Container Instances'
+        uses: 'azure/aci-deploy@v1'
+        with:
+          resource-group: ${{ secrets.RESOURCE_GROUP }}
+          dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
+          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/homepodapp:${{ github.sha }}
+          registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          registry-username: ${{ secrets.REGISTRY_USERNAME }}
+          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+          name: homepodapp
+          location: 'north europe'
 
       - name: logout
         run: |
