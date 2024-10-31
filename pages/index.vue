@@ -13,8 +13,8 @@
           class="relative hidden h-32 items-center justify-center bg-[#EBFFFF] lg:col-span-5 lg:flex lg:h-full xl:col-span-6">
           <div class="absolute right-10 top-4 flex items-end justify-end">
             <div class="flex items-center gap-x-10">
-              <nuxt-link class="no-underline text-gray-800" to="#">Terms</nuxt-link>
-              <nuxt-link class="no-underline text-gray-800" to="#">Privacy</nuxt-link>
+              <nuxt-link class="no-underline text-gray-800" to="https://storipod.app/terms">Terms</nuxt-link>
+              <nuxt-link class="no-underline text-gray-800" to="https://storipod.app/privacy">Privacy</nuxt-link>
             </div>
           </div>
           <div class="flex flex-col items-center justify-center">
