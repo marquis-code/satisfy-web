@@ -48,7 +48,7 @@
                       </NuxtLink>
                     </li>
                     <!-- <li> -->
-                      <!-- <NuxtLink to="/dashboard/payment" @click.prevent="isOpen = false"
+                    <!-- <NuxtLink to="/dashboard/payment" @click.prevent="isOpen = false"
                         class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
                         <svg fill="#000000"  width="24" height="24" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                         viewBox="0 0 511.999 511.999" xml:space="preserve">
@@ -168,33 +168,66 @@
                       </NuxtLink>
                     </li> -->
 
+
+
                     <li>
-                      <NuxtLink to="/dashboard/ads" @click.prevent="isOpen = false"
-                        class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M11.667 15L17.5003 15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                          <path d="M2.5 15H4.16667" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                          <path
-                            d="M6.25033 17.0833C7.40092 17.0833 8.33366 16.1506 8.33366 15C8.33366 13.8494 7.40092 12.9167 6.25033 12.9167C5.09973 12.9167 4.16699 13.8494 4.16699 15C4.16699 16.1506 5.09973 17.0833 6.25033 17.0833Z"
-                            stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                          <path d="M16.667 10H17.5003" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                          <path d="M2.5 10H8.33333" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                          <path
-                            d="M13.7503 12.0833C14.9009 12.0833 15.8337 11.1506 15.8337 9.99999C15.8337 8.8494 14.9009 7.91666 13.7503 7.91666C12.5997 7.91666 11.667 8.8494 11.667 9.99999C11.667 11.1506 12.5997 12.0833 13.7503 12.0833Z"
-                            stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                          <path d="M10.833 5H17.4997" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                          <path d="M2.5 5H3.33333" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                          <path
-                            d="M8.75033 7.08332C9.90092 7.08332 10.8337 6.15058 10.8337 4.99999C10.8337 3.8494 9.90092 2.91666 8.75033 2.91666C7.59973 2.91666 6.66699 3.8494 6.66699 4.99999C6.66699 6.15058 7.59973 7.08332 8.75033 7.08332Z"
-                            stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        Banner Ads
+                      <NuxtLink to="/dashboard/ads"
+                        class="text-gray-700 hover:bg-[#0ba9b9] hover:text-white group flex flex-col rounded-md p-2 py-3 text-sm leading-6 font-semibold">
+                        <div class="flex items-center justify-between">
+                          <div class="flex gap-x-3">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path d="M11.667 15L17.5003 15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                              <path d="M2.5 15H4.16667" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                              <path
+                                d="M6.25033 17.0833C7.40092 17.0833 8.33366 16.1506 8.33366 15C8.33366 13.8494 7.40092 12.9167 6.25033 12.9167C5.09973 12.9167 4.16699 13.8494 4.16699 15C4.16699 16.1506 5.09973 17.0833 6.25033 17.0833Z"
+                                stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                              <path d="M16.667 10H17.5003" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                              <path d="M2.5 10H8.33333" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                              <path
+                                d="M13.7503 12.0833C14.9009 12.0833 15.8337 11.1506 15.8337 9.99999C15.8337 8.8494 14.9009 7.91666 13.7503 7.91666C12.5997 7.91666 11.667 8.8494 11.667 9.99999C11.667 11.1506 12.5997 12.0833 13.7503 12.0833Z"
+                                stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                              <path d="M10.833 5H17.4997" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                              <path d="M2.5 5H3.33333" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                              <path
+                                d="M8.75033 7.08332C9.90092 7.08332 10.8337 6.15058 10.8337 4.99999C10.8337 3.8494 9.90092 2.91666 8.75033 2.91666C7.59973 2.91666 6.66699 3.8494 6.66699 4.99999C6.66699 6.15058 7.59973 7.08332 8.75033 7.08332Z"
+                                stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            Banner Ads
+                          </div>
+                          <svg @click.prevent="toggleDropdown" v-if="dropdownOpen" width="30px" height="30px"
+                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                              <path d="M17 15L12 10L7 15" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                            </g>
+                          </svg>
+                          <svg @click.prevent="toggleDropdown" v-if="!dropdownOpen" width="30px" height="30px"
+                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#FFFFFF">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                              <path d="M7 10L12 15L17 10" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                            </g>
+                          </svg>
+                        </div>
+                        <ul v-if="dropdownOpen" class=" pl-10 ">
+                          <li>
+                            <NuxtLink to="/dashboard/ads/requests" @click.prevent="isOpen = false"
+                              class="block text-white hover:text-indigo-600 hover:bg-gray-50 rounded-md p-2 font-normal text-sm leading-6">
+                              Requests(0)
+                            </NuxtLink>
+                          </li>
+                        </ul>
                       </NuxtLink>
                     </li>
                   </ul>
@@ -274,7 +307,7 @@
                   </NuxtLink>
                 </li>
                 <!-- in payment -->
-                 <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M18 15L19 15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round" />
                       <path d="M9 15H15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
@@ -386,32 +419,61 @@
                 </li> -->
                 <li>
                   <NuxtLink to="/dashboard/ads"
-                    class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-sm leading-6 font-semibold">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M11.667 15L17.5003 15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                      <path d="M2.5 15H4.16667" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                      <path
-                        d="M6.25033 17.0833C7.40092 17.0833 8.33366 16.1506 8.33366 15C8.33366 13.8494 7.40092 12.9167 6.25033 12.9167C5.09973 12.9167 4.16699 13.8494 4.16699 15C4.16699 16.1506 5.09973 17.0833 6.25033 17.0833Z"
-                        stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                      <path d="M16.667 10H17.5003" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                      <path d="M2.5 10H8.33333" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                      <path
-                        d="M13.7503 12.0833C14.9009 12.0833 15.8337 11.1506 15.8337 9.99999C15.8337 8.8494 14.9009 7.91666 13.7503 7.91666C12.5997 7.91666 11.667 8.8494 11.667 9.99999C11.667 11.1506 12.5997 12.0833 13.7503 12.0833Z"
-                        stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                      <path d="M10.833 5H17.4997" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                      <path d="M2.5 5H3.33333" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                      <path
-                        d="M8.75033 7.08332C9.90092 7.08332 10.8337 6.15058 10.8337 4.99999C10.8337 3.8494 9.90092 2.91666 8.75033 2.91666C7.59973 2.91666 6.66699 3.8494 6.66699 4.99999C6.66699 6.15058 7.59973 7.08332 8.75033 7.08332Z"
-                        stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-
-                    Banner Ads
+                    class="text-gray-700 hover:bg-[#0ba9b9] hover:text-white group flex flex-col rounded-md p-2 py-3 text-sm leading-6 font-semibold">
+                    <div class="flex items-center justify-between">
+                      <div class="flex gap-x-3">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M11.667 15L17.5003 15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                          <path d="M2.5 15H4.16667" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                          <path
+                            d="M6.25033 17.0833C7.40092 17.0833 8.33366 16.1506 8.33366 15C8.33366 13.8494 7.40092 12.9167 6.25033 12.9167C5.09973 12.9167 4.16699 13.8494 4.16699 15C4.16699 16.1506 5.09973 17.0833 6.25033 17.0833Z"
+                            stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M16.667 10H17.5003" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                          <path d="M2.5 10H8.33333" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                          <path
+                            d="M13.7503 12.0833C14.9009 12.0833 15.8337 11.1506 15.8337 9.99999C15.8337 8.8494 14.9009 7.91666 13.7503 7.91666C12.5997 7.91666 11.667 8.8494 11.667 9.99999C11.667 11.1506 12.5997 12.0833 13.7503 12.0833Z"
+                            stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M10.833 5H17.4997" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                          <path d="M2.5 5H3.33333" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                          <path
+                            d="M8.75033 7.08332C9.90092 7.08332 10.8337 6.15058 10.8337 4.99999C10.8337 3.8494 9.90092 2.91666 8.75033 2.91666C7.59973 2.91666 6.66699 3.8494 6.66699 4.99999C6.66699 6.15058 7.59973 7.08332 8.75033 7.08332Z"
+                            stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Banner Ads
+                      </div>
+                      <svg @click.prevent="toggleDropdown" v-if="dropdownOpen" width="30px" height="30px"
+                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <path d="M17 15L12 10L7 15" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        </g>
+                      </svg>
+                      <svg @click.prevent="toggleDropdown" v-if="!dropdownOpen" width="30px" height="30px"
+                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#FFFFFF">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <path d="M7 10L12 15L17 10" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        </g>
+                      </svg>
+                    </div>
+                    <ul v-if="dropdownOpen" class=" pl-10 ">
+                      <li>
+                        <NuxtLink to="/dashboard/ads/requests" @click.prevent="isOpen = false"
+                          class="block text-white hover:text-indigo-600 hover:bg-gray-50 rounded-md p-2 font-normal text-sm leading-6">
+                          Requests(0)
+                        </NuxtLink>
+                      </li>
+                    </ul>
                   </NuxtLink>
                 </li>
               </ul>
@@ -496,6 +558,11 @@ const { localstorageData, logOut } = useLogin()
 const isOpen = ref(false)
 const route = useRoute()
 const router = useRouter()
+const dropdownOpen = ref(false)
+
+const toggleDropdown = () => {
+  dropdownOpen.value = !dropdownOpen.value;
+}
 
 const username = computed(() => {
   return Object.keys(localstorageData.user.value).length ? `${localstorageData.user.value.firstname} ${localstorageData.user.value.lastname}` : ''
