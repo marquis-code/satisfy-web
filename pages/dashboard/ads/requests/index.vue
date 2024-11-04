@@ -68,10 +68,12 @@
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
-                                    <td :colspan="11">
-                                        <CoreEmptyState class="w-full" title="No Ads available" desc="">
-                                        </CoreEmptyState>
-                                    </td>
+                                    <tr>
+                                        <td :colspan="11">
+                                            <CoreEmptyState class="w-full" title="No Ads available" desc="">
+                                            </CoreEmptyState>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
