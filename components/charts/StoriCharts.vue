@@ -5,7 +5,7 @@
                 <p class="text-[#ACAFAE] py-0 my-0 text-sm md:text-lg font-medium">
                     Today, 9 January
                 </p>
-                <h1 class="py-0 my-0 text-xl">3h 50m</h1>
+                <h1 class="py-0 my-0 text-xl">3h 30m</h1>
             </div>
             <div class="flex items-center gap-x-3">
                 <select class="text-sm outline-none font-medium bg-gray-100 rounded-md px-2.5 py-2 w-full">
