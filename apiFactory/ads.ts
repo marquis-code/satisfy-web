@@ -9,8 +9,8 @@ export const adsApiFactory = {
     return axiosInstance.patch(`/adverts/${id}`, payload);
   },
 
-  $_fetch_ads() {
-    return axiosInstance.get("/adverts");
+  $_fetch_ads(queryObj: {sortBy: string, orderBy: string}, metadata: { page: number; perPage: number}) {
+    return axiosInstance.get(`/adverts/all?perPage=${metadata.perPage}&page=${metadata.page}&orderBy=${queryObj.sortBy}:${queryObj.orderBy}`);
   },
 
   $_fetch_ads_by_id(id: string | number) {

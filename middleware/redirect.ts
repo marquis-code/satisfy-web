@@ -13,18 +13,20 @@ export default defineNuxtRouteMiddleware((context) => {
       if (decodedToken.exp < currentTime) {
         // Token has expired, clear it and redirect to sign-in page
         localStorage.removeItem('token');
-        return router.push({ path: "/", query: { page: "login" } });
+        return router.push({ path: "/auth", query: { page: "login" } });
         // return navigateTo('/signin');
       }
     } catch (error) {
       // On error, remove the token and redirect
       localStorage.removeItem('token');
-      return router.push({ path: "/", query: { page: "login" } });
+      return router.push({ path: "/auth", query: { page: "login" } });
     //   return navigateTo('/signin');
     }
   } else {
     // No token, redirect to sign-in
     // return navigateTo('/signin');
-    return router.push({ path: "/", query: { page: "login" } });
-  }
+    return router.push({ path: "/auth", query: { page: "login" } });
+  } 
 });
+
+

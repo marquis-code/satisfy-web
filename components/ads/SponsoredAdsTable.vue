@@ -1,7 +1,8 @@
 <template>
   <main>
     <div class="space-y-6">
-      <AdsHeader :total="adsList.length" :clicks="adsDashboardTotals.clicks" :impressions="adsDashboardTotals.impressions" :handleAds="handleAds"/>
+      <AdsHeader :total="totalAds" :clicks="adsDashboardTotals.clicks" :impressions="adsDashboardTotals.impressions"
+        :handleAds="handleAds" />
       <!-- <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
           <h1 class="text-base font-semibold leading-6 text-gray-900">Banner Ads</h1>
@@ -172,8 +173,7 @@
         <div class="flex items-center justify-end gap-x-6 mb-5">
           <div class="space-x-2">
             <label for="sortBy" class="text-sm text-gray-700 font-medium">Sort By:</label>
-            <select id="sortBy" v-model="sortKey" @change="applySorting"
-              class="h-10 rounded border-gray-300 text-sm">
+            <select id="sortBy" v-model="sortKey" @change="updateQuery" class="h-10 rounded border-gray-300 text-sm">
               <option value="clientName">Client Name</option>
               <option value="status">Status</option>
               <option value="startDate">Start Date</option>
@@ -183,7 +183,7 @@
           </div>
           <div class="space-x-2">
             <label for="orderBy" class="text-sm text-gray-700 font-medium">Order by:</label>
-            <select id="orderBy" v-model="sortOrder" @change="applySorting"
+            <select id="orderBy" v-model="sortOrder" @change="updateQuery"
               class="h-10 rounded border-gray-300 text-sm">
               <option value="asc">Ascending Order</option>
               <option value="desc">Descending Order</option>
@@ -191,11 +191,7 @@
           </div>
         </div>
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div v-if="paginatedAds.length && !loading"
-            class="inline-block  min-w-full py-2 align-middle sm:px-6 lg:px-8">
-
-
-
+          <div v-if="ads.length && !loading" class="inline-block  min-w-full py-2 align-middle sm:px-6 lg:px-8">
             <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
               <table class="min-w-full divide-y divide-gray-300">
                 <thead class="bg-gray-50">
@@ -234,9 +230,9 @@
                   </tr>
                 </thead> -->
                 <tbody class="divide-y divide-gray-200 bg-white">
-                  <tr v-for="(ads, idx) in paginatedAds" :key="idx">
+                  <tr v-for="(ads, idx) in ads" :key="idx">
                     <td class="whitespace-nowrap  text-sm font-medium text-gray-900 sm:pl-4">
-                      {{ (currentPage - 1) * itemsPerPage + (idx + 1) }}</td>
+                      {{ (pagination.page - 1) * pagination.perPage + (idx + 1) }}</td>
                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                       {{ ads.clientName ?? 'Nil' }}</td>
                     <!-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -305,38 +301,15 @@
               </table>
             </div>
           </div>
-          <CoreEmptyState v-if="adsList.length <= 0 && !loading" title="No Ads available" desc="">
+          <CoreEmptyState v-if="ads.length <= 0 && !loading" title="No Ads available" desc="">
           </CoreEmptyState>
           <div v-if="loading" class="h-32 bg-slate-100 rounded"></div>
 
-          <!-- Pagination Controls -->
-          <nav v-if="!loading && adsList.length"
-            class="flex max-w-screen-2xl mx-10  items-center justify-between border border-gray-200 bg-white px-4 py-3\\\ sm:px-6"
-            aria-label="Pagination">
-            <div class="hidden sm:block">
-              <p class="text-sm text-gray-700">
-                Showing
-                <span class="font-medium">{{ currentPage }}</span>
-                <!-- to
-                            <span class="font-medium">10</span> -->
-                of
-                <span class="font-medium">{{ totalPages }}</span>
-                results
-              </p>
-            </div>
-            <div class="flex flex-1 justify-between sm:justify-end">
-              <button :disabled="currentPage === 1" @click="previousPage"
-                class="relative inline-flex items-center rounded-md bg-white px-3 py-4 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Previous</button>
-              <button :disabled="currentPage === totalPages" @click="nextPage" href="#"
-                class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Next</button>
-            </div>
-          </nav>
+          <CorePagination :total="pagination.total" :page="pagination.page" :perPage="pagination.perPage"
+            :pages="pagination.pages" @page-changed="handlePageChange" />
 
         </div>
       </div>
-
-
-
     </div>
 
     <CoreSlideOver :show="showSlideOver" @update:show="closeSideModal" :title="computedSlideOverHeader.title"
@@ -355,7 +328,7 @@ import { useGetAllSponsoredAds } from '@/composables/sponsored-ads/fetch'
 import { useDeleteSponsoredAds } from '@/composables/sponsored-ads/delete'
 import { useGetAdsDashboardTotal } from '@/composables/sponsored-ads/adsDashboard';
 const { deleteSponsoredAds, loading: deleting } = useDeleteSponsoredAds()
-const { getAllSponsoredAds, ads: adsList, loading } = useGetAllSponsoredAds()
+const { getAllSponsoredAds, ads, loading, pagination, totalAds, queryObj } = useGetAllSponsoredAds()
 const { getAdsDahboardTotals, adsDashboardTotals, loading: showing } = useGetAdsDashboardTotal()
 const showSlideOver = ref(false)
 const selectedAds = ref({}) as Record<string, any>
@@ -367,76 +340,18 @@ onMounted(() => {
   getAdsDahboardTotals();
 });
 
-const itemsPerPage = 10;
-const currentPage = ref(1);
+const handlePageChange = (val: any) => {
+  pagination.value.page = val
+}
 
-//new
-const sortKey = ref('clientName');
-const sortOrder = ref('asc');
-
-const sortedAds = computed(() => {
-  const sorted = [...adsList.value].sort((a, b) => {
-    let comparison = 0;
-
-    switch (sortKey.value) {
-      case 'clientName':
-        comparison = a.clientName.localeCompare(b.clientName);
-        break;
-      case 'status':
-        comparison = a.status.localeCompare(b.status);
-        break;
-      case 'startDate':
-        comparison = new Date(a.startDate) - new Date(b.startDate);
-        break;
-      case 'endDate':
-        comparison = new Date(a.endDate) - new Date(b.endDate);
-        break;
-      case 'createdAt':
-        comparison = new Date(a.createdAt) - new Date(b.createdAt);
-        break;
-      default:
-        break;
-    }
-
-    return sortOrder.value === 'asc' ? comparison : -comparison;
-  });
-  return sorted;
-});
-
-const applySorting = () => {
-  sortedAds.value; 
-};
-
-
-
-// Computed property to get paginated data
-
-// const paginatedAds = computed(() => {
-//   const start = (currentPage.value - 1) * itemsPerPage;
-//   const end = start + itemsPerPage;
-//   return adsList.value.slice(start, end);
-// });
-
-const paginatedAds = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
-  return sortedAds.value.slice(start, end);
-});
-
-// Total pages calculation
-const totalPages = computed(() => Math.ceil(adsList.value.length / itemsPerPage));
-
-// Pagination controls
-const nextPage = () => {
-  if (currentPage.value < totalPages.value) {
-    currentPage.value++;
-  }
-};
-
-const previousPage = () => {
-  if (currentPage.value > 1) {
-    currentPage.value--;
-  }
+const sortKey = ref('createdAt');
+const sortOrder = ref('desc');
+const updateQuery = () => {
+  queryObj.value = {
+    sortBy: sortKey.value,
+    orderBy: sortOrder.value,
+  };
+  getAllSponsoredAds();
 };
 
 
