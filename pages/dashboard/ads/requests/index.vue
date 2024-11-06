@@ -1,8 +1,45 @@
 <template>
     <main>
         <div class="space-y-6">
-            <AdsHeader :total="adsList.length" :clicks="adsDashboardTotals.clicks"
-                :impressions="adsDashboardTotals.impressions" :handleAds="handleAds" />
+            <div class="sm:flex sm:items-center">
+                <div class="sm:flex-auto">
+                    <h1 class="text-base font-semibold leading-6 text-gray-900">Banner Ads</h1>
+                    <p class="mt-2 text-sm text-gray-700">A list of all the banner ads in your account including
+                        their name,
+                        title, email and role.</p>
+                </div>
+                <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+                    <!-- <button type="button" @click="handleAds('create')"
+            class="block rounded-sm bg-[#00A1C1] px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create
+            new banner ads</button> -->
+                </div>
+            </div>
+            <div class="border-[0.5px] border-gray-50 rounded-lg">
+                <!-- dl class: class="mx-auto grid grid-cols-1 gap-px bg-gray-900/5 sm:grid-cols-2 lg:grid-cols-4 border-[0.5px] border-gray-50 rounded-lg"> -->
+                <dl class="mx-auto grid grid-cols-3 gap-px bg-gray-900/5 border-[0.5px] border-gray-50 rounded-lg">
+
+                    <div
+                        class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-10 sm:px-6 xl:px-8">
+                        <dt class="text-base font-medium leading-6 text-gray-500">Total Requests</dt>
+                        <dd class="text-xs font-medium text-gray-700"></dd>
+                        <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">0</dd>
+                    </div>
+                    <div
+                        class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-10 sm:px-6 xl:px-8">
+                        <dt class="text-base font-medium leading-6 text-gray-500">Published</dt>
+                        <!-- <dd class="text-xs font-medium text-rose-600">+54.02%</dd> -->
+                        <!-- <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">200</dd> -->
+                        <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">0</dd>
+
+                    </div>
+                    <div
+                        class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 bg-white px-4 py-10 sm:px-6 xl:px-8">
+                        <dt class="text-base font-medium leading-6 text-gray-500">Rejected</dt>
+                        <!-- <dd class="text-xs font-medium text-gray-700">-1.39%</dd> -->
+                        <dd class="w-full flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">0</dd>
+                    </div>
+                </dl>
+            </div>
 
             <div class="mt-8 flow-root">
                 <div class="flex items-center justify-end gap-x-6 mb-5">
@@ -46,8 +83,6 @@
                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Ads Link
                                         </th>
                                         <th scope="col"
-                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Hits</th>
-                                        <th scope="col"
                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Amount
                                             Paid</th>
                                         <th scope="col"
@@ -57,21 +92,26 @@
                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">End date
                                         </th>
                                         <th scope="col"
-                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Date
-                                            Created</th>
+                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Action
+                                        </th>
                                         <th scope="col"
                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status
                                         </th>
+                                        <th scope="col"
+                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Date
+                                        </th> <!--date created-->
                                         <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                                             <span class="sr-only">Edit</span>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
-                                    <td :colspan="11">
-                                        <CoreEmptyState class="w-full" title="No Ads available" desc="">
-                                        </CoreEmptyState>
-                                    </td>
+                                    <tr>
+                                        <td :colspan="11">
+                                            <CoreEmptyState class="w-full" title="No Ads available" desc="">
+                                            </CoreEmptyState>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

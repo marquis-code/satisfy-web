@@ -201,34 +201,21 @@
                             </svg>
                             Banner Ads
                           </div>
-                          <svg @click.prevent="toggleDropdown" v-if="dropdownOpen" width="30px" height="30px"
-                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                            <g id="SVGRepo_iconCarrier">
-                              <path d="M17 15L12 10L7 15" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round"></path>
-                            </g>
-                          </svg>
-                          <svg @click.prevent="toggleDropdown" v-if="!dropdownOpen" width="30px" height="30px"
-                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#FFFFFF">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                            <g id="SVGRepo_iconCarrier">
-                              <path d="M7 10L12 15L17 10" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round"></path>
-                            </g>
-                          </svg>
                         </div>
-                        <ul v-if="dropdownOpen" class=" pl-10 ">
-                          <li>
-                            <NuxtLink to="/dashboard/ads/requests" @click.prevent="isOpen = false"
-                              class="block text-white hover:text-indigo-600 hover:bg-gray-50 rounded-md p-2 font-normal text-sm leading-6">
-                              Requests(0)
-                            </NuxtLink>
-                          </li>
-                        </ul>
                       </NuxtLink>
+                      <ul class=" pl-10 ">
+                        <li>
+                          <NuxtLink to="/dashboard/ads/requests"
+                            class="text-gray-700 hover:bg-[#0ba9b9] hover:text-white group rounded-md p-2 py-3 mt-0.5 text-sm leading-6 font-semibold block">
+                            Requests
+                          </NuxtLink>
+                        </li>
+                      </ul>
+                      <div
+                        class=" absolute top-[42%] left-[7%] w-[12%] h-0.5 border-t-2 border-dotted border-[#0ba9b9]">
+                      </div>
+                      <div class="absolute top-[35%] left-[7%] w-0.5 h-[7%] border-l-2 border-dotted border-[#0ba9b9]">
+                      </div>
                     </li>
                   </ul>
                 </li>
@@ -417,7 +404,7 @@
                     Configuration
                   </NuxtLink>
                 </li> -->
-                <li>
+                <li class=" relative">
                   <NuxtLink to="/dashboard/ads"
                     class="text-gray-700 hover:bg-[#0ba9b9] hover:text-white group flex flex-col rounded-md p-2 py-3 text-sm leading-6 font-semibold">
                     <div class="flex items-center justify-between">
@@ -447,35 +434,23 @@
                         </svg>
                         Banner Ads
                       </div>
-                      <svg @click.prevent="toggleDropdown" v-if="dropdownOpen" width="30px" height="30px"
-                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                          <path d="M17 15L12 10L7 15" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                        </g>
-                      </svg>
-                      <svg @click.prevent="toggleDropdown" v-if="!dropdownOpen" width="30px" height="30px"
-                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#FFFFFF">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                          <path d="M7 10L12 15L17 10" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                        </g>
-                      </svg>
                     </div>
-                    <ul v-if="dropdownOpen" class=" pl-10 ">
-                      <li>
-                        <NuxtLink to="/dashboard/ads/requests" @click.prevent="isOpen = false"
-                          class="block text-white hover:text-indigo-600 hover:bg-gray-50 rounded-md p-2 font-normal text-sm leading-6">
-                          Requests(0)
-                        </NuxtLink>
-                      </li>
-                    </ul>
                   </NuxtLink>
+
+                  <ul class="pl-10">
+                    <li>
+                      <NuxtLink to="/dashboard/ads/requests"
+                        class="text-gray-700 hover:bg-[#0ba9b9] hover:text-white group rounded-md p-2 py-3 mt-0.5 text-sm leading-6 font-semibold block">
+                        Requests
+                      </NuxtLink>
+                    </li>
+                  </ul>
+                  <div class=" absolute bottom-[25%] left-[7%] w-[15%] h-0.5 border-t-2 border-dotted border-[#0ba9b9]">
+                  </div>
+                  <div class="absolute bottom-[28%] left-[7%] w-0.5 h-[40%] border-l-2 border-dotted border-[#0ba9b9]">
+                  </div>
                 </li>
+
               </ul>
             </li>
             <!-- <li>
@@ -558,11 +533,7 @@ const { localstorageData, logOut } = useLogin()
 const isOpen = ref(false)
 const route = useRoute()
 const router = useRouter()
-const dropdownOpen = ref(false)
 
-const toggleDropdown = () => {
-  dropdownOpen.value = !dropdownOpen.value;
-}
 
 const username = computed(() => {
   return Object.keys(localstorageData.user.value).length ? `${localstorageData.user.value.firstname} ${localstorageData.user.value.lastname}` : ''
