@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CoreLandingPageLoader @update:show="showOverlay = false" :show="showOverlay" />
+    <!-- <CoreLandingPageLoader @update:show="showOverlay = false" :show="showOverlay" /> -->
     <NuxtPage />
   </div>
 </template>
