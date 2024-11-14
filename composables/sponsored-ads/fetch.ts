@@ -31,12 +31,6 @@ export const useGetAllSponsoredAds = () => {
       loading.value = false;
     }
   };
-  // watch(
-  //   () => pagination.value.page,
-  //   () => {
-  //     getAllSponsoredAds();
-  //   }
-  // );
   watch([() => pagination.value.page, () => queryObj.value], () => {
     getAllSponsoredAds();
   });

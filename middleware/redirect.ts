@@ -28,5 +28,3 @@ export default defineNuxtRouteMiddleware((context) => {
     return router.push({ path: "/auth", query: { page: "login" } });
   } 
 });
-
-

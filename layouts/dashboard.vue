@@ -553,7 +553,8 @@ const checkOnlineStatus = () => {
   if (navigator.onLine) {
     router.push(router?.options?.history?.state?.current)
   } else {
-    router.push('/login')
+    // router.push('/login')
+    router.push({ path: "/auth", query: { page: "login" } })
     useNuxtApp().$toast.success('You are currently offline.', {
       autoClose: 5000,
       dangerouslyHTMLString: true,
