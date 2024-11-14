@@ -358,7 +358,7 @@ const { getAllSponsoredAds, ads, loading, pagination, totalAds, queryObj } = use
 const { deleteSponsoredAds, loading: deleting } = useDeleteSponsoredAds(getAllSponsoredAds)
 const { getAdsDahboardTotals, adsDashboardTotals, loading: showing } = useGetAdsDashboardTotal()
 
-
+const showSlideOver = ref(false)
 const selectedAds = ref({}) as Record<string, any>
 const route = useRoute()
 const router = useRouter()
