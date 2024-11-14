@@ -169,6 +169,33 @@
                     <div v-if="loading" class="h-32 bg-slate-100 rounded"></div>
                 </div>
             </div> -->
+
+      <!-- <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between my-5 sm:gap-24 gap-3">
+          <div class="flex-1 flex items-center h-9 rounded border-gray-300 relative">
+            <input type="text" placeholder="Search" class=" text-sm rounded focus:outline-none px-5 flex-1">
+            <svg class="absolute right-3" width="21px" height="21px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+          </div>
+          <div class="flex gap-x-2 flex-col sm:flex-row gap-2 sm:items-center">
+            <div class="space-x-2">
+              <label for="sortBy" class="text-sm text-gray-700 font-medium">Sort By:</label>
+              <select id="sortBy" v-model="sortKey" @change="updateQuery" class="h-10 rounded border-gray-300 text-sm">
+                <option value="clientName">Client Name</option>
+                <option value="status">Status</option>
+                <option value="startDate">Start Date</option>
+                <option value="endDate">End Date</option>
+                <option value="createdAt">Date Created</option>
+              </select>
+            </div>
+            <div class="space-x-2">
+              <label for="orderBy" class="text-sm text-gray-700 font-medium">Order by:</label>
+              <select id="orderBy" v-model="sortOrder" @change="updateQuery"
+                class="h-10 rounded border-gray-300 text-sm">
+                <option value="asc">Ascending Order</option>
+                <option value="desc">Descending Order</option>
+              </select>
+            </div>
+          </div>
+        </div> -->
       <div class="mt-8 flow-root">
         <div class="flex items-center justify-end gap-x-6 mb-5">
           <div class="space-x-2">
@@ -183,8 +210,7 @@
           </div>
           <div class="space-x-2">
             <label for="orderBy" class="text-sm text-gray-700 font-medium">Order by:</label>
-            <select id="orderBy" v-model="sortOrder" @change="updateQuery"
-              class="h-10 rounded border-gray-300 text-sm">
+            <select id="orderBy" v-model="sortOrder" @change="updateQuery" class="h-10 rounded border-gray-300 text-sm">
               <option value="asc">Ascending Order</option>
               <option value="desc">Descending Order</option>
             </select>
@@ -203,7 +229,7 @@
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Ads Link</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Hits</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Amount Paid</th>
+                    <th scope="col" class=" py-3.5  text-left text-sm font-semibold text-gray-900">Amount Paid</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Start date</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">End date</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Date Created</th>
@@ -245,7 +271,7 @@
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       <a target="__blank" v-if="ads.link" :href="ads.link" class="underline text-green-600">{{
-                        ads.link.slice(0, 10) + '.....' }}</a>
+                        ads.link.length > 30 ? ads.link.slice(0, 30) + '.....'  : ads.link.slice(0, 25) }}</a>
                       <span v-else>Nil</span>
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -254,23 +280,23 @@
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {{ ads.hits ?? 'Nil' }}
                     </td>
-                    <td class="whitespace-nowrap pl-5 pr-20 py-4text-sm text-gray-500">
+                    <td class="whitespace-nowrap pl-5 pr-12 py-4 text-sm text-gray-500">
                       {{ ads.amountPaid ?? 'Nil' }}
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       <span v-if="ads?.startDate">
-                        {{ formatDateTime(ads?.startDate) }}
+                        {{ formatDate(ads?.startDate )}}
                       </span>
                       <span v-else>Nil</span>
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       <span v-if="ads?.endDate">
-                        {{ formatDateTime(ads?.endDate) }}
+                        {{ formatDate(ads?.endDate) }}
                       </span>
                       <span v-else>Nil</span>
                     </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      <span v-if="ads?.createdAt">{{ formatDateTime(ads?.createdAt) }}</span>
+                    <td class="whitespace-nowrap px-3 pr-5 py-4 text-sm text-gray-500">
+                      <span v-if="ads?.createdAt">{{ formatDate(ads?.createdAt) }}</span>
                       <span v-else>Nil</span>
                     </td>
                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
@@ -327,10 +353,12 @@ import { formatDateTime } from '@/utils/generateDate'
 import { useGetAllSponsoredAds } from '@/composables/sponsored-ads/fetch'
 import { useDeleteSponsoredAds } from '@/composables/sponsored-ads/delete'
 import { useGetAdsDashboardTotal } from '@/composables/sponsored-ads/adsDashboard';
-const { deleteSponsoredAds, loading: deleting } = useDeleteSponsoredAds()
+import { useDateFormat } from '@vueuse/core'
 const { getAllSponsoredAds, ads, loading, pagination, totalAds, queryObj } = useGetAllSponsoredAds()
+const { deleteSponsoredAds, loading: deleting } = useDeleteSponsoredAds(getAllSponsoredAds)
 const { getAdsDahboardTotals, adsDashboardTotals, loading: showing } = useGetAdsDashboardTotal()
-const showSlideOver = ref(false)
+
+
 const selectedAds = ref({}) as Record<string, any>
 const route = useRoute()
 const router = useRouter()
@@ -343,6 +371,16 @@ onMounted(() => {
 const handlePageChange = (val: any) => {
   pagination.value.page = val
 }
+
+const formatDate = (date: string | Date | undefined) => {
+  // Ensure the date exists before formatting
+  if (date) {
+    return useDateFormat(date, 'MMM D YYYY');
+  }
+  return '';
+};
+
+
 
 const sortKey = ref('createdAt');
 const sortOrder = ref('desc');

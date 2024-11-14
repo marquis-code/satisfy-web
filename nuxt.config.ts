@@ -22,7 +22,7 @@ export default {
     // Axios options here
     timeout: 10000, // Example: set timeout to 10 seconds
   },
-  plugins: [{ src: '~/plugins/google-analytics.client.ts', mode: 'client' }, { src: '~/plugins/googleTagManager.client.ts', mode: 'client' },]
+  plugins: [{ src: '~/plugins/google-analytics.client.ts', mode: 'client' }, { src: '~/plugins/googleTagManager.client.ts', mode: 'client' }, { src: '~/plugins/vue-picture-cropper.ts', mode: 'client' }, ]
   // buildModules: [
   //   '@nuxtjs/moment'
   // ]

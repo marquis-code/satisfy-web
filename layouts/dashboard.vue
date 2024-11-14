@@ -39,7 +39,11 @@
                     <li>
                       <NuxtLink to="/dashboard/users" @click.prevent="isOpen = false"
                         class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
-                        <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-linecap="round"></circle> <path d="M4.84913 16.9479C5.48883 14.6034 7.91473 13.5 10.345 13.5H13.655C16.0853 13.5 18.5112 14.6034 19.1509 16.9479C19.282 17.4287 19.3868 17.9489 19.4462 18.5015C19.5052 19.0507 19.0523 19.5 18.5 19.5H5.5C4.94772 19.5 4.49482 19.0507 4.55382 18.5015C4.6132 17.9489 4.71796 17.4287 4.84913 16.9479Z" stroke="currentColor" stroke-linecap="round"></path> </g></svg>
+                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M10.5391 10C11.5336 10 12.4875 9.60491 13.1907 8.90165C13.894 8.19839 14.2891 7.24456 14.2891 6.25C14.2891 5.25544 13.894 4.30161 13.1907 3.59835C12.4875 2.89509 11.5336 2.5 10.5391 2.5C9.5445 2.5 8.59067 2.89509 7.88741 3.59835C7.18415 4.30161 6.78906 5.25544 6.78906 6.25C6.78906 7.24456 7.18415 8.19839 7.88741 8.90165C8.59067 9.60491 9.5445 10 10.5391 10ZM13.0391 6.25C13.0391 6.91304 12.7757 7.54893 12.3068 8.01777C11.838 8.48661 11.2021 8.75 10.5391 8.75C9.87602 8.75 9.24014 8.48661 8.7713 8.01777C8.30245 7.54893 8.03906 6.91304 8.03906 6.25C8.03906 5.58696 8.30245 4.95107 8.7713 4.48223C9.24014 4.01339 9.87602 3.75 10.5391 3.75C11.2021 3.75 11.838 4.01339 12.3068 4.48223C12.7757 4.95107 13.0391 5.58696 13.0391 6.25ZM18.0391 16.25C18.0391 17.5 16.7891 17.5 16.7891 17.5H4.28906C4.28906 17.5 3.03906 17.5 3.03906 16.25C3.03906 15 4.28906 11.25 10.5391 11.25C16.7891 11.25 18.0391 15 18.0391 16.25ZM16.7891 16.245C16.7878 15.9375 16.5966 15.0125 15.7491 14.165C14.9341 13.35 13.4003 12.5 10.5391 12.5C7.67656 12.5 6.14406 13.35 5.32906 14.165C4.48156 15.0125 4.29156 15.9375 4.28906 16.245H16.7891Z"
+                            fill="#09090F" />
+                        </svg>
                         Users
                       </NuxtLink>
                     </li>
@@ -77,15 +81,15 @@
                       <NuxtLink to="/dashboard/pods" @click.prevent="isOpen = false"
                         class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M18 15L19 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                          <path d="M18 15L19 15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
-                          <path d="M9 15H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                          <path d="M9 15H15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
-                          <path d="M6 15H5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                          <path d="M6 15H5" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
-                          <path d="M5 12H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                          <path d="M5 12H19" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
-                          <path d="M5 9H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                          <path d="M5 9H19" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                           <path
                             d="M21 6H3C2.44772 6 2 6.44772 2 7V17C2 17.5523 2.44772 18 3 18H21C21.5523 18 22 17.5523 22 17V7C22 6.44772 21.5523 6 21 6Z"
@@ -168,7 +172,7 @@
 
                     <li>
                       <NuxtLink to="/dashboard/ads"
-                        class="text-gray-700 hover:bg-[#0ba9b9] hover:text-white group flex flex-col rounded-md p-2 py-3 text-base leading-6 font-semibold">
+                        class="text-gray-700 hover:bg-[#0ba9b9] hover:text-white group flex flex-col rounded-md p-2 py-3 text-sm leading-6 font-semibold">
                         <div class="flex items-center justify-between">
                           <div class="flex gap-x-3">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -246,7 +250,7 @@
                 <li>
                   <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
                   <NuxtLink to="/dashboard"
-                    class="flex w-full text-gray-700 items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose hover:bg-[#0ba9b9] hover:text-white ">
+                    class="flex w-full text-gray-700 items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose">
                     <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                       stroke="currentColor" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round"
@@ -257,29 +261,33 @@
                 </li>
                 <li>
                   <NuxtLink to="/dashboard/users"
-                    class="flex w-full text-gray-700 items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose hover:bg-[#0ba9b9] hover:text-white ">
-                    <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-linecap="round"></circle> <path d="M4.84913 16.9479C5.48883 14.6034 7.91473 13.5 10.345 13.5H13.655C16.0853 13.5 18.5112 14.6034 19.1509 16.9479C19.282 17.4287 19.3868 17.9489 19.4462 18.5015C19.5052 19.0507 19.0523 19.5 18.5 19.5H5.5C4.94772 19.5 4.49482 19.0507 4.55382 18.5015C4.6132 17.9489 4.71796 17.4287 4.84913 16.9479Z" stroke="currentColor" stroke-linecap="round"></path> </g></svg>
+                    class="flex w-full text-gray-700 items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose">
+                    <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M10.5391 10C11.5336 10 12.4875 9.60491 13.1907 8.90165C13.894 8.19839 14.2891 7.24456 14.2891 6.25C14.2891 5.25544 13.894 4.30161 13.1907 3.59835C12.4875 2.89509 11.5336 2.5 10.5391 2.5C9.5445 2.5 8.59067 2.89509 7.88741 3.59835C7.18415 4.30161 6.78906 5.25544 6.78906 6.25C6.78906 7.24456 7.18415 8.19839 7.88741 8.90165C8.59067 9.60491 9.5445 10 10.5391 10ZM13.0391 6.25C13.0391 6.91304 12.7757 7.54893 12.3068 8.01777C11.838 8.48661 11.2021 8.75 10.5391 8.75C9.87602 8.75 9.24014 8.48661 8.7713 8.01777C8.30245 7.54893 8.03906 6.91304 8.03906 6.25C8.03906 5.58696 8.30245 4.95107 8.7713 4.48223C9.24014 4.01339 9.87602 3.75 10.5391 3.75C11.2021 3.75 11.838 4.01339 12.3068 4.48223C12.7757 4.95107 13.0391 5.58696 13.0391 6.25ZM18.0391 16.25C18.0391 17.5 16.7891 17.5 16.7891 17.5H4.28906C4.28906 17.5 3.03906 17.5 3.03906 16.25C3.03906 15 4.28906 11.25 10.5391 11.25C16.7891 11.25 18.0391 15 18.0391 16.25ZM16.7891 16.245C16.7878 15.9375 16.5966 15.0125 15.7491 14.165C14.9341 13.35 13.4003 12.5 10.5391 12.5C7.67656 12.5 6.14406 13.35 5.32906 14.165C4.48156 15.0125 4.29156 15.9375 4.28906 16.245H16.7891Z"
+                        fill="#09090F" />
+                    </svg>
 
                     Users
                   </NuxtLink>
                 </li>
                 <li>
                   <NuxtLink to="/dashboard/pods"
-                    class="flex w-full text-gray-700 items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose hover:bg-[#0ba9b9] hover:text-white ">
+                    class="flex w-full text-gray-700 items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M18 15L19 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                      <path d="M18 15L19 15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round" />
-                      <path d="M9 15H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                      <path d="M9 15H15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round" />
-                      <path d="M6 15H5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                      <path d="M6 15H5" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round" />
-                      <path d="M5 12H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                      <path d="M5 12H19" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round" />
-                      <path d="M5 9H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                      <path d="M5 9H19" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round" />
                       <path
                         d="M21 6H3C2.44772 6 2 6.44772 2 7V17C2 17.5523 2.44772 18 3 18H21C21.5523 18 22 17.5523 22 17V7C22 6.44772 21.5523 6 21 6Z"
-                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
 
                     Pods
@@ -398,31 +406,31 @@
                 </li> -->
                 <li class=" relative">
                   <NuxtLink to="/dashboard/ads"
-                    class="text-gray-700 hover:bg-[#0ba9b9] hover:text-white group flex flex-col rounded-md px-3 py-2.5 leading-loose ">
+                    class="text-gray-700 hover:bg-[#0ba9b9] hover:text-white group flex flex-col rounded-md p-2 py-3 text-sm leading-6 font-semibold">
                     <div class="flex items-center justify-between">
                       <div class="flex gap-x-3">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M11.667 15L17.5003 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                          <path d="M11.667 15L17.5003 15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
-                          <path d="M2.5 15H4.16667" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                          <path d="M2.5 15H4.16667" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                           <path
                             d="M6.25033 17.0833C7.40092 17.0833 8.33366 16.1506 8.33366 15C8.33366 13.8494 7.40092 12.9167 6.25033 12.9167C5.09973 12.9167 4.16699 13.8494 4.16699 15C4.16699 16.1506 5.09973 17.0833 6.25033 17.0833Z"
-                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                          <path d="M16.667 10H17.5003" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M16.667 10H17.5003" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
-                          <path d="M2.5 10H8.33333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                          <path d="M2.5 10H8.33333" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                           <path
                             d="M13.7503 12.0833C14.9009 12.0833 15.8337 11.1506 15.8337 9.99999C15.8337 8.8494 14.9009 7.91666 13.7503 7.91666C12.5997 7.91666 11.667 8.8494 11.667 9.99999C11.667 11.1506 12.5997 12.0833 13.7503 12.0833Z"
-                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                          <path d="M10.833 5H17.4997" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M10.833 5H17.4997" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
-                          <path d="M2.5 5H3.33333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                          <path d="M2.5 5H3.33333" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                           <path
                             d="M8.75033 7.08332C9.90092 7.08332 10.8337 6.15058 10.8337 4.99999C10.8337 3.8494 9.90092 2.91666 8.75033 2.91666C7.59973 2.91666 6.66699 3.8494 6.66699 4.99999C6.66699 6.15058 7.59973 7.08332 8.75033 7.08332Z"
-                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         Banner Ads
                       </div>
@@ -432,7 +440,7 @@
                   <ul class="pl-10">
                     <li>
                       <NuxtLink to="/dashboard/ads/requests"
-                        class="text-gray-700 hover:bg-[#0ba9b9] hover:text-white group rounded-md p-2 py-3 mt-0.5 text-sm leading-loose font-semibold block">
+                        class="text-gray-700 hover:bg-[#0ba9b9] hover:text-white group rounded-md p-2 py-3 mt-0.5 text-sm leading-6 font-semibold block">
                         Requests
                       </NuxtLink>
                     </li>
@@ -545,7 +553,8 @@ const checkOnlineStatus = () => {
   if (navigator.onLine) {
     router.push(router?.options?.history?.state?.current)
   } else {
-    router.push('/login')
+    // router.push('/login')
+    router.push({ path: "/auth", query: { page: "login" } })
     useNuxtApp().$toast.success('You are currently offline.', {
       autoClose: 5000,
       dangerouslyHTMLString: true,
