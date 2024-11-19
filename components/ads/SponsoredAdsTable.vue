@@ -170,9 +170,11 @@
                 </div>
             </div> -->
 
-      <!-- <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between my-5 sm:gap-24 gap-3">
+      
+      <div class="mt-8 flow-root">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between my-5 sm:gap-24 gap-3">
           <div class="flex-1 flex items-center h-9 rounded border-gray-300 relative">
-            <input type="text" placeholder="Search" class=" text-sm rounded focus:outline-none px-5 flex-1">
+            <input type="text" v-model="searchTerm" placeholder="Search" class=" text-sm rounded focus:outline-none px-5 flex-1">
             <svg class="absolute right-3" width="21px" height="21px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
           </div>
           <div class="flex gap-x-2 flex-col sm:flex-row gap-2 sm:items-center">
@@ -194,26 +196,6 @@
                 <option value="desc">Descending Order</option>
               </select>
             </div>
-          </div>
-        </div> -->
-      <div class="mt-8 flow-root">
-        <div class="flex items-center justify-end gap-x-6 mb-5">
-          <div class="space-x-2">
-            <label for="sortBy" class="text-sm text-gray-700 font-medium">Sort By:</label>
-            <select id="sortBy" v-model="sortKey" @change="updateQuery" class="h-10 rounded border-gray-300 text-sm">
-              <option value="clientName">Client Name</option>
-              <option value="status">Status</option>
-              <option value="startDate">Start Date</option>
-              <option value="endDate">End Date</option>
-              <option value="createdAt">Date Created</option>
-            </select>
-          </div>
-          <div class="space-x-2">
-            <label for="orderBy" class="text-sm text-gray-700 font-medium">Order by:</label>
-            <select id="orderBy" v-model="sortOrder" @change="updateQuery" class="h-10 rounded border-gray-300 text-sm">
-              <option value="asc">Ascending Order</option>
-              <option value="desc">Descending Order</option>
-            </select>
           </div>
         </div>
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -291,7 +273,7 @@
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       <span v-if="ads?.endDate">
-                        {{ formatDate(ads?.endDate) }}
+                        {{ duration(ads?.endDate) }}
                       </span>
                       <span v-else>Nil</span>
                     </td>
@@ -354,14 +336,15 @@ import { useGetAllSponsoredAds } from '@/composables/sponsored-ads/fetch'
 import { useDeleteSponsoredAds } from '@/composables/sponsored-ads/delete'
 import { useGetAdsDashboardTotal } from '@/composables/sponsored-ads/adsDashboard';
 import { useDateFormat } from '@vueuse/core'
-const { getAllSponsoredAds, ads, loading, pagination, totalAds, queryObj } = useGetAllSponsoredAds()
+import dayjs from 'dayjs';
+const { getAllSponsoredAds, ads, loading, searchTerm, pagination, totalAds, queryObj } = useGetAllSponsoredAds()
 const { deleteSponsoredAds, loading: deleting } = useDeleteSponsoredAds(getAllSponsoredAds)
 const { getAdsDahboardTotals, adsDashboardTotals, loading: showing } = useGetAdsDashboardTotal()
 
-const showSlideOver = ref(false)
+const showSlideOver = ref(false);
 const selectedAds = ref({}) as Record<string, any>
 const route = useRoute()
-const router = useRouter()
+const router = useRouter();
 getAllSponsoredAds()
 
 onMounted(() => {
@@ -373,11 +356,28 @@ const handlePageChange = (val: any) => {
 }
 
 const formatDate = (date: string | Date | undefined) => {
-  // Ensure the date exists before formatting
   if (date) {
     return useDateFormat(date, 'MMM D YYYY');
   }
   return '';
+};
+
+const duration = (selectedDate : string) => {
+  const now = dayjs(); 
+  const duration = dayjs(selectedDate).diff(now, 'day'); 
+  
+  if (duration < 7) {
+    return `${duration} day${duration !== 1 ? 's' : ''}`;
+  } else if (duration < 30) {
+    const weeks = Math.floor(duration / 7);
+    return `${weeks} week${weeks !== 1 ? 's' : ''}`;
+  } else if (duration < 365) {
+    const months = Math.floor(duration / 30);
+    return `${months} month${months !== 1 ? 's' : ''}`;
+  } else {
+    const years = Math.floor(duration / 365);
+    return `${years} year${years !== 1 ? 's' : ''}`;
+  }
 };
 
 

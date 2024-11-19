@@ -8,7 +8,7 @@ const { fetchStories } = useFetchStories();
 export const useSetOriginal = () => {
   const payload = ref({
     IsOriginal: true,
-    storyId: "",
+    storyIds: [],
   });
   const loading = ref(false);
   const setOriginal = async () => {
@@ -64,7 +64,7 @@ export const useSetOriginal = () => {
 
   const setPayloadObj = (data) => {
     payload.value.IsOriginal = data.value.isOriginal;
-    payload.value.storyId = data.value.storyId;
+    payload.value.storyIds = data.value.storyIds;
   };
 
   return { setOriginal, payload, loading, setPayloadObj };
