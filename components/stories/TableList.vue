@@ -315,18 +315,19 @@ const closeDropdown = () => {
 };
 
 const handleSwitchToOriginal = (payloadObj: any) => {
+  const storyIds = Array.isArray(payloadObj.id) ? payloadObj.id : [payloadObj.id];
   const payload = ref({
     isOriginal: !payloadObj.isOriginal,
-    storyId: payloadObj.id
+    storyIds: storyIds
   });
   setPayloadObj(payload)
   setOriginal()
 }
 
-// Function to handle dropdown option click
 const handleDropdownClick = (action: any, data: any) => {
   closeDropdown();
   if (action === "switch-type") {
+    console.log('first', data)
     handleSwitchToOriginal(data);
   }
 

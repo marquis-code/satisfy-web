@@ -440,8 +440,9 @@
                   <ul class="pl-10">
                     <li>
                       <NuxtLink to="/dashboard/ads/requests"
-                        class="text-gray-700 hover:bg-[#0ba9b9] hover:text-white group rounded-md p-2 py-3 mt-0.5 text-sm leading-6 font-semibold block">
-                        Requests
+                        class="text-gray-700 hover:bg-[#0ba9b9] hover:text-white group rounded-md p-2 py-3 mt-0.5 text-sm leading-6 font-semibold flex gap-0.5">
+                        <span>Requests</span>
+                        <span v-if="totalAds > 0" class="w-2 h-2 rounded-full bg-red-500"></span>
                       </NuxtLink>
                     </li>
                   </ul>
@@ -529,11 +530,14 @@
 <script setup lang="ts">
 import { useKeyboardShortcut } from '@/composables/core/useKeyboardShortcut';
 import { useLogin } from '@/composables/auth/login'
-const { localstorageData, logOut } = useLogin()
+import { useGetAllSponsoredAdsRequests } from '@/composables/sponsored-ads/fetchRequests';
+const { localstorageData, logOut } = useLogin();
+const { totalAds, getAllSponsoredAdsRequests } = useGetAllSponsoredAdsRequests();
+
 const isOpen = ref(false)
 const route = useRoute()
 const router = useRouter()
-
+getAllSponsoredAdsRequests()
 
 const username = computed(() => {
   return Object.keys(localstorageData.user.value).length ? `${localstorageData.user.value.firstname} ${localstorageData.user.value.lastname}` : ''
