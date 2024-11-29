@@ -1,5 +1,5 @@
 <template>
-  <main class="space-y-10">
+  <main class="space-y-10 ">
     <DashboardStatsCards />
     <DashboardSectionTwo />
     <DashboardSectionThree />

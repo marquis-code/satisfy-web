@@ -40,5 +40,8 @@ export const storyApiFactory = {
   setOriginal(data: any){
    const url = '/story/set-original'
    return axiosInstance.post(url, data);
+  },
+  getTagCloud(metadata: { page: number; perPage: number }){
+    return axiosInstance.get(`/story/tag-cloud?page=${Number(metadata.page)}&perPage=${Number(metadata.perPage)}`);
   }
 };
