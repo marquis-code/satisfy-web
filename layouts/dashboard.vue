@@ -47,10 +47,10 @@
                         Users
                       </NuxtLink>
                     </li>
-                    <!-- <li> -->
-                    <!-- <NuxtLink to="/dashboard/payment" @click.prevent="isOpen = false"
+                    <li>
+                    <NuxtLink to="/dashboard/payment" @click.prevent="isOpen = false"
                         class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
-                        <svg fill="#000000"  width="24" height="24" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                        <svg fill="#667085"  width="24" height="24" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                         viewBox="0 0 511.999 511.999" xml:space="preserve">
                      <g>
                        <g>
@@ -75,8 +75,8 @@
                      </g>
                      </svg>
                         Payment
-                      </NuxtLink> -->
-                    <!-- </li> -->
+                      </NuxtLink>
+                    </li>
                     <li>
                       <NuxtLink to="/dashboard/pods" @click.prevent="isOpen = false"
                         class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
@@ -309,11 +309,11 @@
                         d="M21 6H3C2.44772 6 2 6.44772 2 7V17C2 17.5523 2.44772 18 3 18H21C21.5523 18 22 17.5523 22 17V7C22 6.44772 21.5523 6 21 6Z"
                         stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg> -->
-                <!-- <li>
+                <li>
                   <NuxtLink to="/dashboard/payment"
                     class="flex w-full text-gray-700 items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose">
                     
-                    <svg fill="#000000"  width="24" height="24" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                    <svg fill="#667085"  width="24" height="24" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
 	 viewBox="0 0 511.999 511.999" xml:space="preserve">
 <g>
 	<g>
@@ -340,7 +340,7 @@
 
                     Payment
                   </NuxtLink>
-                </li> -->
+                </li>
                 <!-- <li>
                   <NuxtLink to="/dashboard/notify"
                     class="flex w-full text-gray-700 items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose">
