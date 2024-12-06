@@ -18,7 +18,7 @@
                     
                         <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
                         <!-- Total payment Card -->
-                        <div class="bg-red-50 p-6 rounded-lg ">
+                        <div class="bg-red-50 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
                             <div class="flex items-center justify-between">
                             <h3 class="text-gray-700 font-bold">Total payment</h3>
                             </div>
@@ -40,7 +40,7 @@
                         </div>
                     
                         <!-- Wallet balance Card -->
-                        <div class="bg-green-50 p-6 rounded-lg ">
+                        <div class="bg-green-50 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
                             <div class="flex items-center justify-between">
                             <h3 class="text-gray-700 font-bold">Wallet balance</h3>
                             </div>
@@ -63,7 +63,7 @@
                         </div>
                     
                         <!-- Credit line Card -->
-                        <div class="bg-red-50 p-6 rounded-lg ">
+                        <div class="bg-red-50 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
                             <div class="flex items-center justify-between">
                             <h3 class="text-gray-700 font-bold">Credit line</h3>
                             <!-- <div class="bg-red-100 p-1 rounded-full">
@@ -91,14 +91,14 @@
                         </div>
                     
                         <!-- Payouts Card -->
-                        <div class="bg-green-50 p-6 rounded-lg ">
+                        <div class="bg-green-50 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
                             <div class="flex items-center justify-between">
                             <h3 class="text-gray-700 font-bold">Payouts</h3>
-                            <div class="bg-green-100 p-1 rounded-full">
+                            <!-- <div class="bg-green-100 p-1 rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-green-500">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
                                 </svg>
-                            </div>
+                            </div> -->
                             </div>
                             <svg width="204" height="62" viewBox="0 0 204 62" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1 31.65C1 31.65 12.1236 45.95 30.5 45.95C46 45.95 52.017 39.9 65.5 39.9C84 39.9 84 60.8 103.5 60.8C120.5 60.8 127.059 42.1 152.5 42.1C179 42.1 172.947 8 203 8" stroke="#20E682" stroke-width="2" stroke-linecap="round"/>
@@ -120,15 +120,16 @@
                     </div>
                 
                     <!-- Transactions Chart -->
-                    <div class="">
+                    <div v-if="activeView === 'chart'" class="">
                         <p class="font-medium">Transactions</p>
                         <apexchart 
                         type="line" 
                         height="350" 
                         :options="chartOptions" 
                         :series="series" 
-                        />
+                        /> 
                     </div>
+                    <TransactionsList v-else />
                 </section>
                 <TransactionsList v-if="activeTab === 'transactions'" />
             </template>
@@ -142,6 +143,7 @@ import ApexCharts from "vue3-apexcharts";
 definePageMeta({
   layout: "dashboard",
 });
+const activeView = ref("chart")
 
 // Chart Data
 const series = ref([
