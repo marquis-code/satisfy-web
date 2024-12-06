@@ -128,11 +128,6 @@ const setUserStats = () => {
             // count: !loadingUserStories?.value ? userStoriesList?.value?.length : 0
         },
         {
-            title: "Referrals",
-            key: "referrals",
-            count: !loadRefferals?.value ? referralList?.value.length : 0
-        },
-        {
             title: "Views",
             key: "views",
             count: user?.value?.total_views_count ?? 0
@@ -151,7 +146,12 @@ const setUserStats = () => {
             title: "Payout",
             key: "payout",
             count: user?.value?.estimatedPayout || 0,
-        }
+        },
+        {
+            title: "Referrals",
+            key: "referrals",
+            count: !loadRefferals?.value ? referralList?.value.length : 0
+        },
         // {
         //     title: "Estimated Payout",
         //     key: "estimated_payout",
