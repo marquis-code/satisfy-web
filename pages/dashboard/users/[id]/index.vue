@@ -70,17 +70,20 @@ import { useFetchUserById } from '@/composables/user/getUserById'
 import { useFetchUserStories } from '@/composables/user/fetchUserStories'
 import { useFetchReferalls } from '@/composables/user/getReferrals'
 import { useFetchUserSummary } from '@/composables/user/getUserSummary';
+import { useFetchUserWallet } from '@/composables/wallet/fetchUserWallets'
 
 const { fetchUserStories, userStoriesList, loading: loadingUserStories, pagination: storyPagination, queryObj, totalPods } = useFetchUserStories()
 const { fetchFollowings, followingsList, pagination: followingsPagination, loading: loadFollowings, totalFollowings } = useFetchFollowings()
 const { fetchFollowers, followersList, pagination, loading: loadFollowers, totalFollowers } = useFetchFollowers()
 const { fetchUser, user, loading } = useFetchUserById()
 const { fetchReferalls, referralList, loading: loadRefferals, pagination: referralsPagination } = useFetchReferalls()
+const {loading : loadingWallet, wallets, fetchUserWallet} = useFetchUserWallet();
 fetchUser(),
 fetchUserStories()
 fetchFollowings()
 fetchFollowers()
 fetchReferalls()
+fetchUserWallet()
 const router = useRouter()
 const route = useRoute()
 const activeTab = ref("default") as any
@@ -106,6 +109,13 @@ const createPod = () => {
 const closeSlideOver = () => {
     showSlideOver.value = false
 }
+
+const formatCurrency = (amount: number) => {
+  return new Intl.NumberFormat('en-NG', {
+    style: 'currency',
+    currency: 'NGN',
+  }).format(amount);
+};
 
 const setUserStats = () => {
     return [
@@ -140,12 +150,12 @@ const setUserStats = () => {
         {
             title: "Wallet",
             key: "wallet",
-            count: user?.value?.reactions_count ?? 0
+            count: formatCurrency(wallets?.value[0]?.balance )|| 0
         },
         {
             title: "Payout",
             key: "payout",
-            count: user?.value?.estimatedPayout || 0,
+            count: formatCurrency(wallets?.value[1]?.balance )|| 0
         },
         {
             title: "Referrals",
