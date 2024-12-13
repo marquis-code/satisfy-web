@@ -9,7 +9,7 @@
     </div>
 
   </main>
-</template>
+</template> 
 
 <script setup lang="ts">
 import { useFetchUserStories } from '@/composables/user/fetchUserStories'
@@ -18,7 +18,9 @@ const { fetchUserStories, userStoriesList, loading, pagination, queryObj } = use
 fetchUserStories()
 
 const handlePageChange = (val: any) => {
-  pagination.value.page = val
+  pagination.value.page = val;
+  console.log('clickkk')
+
 }
 
 defineProps({

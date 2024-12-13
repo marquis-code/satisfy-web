@@ -18,9 +18,9 @@ export const useFetchUserWalletTransactions = () => {
     const fetchUserWalletTransactions = async () => {
         loading.value = true;
         try {
-            const response = await walletApiFactory.getUserWalletTransactions(pagination.value, queryObj.value, id);
+            const response = await walletApiFactory.getUserWalletTransactions(pagination.value, queryObj.value, id||'');
             walletTransactions.value = response.data.result;
-            console.log(walletTransactions.value)
+            pagination.value = response.data.metadata;
         } catch (error: any) {
             useNuxtApp().$toast.error(error.message || 'Something went wrong while fetching wallet.', {
                 autoClose: 5000,
@@ -31,9 +31,11 @@ export const useFetchUserWalletTransactions = () => {
             loading.value = false;
         }
     }
-    // watch(() => pagination.value.page, () => {
-    //     fetchUserWalletTransactions();
-    //     }
-    // );
-    return { loading, walletTransactions, fetchUserWalletTransactions, pagination }
+    watch(
+        () => pagination.value.page,
+        () => {
+            fetchUserWalletTransactions();
+        }
+    );
+    return { loading, walletTransactions, fetchUserWalletTransactions, pagination, queryObj }
 }

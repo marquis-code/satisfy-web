@@ -44,7 +44,7 @@
             <section v-else-if="route.query.page === 'stories'">
                 <UsersStories :stories="userStoriesList" :loading="loadingUserStories" :pagination="storyPagination" :queryObj="queryObj" />
             </section>
-            <section v-else-if="route.query.page === 'wallet'">
+            <section v-else-if="route.query.page === 'payout'">
                 <UsersWallet />
             </section>
             <section v-else-if="route.query.page === 'followers'">
