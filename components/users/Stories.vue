@@ -19,8 +19,6 @@ fetchUserStories()
 
 const handlePageChange = (val: any) => {
   pagination.value.page = val;
-  console.log('clickkk')
-
 }
 
 defineProps({
