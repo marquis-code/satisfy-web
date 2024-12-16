@@ -1,8 +1,7 @@
 import { userApiFactory } from "@/apiFactory/users";
 import { ref, watch } from "vue";
 import { useNuxtApp } from "#app";
-
-// Debounce function to limit the rate at which a function can be called
+ 
 function debounce(fn: Function, delay: number) {
   let timeoutId: number | undefined;
   return function (...args: any) {

@@ -19,16 +19,16 @@
             </thead>
             <tbody>
                 <tr v-for="transaction in walletTransactions" :key="transaction.id" class="border-t hover:bg-gray-50">
-                    <td class="py-4 pl-6 ">{{ formatDate(transaction.createdAt) }}</td>
+                    <td class="py-4 pl-6 ">{{ formatDateTime(transaction.createdAt) }}</td>
                     <td class="py-4 px-6">{{ transaction.description }}</td>
-                    <td class="py-4 px-6 font-medium"
-                        :class="transaction.direction === 'credit' ? 'text-green-400' : 'text-red-600'">{{
+                    <td class="py-4 px-6 font-medium text-right"
+                        :class="transaction.direction === 'credit' ? 'text-green-600' : 'text-red-600'">{{
                             formatCurrency(transaction.amount) }}</td>
                 </tr>
             </tbody>
         </table>
-        <CorePagination :total="pagination.total" :page="pagination.page" :perPage="pagination.perPage"
-            :pages="pagination.pages" @page-changed="handlePageChange" />
+       <CorePagination :total="pagination.total" :page="pagination.page" :perPage="pagination.perPage"
+       :pages="pagination.pages" @page-changed="handlePageChange" />
     </div>
     <div v-if="loading" class="w-full h-32 bg-gray-100 animate-pulse rounded-xl"></div>
 </template>
@@ -47,7 +47,7 @@ const formatCurrency = (amount: number) => {
     }).format(amount);
 };
 const handlePageChange = (val: any) => {
-    pagination.value.page = val
+  pagination.value.page = val
 }
 </script>
 
