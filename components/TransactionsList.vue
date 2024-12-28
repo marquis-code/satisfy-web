@@ -18,7 +18,8 @@
           </svg>
         </div>
         <span class="text-gray-300">Sort by :</span>
-        <select id="orderBy" v-model="sortOrder" @change="updateQuery" class="text-sm rounded-lg text-gray-600 outline-none border-none">
+        <select id="orderBy" v-model="sortOrder" @change="updateQuery"
+          class="text-sm rounded-lg text-gray-600 outline-none border-none">
           <option value="desc">Newest</option>
           <option value="asc">Oldest</option>
         </select>
@@ -33,8 +34,8 @@
             <th class="py-4 pl-6 w-44 ">Date</th>
             <th class="py-4 pl-6">Description</th>
             <th class="py-4 pl-6">Amount</th>
-            <!-- <th class="py-4 pl-6 w-52">User</th>
-            <th class="py-4 pl-6">User class</th>
+            <th class="py-4 pl-6">User</th>
+            <!-- <th class="py-4 pl-6">User class</th>
             <th class="py-4 pl-6">Source</th> -->
           </tr>
         </thead>
@@ -45,11 +46,15 @@
             <td class="py-4 px-6 font-medium text-right"
               :class="transaction.direction === 'credit' ? 'text-green-600' : 'text-red-600'">{{
                 formatCurrency(transaction.amount) }}</td>
-            <!-- <td class="py-4 pl-6 flex items-center space-x-2 w-52">
-              <div class="w-8 h-8 rounded-full bg-gray-300"></div>
-              <span>{{ transaction.user }}</span>
+            <td class="py-4 pl-6 flex items-center gap-2" >
+              <DashboardImageZoom v-if="transaction.user.profilePicture" class="h-10 w-10"
+                :src="transaction.user.profilePicture" />
+              <div v-else class="h-10 w-10 rounded-full p-2 bg-gray-500 text-white flex justify-center items-center">
+                {{ generateInitials(transaction.user.fname, transaction.user.lname) }}
+              </div>
+              <span>{{ transaction.user.fname }} {{ transaction.user.lname }}</span>
             </td>
-            <td class="py-4 pl-6">{{ transaction.userClass }}</td>
+            <!-- <td class="py-4 pl-6">{{ transaction.userClass }}</td>
             <td class="py-4 pl-6">{{ transaction.source }}</td> -->
           </tr>
         </tbody>
@@ -111,6 +116,9 @@ const formatCurrency = (amount: number) => {
     style: 'currency',
     currency: 'NGN',
   }).format(amount);
+};
+const generateInitials = (fname: string, lname: string) => {
+  return `${fname.charAt(0).toUpperCase()}${lname.charAt(0).toUpperCase()}`;
 };
 </script>
 

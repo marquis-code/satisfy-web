@@ -4,9 +4,8 @@ import { ref, watch } from "vue";
 export const useFetchDetailedDashboardSummary = () => {
   const detailedDashboardSummary = ref({}) as Record<string, any>;
   const metaObj = ref({
-    // range: 'last_7_days',  
     range: 'today',  
-    startDate: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().substr(0, 10),
+    startDate: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().substr(0, 10), 
     endDate: new Date().toISOString().substr(0, 10),
     showAll: true,
   });
@@ -18,7 +17,6 @@ export const useFetchDetailedDashboardSummary = () => {
       const response = await dashboardApiFactory.getDashboardDetailedSummary(metaObj.value);
       if (response && response.data) {
         detailedDashboardSummary.value = response.data;
-
       }
     } catch (error) {
       useNuxtApp().$toast.error(error.message, {
