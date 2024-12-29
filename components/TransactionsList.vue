@@ -46,13 +46,14 @@
             <td class="py-4 px-6 font-medium text-right"
               :class="transaction.direction === 'credit' ? 'text-green-600' : 'text-red-600'">{{
                 formatCurrency(transaction.amount) }}</td>
-            <td class="py-4 pl-6 flex items-center gap-2" >
+            <td class="py-4 pl-6 flex items-center gap-2">
               <DashboardImageZoom v-if="transaction.user.profilePicture" class="h-10 w-10"
                 :src="transaction.user.profilePicture" />
               <div v-else class="h-10 w-10 rounded-full p-2 bg-gray-500 text-white flex justify-center items-center">
                 {{ generateInitials(transaction.user.fname, transaction.user.lname) }}
               </div>
-              <span>{{ transaction.user.fname }} {{ transaction.user.lname }}</span>
+              <nuxt-link :to="`/dashboard/users/${transaction.user.id}`" class="font-medium text-gray-800 no-underline cursor-pointer">{{
+                transaction.user.fname }} {{ transaction.user.lname }}</nuxt-link>
             </td>
             <!-- <td class="py-4 pl-6">{{ transaction.userClass }}</td>
             <td class="py-4 pl-6">{{ transaction.source }}</td> -->
