@@ -13,39 +13,17 @@
                 <select v-model="selectedRange" @change="onRangeChange"
                   class="border border-gray-300 bg-white px-7 outline-none py-2 rounded-lg shadow-sm text-sm text-gray-600">
                   <option value="today">All Time</option>
-                  <option value="this_month">Current month</option>
-                  <option value="last_30_days">Previous month</option>
+                  <option value="yesterday">Yesterday</option>
+                  <option value="this_week">This Week</option>
+                  <option value="this_month">This Month</option>
+                  <option value="last_7_days">Last 7 Days</option>
+                  <option value="last_30_days">Last 30 Days</option>
+                  <option value="last_60_days">Last 60 Days</option>
                 </select>
               </div>
             </div>
 
             <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6" v-if="!loading && Object.keys(walletSummary).length">
-              <!-- Total payment Card -->
-              <div class="bg-red-50 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
-                <div class="flex items-center justify-between">
-                  <h3 class="text-gray-700 font-bold">Total payment</h3>
-                </div>
-                <svg width="204" height="56" viewBox="0 0 204 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M203 44.5469C203 44.5469 191.876 30.2469 173.5 30.2469C158 30.2469 151.983 47.2969 138.5 47.2969C120 47.2969 120 18.6969 100.5 18.6969C83.5 18.6969 76.9411 54.9969 51.5 54.9969C25 54.9969 31.0532 14.2969 1 14.2969"
-                    stroke="#E13D45" stroke-width="2" stroke-linecap="round" />
-                </svg>
-
-                <div class="mt-4 flex items-center justify-between">
-                  <h2 class="text-2xl font-semibold text-black flex items-center gap-x-3">
-                    <div class="bg-red-100 p-1 rounded-full">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                        stroke="currentColor" class="w-4 h-4 text-red-500">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                      </svg>
-                    </div>
-                    ₦405.01k
-                  </h2>
-                  <span class="text-red-500">-7.3%</span>
-                </div>
-                <div class="mt-2 text-gray-500 text-sm">Compared from Last Month</div>
-              </div>
-
               <!-- Wallet balance Card -->
               <div class="bg-green-50 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
                 <div class="flex items-center justify-between">
@@ -55,51 +33,23 @@
                   src="@/assets/icons/payment/paymentIncrease.svg" alt="">
                 <img v-else src="@/assets/icons/payment/paymentDecrease.svg" alt="">
 
-                <div class="mt-4 flex items-center justify-between">
+                <div class="mt-4 flex items-center justify-between flex-wrap">
                   <h2 class="text-2xl font-semibold text-black flex items-center gap-x-3">
-                    <div class="bg-green-100 p-1 rounded-full">
-                      <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    <!-- <div class="bg-green-100 p-1 rounded-full">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                         stroke="currentColor" class="w-4 h-4 text-green-500">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                      </svg> -->
-                    </div>
-                    ₦{{ formatTotal(walletSummary.wallet.diff) }}k
+                      </svg>
+                    </div> -->
+                    ₦{{ formatTotal(walletSummary.wallet.diff) }}
                   </h2>
                   <span v-if="parseFloat(walletSummary.wallet.growth) >= 0" class="text-green-400">{{
                     walletSummary.wallet.growth }}</span>
-                  <span v-else class=" text-red-500">
+                  <span v-else class=" text-red-500 text-wrap">
                     {{ walletSummary.wallet.growth }}
                   </span>
                 </div>
-                <div class="mt-2 text-gray-500 text-sm">Compared from Last Month</div>
-              </div>
-
-              <!-- Credit line Card -->
-              <div class="bg-red-50 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
-                <div class="flex items-center justify-between">
-                  <h3 class="text-gray-700 font-bold">Credit line</h3>
-                </div>
-                <img v-if="parseFloat(walletSummary.commission.growth) >= 0"
-                  src="@/assets/icons/payment/paymentIncrease.svg" alt="">
-                <img v-else src="@/assets/icons/payment/paymentDecrease.svg" alt="">
-
-                <div class="mt-4 flex items-center justify-between">
-                  <h2 class="text-2xl font-semibold text-black flex items-center gap-x-3">
-                    <!-- <div class="bg-red-100 p-1 rounded-full">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                        stroke="currentColor" class="w-4 h-4 text-red-500">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                      </svg>
-                    </div> -->
-                    ₦{{ formatTotal(walletSummary.commission.diff) }}k
-                  </h2>
-                  <span v-if="parseFloat(walletSummary.commission.growth) >= 0" class="text-green-400">{{
-                    walletSummary.commission.growth }}</span>
-                  <span v-else class=" text-red-500">
-                    {{ walletSummary.commission.growth }}
-                  </span>
-                </div>
-                <div class="mt-2 text-gray-500 text-sm">Compared from Last Month</div>
+                <div class="mt-2 text-gray-500 text-sm">Compared from {{formatRange(selectedRange)}}</div>
               </div>
 
               <!-- Payouts Card -->
@@ -110,7 +60,7 @@
                 <img v-if="parseFloat(walletSummary.payout.growth) >= 0"
                   src="@/assets/icons/payment/paymentIncrease.svg" alt="">
                 <img v-else src="@/assets/icons/payment/paymentDecrease.svg" alt="">
-                <div class="mt-4 flex items-center justify-between">
+                <div class="mt-4 flex items-center justify-between flex-wrap">
                   <h2 class="text-2xl font-semibold text-black flex items-center gap-x-3">
                     <!-- <div class="bg-green-100 p-1 rounded-full">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -118,7 +68,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
                       </svg>
                     </div> -->
-                    ₦{{ formatTotal(walletSummary.payout.diff) }}k
+                    ₦{{ formatTotal(walletSummary.payout.diff) }}
                   </h2>
                   <span v-if="parseFloat(walletSummary.payout.growth) >= 0" class="text-green-400">{{
                     walletSummary.payout.growth }}</span>
@@ -126,11 +76,64 @@
                     {{ walletSummary.payout.growth }}
                   </span>
                 </div>
-                <div class="mt-2 text-gray-500 text-sm">Compared from Last Month</div>
+                <div class="mt-2 text-gray-500 text-sm">Compared from {{formatRange(selectedRange)}}</div>
+              </div>
+
+              <!-- Commission Card -->
+              <div class="bg-red-50 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-gray-700 font-bold">Commission</h3>
+                </div>
+                <img v-if="parseFloat(walletSummary.commission.growth) >= 0"
+                  src="@/assets/icons/payment/paymentIncrease.svg" alt="">
+                <img v-else src="@/assets/icons/payment/paymentDecrease.svg" alt="">
+
+                <div class="mt-4 flex items-center justify-between flex-wrap">
+                  <h2 class="text-2xl font-semibold text-black flex items-center gap-x-3">
+                    <!-- <div class="bg-red-100 p-1 rounded-full">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="w-4 h-4 text-red-500">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                      </svg>
+                    </div> -->
+                    ₦{{ formatTotal(walletSummary.commission.diff) }}
+                  </h2>
+                  <span v-if="parseFloat(walletSummary.commission.growth) >= 0" class="text-green-400">{{
+                    walletSummary.commission.growth }}</span>
+                  <span v-else class=" text-red-500">
+                    {{ walletSummary.commission.growth }}
+                  </span>
+                </div>
+                <div class="mt-2 text-gray-500 text-sm">Compared from {{formatRange(selectedRange)}}</div>
+              </div>
+
+              <!-- Settlement Balance Card -->
+              <div class="bg-red-50 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-gray-700 font-bold">Settlement Balance</h3>
+                </div>
+                <svg width="204" height="56" viewBox="0 0 204 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M203 44.5469C203 44.5469 191.876 30.2469 173.5 30.2469C158 30.2469 151.983 47.2969 138.5 47.2969C120 47.2969 120 18.6969 100.5 18.6969C83.5 18.6969 76.9411 54.9969 51.5 54.9969C25 54.9969 31.0532 14.2969 1 14.2969"
+                    stroke="#E13D45" stroke-width="2" stroke-linecap="round" />
+                </svg>
+
+                <div class="mt-4 flex items-center justify-between flex-wrap">
+                  <h2 class="text-2xl font-semibold text-black flex items-center gap-x-3">
+                    <!-- <div class="bg-red-100 p-1 rounded-full">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="w-4 h-4 text-red-500">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                      </svg>
+                    </div> -->
+                    ₦405.01k
+                  </h2>
+                  <span class="text-red-500">-7.3%</span>
+                </div>
+                <div class="mt-2 text-gray-500 text-sm">Compared from {{formatRange(selectedRange)}}</div>
               </div>
             </div>
-            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-4 lg:gap-8"
-              v-if="loading">
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-4 lg:gap-8" v-if="loading">
               <div v-for="itm in 4" :key="itm" class="h-[200px] bg-slate-300 rounded-2xl animate-pulse"></div>
             </div>
           </div>
@@ -162,8 +165,20 @@ const formatTotal = (total: number | string): string => {
   if (isNaN(numericTotal)) {
     return "0.00";
   }
-  return numericTotal.toFixed(2);
+  return new Intl.NumberFormat('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(numericTotal);
 };
+
+const formatRange = (input: string): string => {
+  return input
+    .split('_')  
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))  
+    .join(' '); 
+};
+
+
 const selectedRange = ref('today');
 const dateFilter = ref<any>([]);
 const showAll = ref<boolean>(true);
