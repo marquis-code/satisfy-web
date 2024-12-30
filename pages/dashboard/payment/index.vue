@@ -112,11 +112,7 @@
                 <div class="flex items-center justify-between">
                   <h3 class="text-gray-700 font-bold">Settlement Balance</h3>
                 </div>
-                <svg width="204" height="56" viewBox="0 0 204 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M203 44.5469C203 44.5469 191.876 30.2469 173.5 30.2469C158 30.2469 151.983 47.2969 138.5 47.2969C120 47.2969 120 18.6969 100.5 18.6969C83.5 18.6969 76.9411 54.9969 51.5 54.9969C25 54.9969 31.0532 14.2969 1 14.2969"
-                    stroke="#E13D45" stroke-width="2" stroke-linecap="round" />
-                </svg>
+                <img src="@/assets/icons/payment/paymentIncrease.svg" alt="">
 
                 <div class="mt-4 flex items-center justify-between flex-wrap">
                   <h2 class="text-2xl font-semibold text-black flex items-center gap-x-3">
@@ -126,9 +122,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                       </svg>
                     </div> -->
-                    ₦405.01k
+                    ₦{{formatTotal(getSettlementBalance("NGN"))}}
                   </h2>
-                  <span class="text-red-500">-7.3%</span>
+                  <!-- <span class="text-red-500">-7.3%</span> -->
                 </div>
                 <div class="mt-2 text-gray-500 text-sm">Compared from {{formatRange(selectedRange)}}</div>
               </div>
@@ -184,6 +180,7 @@ const dateFilter = ref<any>([]);
 const showAll = ref<boolean>(true);
 
 
+
 const onRangeChange = () => {
   const payload = {
     range: selectedRange.value,
@@ -194,6 +191,14 @@ const onRangeChange = () => {
   setFilterData(payload);
   fetchWalletSummary();
 };
+
+
+const getSettlementBalance = (currency: string): number => {
+  console.log(walletSummary.value)
+  const settlementBalance = walletSummary.value?.settlement?.wallets?.find(wallet => wallet.currency === currency);
+  return settlementBalance ? settlementBalance.balance : 0; 
+}
+
 
 
 const activeView = ref("chart")
