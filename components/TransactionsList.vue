@@ -38,7 +38,7 @@
             <th scope="col" class="px-3 py-3.5 text-right text-sm font-semibold text-gray-900"> Amount </th>
             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"> Date Created </th>
             <!-- <th class="py-4 pl-6">User class</th>
-            <th class="py-4 pl-6">Source</th> -->
+            <th class="py-4 pl-6">Sourcee</th> -->
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-100 bg-white">
