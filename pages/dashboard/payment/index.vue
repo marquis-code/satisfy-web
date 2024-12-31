@@ -25,7 +25,7 @@
 
             <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6" v-if="!loading && Object.keys(walletSummary).length">
               <!-- Wallet balance Card -->
-              <div class="bg-green-50 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
+              <div class="bg-blue-100 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
                 <div class="flex items-center justify-between">
                   <h3 class="text-gray-700 font-bold">Wallet balance</h3>
                 </div>
@@ -53,15 +53,15 @@
               </div>
 
               <!-- Payouts Card -->
-              <div class="bg-green-50 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
+              <div class=" bg-black opacity-80 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
                 <div class="flex items-center justify-between">
-                  <h3 class="text-gray-700 font-bold">Payouts</h3>
+                  <h3 class="text-white font-bold">Payouts</h3>
                 </div>
                 <img v-if="parseFloat(walletSummary.payout.growth) >= 0"
                   src="@/assets/icons/payment/paymentIncrease.svg" alt="">
                 <img v-else src="@/assets/icons/payment/paymentDecrease.svg" alt="">
                 <div class="mt-4 flex items-center justify-between flex-wrap">
-                  <h2 class="text-2xl font-semibold text-black flex items-center gap-x-3">
+                  <h2 class="text-2xl font-semibold text-white flex items-center gap-x-3">
                     <!-- <div class="bg-green-100 p-1 rounded-full">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                         stroke="currentColor" class="w-4 h-4 text-green-500">
@@ -80,7 +80,7 @@
               </div>
 
               <!-- Commission Card -->
-              <div class="bg-red-50 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
+              <div class="bg-green-100 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
                 <div class="flex items-center justify-between">
                   <h3 class="text-gray-700 font-bold">Commission</h3>
                 </div>
@@ -108,7 +108,7 @@
               </div>
 
               <!-- Settlement Balance Card -->
-              <div class="bg-red-50 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
+              <div class="bg-purple-100 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
                 <div class="flex items-center justify-between">
                   <h3 class="text-gray-700 font-bold">Settlement Balance</h3>
                 </div>
@@ -206,11 +206,11 @@ const activeView = ref("chart")
 // Chart Data
 const series = ref([
   {
-    name: "Funding",
+    name: "Wallet Fund",
     data: [6, 8, 9, 10, 8.3, 11, 12],
   },
   {
-    name: "Expenses",
+    name: "Payout",
     data: [4, 6, 5, 7, 5, 8, 9],
   },
 ]);

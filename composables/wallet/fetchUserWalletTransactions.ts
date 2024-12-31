@@ -1,5 +1,19 @@
 import { walletApiFactory } from "@/apiFactory/wallet"
 
+
+function debounce(fn: Function, delay: number) {
+    let timeoutId: number | undefined;
+    return function (...args: any) {
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+        }
+        timeoutId = setTimeout(() => {
+            fn(...args);
+        }, delay);
+    };
+}
+
+
 export const useFetchUserWalletTransactions = () => {
     const loading = ref(false)
     const walletTransactions = ref([])
@@ -8,6 +22,7 @@ export const useFetchUserWalletTransactions = () => {
         sortBy: "createdAt",
         orderBy: "desc",
     }) as any;
+    const searchQuery = ref<string>("");
 
     const pagination = ref({
         page: 1,
@@ -18,7 +33,7 @@ export const useFetchUserWalletTransactions = () => {
     const fetchUserWalletTransactions = async () => {
         loading.value = true;
         try {
-            const response = await walletApiFactory.getUserWalletTransactions(pagination.value, queryObj.value, id||'');
+            const response = await walletApiFactory.getUserWalletTransactions(pagination.value, queryObj.value, id || '', searchQuery.value,);
             walletTransactions.value = response.data.result;
             pagination.value = response.data.metadata;
         } catch (error: any) {
@@ -37,5 +52,15 @@ export const useFetchUserWalletTransactions = () => {
             fetchUserWalletTransactions();
         }
     );
-    return { loading, walletTransactions, fetchUserWalletTransactions, pagination, queryObj }
+    const debouncedFetchUserWalletTransactions = debounce(fetchUserWalletTransactions, 300);
+
+    watch(searchQuery, (newQuery) => {
+        setPaginationObj(1); 
+        debouncedFetchUserWalletTransactions();
+    });
+    const setPaginationObj = (val: any) => {
+        pagination.value.page = val;
+    };
+
+    return { loading, walletTransactions, fetchUserWalletTransactions, pagination, queryObj, searchQuery}
 }
