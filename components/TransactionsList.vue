@@ -4,7 +4,7 @@
     <div class="flex justify-end mt-6 mb-4  text-sm">
       <div class="relative flex items-center space-x-2">
         <div class="flex items-center rounded border-none relative">
-          <input type="text"
+          <input type="text" v-model="searchQuery"
             class=" text-sm rounded focus:outline-none focus:border-none px-5 flex-1 bg-transparent border-none ">
           <svg class="absolute right-3" width="21px" height="21px" viewBox="0 0 24 24" fill="none"
             xmlns="http://www.w3.org/2000/svg">
@@ -28,33 +28,42 @@
 
     <!-- Table -->
     <div class="overflow-x-auto bg-white rounded-lg shadow-md text-sm">
-      <table class="min-w-full text-left">
+      <table class="min-w-full table-fixed divide-y divide-gray-300">
         <thead class="bg-gray-100">
           <tr>
-            <th class="py-4 pl-6 w-44 ">Date</th>
-            <th class="py-4 pl-6">Description</th>
-            <th class="py-4 pl-6">Amount</th>
-            <th class="py-4 pl-6">User</th>
+            <th scope="col" class="px-6 py-3.5 pl-4 text-left text-sm font-semibold text-gray-900">S/N</th>
+            <th scope="col" class="py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"> Avatar </th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">User </th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"> Description</th>
+            <th scope="col" class="px-3 py-3.5 text-right text-sm font-semibold text-gray-900"> Amount </th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"> Date Created </th>
             <!-- <th class="py-4 pl-6">User class</th>
             <th class="py-4 pl-6">Source</th> -->
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="transaction in walletTransactions" :key="transaction.id" class="border-t hover:bg-gray-50">
-            <td class="py-4 pl-6 w-44 ">{{ formatDateTime(transaction.createdAt) }}</td>
-            <td class="py-4 pl-6">{{ transaction.description }}</td>
-            <td class="py-4 px-6 font-medium text-right"
-              :class="transaction.direction === 'credit' ? 'text-green-600' : 'text-red-600'">{{
-                formatCurrency(transaction.amount) }}</td>
-            <td class="py-4 pl-6 flex items-center gap-2">
+        <tbody class="divide-y divide-gray-100 bg-white">
+          <tr v-for="(transaction, index) in walletTransactions" :key="index" class="odd:bg-gray-50">
+            <td class="whitespace-nowrap  text-sm font-medium text-gray-900 sm:pl-4">
+              {{ (pagination.page - 1) * pagination.perPage + (index + 1) }}</td>
+            <td class="whitespace-nowrap py-4 pr-3 text-xs font-medium">
               <DashboardImageZoom v-if="transaction.user.profilePicture" class="h-10 w-10"
                 :src="transaction.user.profilePicture" />
               <div v-else class="h-10 w-10 rounded-full p-2 bg-gray-500 text-white flex justify-center items-center">
                 {{ generateInitials(transaction.user.fname, transaction.user.lname) }}
               </div>
-              <nuxt-link :to="`/dashboard/users/${transaction.user.id}`" class="font-medium text-gray-800 no-underline cursor-pointer">{{
-                transaction.user.fname }} {{ transaction.user.lname }}</nuxt-link>
             </td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+              <nuxt-link :to="`/dashboard/users/${transaction.user.id}`"
+                class="font-medium text-gray-800 no-underline cursor-pointer">{{ transaction.user.fname }} {{
+                  transaction.user.lname }}</nuxt-link>
+            </td>
+            <td class="px-3 py-4 text-sm text-gray-500">{{ transaction.description }}</td>
+            <td class="py-4 px-6 font-medium text-right"
+              :class="transaction.direction === 'credit' ? 'text-green-600' : 'text-red-600'">{{
+                formatCurrency(transaction.amount) }}</td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 ">{{ formatDateTime(transaction.createdAt) }}</td>
+
+
             <!-- <td class="py-4 pl-6">{{ transaction.userClass }}</td>
             <td class="py-4 pl-6">{{ transaction.source }}</td> -->
           </tr>
@@ -64,29 +73,6 @@
         :pages="pagination.pages" @page-changed="handlePageChange" />
     </div>
 
-    <!-- Pagination -->
-    <!-- <div class="flex justify-between items-center mt-6">
-      <span class="text-gray-600">Viewing 1 - 8 of 4,000</span>
-      <div class="flex space-x-2 items-center">
-        <button class="text-gray-600 hover:bg-gray-200 p-2 rounded-lg">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <div class="flex space-x-2">
-          <button class="bg-green-500 text-white px-3 py-1 rounded-lg">1</button>
-          <button class="text-gray-600 hover:bg-gray-200 px-3 py-1 rounded-lg">2</button>
-          <button class="text-gray-600 hover:bg-gray-200 px-3 py-1 rounded-lg">3</button>
-          <span class="text-gray-600">...</span>
-          <button class="text-gray-600 hover:bg-gray-200 px-3 py-1 rounded-lg">12</button>
-        </div>
-        <button class="text-gray-600 hover:bg-gray-200 p-2 rounded-lg">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -96,7 +82,7 @@ import { ref } from 'vue';
 definePageMeta({
   layout: 'dashboard'
 })
-const { loading, walletTransactions, fetchUserWalletTransactions, pagination, queryObj } = useFetchUserWalletTransactions();
+const { loading, walletTransactions, fetchUserWalletTransactions, pagination, queryObj, searchQuery } = useFetchUserWalletTransactions();
 fetchUserWalletTransactions();
 
 const handlePageChange = (val: any) => {
