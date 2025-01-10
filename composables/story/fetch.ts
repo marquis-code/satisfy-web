@@ -1,5 +1,17 @@
-import { storyApiFactory } from "@/apiFactory/story";
+import { storyApiFactory } from "@/apiFactory/story"; 
 import { ref, computed, watch } from "vue";
+
+function debounce(fn: Function, delay: number) {
+  let timeoutId: number | undefined;
+  return function (...args: any) {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
+}
 
 export const useFetchStories = () => {
   const storiesList = ref([]) as any;
@@ -36,14 +48,15 @@ export const useFetchStories = () => {
       const response = await storyApiFactory.getAllStories(
         queryObj.value,
         currentPagination,
-        isOriginal.value
+        isOriginal.value,
+        searchQuery.value
       );
       storiesList.value = response?.data?.result || [];
 
       if (isOriginal.value) {
         paginationOriginal.value = response.data.metadata;
         const totalOriginalStories = response.data.metadata.total;
-        console.log("Total original stories:", totalOriginalStories);
+        // console.log("Total original stories:", totalOriginalStories);
       } else {
         pagination.value = response.data.metadata;
       }
@@ -77,18 +90,18 @@ export const useFetchStories = () => {
     }
   };
 
-  const filteredStories = computed(() => {
-    const query = searchQuery.value.trim().toLowerCase();
-    if (!query) return storiesList.value;
+  // const filteredStories = computed(() => {
+  //   const query = searchQuery.value.trim().toLowerCase();
+  //   if (!query) return storiesList.value;
 
-    return storiesList.value.filter(
-      (story) =>
-        story?.title.toLowerCase().includes(query) ||
-        story?.tags.toLowerCase().includes(query) ||
-        story?.user?.fname.toLowerCase().includes(query) ||
-        story?.user?.lname.toLowerCase().includes(query)
-    );
-  });
+  //   return storiesList.value.filter(
+  //     (story) =>
+  //       story?.title.toLowerCase().includes(query) ||
+  //       story?.tags.toLowerCase().includes(query) ||
+  //       story?.user?.fname.toLowerCase().includes(query) ||
+  //       story?.user?.lname.toLowerCase().includes(query)
+  //   );
+  // });
 
   watch(
     () =>
@@ -116,6 +129,14 @@ export const useFetchStories = () => {
       }
     }
   );
+
+  const debouncedFetchStories = debounce(fetchStories, 300);
+  
+    watch(searchQuery, (newQuery) => {
+      setPaginationObj(1); 
+      debouncedFetchStories();
+    });
+    
 
   const setPaginationObj = (val: number) => {
     if (isOriginal.value) {
@@ -155,7 +176,6 @@ export const useFetchStories = () => {
     pagination,
     paginationOriginal,
     searchQuery,
-    filteredStories,
     queryObj,
     isOriginal,
     fetchTotalOriginals,

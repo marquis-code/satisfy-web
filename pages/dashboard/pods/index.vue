@@ -24,7 +24,7 @@
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="flow-root mt-2">
                 <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 border-[0.7px] rounded-b-lg">
-                    <div v-if="filteredStories.length && !loading">
+                    <div>
                         <div class="flex items-center justify-between px-4 p-2">
                             <div class="flex rounded border border-gray-100">
                                 <button @click="activeTableView = 'grid'"
@@ -49,6 +49,9 @@
                             </div>
 
                             <div class="flex items-center gap-x-6">
+                                <div v-if="activeTab === 'stories'" @click="handleCreateOriginals"
+                                    class="bg-[#0ba9b9] text-white font-medium text-sm rounded-md py-2.5 px-4">Create
+                                    Originals</div>
                                 <div class="space-x-2">
                                     <label for="SortBy" class="text-sm text-gray-700 font-medium">SortBy:</label>
                                     <select v-model="queryObj.sortBy" id="SortBy"
@@ -83,9 +86,9 @@
                                 placeholder="Search..." v-model="searchQuery" type="search" name="search">
                         </form>
                         <section v-if="activeTableView === 'list'">
-                            <StoriesTableList :storiesList="filteredStories" :loadingUsers="loading"
+                            <StoriesTableList :storiesList="storiesList" :loadingUsers="loading"
                                 :pagination="isOriginal ? paginationOriginal : pagination"
-                                @selectedStory="handleSelectedStory" />
+                                v-model:selectedOriginals="selectedOriginals" @selectedStory="handleSelectedStory" />
                             <CorePagination :total="isOriginal ? paginationOriginal.total : pagination.total"
                                 :page="isOriginal ? paginationOriginal.page : pagination.page"
                                 :perPage="isOriginal ? paginationOriginal.perPage : pagination.perPage"
@@ -94,7 +97,7 @@
                         </section>
 
                         <section v-if="activeTableView === 'grid'">
-                            <StoriesTableGrid :storiesList="filteredStories" :loadingStories="loading"
+                            <StoriesTableGrid :storiesList="storiesList" :loadingStories="loading"
                                 :pagination="isOriginal ? paginationOriginal : pagination"
                                 @selectedStory="handleSelectedStory" />
                             <CorePagination :total="isOriginal ? paginationOriginal.total : pagination.total"
@@ -105,22 +108,25 @@
                         </section>
 
                     </div>
-                    <CoreEmptyState v-if="filteredStories.length <= 0 && !loading" title="No Stories available" desc="">
+                    <CoreEmptyState v-if="storiesList.length <= 0 && !loading" title="No Stories available" desc="">
                     </CoreEmptyState>
                     <LoadingSpinner v-if="loading" />
                 </div>
             </div>
         </div>
-        <div class="w-full" v-if="loading && !filteredStories.length">
+        <div class="w-full" v-if="loading && !storiesList.length">
             <div class="h-[500px] w-full bg-slate-300 rounded-2xl animate-pulse"></div>
         </div>
     </main>
 </template>
 
 <script setup lang="ts">
+import Swal from "sweetalert2";
 import { useFetchStories } from '@/composables/story/fetch'
-const { fetchStories, storiesList, loading, searchQuery, filteredStories, pagination, paginationOriginal, queryObj, isOriginal, fetchOriginalStories, fetchTotalOriginals, 
+import { useCreateChainedOriginal } from "@/composables/story/createChainedOriginal";
+const { fetchStories, storiesList, loading, searchQuery, pagination, paginationOriginal, queryObj, isOriginal, fetchOriginalStories, fetchTotalOriginals,
     totalOriginalStories } = useFetchStories()
+const { loading: loadingO, createChainedOriginal, payload } = useCreateChainedOriginal();
 definePageMeta({
     layout: 'dashboard'
 })
@@ -129,6 +135,8 @@ const selectedStories = ref([])
 
 const activeTableView = ref('list')
 const activeTab = ref('stories')
+
+const selectedOriginals = ref([])
 
 
 onMounted(() => {
@@ -161,5 +169,26 @@ const handlePageChange = (val: number) => {
     }
     fetchStories();
 };
+// const handleCreateOriginals = () => {
+//     console.log('num is', selectedOriginals.value)
+// }
+const handleCreateOriginals = async () => {
+    const result = await Swal.fire({
+        title: "Create Originals",
+        // text: "You won't be able to revert this!",
+        input: "text",
+        inputPlaceholder: "Enter originals title",
+    })
+    if (result.value) {
+        console.log(result.value);
+        payload.value = {
+            title: result.value,
+            storyIds: selectedOriginals.value,
+        }
+        createChainedOriginal();
+    } else {
+        Swal.fire("Cancelled", "Action was cancelled", "info");
+    }
+}
 
 </script>

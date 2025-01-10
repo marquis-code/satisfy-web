@@ -136,8 +136,7 @@
 
           <!-- Transactions Chart -->
           <div v-if="activeView === 'chart'" class="">
-            <p class="font-medium">Transactions</p>
-            <apexchart type="line" height="350" :options="chartOptions" :series="series" />
+            <TransactionsChart/>
           </div>
           <TransactionsList v-else />
         </section>
@@ -150,7 +149,6 @@
 <script lang="ts" setup>
 import { useFetchWalletSummary } from "@/composables/wallet/fetchWalletSummary";
 import { ref } from "vue";
-import ApexCharts from "vue3-apexcharts";
 const { loading, walletSummary, fetchWalletSummary, setFilterData, metaObj } = useFetchWalletSummary();
 fetchWalletSummary();
 definePageMeta({
@@ -202,59 +200,6 @@ const getSettlementBalance = (currency: string): number => {
 
 
 const activeView = ref("chart")
-
-// Chart Data
-const series = ref([
-  {
-    name: "Wallet Fund",
-    data: [6, 8, 9, 10, 8.3, 11, 12],
-  },
-  {
-    name: "Payout",
-    data: [4, 6, 5, 7, 5, 8, 9],
-  },
-]);
-
-const chartOptions = ref({
-  chart: {
-    height: 350,
-    type: "line",
-    toolbar: {
-      show: false,
-    },
-  },
-  stroke: {
-    curve: "smooth",
-    width: 2,
-  },
-  xaxis: {
-    categories: [
-      "9 AM",
-      "10 AM",
-      "11 AM",
-      "12 AM",
-      "1 PM",
-      "2 PM",
-      "3 PM",
-      "4 PM",
-    ],
-  },
-  yaxis: {
-    title: {
-      text: "Transactions",
-    },
-  },
-  markers: {
-    size: 4,
-  },
-  colors: ["#000000", "#00E396"],
-  dataLabels: {
-    enabled: false,
-  },
-  legend: {
-    position: "bottom",
-  },
-});
 
 // Functions to manage card colors based on trend
 const getCardBgColor = (trend: "up" | "down") => {
