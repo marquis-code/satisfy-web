@@ -10,8 +10,8 @@ export const useReviewAd = () => {
     const reviewAd = async () => {
         try {
             const response = await adsApiFactory.$_review_ad(adId.value, payload.value);
-            console.log(adId.value, payload.value)
-            console.log(response);
+            // console.log(adId.value, payload.value)
+            // console.log(response);
             useNuxtApp().$toast.success('Ad updated successfully!', {
                 autoClose: 5000,
                 dangerouslyHTMLString: true,
