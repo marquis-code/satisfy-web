@@ -25,7 +25,7 @@
 
             <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6" v-if="!loading && Object.keys(walletSummary).length">
               <!-- Wallet balance Card -->
-              <div class="bg-blue-100 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
+              <div class="bg-blue-100 p-6 rounded-lg cursor-pointer" @click="setActiveAmountType('wallet')">
                 <div class="flex items-center justify-between">
                   <h3 class="text-gray-700 font-bold">Wallet balance</h3>
                 </div>
@@ -35,12 +35,6 @@
 
                 <div class="mt-4 flex items-center justify-between flex-wrap">
                   <h2 class="text-2xl font-semibold text-black flex items-center gap-x-3">
-                    <!-- <div class="bg-green-100 p-1 rounded-full">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                        stroke="currentColor" class="w-4 h-4 text-green-500">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                      </svg>
-                    </div> -->
                     ₦{{ formatTotal(walletSummary.wallet.diff) }}
                   </h2>
                   <span v-if="parseFloat(walletSummary.wallet.growth) >= 0" class="text-green-400">{{
@@ -53,7 +47,7 @@
               </div>
 
               <!-- Payouts Card -->
-              <div class=" bg-black opacity-80 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
+              <div class=" bg-black opacity-80 p-6 rounded-lg cursor-pointer" @click="setActiveAmountType('payout')">
                 <div class="flex items-center justify-between">
                   <h3 class="text-white font-bold">Payouts</h3>
                 </div>
@@ -80,7 +74,7 @@
               </div>
 
               <!-- Commission Card -->
-              <div class="bg-green-100 p-6 rounded-lg cursor-pointer" @click="activeView = 'table'">
+              <div class="bg-green-100 p-6 rounded-lg cursor-pointer" @click="setActiveAmountType('commission')">
                 <div class="flex items-center justify-between">
                   <h3 class="text-gray-700 font-bold">Commission</h3>
                 </div>
@@ -136,7 +130,7 @@
 
           <!-- Transactions Chart -->
           <div v-if="activeView === 'chart'" class="">
-            <TransactionsChart/>
+            <TransactionsChart v-model:amountType="activeAmountType"/>
           </div>
           <TransactionsList v-else />
         </section>
@@ -217,6 +211,11 @@ const tabs = [
 
 const handleTabChange = (tabKey: string) => {
   console.log("Selected tab:", tabKey);
+};
+const activeAmountType = ref('wallet')
+const setActiveAmountType = (type) => {
+  activeView.value = 'chart'
+  activeAmountType.value = type; 
 };
 </script>
 
