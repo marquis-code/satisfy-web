@@ -28,10 +28,7 @@
               <div class="bg-blue-100 p-6 rounded-lg cursor-pointer" @click="setActiveAmountType('wallet')">
                 <div class="flex items-center justify-between">
                   <h3 class="text-gray-700 font-bold">Wallet balance</h3>
-                </div>
-                <img v-if="parseFloat(walletSummary.wallet.growth) >= 0"
-                  src="@/assets/icons/payment/paymentIncrease.svg" alt="">
-                <img v-else src="@/assets/icons/payment/paymentDecrease.svg" alt="">
+                </div>                  
 
                 <div class="mt-4 flex items-center justify-between flex-wrap">
                   <h2 class="text-2xl font-semibold text-black flex items-center gap-x-3">
@@ -50,10 +47,7 @@
               <div class=" bg-black opacity-80 p-6 rounded-lg cursor-pointer" @click="setActiveAmountType('payout')">
                 <div class="flex items-center justify-between">
                   <h3 class="text-white font-bold">Payouts</h3>
-                </div>
-                <img v-if="parseFloat(walletSummary.payout.growth) >= 0"
-                  src="@/assets/icons/payment/paymentIncrease.svg" alt="">
-                <img v-else src="@/assets/icons/payment/paymentDecrease.svg" alt="">
+                </div>                  
                 <div class="mt-4 flex items-center justify-between flex-wrap">
                   <h2 class="text-2xl font-semibold text-white flex items-center gap-x-3">
                     <!-- <div class="bg-green-100 p-1 rounded-full">
@@ -77,10 +71,7 @@
               <div class="bg-green-100 p-6 rounded-lg cursor-pointer" @click="setActiveAmountType('commission')">
                 <div class="flex items-center justify-between">
                   <h3 class="text-gray-700 font-bold">Commission</h3>
-                </div>
-                <img v-if="parseFloat(walletSummary.commission.growth) >= 0"
-                  src="@/assets/icons/payment/paymentIncrease.svg" alt="">
-                <img v-else src="@/assets/icons/payment/paymentDecrease.svg" alt="">
+                </div>                  
 
                 <div class="mt-4 flex items-center justify-between flex-wrap">
                   <h2 class="text-2xl font-semibold text-black flex items-center gap-x-3">
@@ -106,8 +97,6 @@
                 <div class="flex items-center justify-between">
                   <h3 class="text-gray-700 font-bold">Settlement Balance</h3>
                 </div>
-                <img src="@/assets/icons/payment/paymentIncrease.svg" alt="">
-
                 <div class="mt-4 flex items-center justify-between flex-wrap">
                   <h2 class="text-2xl font-semibold text-black flex items-center gap-x-3">
                     <!-- <div class="bg-red-100 p-1 rounded-full">
