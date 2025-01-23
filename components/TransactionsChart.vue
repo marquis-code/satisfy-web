@@ -98,18 +98,35 @@ const series = ref([] as any);
 const chartOptions = ref({} as any);
 chartOptions.value = {
     chart: {
+        fontFamily: "'Plus Jakarta Sans', sans-serif;",
+        toolbar: { show: false },
         height: 350,
-        type: 'bar',
+        type: "bar"
     },
     plotOptions: {
         bar: {
-            borderRadius: 10,
-            columnWidth: '50%',
-        }
+            horizontal: false,
+            borderRadius: 4,
+            columnWidth: '40%',
+            barHeight: '40%',
+            endingShape: 'rounded',
+            dataLabels: {
+                position: 'top',
+            },
+        },
     },
     colors: ['#000'],
     dataLabels: {
-        enabled: false
+        enabled: true,
+        formatter: (val) => {
+            return val.toLocaleString();
+        },
+        style: {
+            colors: ['#000'],
+        },
+        offsetX: -10,
+        offsetY: -25,
+        textAnchor: "start"
     },
     stroke: {
         width: 0

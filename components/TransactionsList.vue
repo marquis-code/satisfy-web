@@ -1,33 +1,30 @@
 <template>
   <div class="">
-    <!-- Sorting and Pagination Controls -->
-    <div class="flex justify-end mt-6 mb-4  text-sm">
-      <div class="relative flex items-center space-x-2">
-        <div class="flex items-center rounded border-none relative">
-          <input type="text" v-model="searchQuery"
-            class=" text-sm rounded focus:outline-none focus:border-none px-5 flex-1 bg-transparent border-none ">
-          <svg class="absolute right-3" width="21px" height="21px" viewBox="0 0 24 24" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-            <g id="SVGRepo_iconCarrier">
-              <path
-                d="M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-            </g>
-          </svg>
+    <div class=" flex lg:flex-row flex-col gap-3 py-3 justify-between">
+      <div class="grid md:grid-cols-4 grid-cols-2 gap-8 text-sm font-medium ">
+        <div @click="handleTabs('wallet')"
+          class="border-2 border-black px-5 flex items-center justify-center py-2 rounded-md cursor-pointer">Wallet
         </div>
-        <span class="text-gray-300">Sort by :</span>
+        <div @click="handleTabs('payout')"
+          class="border-2 border-black px-5 flex items-center justify-center py-2 rounded-md cursor-pointer">Payout
+        </div>
+        <div @click="handleTabs('commission')"
+          class="border-2 border-black px-5 flex items-center justify-center py-2 rounded-md cursor-pointer">
+          Commission</div>
+        <div @click="handleTabs('settlement')"
+          class="border-2 border-black px-5 flex items-center justify-center text-center py-2 rounded-md cursor-pointer">
+          Settlement Balance
+        </div>
+      </div>
+      <div class="">
         <select id="orderBy" v-model="sortOrder" @change="updateQuery"
-          class="text-sm rounded-lg text-gray-600 outline-none border-none">
+          class="text-sm rounded-md text-gray-600 outline-none border-2 border-black">
           <option value="desc">Newest</option>
           <option value="asc">Oldest</option>
         </select>
       </div>
     </div>
-
-    <!-- Table -->
-    <div class="overflow-x-auto bg-white rounded-lg shadow-md text-sm">
+    <div v-if="route.query.tab === 'transactions'" class="overflow-x-auto bg-white rounded-lg shadow-md text-sm">
       <table class="min-w-full table-fixed divide-y divide-gray-300">
         <thead class="bg-gray-100">
           <tr>
@@ -61,7 +58,8 @@
             <td class="py-4 px-6 font-medium text-right"
               :class="transaction.direction === 'credit' ? 'text-green-600' : 'text-red-600'">{{
                 formatCurrency(transaction.amount) }}</td>
-            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 ">{{ formatDateTime(transaction.createdAt) }}</td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 ">{{ formatDateTime(transaction.createdAt) }}
+            </td>
 
 
             <!-- <td class="py-4 pl-6">{{ transaction.userClass }}</td>
@@ -72,6 +70,10 @@
       <CorePagination :total="pagination.total" :page="pagination.page" :perPage="pagination.perPage"
         :pages="pagination.pages" @page-changed="handlePageChange" />
     </div>
+    <div v-else>
+      <CoreEmptyState title="No Data Available" desc="" />
+    </div>
+
 
   </div>
 </template>
@@ -82,6 +84,8 @@ import { ref } from 'vue';
 definePageMeta({
   layout: 'dashboard'
 })
+const route = useRoute();
+const router = useRouter();
 const { loading, walletTransactions, fetchUserWalletTransactions, pagination, queryObj, searchQuery } = useFetchUserWalletTransactions();
 fetchUserWalletTransactions();
 
@@ -97,6 +101,10 @@ const updateQuery = () => {
   };
   fetchUserWalletTransactions();
 };
+
+const handleTabs = (page: string) => {
+  router.push({ path: route.path, query: { transactionType: 'page' } })
+}
 
 const formatCurrency = (amount: number) => {
   return new Intl.NumberFormat('en-NG', {
