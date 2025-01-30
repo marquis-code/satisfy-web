@@ -115,7 +115,7 @@ chartOptions.value = {
             },
         },
     },
-    colors: ['#000'],
+    colors: ['#93c5fd'],
     dataLabels: {
         enabled: true,
         formatter: (val) => {
@@ -168,6 +168,21 @@ watchEffect(() => {
         }
     }
 });
+
+const updateChartColor = (type) => {
+    switch (type) {
+        case 'wallet':
+            return ['#93c5fd'];
+        case 'payout':
+            return ['#000'];
+        case 'commission':
+            return ['#86efac'];
+    }
+};
+
+watch(chartAmountType, (newType) => {
+    chartOptions.value.colors = updateChartColor(newType);
+}); 
 </script>
 
 <style scoped></style>
