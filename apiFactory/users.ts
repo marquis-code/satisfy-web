@@ -76,5 +76,9 @@ export const userApiFactory = {
   getRefferals(userId: string, metadata: { page: number; perPage: number }){
     const url = `/promotion?page=${metadata.page}&perPage=${metadata.perPage}&referrerId=${userId}&sortBy=createdAt:DESC`;
     return axiosInstance.get(url)
-  }
+  },
+  suspendUser(id: string | any, payload: any) {
+    const url = `/user/${id}/suspend-users`;
+    return axiosInstance.post(url, payload);
+  },
 };

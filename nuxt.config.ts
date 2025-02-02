@@ -1,6 +1,7 @@
 export default {
   ssr: false,
   target: "static",
+
   app: {
     head: {
       title: "Homepod - Storipod Admin Platform",
@@ -13,20 +14,26 @@ export default {
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.svg" }],
     },
   },
+
   modules: ["@nuxtjs/tailwindcss"],
   css: ["/assets/css/main.css"],
+
   tailwindcss: {
     cssPath: "@/assets/css/main.css",
   },
+
   axios: {
     // Axios options here
     timeout: 10000, // Example: set timeout to 10 seconds
   },
-  plugins: [{ src: '~/plugins/google-analytics.client.ts', mode: 'client' }, { src: '~/plugins/googleTagManager.client.ts', mode: 'client' }, { src: '~/plugins/vue-picture-cropper.ts', mode: 'client' }, ]
+
   // buildModules: [
   //   '@nuxtjs/moment'
   // ]
   // alias: {
   // 	'@': '/'
   // },
+  plugins: [{ src: '~/plugins/google-analytics.client.ts', mode: 'client' }, { src: '~/plugins/googleTagManager.client.ts', mode: 'client' }, { src: '~/plugins/vue-picture-cropper.ts', mode: 'client' }, ],
+
+  compatibilityDate: "2025-02-01",
 };
