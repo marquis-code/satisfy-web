@@ -8,7 +8,7 @@
         </div>
       </div>
       <p class="text-gray-500 font-semibold text-sm">
-        Account created | {{ moment(user?.createdAt).format("MMM DD, YYYY") }}
+        Account created | {{ moment(user?.createdAt).format("MMMM Do YYYY, h:mm:ss a") }}
       </p>
     </div>
     <dl class="-my-3 divide-y divide-gray-100 text-sm p-3">
