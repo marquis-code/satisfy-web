@@ -37,7 +37,7 @@
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                 {{ transaction.user.fname || "" }} {{ transaction.user.lname || "" }}
                             </td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-wrap">
                                 {{ transaction.description }}
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

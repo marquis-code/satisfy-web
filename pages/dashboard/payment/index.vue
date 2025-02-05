@@ -123,7 +123,7 @@
           </div>
           <TransactionsList v-else />
         </section>
-        <TransactionsList v-if="activeTab === 'transactions'" />
+        <TransactionsList v-if="activeTab === 'transactions' || 'wallet' || 'payout' || 'commission' || 'settlement'" />
       </template>
     </CoreTabsComponent>
   </div>

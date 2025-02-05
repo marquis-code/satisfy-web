@@ -2,16 +2,16 @@
   <div class="">
     <div class=" flex lg:flex-row flex-col gap-3 py-3 justify-between">
       <div class="grid md:grid-cols-4 grid-cols-2 gap-8 text-sm font-medium ">
-        <div @click="handleTabs('wallet')"
+        <div @click="handleTabs('wallet')" :class="route.query.tab === 'wallet' ? 'bg-blue-100' : ''"
           class="border-2 border-black px-5 flex items-center justify-center py-2 rounded-md cursor-pointer">Wallet
         </div>
-        <div @click="handleTabs('payout')"
+        <div @click="handleTabs('payout')" :class="route.query.tab === 'payout' ? 'bg-black text-white' : ''"
           class="border-2 border-black px-5 flex items-center justify-center py-2 rounded-md cursor-pointer">Payout
         </div>
-        <div @click="handleTabs('commission')"
+        <div @click="handleTabs('commission')" :class="route.query.tab === 'commission' ? 'bg-green-100' : ''"
           class="border-2 border-black px-5 flex items-center justify-center py-2 rounded-md cursor-pointer">
           Commission</div>
-        <div @click="handleTabs('settlement')"
+        <div @click="handleTabs('settlement')" :class="route.query.tab === 'settlement' ? 'bg-purple-100' : ''"
           class="border-2 border-black px-5 flex items-center justify-center text-center py-2 rounded-md cursor-pointer">
           Settlement Balance
         </div>
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div v-if="route.query.tab === 'transactions'" class="overflow-x-auto bg-white rounded-lg shadow-md text-sm">
-      <PaymentTableList :walletTransactions="walletTransactions" :loading="loading" :pagination="pagination"/>
+      <PaymentTableList :walletTransactions="walletTransactions" :loading="loading" :pagination="pagination" />
     </div>
     <div v-else>
       <CoreEmptyState title="No Data Available" desc="" />
@@ -58,9 +58,8 @@ const updateQuery = () => {
   };
   fetchUserWalletTransactions();
 };
-
 const handleTabs = (page: string) => {
-  router.push({ path: route.path, query: { transactionType: 'page' } })
+  router.push({ path: route.path, query: { tab: page } })
 }
 
 const formatCurrency = (amount: number) => {
