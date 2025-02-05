@@ -78,7 +78,7 @@ export const userApiFactory = {
     return axiosInstance.get(url)
   },
   suspendUser(id: string | any, payload: any) {
-    const url = `/user/${id}/suspend-users`;
+    const url = `/users/${id}/suspended-users`;
     return axiosInstance.post(url, payload);
   },
 };
