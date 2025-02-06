@@ -9,8 +9,8 @@ export const adsApiFactory = {
     return axiosInstance.patch(`/adverts/${id}`, payload);
   },
 
-  $_fetch_ads() {
-    return axiosInstance.get("/adverts");
+  $_fetch_ads(queryObj: {sortBy: string, orderBy: string}, metadata: { page: number; perPage: number}, searchTerm:string) {
+    return axiosInstance.get(`/adverts/all?perPage=${metadata.perPage}&page=${metadata.page}&orderBy=${queryObj.sortBy}:${queryObj.orderBy}&search=${searchTerm}`);
   },
 
   $_fetch_ads_by_id(id: string | number) {
@@ -23,5 +23,11 @@ export const adsApiFactory = {
 
   $_fetch_dashboard_totals(metaObj: any) {
     return axiosInstance.get(`/adverts/dashboard-totals?showAll=${metaObj.showAll}&startDate=${metaObj.startDate}&endDate=${metaObj.endDate}`);
+  },
+  $_fetch_ads_requests(queryObj: {sortBy: string, orderBy: string}, metadata: { page: number; perPage: number}, searchTerm:string, status : boolean) {
+    return axiosInstance.get(`/adverts/all?perPage=${metadata.perPage}&page=${metadata.page}&orderBy=${queryObj.sortBy}:${queryObj.orderBy}&search=${searchTerm}&status=${status}`);
+  },
+  $_review_ad(id : string, payload){
+    return axiosInstance.post(`/adverts/review/${id}`, payload)
   }
 };

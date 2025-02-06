@@ -65,9 +65,8 @@ const router = useRouter()
 const route = useRoute()
 onMounted(() => {
   const newQuery = { page: "login" };
-  router.push({ path: "/", query: newQuery });
+  router.push({ path: "/auth", query: newQuery });
 })
-
 const handleLogin = (val: any) => {
   isLoading.value = true;
 }
@@ -86,6 +85,6 @@ const navigateToLogin = () => {
 }
 
 if (isLoggedIn) {
-    router.push('/dashboard')
-  }
+  router.push('/dashboard')
+}
 </script>

@@ -24,7 +24,8 @@ export const useRegister = () => {
         autoClose: 5000,
         dangerouslyHTMLString: true,
       });
-      useRouter().push("/login");
+      // useRouter().push("/login");
+        useRouter().push({ path: "/auth", query: { page: "login" } })
     } catch (error) {
       useNuxtApp().$toast.error(error.message, {
         autoClose: 5000,

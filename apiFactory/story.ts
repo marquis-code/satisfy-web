@@ -1,11 +1,15 @@
 import { axiosInstance } from "./axios.config";
 
 export const storyApiFactory = { 
-  getAllStories(queryObj: {sortBy: string, orderBy: string}, metadata: { page: number; perPage: number }) {
-    return axiosInstance.get(
-      `/story?sortBy=${queryObj.sortBy}:${queryObj.orderBy}&page=${Number(metadata.page)}&perPage=${Number(metadata.perPage)}`
-    );
+  getAllStories(queryObj: {sortBy: string, orderBy: string}, metadata: { page: number; perPage: number }, isOriginal: boolean | null, searchQuery: any) {
+    const isOriginalParam = isOriginal !== null ? `&isOriginal=${isOriginal}` : '';
+    let endpoint = `/story?sortBy=${queryObj.sortBy}:${queryObj.orderBy}&page=${Number(metadata.page)}&perPage=${Number(metadata.perPage)}${isOriginalParam}`
+    if (searchQuery && searchQuery.trim() !== "") {
+      endpoint += `&search=${encodeURIComponent(searchQuery.trim())}`;
+    }
+    return axiosInstance.get(endpoint);
   },
+
   getStoryByUserId(userId: string | number, queryObj: {sortBy: string, orderBy: string}, metadata: { page: number; perPage: number }) {
     return axiosInstance.get(`/story?userId=${userId}&sortBy=${queryObj.sortBy}:${queryObj.orderBy}&page=${Number(metadata.page)}&perPage=${Number(metadata.perPage)}`);
   },
@@ -39,5 +43,12 @@ export const storyApiFactory = {
   setOriginal(data: any){
    const url = '/story/set-original'
    return axiosInstance.post(url, data);
+  },
+  createChainedOriginal(data: any){
+    const url = '/story/originals'
+    return axiosInstance.post(url, data);
+   },
+  getTagCloud(metadata: { page: number; perPage: number }){
+    return axiosInstance.get(`/story/tag-cloud?page=${Number(metadata.page)}&perPage=${Number(metadata.perPage)}`);
   }
 };

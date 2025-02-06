@@ -1,7 +1,7 @@
 <template>
     <div class="">
-        <textarea v-model="textInput" class="w-full h-40 p-2 border rounded mb-4"
-            placeholder="Enter your text here..."></textarea>
+        <textarea v-model="textInput" class="w-full h-40 p-2 border rounded mb-4" placeholder="Enter your text here..."
+            ref="inputField"></textarea>
         <div class="flex justify-end items-end">
             <button @click="splitText" type="button"
                 class="border rounded-full shadow bg-white p-2 flex items-center gap-x-2 text-sm font-medium">
@@ -47,18 +47,22 @@
                         :class="`leading-relaxed p-3 ${!color.length ? 'text-gray-700' : 'text-white'}`">{{ editingText
                         }}</p>
                 </div> -->
-                <div class="relative mx-auto border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-xl">
-                    <div class="w-[148px] h-[18px] bg-gray-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
+                <div
+                    class="relative mx-auto border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-xl">
+                    <div
+                        class="w-[148px] h-[18px] bg-gray-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute">
+                    </div>
                     <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
                     <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
                     <div class="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
                     <div class="rounded-[2rem] overflow-hidden w-[272px] h-[572px]" :style="{ backgroundColor: color }">
                         <div :style="{ backgroundColor: color }"
-                        :class="`${!color.length ? 'border border-gray-600' : ''}`">
-                        <p :style="previewStyles" class="text-preview"
-                            :class="`leading-snug p-3 text-xs ${!color.length ? 'text-gray-700' : 'text-white'}`">{{ editingText
-                            }}</p>
-                    </div>
+                            :class="`${!color.length ? 'border border-gray-600' : ''}`">
+                            <p :style="previewStyles" class="text-preview"
+                                :class="`leading-snug p-3 text-xs ${!color.length ? 'text-gray-700' : 'text-white'}`">{{
+                                    editingText
+                                }}</p>
+                        </div>
                         <!-- <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/mockup-2-light.png" class="dark:hidden w-[272px] h-[572px]" alt="">
                         <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/mockup-2-dark.png" class="hidden dark:block w-[272px] h-[572px]" alt=""> -->
                     </div>
@@ -67,11 +71,12 @@
         </div>
 
         <div class="grid grid-cols-4 lg:grid-cols-12 gap-2 mt-4">
+            <!-- <div class="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-7 gap-y-2 mt-4"> -->
             <div v-for="(slide, index) in slides" :key="index"
                 :class="[slide.color, 'relative p-4 rounded border border-gray-200 shadow cursor-pointer w-24 h-24', { 'border-2 border-green-500 overflow-y-auto': index === editingIndex }]"
                 @click="startEditing(index)">
                 <div class="pt-3">
-                    <p class="flex-1 text-[10px] text-gray-800 mt-2 leading-snug">{{ slide.text.slice(0, 30) + '...' }}
+                    <p class="flex-1 text-[10px] text-gray-800 overflow-x-hidden mt-2 leading-snug">{{ slide.text.slice(0, 30) + '...' }}
                     </p>
                 </div>
                 <div class="flex justify-between items-center">
@@ -85,6 +90,15 @@
                     </button>
                     <p class="font-semibold text-sm text-gray-800 absolute top-1 right-1">{{ index + 1 }}</p>
                 </div>
+            </div>
+            <div class="flex items-center justify-center" v-if="slides.length >= 1">
+                <button @click="focusNew">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="35" viewBox="0 0 50 50">
+                        <path
+                            d="M25,2C12.317,2,2,12.317,2,25s10.317,23,23,23s23-10.317,23-23S37.683,2,25,2z M37,26H26v11h-2V26H13v-2h11V13h2v11h11V26z">
+                        </path>
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
@@ -136,6 +150,14 @@ const props = defineProps({
 const previewStyles = {
     fontFamily: props.selectedFont,
     textAlign: props.selectedTextAlignment // Ensure this is a valid CSS value
+}
+
+const inputField = ref<HTMLTextAreaElement | null>(null);
+
+const focusNew = () => {
+    editingIndex.value = null;
+    // console.log('kmk', editingIndex.value)
+    inputField.value?.focus();
 }
 
 </script>

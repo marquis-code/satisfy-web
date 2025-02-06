@@ -1,6 +1,6 @@
 import { adsApiFactory } from "@/apiFactory/ads";
 
-export const useGetAllSponsoredAds = () => {
+export const useGetAllSponsoredAdsRequests = () => {
   const loading = ref(false);
   const pagination = ref({
     page: 1,
@@ -15,10 +15,10 @@ export const useGetAllSponsoredAds = () => {
   const searchTerm = ref('')
   const status = ref()
   const ads = ref([]);
-  const getAllSponsoredAds = async () => {
+  const getAllSponsoredAdsRequests = async () => {
     loading.value = true;
     try {
-      const response = await adsApiFactory.$_fetch_ads(queryObj.value, pagination.value, searchTerm.value, status.value); 
+      const response = await adsApiFactory.$_fetch_ads_requests(queryObj.value, pagination.value, searchTerm.value, status.value); 
       ads.value = response?.data?.result  || [];
       console.log('ads value:', response);
       pagination.value = response.data.metadata;
@@ -34,8 +34,10 @@ export const useGetAllSponsoredAds = () => {
     }
   };
   watch([() => pagination.value.page, () => queryObj.value, () => searchTerm.value,], () => {
-    getAllSponsoredAds();
+    getAllSponsoredAdsRequests();
   });
-  return { getAllSponsoredAds, ads, loading, pagination, queryObj, status, searchTerm, totalAds: computed(() => pagination.value.total)};
+
+  
+  return { getAllSponsoredAdsRequests, ads, loading, pagination, queryObj, status, searchTerm, totalAds: computed(() => pagination.value.total)};
 };
  

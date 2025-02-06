@@ -16,12 +16,24 @@ const localstorageData = {
 watch(
   runtimeData.user,
   (val) => {
-    Object.keys(val).forEach((key) => {
-      localstorageData.user.value[key] = val[key];
-    });
+    if (val && typeof val === "object") {
+      Object.keys(val).forEach((key) => {
+        localstorageData.user.value[key] = val[key];
+      });
+    }
   },
   { deep: true }
 );
+
+// watch(
+//   runtimeData.user,
+//   (val) => {
+//     Object.keys(val).forEach((key) => {
+//       localstorageData.user.value[key] = val[key];
+//     });
+//   },
+//   { deep: true }
+// );
 
 (() => {
   runtimeData.user.value = localstorageData.user.value;
@@ -78,7 +90,9 @@ export const useLogin = () => {
       if (result.value) {
         localStorage.clear();
         runtimeData.user.value = null;
-        router.push({ path: "/", query: { page: "login" } });
+        useRouter().push({ path: "/", query: { page: "login" } });
+
+        // router.push({ path: "/", query: { page: "login" } });
       } else {
         Swal.fire("Cancelled", "Action was cancelled", "info");
       }
@@ -87,7 +101,7 @@ export const useLogin = () => {
 
   const id = computed({
     get: () => runtimeData?.user?.value?.id ?? "",
-    set: () => {},
+    set: () => { },
   });
 
   const isLoggedIn = computed({
@@ -95,7 +109,7 @@ export const useLogin = () => {
       if (!runtimeData.token?.value) return false;
       return runtimeData?.user?.value != null || undefined || {};
     },
-    set: () => {},
+    set: () => { },
   });
 
   const userRole = computed({
@@ -105,7 +119,7 @@ export const useLogin = () => {
         ? runtimeData?.user?.value.role
         : "";
     },
-    set: () => {},
+    set: () => { },
   });
 
   const user = computed({
@@ -115,7 +129,7 @@ export const useLogin = () => {
         ? runtimeData?.user?.value
         : "";
     },
-    set: () => {},
+    set: () => { },
   });
   const isFormEmpty = computed(() => {
     return !!(loginPayload.value.username && loginPayload.value.password);

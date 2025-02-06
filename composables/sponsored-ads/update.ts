@@ -14,6 +14,9 @@ export const useUpdateSponsoredAds = () => {
     loading.value = true;
     try {
       const response = await adsApiFactory.$_update_ads(route.query.id, payload.value);
+      useRouter().push('/dashboard/ads').then(() => {
+        window.location.reload();  
+      });
       return response;
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {

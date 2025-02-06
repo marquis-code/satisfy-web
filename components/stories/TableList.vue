@@ -3,20 +3,21 @@
     <div v-if="storiesList.length && !loadingStories"
       class="inline-block min-w-full py-2 align-middle border-gray-100 rounded-b-lg border bg-white shadow">
       <div class="relative">
-        <div v-if="selectedStori.length > 0"
+        <!-- <div v-if="selectedStori.length > 0"
           class="absolute left-14 top-0 flex h-12 items-center space-x-3 bg-white sm:left-12">
           <button type="button"
             class="inline-flex items-center rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white">
             Bulk edit
           </button>
-          <button type="button"
+          <button type="button" 
             class="inline-flex items-center rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white">
             Delete all
           </button>
-        </div>
+        </div> -->
         <table class="min-w-full table-fixed divide-y divide-gray-300">
           <thead class="">
             <tr>
+              <th scope="col" class="py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"></th>
               <th scope="col" class="px-6 py-3.5 pl-4 text-left text-sm font-semibold text-gray-900">S/N</th>
               <!-- <th scope="col" class="relative px-7 sm:w-12 sm:px-6">
                                 <input type="checkbox"
@@ -68,6 +69,16 @@
                                     class="absolute left-4 top-1/2 -mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                     :value="stori.id" v-model="selectedStori" />
                             </td> -->
+              <!-- <td class="whitespace-nowrap py-4 pr-3 text-xs font-medium">
+                <input type="checkbox" :value="stori.id" v-model="selectedOriginals"
+                  class="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+              </td> -->
+              <td class="whitespace-nowrap py-4 px-3 text-xs font-medium">
+  <input type="checkbox" :value="stori.id" :checked="selectedOriginals.includes(stori.id)" 
+    @change="handleCheckboxChange(stori.id)"
+    class="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+</td>
+
               <td class="whitespace-nowrap  text-sm font-medium text-gray-900 sm:pl-4">
                 {{ (pagination.page - 1) * pagination.perPage + (index + 1) }}</td>
               <td :class="[
@@ -82,7 +93,7 @@
                 </div>
               </td>
               <td @click="viewStory(stori)" class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
-                <p class="font-medium text-gray-800 no-underline">{{
+                <p class="font-medium text-gray-800 no-underline text-wrap w-64">{{
                   stori?.title || "N/A" }}</p>
               </td>
               <td @click="viewStory(stori)" class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 cursor-pointer">
@@ -216,7 +227,7 @@ const {
 const { deleteStory } = useDeleteStory();
 
 const handleDeleteStory = (id: any) => {
-  deleteStory(id); 
+  deleteStory(id);
 };
 const router = useRouter();
 const selectedStori = ref([]) as any;
@@ -236,7 +247,24 @@ const props = defineProps({
   pagination: {
     type: Object,
   },
+  selectedOriginals: {
+    type: Array,
+    default: () => [],
+  },
 });
+
+const emit = defineEmits(["update:selectedOriginals"]);
+
+const handleCheckboxChange = (id) => {
+  const isSelected = props.selectedOriginals.includes(id);
+  const updatedSelection = isSelected 
+    ? props.selectedOriginals.filter(item => item !== id) 
+    : [...props.selectedOriginals, id];
+  emit("update:selectedOriginals", updatedSelection);
+};
+
+
+
 const formatter = ref({
   date: "DD MMM YYYY",
   month: "MMM",
@@ -315,18 +343,19 @@ const closeDropdown = () => {
 };
 
 const handleSwitchToOriginal = (payloadObj: any) => {
+  const storyIds = Array.isArray(payloadObj.id) ? payloadObj.id : [payloadObj.id];
   const payload = ref({
     isOriginal: !payloadObj.isOriginal,
-    storyId: payloadObj.id
+    storyIds: storyIds
   });
   setPayloadObj(payload)
   setOriginal()
 }
 
-// Function to handle dropdown option click
 const handleDropdownClick = (action: any, data: any) => {
   closeDropdown();
   if (action === "switch-type") {
+    console.log('first', data)
     handleSwitchToOriginal(data);
   }
 

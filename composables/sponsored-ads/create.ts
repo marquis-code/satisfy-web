@@ -28,13 +28,16 @@ export const useCreateSponsoredAds = () => {
         autoClose: 5000,
         dangerouslyHTMLString: true,
       });
+      useRouter().push('/dashboard/ads').then(() => {
+        window.location.reload();  
+      });
       return response;
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
         autoClose: 5000,
         dangerouslyHTMLString: true,
       });
-      console.log('hhbb', error)
+      // console.log('hhbb', error)
       return error;
     } finally {
       loading.value = false;

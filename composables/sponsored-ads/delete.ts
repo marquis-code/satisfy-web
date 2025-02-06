@@ -2,7 +2,7 @@ import { adsApiFactory } from "@/apiFactory/ads";
 import Swal from "sweetalert2";
 
 
-export const useDeleteSponsoredAds = () => {
+export const useDeleteSponsoredAds = (getAllSponsoredAds : () => void) => {
   const router = useRouter()
   const loading = ref(false);
   const deleteSponsoredAds = async (id: string | number) => {
@@ -20,6 +20,7 @@ export const useDeleteSponsoredAds = () => {
         try {
           loading.value = true;
           const response = await adsApiFactory.$_delete_ads(id);
+          await getAllSponsoredAds();
           router.push({ path: "/dashboard/ads" });
           return response;
         } catch (error: any) {

@@ -9,7 +9,7 @@ export const useFetchStoryById = () => {
     try {
       const response = await storyApiFactory.getStoryById(storyId);
       story.value = response.data;
-      console.log('hm', story.value)
+      // console.log('hm', story.value)
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
         autoClose: 5000,

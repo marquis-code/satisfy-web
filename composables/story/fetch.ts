@@ -1,52 +1,111 @@
-import { storyApiFactory } from "@/apiFactory/story";
+import { storyApiFactory } from "@/apiFactory/story"; 
+import { ref, computed, watch } from "vue";
+
+function debounce(fn: Function, delay: number) {
+  let timeoutId: number | undefined;
+  return function (...args: any) {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
+}
 
 export const useFetchStories = () => {
   const storiesList = ref([]) as any;
   const loading = ref(false);
   const searchQuery = ref<string>("");
   const queryObj = ref({
-    sortBy: 'createdAt',
-    orderBy: 'desc'
-  }) as any
+    sortBy: "createdAt",
+    orderBy: "desc",
+  }) as any;
+
   const pagination = ref({
     page: 1,
     perPage: 10,
     total: 0,
     pages: 0,
   });
+
+  const paginationOriginal = ref({
+    page: 1,
+    perPage: 10,
+    total: 0,
+    pages: 0,
+  });
+
+  const isOriginal = ref<boolean | null>(null);
+
   const fetchStories = async () => {
     loading.value = true;
     try {
-      const response = await storyApiFactory.getAllStories(queryObj.value, pagination.value);
+      const currentPagination = isOriginal.value
+        ? paginationOriginal.value
+        : pagination.value;
+
+      const response = await storyApiFactory.getAllStories(
+        queryObj.value,
+        currentPagination,
+        isOriginal.value,
+        searchQuery.value
+      );
       storiesList.value = response?.data?.result || [];
-      pagination.value = response.data.metadata;
-      console.log(storiesList.value)
+
+      if (isOriginal.value) {
+        paginationOriginal.value = response.data.metadata;
+        const totalOriginalStories = response.data.metadata.total;
+        // console.log("Total original stories:", totalOriginalStories);
+      } else {
+        pagination.value = response.data.metadata;
+      }
     } catch (error: any) {
       useNuxtApp().$toast.error(error.message, {
         autoClose: 5000,
         dangerouslyHTMLString: true,
       });
-      return error;
     } finally {
       loading.value = false;
     }
   };
 
-  const filteredStories = computed(() => {
-    const query = searchQuery.value.trim().toLowerCase();
-    if (!query) return storiesList.value;
+  const fetchOriginalStories = async () => {
+    loading.value = true;
+    try {
+      const response = await storyApiFactory.getAllStories(
+        queryObj.value,
+        paginationOriginal.value,
+        true
+      );
+      paginationOriginal.value = response.data.metadata;
+      storiesList.value = response?.data?.result || [];
+    } catch (error: any) {
+      useNuxtApp().$toast.error(error.message, {
+        autoClose: 5000,
+        dangerouslyHTMLString: true,
+      });
+    } finally {
+      loading.value = false;
+    }
+  };
 
-    return storiesList.value.filter(
-      (story) =>
-        story?.title.toLowerCase().includes(query) ||
-        story?.tags.toLowerCase().includes(query) ||
-        story?.user?.fname.toLowerCase().includes(query) ||
-        story?.user?.lname.toLowerCase().includes(query)
-    );
-  });
+  // const filteredStories = computed(() => {
+  //   const query = searchQuery.value.trim().toLowerCase();
+  //   if (!query) return storiesList.value;
+
+  //   return storiesList.value.filter(
+  //     (story) =>
+  //       story?.title.toLowerCase().includes(query) ||
+  //       story?.tags.toLowerCase().includes(query) ||
+  //       story?.user?.fname.toLowerCase().includes(query) ||
+  //       story?.user?.lname.toLowerCase().includes(query)
+  //   );
+  // });
 
   watch(
-    () => pagination.value.page,
+    () =>
+      isOriginal.value ? paginationOriginal.value.page : pagination.value.page,
     (newPage) => {
       setPaginationObj(newPage);
       fetchStories();
@@ -71,17 +130,55 @@ export const useFetchStories = () => {
     }
   );
 
-  const setPaginationObj = (val: any) => {
-    pagination.value.page = val;
+  const debouncedFetchStories = debounce(fetchStories, 300);
+  
+    watch(searchQuery, (newQuery) => {
+      setPaginationObj(1); 
+      debouncedFetchStories();
+    });
+    
+
+  const setPaginationObj = (val: number) => {
+    if (isOriginal.value) {
+      paginationOriginal.value.page = val;
+    } else {
+      pagination.value.page = val;
+    }
+  };
+  const totalOriginalStories = ref(0);
+
+  const fetchTotalOriginals = async () => {
+    loading.value = true;
+    try {
+      const pagination = { page: 1, perPage: 1 }; 
+      const response = await storyApiFactory.getAllStories(
+        queryObj.value,
+        pagination,
+        true 
+      );
+      totalOriginalStories.value = response.data.metadata.total; 
+      console.log("hbjbj", totalOriginalStories.value);
+    } catch (error) {
+      useNuxtApp().$toast.error(error.message, {
+        autoClose: 5000,
+        dangerouslyHTMLString: true,
+      });
+    } finally {
+      loading.value = false;
+    }
   };
 
   return {
     fetchStories,
+    fetchOriginalStories,
     storiesList,
     loading,
     pagination,
+    paginationOriginal,
     searchQuery,
-    filteredStories,
-    queryObj
+    queryObj,
+    isOriginal,
+    fetchTotalOriginals,
+    totalOriginalStories,
   };
 };
