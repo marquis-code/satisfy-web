@@ -1,10 +1,8 @@
 <script setup lang="ts">
-// import { ref, watch } from 'vue';
 import { useCreateCategory } from '@/composables/category/createCategory';
 import { useCreateUserStory } from '@/composables/story/createById';
 import { useFetchSearchInterest } from '@/composables/user/useSearchInterest';
 
-// Debounce utility function
 function debounce<T extends (...args: any[]) => void>(func: T, wait: number): T {
   let timeout: ReturnType<typeof setTimeout>;
   return function (this: any, ...args: Parameters<T>) {
@@ -14,7 +12,7 @@ function debounce<T extends (...args: any[]) => void>(func: T, wait: number): T 
 }
 
 const { payload } = useCreateUserStory();
-const { createCategory, payload : addPayload, loading:loadingAdd, setPayload} = useCreateCategory();
+const { createCategory, payload: addPayload, loading: loadingAdd, setPayload } = useCreateCategory();
 
 const inputValue = ref<string>('');
 const tags = ref<any[]>([]);
@@ -71,14 +69,32 @@ const removeTag = (index: number) => {
   }
 };
 
-const addCategory = async() => {
+const addCategory = async () => {
   const finalPayload = {
-    name : inputValue.value,
-    description : inputValue.value
-  }
+    name: inputValue.value.trim(),
+    description: inputValue.value.trim(),
+  };
   setPayload(finalPayload);
-  await createCategory();
-}
+  try {
+    const response = await createCategory();
+    if (response?.data) {
+      const newTag = {
+        id: response.data.id,
+        name: response.data.name,
+      };
+      tags.value.push(newTag);
+      emit('content', tags);
+      inputValue.value = '';
+      showDropdown.value = false;
+      errorMessage.value = '';
+    }
+  } catch (error) {
+    useNuxtApp().$toast.error("Failed to create tag", {
+      autoClose: 5000,
+      dangerouslyHTMLString: true,
+    });
+  }
+};
 </script>
 
 <template>
@@ -103,7 +119,8 @@ const addCategory = async() => {
     <div v-if="loading && !interestList.length" class="h-20 bg-slate-100 rounded"></div>
     <div v-if="!loading && !interestList.length" class="text-gray-600 text-sm font-medium">Search results not found
     </div>
-    <!-- <button @click="addCategory" class="text-xs md:text-sm font-medium border rounded-md py-1 px-2.5 my-2" :disabled="interestList.length">Create Tag</button> -->
+    <button @click="addCategory" class="text-xs md:text-sm font-medium border rounded-md py-1 px-2.5 my-2">Create
+      Tag</button>
 
     <div class="flex flex-wrap gap-2">
       <div v-for="(tag, index) in tags" :key="index"
@@ -125,7 +142,6 @@ const addCategory = async() => {
 </template>
 
 <style scoped>
-/* Add custom styles if needed */
 table {
   width: 100%;
   border-collapse: collapse;
