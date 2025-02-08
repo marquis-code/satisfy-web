@@ -19,13 +19,12 @@
             <section class="flex items-center gap-x-3">
               <div  class="mb-4">
                 <button
-                 v-if="use?.isActive"
                   @click="showSuspendModal = true"
                   class="bg-red-200 text-red-600 font-medium text-sm rounded-md py-2.5 px-4"
                 >
                   Suspend User
                 </button>
-                <button disabled v-else
+                <button disabled
                   class="bg-red-200 disabled:cursor-not-allowed disabled:opacity-50 text-red-600 font-medium text-sm rounded-md py-2.5 px-4"
                 >
                   Account Suspended
