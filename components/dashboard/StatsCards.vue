@@ -22,8 +22,8 @@
               </div>
             </fieldset> -->
             <select class=" rounded focus:border-none border-gray-300" v-model="selectedRange" @change="onRangeChange">
-              <option value="today">All Time</option>
-              <!-- <option value="today">Today</option> -->
+              <option value="all">All Time</option>
+              <option value="today">Today</option>
               <option value="yesterday">Yesterday</option>
               <option value="this_week">This Week</option>
               <option value="this_month">This Month</option>
