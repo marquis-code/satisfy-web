@@ -95,7 +95,7 @@ const { fetchDetailedDashboardSummary, detailedDashboardSummary, loading, metaOb
 const dateFilter = ref<any>([]);
 const showAll = ref<boolean>(true);
 
-const selectedRange = ref('today');
+const selectedRange = ref('all');
 
 const onRangeChange = () => {
   const payload = {
