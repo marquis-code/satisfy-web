@@ -18,7 +18,7 @@
             </h1>
             <section class="flex items-center gap-x-3">
               <div  class="mb-4">
-                <button
+                <!-- <button
                  v-if="user?.isActive"
                   @click="showSuspendModal = true"
                   class="bg-red-200 text-red-600 font-medium text-sm rounded-md py-2.5 px-4"
@@ -29,7 +29,7 @@
                   class="bg-red-200 disabled:cursor-not-allowed disabled:opacity-50 text-red-600 font-medium text-sm rounded-md py-2.5 px-4"
                 >
                   Account Suspended
-                </button>
+                </button> -->
               </div>
               <div class="mb-4">
                 <NuxtLink
