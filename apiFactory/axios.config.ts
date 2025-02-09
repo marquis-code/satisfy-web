@@ -1,4 +1,6 @@
 import axios from "axios";
+import { useCustomToast } from '@/composables/core/useCustomToast'
+const { showToast } = useCustomToast();
 
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_HOMEPOD_BASE_URL,
@@ -31,15 +33,19 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if (typeof error.response === "undefined") {
-      useNuxtApp().$toast.error("kindly check your network connection", {
-        autoClose: 5000,
-        dangerouslyHTMLString: true,
-      });
+      showToast({
+        title: "Error",
+        message: 'kindly check your network connection',
+        toastType: "error",
+        duration: 3000
+    });
     } else {
-      useNuxtApp().$toast.error(error.response.data.message, {
-        autoClose: 5000,
-        dangerouslyHTMLString: true,
-      });
+      showToast({
+        title: "Error",
+        message: error.response.data.message,
+        toastType: "error",
+        duration: 3000
+    });
     }
   }
 );
@@ -50,15 +56,19 @@ storipodAxiosInstance.interceptors.response.use(
   },
   (error) => {
     if (typeof error.response === "undefined") {
-      useNuxtApp().$toast.error("kindly check your network connection", {
-        autoClose: 5000,
-        dangerouslyHTMLString: true,
-      });
+      showToast({
+        title: "Error",
+        message: 'kindly check your network connection',
+        toastType: "error",
+        duration: 3000
+    });
     } else {
-      useNuxtApp().$toast.error(error.response.data.message, {
-        autoClose: 5000,
-        dangerouslyHTMLString: true,
-      });
+      showToast({
+        title: "Error",
+        message: error.response.data.message,
+        toastType: "error",
+        duration: 3000
+    });
     }
   }
 );

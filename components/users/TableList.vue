@@ -66,14 +66,19 @@
         ? 'text-indigo-600'
         : 'text-gray-900',
     ]">
+              
+               <div>
                 <DashboardImageZoom v-if="person.profilePicture" class="h-10 w-10" :src="person.profilePicture" />
                 <div v-else class="h-10 w-10 rounded-full p-2 bg-gray-500 text-white flex justify-center items-center">
                   {{ generateInitials(person.fname, person.lname) }}
                 </div>
+               </div>
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                <nuxt-link :to="`/dashboard/users/${person.id}`" class="font-medium text-gray-800 no-underline">{{
-      person.handle ?? "Nil" }}</nuxt-link>
+                <nuxt-link :to="`/dashboard/users/${person.id}`" class="font-medium flex items-center gap-x-2 text-gray-800 no-underline">
+                  <p v-if="!person.isActive">❌</p>
+                  <P>{{ person.handle ?? "Nil" }}</P>
+                 </nuxt-link>
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 <nuxt-link class="no-underline text-gray-800" :to="`/dashboard/users/${person.id}`">{{ person.fname ||

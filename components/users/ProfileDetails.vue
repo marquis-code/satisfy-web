@@ -8,7 +8,7 @@
         </div>
       </div>
       <p class="text-gray-500 font-semibold text-sm">
-        Account created | {{ moment(user?.createdAt).format("MMM DD, YYYY") }}
+        Account created | {{ moment(user?.createdAt).format("MMMM Do YYYY, h:mm:ss a") }}
       </p>
     </div>
     <dl class="-my-3 divide-y divide-gray-100 text-sm p-3">
@@ -78,7 +78,7 @@
 
       <div class="flex justify-between items-center py-5">
         <dt class="font-semibold text-gray-900 text-[14px]">Status</dt>
-        <dd v-if="user.blockedAt === null" class="font-semibold text-green-900 text-[14px] flex items-center gap-x-3">
+        <dd v-if="user.isActive" class="font-semibold text-green-900 text-[14px] flex items-center gap-x-3">
           <span class="h-3 w-3 bg-green-600 rounded-full p-1.5"></span>Active
         </dd>
         <dd v-else class="font-semibold text-gray-900 text-[14px] flex items-center gap-x-3">
