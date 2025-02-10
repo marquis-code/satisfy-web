@@ -9,7 +9,13 @@ export const useFetchDetailedDashboardSummary = () => {
     endDate: new Date().toISOString().substr(0, 10),
     showAll: true,
   });
+  const allTimeDashboardSummary = ref({}) as Record<string, any>;
+  const allTimeMetaObj = ref({
+    range: 'all',  
+    showAll: true,
+  });
   const loading = ref(false);
+  const allTimeLoading = ref(false);
 
   const fetchDetailedDashboardSummary = async () => {
     loading.value = true;
@@ -26,6 +32,23 @@ export const useFetchDetailedDashboardSummary = () => {
       return error;
     } finally {
       loading.value = false;
+    }
+  };
+  const fetchAllTimeDashboardSummary= async () => {
+    allTimeLoading.value = true;
+    try {
+      const response = await dashboardApiFactory.getDashboardDetailedSummary(allTimeMetaObj.value);
+      if (response && response.data) {
+        allTimeDashboardSummary.value = response.data;
+      }
+    } catch (error) {
+      useNuxtApp().$toast.error(error.message, {
+        autoClose: 5000,
+        dangerouslyHTMLString: true,
+      });
+      return error;
+    } finally {
+      allTimeLoading.value = false;
     }
   };
 
@@ -46,5 +69,8 @@ export const useFetchDetailedDashboardSummary = () => {
     loading,
     metaObj,
     setFilterData,
+    fetchAllTimeDashboardSummary,
+    allTimeDashboardSummary,
+    allTimeLoading
   };
 };

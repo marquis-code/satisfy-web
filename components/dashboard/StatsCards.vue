@@ -47,8 +47,11 @@
           v-for="(value, key) in detailedDashboardSummary" :key="key" :class="computedCardColor(key)">
           <h1 class="font-semibold text-lg">{{ modifyCardTitle(key) }}</h1>
           <div class="flex items-center flex-col gap-x-4 lg:gap-x-6 mt-2 gap-y-3">
-            <h1 class="text-xl lg:text-2xl font-bold">{{ value.total || 0 }}</h1>
-            <div class="flex items-center gap-x-2">
+            <h1 class="text-xl lg:text-2xl font-bold"
+              v-if="!allTimeLoading && Object.keys(allTimeDashboardSummary).length">{{
+                allTimeDashboardSummary[key]?.total || 0}}</h1>
+            <div class="flex items-center gap-x-3">
+              <h1 class="text-base lg:text-lg font-semibold text-gray-700 ">{{ value.total || 0 }}</h1>
               <img v-if="parseFloat(value.growth) >= 0" src="@/assets/icons/dashboard/increase.svg" alt="nill" />
               <img v-if="parseFloat(value.growth) < 0" src="@/assets/icons/dashboard/decrease.svg" alt="" />
               <p class="" :class="[parseFloat(value.growth) >= 0 ? 'text-green-600' : 'text-red-600']">
@@ -90,12 +93,13 @@ const router = useRouter()
 
 // const { fetchDashboardSummary, dashboardSummary, loading, metaObj, setFilterData } = useFetchDashboardSummary();
 // const { fetchDashboardSummary, dashboardSummary, loading: loadingD, metaObj: metaD, setFilterData: setFilterDataD } = useFetchDashboardSummary();
-const { fetchDetailedDashboardSummary, detailedDashboardSummary, loading, metaObj, setFilterData, } = useFetchDetailedDashboardSummary();
+const { fetchDetailedDashboardSummary, detailedDashboardSummary, loading, metaObj, setFilterData, fetchAllTimeDashboardSummary, allTimeLoading, allTimeDashboardSummary } = useFetchDetailedDashboardSummary();
 // const dateFilter = ref<any>(null);
 const dateFilter = ref<any>([]);
 const showAll = ref<boolean>(true);
 
-const selectedRange = ref('all');
+const selectedRange = ref('today');
+fetchAllTimeDashboardSummary();
 
 const onRangeChange = () => {
   const payload = {
