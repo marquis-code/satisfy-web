@@ -4,7 +4,7 @@ import { ref, watch } from "vue";
 export const useFetchDetailedDashboardSummary = () => {
   const detailedDashboardSummary = ref({}) as Record<string, any>;
   const metaObj = ref({
-    range: 'all',  
+    range: 'today',  
     startDate: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().substr(0, 10), 
     endDate: new Date().toISOString().substr(0, 10),
     showAll: true,
