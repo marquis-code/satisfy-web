@@ -100,6 +100,7 @@ const showAll = ref<boolean>(true);
 
 const selectedRange = ref('today');
 fetchAllTimeDashboardSummary();
+
 const onRangeChange = () => {
   const payload = {
     range: selectedRange.value,
