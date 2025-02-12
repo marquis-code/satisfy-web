@@ -10,6 +10,9 @@ const payload = ref({
   coverImage: "",
   storyCategories: [],
   slides: [],
+  price: null,
+  currencyCode: '',
+  isLocked: false
 }) as any;
 const descriptionLength = ref(700) as any;
 const router = useRouter();
@@ -50,6 +53,9 @@ export const useCreateUserStory = () => {
     payload.value.storyCategories = data.storyCategories;
     payload.value.slides = data.slides;
     payload.value.coverImage = data.coverImage;
+    payload.value.price = data.price
+    payload.value.currencyCode = data.currencyCode
+    payload.value.isLocked = data.isLocked
   };
 
   return {
