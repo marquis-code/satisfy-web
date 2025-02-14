@@ -16,5 +16,8 @@ export const walletApiFactory = {
     },
     getWalletTransactionsChart(metaObj: any){
         return axiosInstance.get(`/wallets/transactions/plot?showAll=${metaObj.showAll}&startDate=${metaObj.startDate}&endDate=${metaObj.endDate}&datePart=${metaObj.datePart}&dataType=${metaObj.dataType}&financeType=${metaObj.financeType}`)
-    }
+    },
+    getCurrencies() {
+        return axiosInstance.get(`/currencies`)
+    },
 }

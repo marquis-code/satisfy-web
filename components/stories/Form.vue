@@ -121,6 +121,7 @@
                     :description="payload.description" />
             </div>
             <StoriesTagInput @content="handleTagContent" />
+            <StoriesLockPod @amount="handleAmount"/>
 
             <div class="flex justify-end items-end pt-32">
                 <div class="flex gap-x-3">
@@ -173,18 +174,22 @@ const { colors } = useColors();
 import { useRoute } from 'vue-router'
 import { useCreateUserStory } from "@/composables/story/createById";
 import { useUploadImageFile } from '@/composables/files/useUploadImageFile'
-import { useTextAlignment } from '@/composables/core/useTextAlignment'
+import { useTextAlignment } from '@/composables/core/useTextAlignment';
+import { useFetchCurrencies } from '@/composables/wallet/fetchCurrencies';
 const { textAlignmentList } = useTextAlignment()
 const { uploadImageFile, uploadResponse, loading: uploading } = useUploadImageFile()
 const { fetchUser, user: userObj, loading: loadingUserObj } = useFetchUserById()
-const { clearSlides } = useTextSplitter()
+const { clearSlides } = useTextSplitter();
+const {loading:loadingCurrencies, currencies, fetchCurrencies} = useFetchCurrencies();
 const showOptionsModal = ref(false)
 fetchUser()
 const { user } = useLogin()
 const selectedFont = ref('Lato') as any
 const selectedTextAlignment = ref('center') as any
-const podSuccessObj = ref({}) as any
-const router = useRouter()
+const podSuccessObj = ref({}) as any;
+const isLocked = ref(false)
+const router = useRouter();
+fetchCurrencies();
 
 const refreshPage = () => {
     router.replace({ path: route.path, query: route.query, hash: route.hash })
@@ -201,7 +206,8 @@ const uploadedPodCover = ref('') as any;
 const slideColor = ref('0xFF39349A') as any;
 const manualContentList = ref([]) as any
 const hexaColor = ref('') as any
-const emittedSlides = ref([]) as any
+const emittedSlides = ref([]) as any;
+const podAmount = ref(0);
 // const coverImage = ref('') as any
 const route = useRoute();
 
@@ -394,7 +400,8 @@ const computedTags = computed(() => {
   return uploadedTagsList.value.map((item: any) => item.name).join(', ');
 });
 
-const handleCreateUserStory = () => {
+const handleCreateUserStory = () => {  
+    console.log(isLocked.value, currencies.value[0]?.code, Number(podAmount.value), 'dkmomlmm')
     const finalPayload = {
         isPublished: selectedPublicationStatus.value,
         title: payload.value.title,
@@ -403,6 +410,9 @@ const handleCreateUserStory = () => {
         userId: route.params.id,
         slides: uploadType.value === 'manual' ? computedManualSlides.value : computedSlides.value,
         storyCategories: computedStoryCategories.value,
+        price : isLocked.value ? Number(podAmount.value) : null,
+        currencyCode : currencies.value[0]?.code,
+        isLocked : isLocked.value
     };
 
 
@@ -472,4 +482,12 @@ const handleCancellation = () => {
 
 const today = moment().format('Do MMMM YYYY, h:mm A');
 const formattedDate = computed(() => today);
+
+const handleAmount = (amount : number) => {
+    podAmount.value = amount;
+    if(podAmount.value > 0){
+        isLocked.value = true
+    }
+    console.log('podssss', podAmount.value)
+}
 </script>
