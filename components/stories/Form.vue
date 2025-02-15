@@ -410,11 +410,12 @@ const handleCreateUserStory = () => {
         userId: route.params.id,
         slides: uploadType.value === 'manual' ? computedManualSlides.value : computedSlides.value,
         storyCategories: computedStoryCategories.value,
-        price : isLocked.value ? Number(podAmount.value) : null,
-        currencyCode : currencies.value[0]?.code,
         isLocked : isLocked.value
     };
-
+    if (isLocked.value) {
+        finalPayload.price = Number(podAmount.value);
+        finalPayload.currencyCode = currencies.value[0]?.code;
+    }
 
     setPayload(finalPayload);
     createUserStory().then(response => {
