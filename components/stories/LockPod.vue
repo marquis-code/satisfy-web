@@ -12,7 +12,7 @@
             <h2 class=" text-center font-semibold">Lock this Pod?</h2>
             <p class="text-center text-sm">I believe <span class="font-semibold">₦{{ podPrice }}</span> is a fair price to lock this pod.</p>
             <div>
-                <input v-model="podPrice" type="range" min="0" max="5000" step="100" class="w-full cursor-pointer">
+                <input v-model="podPrice" type="range" min="0" max="5000" step="50" class="w-full cursor-pointer">
             </div>
             <button @click="lockPod" class="bg-[#0BA9B9] text-white rounded-full py-3 text-sm scro font-semibold w-full">Lock Pod</button>
         </section>
