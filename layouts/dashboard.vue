@@ -80,7 +80,7 @@
                     <li>
                       <NuxtLink to="/dashboard/pods" @click.prevent="isOpen = false"
                         class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M18 15L19 15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                           <path d="M9 15H15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
@@ -94,11 +94,12 @@
                           <path
                             d="M21 6H3C2.44772 6 2 6.44772 2 7V17C2 17.5523 2.44772 18 3 18H21C21.5523 18 22 17.5523 22 17V7C22 6.44772 21.5523 6 21 6Z"
                             stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
+                        </svg> -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256"><path d="M96.26,37.05A8,8,0,0,1,102,27.29a104.11,104.11,0,0,1,52,0,8,8,0,0,1-2,15.75,8.15,8.15,0,0,1-2-.26,88.09,88.09,0,0,0-44,0A8,8,0,0,1,96.26,37.05ZM53.79,55.14a104.05,104.05,0,0,0-26,45,8,8,0,0,0,15.42,4.27,88,88,0,0,1,22-38.09A8,8,0,0,0,53.79,55.14ZM43.21,151.55a8,8,0,1,0-15.42,4.28,104.12,104.12,0,0,0,26,45,8,8,0,0,0,11.41-11.22A88.14,88.14,0,0,1,43.21,151.55ZM150,213.22a88,88,0,0,1-44,0,8,8,0,1,0-4,15.49,104.11,104.11,0,0,0,52,0,8,8,0,0,0-4-15.49ZM222.65,146a8,8,0,0,0-9.85,5.58,87.91,87.91,0,0,1-22,38.08,8,8,0,1,0,11.42,11.21,104,104,0,0,0,26-45A8,8,0,0,0,222.65,146Zm-9.86-41.54a8,8,0,0,0,15.42-4.28,104,104,0,0,0-26-45,8,8,0,1,0-11.41,11.22A88,88,0,0,1,212.79,104.45Z"></path></svg>
                         Pods
                       </NuxtLink>
                     </li>
-                    <!-- <li>
+                    <li>
                       <NuxtLink to="/dashboard/notify" @click.prevent="isOpen = false"
                         class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -108,7 +109,7 @@
                         </svg>
                         Notify
                       </NuxtLink>
-                    </li> -->
+                    </li>
                     <!-- <li>
                       <a href="#" @click.prevent="isOpen = false"
                         class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 py-3 text-base leading-6 font-semibold">
@@ -274,7 +275,7 @@
                 <li>
                   <NuxtLink to="/dashboard/pods"
                     class="flex w-full text-gray-700 items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M18 15L19 15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round" />
                       <path d="M9 15H15" stroke="#667085" stroke-width="1.5" stroke-linecap="round"
@@ -288,7 +289,8 @@
                       <path
                         d="M21 6H3C2.44772 6 2 6.44772 2 7V17C2 17.5523 2.44772 18 3 18H21C21.5523 18 22 17.5523 22 17V7C22 6.44772 21.5523 6 21 6Z"
                         stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+                    </svg> -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256"><path d="M96.26,37.05A8,8,0,0,1,102,27.29a104.11,104.11,0,0,1,52,0,8,8,0,0,1-2,15.75,8.15,8.15,0,0,1-2-.26,88.09,88.09,0,0,0-44,0A8,8,0,0,1,96.26,37.05ZM53.79,55.14a104.05,104.05,0,0,0-26,45,8,8,0,0,0,15.42,4.27,88,88,0,0,1,22-38.09A8,8,0,0,0,53.79,55.14ZM43.21,151.55a8,8,0,1,0-15.42,4.28,104.12,104.12,0,0,0,26,45,8,8,0,0,0,11.41-11.22A88.14,88.14,0,0,1,43.21,151.55ZM150,213.22a88,88,0,0,1-44,0,8,8,0,1,0-4,15.49,104.11,104.11,0,0,0,52,0,8,8,0,0,0-4-15.49ZM222.65,146a8,8,0,0,0-9.85,5.58,87.91,87.91,0,0,1-22,38.08,8,8,0,1,0,11.42,11.21,104,104,0,0,0,26-45A8,8,0,0,0,222.65,146Zm-9.86-41.54a8,8,0,0,0,15.42-4.28,104,104,0,0,0-26-45,8,8,0,1,0-11.41,11.22A88,88,0,0,1,212.79,104.45Z"></path></svg>
 
                     Pods
                   </NuxtLink>
@@ -342,18 +344,6 @@
                   </NuxtLink>
                 </li>
                 <!-- <li>
-                  <NuxtLink to="/dashboard/notify"
-                    class="flex w-full text-gray-700 items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                      stroke="#4a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0">
-                      </path>
-                    </svg>
-
-                    Notify
-                  </NuxtLink>
-                </li> -->
-                <!-- <li>
                   <NuxtLink to="/dashboard/admin"
                     class="flex w-full text-gray-700 items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -404,7 +394,31 @@
                     Configuration
                   </NuxtLink>
                 </li> -->
-                <li class=" relative">
+                <li class="flex w-full text-gray-700 items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose">
+              <div>
+                <button @click="router.push('/dashboard/ads')" type="button" class="flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm/6 font-semibold text-gray-700 hover:bg-gray-50" aria-controls="sub-menu-2" aria-expanded="false">
+                <img src="@/assets/icons/news.svg" class="h-5 w-5" />
+                  Adverts
+                  <!-- Expanded: "rotate-90 text-gray-500", Collapsed: "text-gray-400" -->
+                  <svg class="ml-auto size-5 shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                    <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+                <!-- Expandable link section, show/hide based on state. -->
+                <ul class="mt-1 px-2" id="sub-menu-2">
+                  <li class="w-full">
+                    <!-- 44px -->
+                    <NuxtLink to="/dashboard/ads/requests" class="block rounded-md flex items-center gap-x-2 py-2 pl-9 w-full pr-2 text-sm/6 text-gray-700 hover:bg-gray-50">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                      <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg> -->
+                      Requests
+                    </NuxtLink>
+                  </li>
+
+                </ul>
+              </div>
+            </li>
+                <!-- <li class=" relative">
                   <NuxtLink to="/dashboard/ads"
                     class="text-gray-700 hover:bg-[#0ba9b9] hover:text-white group flex flex-col rounded-md p-2 py-3 text-sm leading-6 font-semibold">
                     <div class="flex items-center justify-between">
@@ -432,7 +446,7 @@
                             d="M8.75033 7.08332C9.90092 7.08332 10.8337 6.15058 10.8337 4.99999C10.8337 3.8494 9.90092 2.91666 8.75033 2.91666C7.59973 2.91666 6.66699 3.8494 6.66699 4.99999C6.66699 6.15058 7.59973 7.08332 8.75033 7.08332Z"
                             stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        Banner Ads
+                        Adverts
                       </div>
                     </div>
                   </NuxtLink>
@@ -450,10 +464,54 @@
                   </div>
                   <div class="absolute bottom-[28%] left-[7%] w-0.5 h-[40%] border-l-2 border-dotted border-[#0ba9b9]">
                   </div>
-                </li>
+                </li> -->
 
               </ul>
             </li>
+            <li class="flex w-full text-gray-700 items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose">
+              <div>
+                <button @click="router.push('/dashboard/notify')" type="button" class="flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm/6 font-semibold text-gray-700 hover:bg-gray-50" aria-controls="sub-menu-2" aria-expanded="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                      stroke="#4a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0">
+                      </path>
+                    </svg>
+
+                  Notifications
+                  <!-- Expanded: "rotate-90 text-gray-500", Collapsed: "text-gray-400" -->
+                  <svg class="ml-auto size-5 shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                    <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+                <!-- Expandable link section, show/hide based on state. -->
+                <ul class="mt-1 px-2" id="sub-menu-2">
+                  <li>
+                    <!-- 44px -->
+                    <NuxtLink to="/dashboard/notify/push" class="block rounded-md flex items-center gap-x-2 py-2 pl-9 pr-2 text-sm/6 text-gray-700 hover:bg-gray-50">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                      Push</NuxtLink>
+                  </li>
+                  <li>
+                    <!-- 44px -->
+                    <NuxtLink to="/dashboard/notify/sms" class="block rounded-md flex items-center gap-x-2 py-2 pl-9 pr-2 text-sm/6 text-gray-700 hover:bg-gray-50">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                      Email</NuxtLink>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!-- <li>
+                  <NuxtLink to="/dashboard/notify"
+                    class="flex w-full text-gray-700 items-center gap-x-3 no-underline rounded-md px-3 py-2.5 leading-loose">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                      stroke="#4a4a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0">
+                      </path>
+                    </svg>
+
+                    Notifications
+                  </NuxtLink>
+                </li> -->
             <!-- <li>
               <div class="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
               <ul role="list" class="-mx-2 mt-2 space-y-1">
