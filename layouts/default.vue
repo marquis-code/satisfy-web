@@ -1,14 +1,7 @@
 <template>
   <div>
-    <!-- <CoreLandingPageLoader @update:show="showOverlay = false" :show="showOverlay" /> -->
+    <Naavbar />
     <NuxtPage />
+    <FooterSection />
   </div>
 </template>
-
-
-<script setup lang="ts">
-const showOverlay = ref(true)
-definePageMeta({
-  middleware: 'auth'
-})
-</script>

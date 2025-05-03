@@ -4,7 +4,7 @@ export default {
 
   app: {
     head: {
-      title: "Homepod - Storipod Admin Platform",
+      title: "OLGnova",
       htmlAttrs: { lang: "en" },
       meta: [
         { charset: "utf-8" },
@@ -13,27 +13,29 @@ export default {
       ],
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.svg" }],
     },
+    pageTransition: { 
+      name: 'page', 
+      mode: 'out-in'
+    }
   },
-
+  build: {
+    transpile: ['vuedraggable', 'marked', 'dompurify', 'lucide-vue-next']
+  },
   modules: ["@nuxtjs/tailwindcss"],
   css: ["/assets/css/main.css"],
 
   tailwindcss: {
     cssPath: "@/assets/css/main.css",
   },
+  transpile: [
+    '@vueuse/motion'
+  ],
 
   axios: {
     // Axios options here
     timeout: 10000, // Example: set timeout to 10 seconds
   },
-
-  // buildModules: [
-  //   '@nuxtjs/moment'
-  // ]
-  // alias: {
-  // 	'@': '/'
-  // },
-  plugins: [{ src: '~/plugins/google-analytics.client.ts', mode: 'client' }, { src: '~/plugins/googleTagManager.client.ts', mode: 'client' }, { src: '~/plugins/vue-picture-cropper.ts', mode: 'client' }, ],
+  plugins: [],
 
   compatibilityDate: "2025-02-01",
 };
