@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Naavbar />
+    <NavbarSection />
     <NuxtPage />
     <FooterSection />
   </div>

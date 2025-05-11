@@ -1,421 +1,667 @@
 <template>
- <main>
-  <NavbarSection class="bg-black" />
+  <main class="overflow-hidden">
+    <NavbarSection class="bg-black" />
     <div class="bg-white">
-
-   <main class="isolate">
-    <!-- Hero section -->
-    <div class="relative isolate -z-10">
-      <svg class="absolute inset-x-0 top-0 -z-10 h-[64rem] w-full stroke-gray-200 [mask-image:radial-gradient(32rem_32rem_at_center,white,transparent)]" aria-hidden="true">
-        <defs>
-          <pattern id="1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84" width="200" height="200" x="50%" y="-1" patternUnits="userSpaceOnUse">
-            <path d="M.5 200V.5H200" fill="none" />
-          </pattern>
-        </defs>
-        <svg x="50%" y="-1" class="overflow-visible fill-gray-50">
-          <path d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z" stroke-width="0" />
-        </svg>
-        <rect width="100%" height="100%" stroke-width="0" fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)" />
-      </svg>
-      <div class="absolute left-1/2 right-0 top-0 -z-10 -ml-24 transform-gpu overflow-hidden blur-3xl lg:ml-24 xl:ml-48" aria-hidden="true">
-        <div class="aspect-[801/1036] w-[50.0625rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30" style="clip-path: polygon(63.1% 29.5%, 100% 17.1%, 76.6% 3%, 48.4% 0%, 44.6% 4.7%, 54.5% 25.3%, 59.8% 49%, 55.2% 57.8%, 44.4% 57.2%, 27.8% 47.9%, 35.1% 81.5%, 0% 97.7%, 39.2% 100%, 35.2% 81.4%, 97.2% 52.8%, 63.1% 29.5%)"></div>
-      </div>
-      <div class="overflow-hidden">
-        <div class="mx-auto max-w-7xl px-6 pb-32 pt-36 sm:pt-60 lg:px-8 lg:pt-32">
+      <!-- Hero section with animated elements -->
+      <section class="relative isolate overflow-hidden">
+        <!-- Animated background patterns -->
+        <div class="absolute inset-0 -z-10 opacity-30">
+          <svg class="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+              <pattern id="grid-pattern" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#3A6E9F" stroke-width="0.5" opacity="0.3" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid-pattern)" />
+          </svg>
+        </div>
+        
+        <!-- Animated gradient blob -->
+        <div class="absolute left-1/2 right-0 top-0 -z-10 -ml-24 transform-gpu overflow-hidden blur-3xl lg:ml-24 xl:ml-48" aria-hidden="true">
+          <div class="aspect-[801/1036] w-[50.0625rem] bg-gradient-to-tr from-[#3A6E9F] to-[#6A9AC9] opacity-30 animate-pulse" 
+               style="clip-path: polygon(63.1% 29.5%, 100% 17.1%, 76.6% 3%, 48.4% 0%, 44.6% 4.7%, 54.5% 25.3%, 59.8% 49%, 55.2% 57.8%, 44.4% 57.2%, 27.8% 47.9%, 35.1% 81.5%, 0% 97.7%, 39.2% 100%, 35.2% 81.4%, 97.2% 52.8%, 63.1% 29.5%)"></div>
+        </div>
+        
+        <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
           <div class="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
-            <div class="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl">
-              <h1 class="text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:text-6xl">Empowering organizations in achieving their highest potential</h1>
-              <p class="mt-8 text-pretty text-lg text-gray-500 sm:max-w-md sm:text-xl/8 lg:max-w-none">
-                At OLGnova, we specialize in driving positive change through expert research, strategic communication, and tailored solutions. We empower organizations to reach their full potential and create lasting, sustainable impact. Whether conducting surveys, research, and evaluations or delivering communication services, we provide data-driven insights and innovative strategies to foster global success.
+            <div class="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl" 
+                 v-motion
+                 :initial="{ opacity: 0, y: 100 }"
+                 :enter="{ opacity: 1, y: 0, transition: { delay: 200, duration: 800 } }">
+              <h1 class="text-pretty text-5xl font-bold tracking-tight text-[#3A6E9F] sm:text-6xl">
+                Empowering organizations in achieving their highest potential
+              </h1>
+              <p class="mt-8 text-pretty text-lg text-gray-600 sm:max-w-md sm:text-xl/8 lg:max-w-none">
+                At OLGnova, we specialize in driving positive change through expert research, strategic communication, and tailored solutions. We empower organizations to reach their full potential and create lasting, sustainable impact.
               </p>
+              <div class="mt-10 flex items-center gap-x-6">
+                <a href="#services" class="rounded-md bg-[#3A6E9F] px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-[#2A5D8E] transition-all duration-300 transform hover:scale-105">
+                  Our Services
+                </a>
+                <a href="#about" class="text-lg font-semibold text-[#3A6E9F] hover:text-[#2A5D8E] transition-all duration-300">
+                  Learn more <span aria-hidden="true">→</span>
+                </a>
+              </div>
             </div>
-            <div class="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
+            
+            <!-- Animated team photo gallery -->
+            <div class="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0"
+                 v-motion
+                 :initial="{ opacity: 0, x: 100 }"
+                 :enter="{ opacity: 1, x: 0, transition: { delay: 600, duration: 800 } }">
               <div class="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80">
-                <div class="relative">
-                  <img src="@/assets/img/founder2.jpg" alt="" class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg">
+                <div class="relative overflow-hidden rounded-xl group">
+                  <img src="@/assets/img/others4.jpg" alt="" class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg transition-transform duration-500 group-hover:scale-110">
                   <div class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10"></div>
                 </div>
               </div>
               <div class="mr-auto w-44 flex-none space-y-8 sm:mr-0 sm:pt-52 lg:pt-36">
-                <div class="relative">
-                  <img src="@/assets/img/founder4.jpg" alt="" class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg">
+                <div class="relative overflow-hidden rounded-xl group">
+                  <img src="@/assets/img/founder4.jpg" alt="" class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg transition-transform duration-500 group-hover:scale-110">
                   <div class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10"></div>
                 </div>
-                <div class="relative">
-                  <img src="@/assets/img/founder5.jpg"  alt="" class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg">
+                <div class="relative overflow-hidden rounded-xl group">
+                  <img src="@/assets/img/founder5.jpg" alt="" class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg transition-transform duration-500 group-hover:scale-110">
                   <div class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10"></div>
                 </div>
               </div>
               <div class="w-44 flex-none space-y-8 pt-32 sm:pt-0">
-                <div class="relative">
-                  <img src="@/assets/img/founder6.png" alt="" class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg">
+                <div class="relative overflow-hidden rounded-xl group">
+                  <img src="@/assets/img/founder6.png" alt="" class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg transition-transform duration-500 group-hover:scale-110">
                   <div class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10"></div>
                 </div>
-                <div class="relative">
-                  <img src="@/assets/img/founder10.png" alt="" class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg">
+                <div class="relative overflow-hidden rounded-xl group">
+                  <img src="@/assets/img/others6.jpg" alt="" class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg transition-transform duration-500 group-hover:scale-110">
                   <div class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10"></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <!-- Content section -->
-    <!-- <div class="mx-auto -mt-12 max-w-7xl px-6 sm:mt-0 lg:px-8 xl:-mt-8">
-      <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-        <h2 class="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Our Aim</h2>
-        <div class="mt-6 flex flex-col gap-x-8 gap-y-20 lg:flex-row">
-          <div class="lg:w-full lg:max-w-2xl lg:flex-auto">
-            <p class="text-xl/8 text-gray-600">To empower organizations in achieving their highest potential by providing comprehensive, data-driven insights, strategic communication, and operational expertise for meaningful local and global impact.</p>
-            <p class="mt-10 max-w-xl text-base/7 text-gray-700">Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque erat velit. Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae sed turpis id.</p>
+      <!-- Our Aim section with animated elements -->
+      <section id="about" class="relative py-24 sm:py-32">
+        <div class="absolute inset-0 bg-gradient-to-b from-white to-gray-50"></div>
+        <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="lg:grid lg:grid-cols-12 lg:gap-x-8 lg:gap-y-20">
+            <!-- Image with floating animation -->
+            <div class="relative col-span-5"
+                 v-motion
+                 :initial="{ opacity: 0, x: -100 }"
+                 :enter="{ opacity: 1, x: 0, transition: { duration: 800 } }">
+              <div class="aspect-[4/3] overflow-hidden rounded-2xl">
+                <img class="h-full w-full object-cover shadow-2xl" src="@/assets/img/founder4.jpg" alt="Team member">
+              </div>
+              
+              <!-- Decorative elements -->
+              <div class="absolute -bottom-6 -left-6 h-24 w-24 rounded-full bg-[#3A6E9F]/10 animate-pulse"></div>
+              <div class="absolute -top-6 -right-6 h-16 w-16 rounded-full bg-[#3A6E9F]/20 animate-pulse" style="animation-delay: 1s"></div>
+              
+              <!-- Floating card with stats -->
+              <div class="absolute -right-8 bottom-16 rounded-lg bg-white p-4 shadow-xl animate-float">
+                <div class="flex items-center gap-4">
+                  <div class="rounded-full bg-[#3A6E9F]/10 p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#3A6E9F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-gray-500">Impact</p>
+                    <p class="text-xl font-bold text-[#3A6E9F]">100%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="relative col-span-7 mt-10 lg:mt-0 lg:pl-8"
+                 v-motion
+                 :initial="{ opacity: 0, x: 100 }"
+                 :enter="{ opacity: 1, x: 0, transition: { duration: 800 } }">
+              <div class="relative rounded-3xl bg-[#3A6E9F] px-8 py-12 shadow-xl sm:px-12 sm:py-16">
+                <div class="relative">
+                  <div class="flex items-center">
+                    <div class="h-12 w-12 rounded-full bg-white/10 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <h2 class="ml-4 text-3xl font-bold tracking-tight text-white">Our Aim</h2>
+                  </div>
+                  
+                  <p class="mt-6 text-lg leading-8 text-white/90">
+                    To empower organizations in achieving their highest potential by providing comprehensive, data-driven insights, strategic communication, and operational expertise for meaningful local and global impact.
+                  </p>
+                  
+                  <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div class="rounded-lg bg-white/10 p-4 backdrop-blur-sm">
+                      <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="ml-2 font-medium text-white">Data-Driven</span>
+                      </div>
+                    </div>
+                    <div class="rounded-lg bg-white/10 p-4 backdrop-blur-sm">
+                      <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="ml-2 font-medium text-white">Strategic</span>
+                      </div>
+                    </div>
+                    <div class="rounded-lg bg-white/10 p-4 backdrop-blur-sm">
+                      <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="ml-2 font-medium text-white">Impactful</span>
+                      </div>
+                    </div>
+                    <div class="rounded-lg bg-white/10 p-4 backdrop-blur-sm">
+                      <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="ml-2 font-medium text-white">Global</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Decorative elements -->
+                <div class="absolute -top-10 -right-10 h-40 w-40">
+                  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="h-full w-full text-[#5A8EBF] opacity-20">
+                    <path fill="currentColor" d="M47.1,-57.8C59.9,-47.4,68.9,-31.8,73.5,-14.2C78.1,3.4,78.4,22.9,70.1,37.5C61.8,52.1,45,61.7,27.4,68.5C9.9,75.3,-8.3,79.3,-24.9,74.9C-41.5,70.5,-56.5,57.7,-65.2,41.7C-73.9,25.7,-76.3,6.4,-72.6,-11.1C-68.9,-28.6,-59.1,-44.3,-45.6,-54.8C-32.1,-65.3,-16.1,-70.6,0.6,-71.3C17.2,-72,34.4,-68.1,47.1,-57.8Z" transform="translate(100 100)" />
+                  </svg>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="lg:flex lg:flex-auto lg:justify-center">
-            <dl class="w-64 space-y-8 xl:w-80">
-              <div class="flex flex-col-reverse gap-y-4">
-                <dt class="text-base/7 text-gray-600">Transactions every 24 hours</dt>
-                <dd class="text-5xl font-semibold tracking-tight text-gray-900">44 million</dd>
+        </div>
+      </section>
+
+      <!-- Our Services section with animated cards -->
+      <section id="services" class="relative py-24 sm:py-32 overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+          <svg class="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1000 1000">
+            <g clip-path="url(#clip0_1_2)" opacity="0.05">
+              <path d="M1000 0H0V1000H1000V0Z" fill="white"></path>
+              <path d="M0 500C0 224.9 224.9 0 500 0C775.1 0 1000 224.9 1000 500C1000 775.1 775.1 1000 500 1000C224.9 1000 0 775.1 0 500Z" stroke="#3A6E9F" stroke-width="2"></path>
+              <path d="M100 500C100 279.4 279.4 100 500 100C720.6 100 900 279.4 900 500C900 720.6 720.6 900 500 900C279.4 900 100 720.6 100 500Z" stroke="#3A6E9F" stroke-width="2"></path>
+              <path d="M200 500C200 334 334 200 500 200C666 200 800 334 800 500C800 666 666 800 500 800C334 800 200 666 200 500Z" stroke="#3A6E9F" stroke-width="2"></path>
+              <path d="M300 500C300 388.5 388.5 300 500 300C611.5 300 700 388.5 700 500C700 611.5 611.5 700 500 700C388.5 700 300 611.5 300 500Z" stroke="#3A6E9F" stroke-width="2"></path>
+              <path d="M400 500C400 443.1 443.1 400 500 400C556.9 400 600 443.1 600 500C600 556.9 556.9 600 500 600C443.1 600 400 556.9 400 500Z" stroke="#3A6E9F" stroke-width="2"></path>
+            </g>
+            <defs>
+              <clipPath id="clip0_1_2">
+                <rect width="1000" height="1000" fill="white"></rect>
+              </clipPath>
+            </defs>
+          </svg>
+        </div>
+        
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="mx-auto max-w-2xl lg:mx-0">
+            <h2 class="text-3xl font-bold tracking-tight text-[#3A6E9F] sm:text-5xl"
+                v-motion
+                :initial="{ opacity: 0, y: 50 }"
+                :enter="{ opacity: 1, y: 0, transition: { duration: 800 } }">
+              Our Services
+            </h2>
+            <p class="mt-6 text-xl/8 text-gray-700"
+               v-motion
+               :initial="{ opacity: 0, y: 50 }"
+               :enter="{ opacity: 1, y: 0, transition: { delay: 200, duration: 800 } }">
+              At OLGnova, we offer a comprehensive suite of services designed to provide organizations with data-driven insights, expert project management, and strategic guidance. Our goal is to help your organization create sustainable, impactful outcomes.
+            </p>
+          </div>
+          
+          <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:mt-10 lg:max-w-none lg:grid-cols-12">
+            <div class="lg:col-span-4"
+                 v-motion
+                 :initial="{ opacity: 0, y: 50 }"
+                 :enter="{ opacity: 1, y: 0, transition: { delay: 400, duration: 800 } }">
+              <div class="relative h-full overflow-hidden rounded-3xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-lg hover:translate-y-[-4px]">
+                <div class="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-[#3A6E9F]/5"></div>
+                
+                <div class="relative">
+                  <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#3A6E9F]/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#3A6E9F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  
+                  <h3 class="text-xl font-semibold text-gray-900">Research, Publication & Reporting</h3>
+                  
+                  <p class="mt-4 text-gray-600">
+                    We provide end-to-end research services tailored to your organization's goals, from feasibility studies and market analysis to project evaluations.
+                  </p>
+                  
+                  <div class="mt-6 flex items-center">
+                    <a href="#" class="text-sm font-medium text-[#3A6E9F] hover:text-[#2A5D8E]">
+                      Learn more
+                      <span aria-hidden="true" class="ml-1">→</span>
+                    </a>
+                  </div>
+                </div>
               </div>
-              <div class="flex flex-col-reverse gap-y-4">
-                <dt class="text-base/7 text-gray-600">Assets under holding</dt>
-                <dd class="text-5xl font-semibold tracking-tight text-gray-900">$119 trillion</dd>
+            </div>
+            
+            <div class="lg:col-span-4"
+                 v-motion
+                 :initial="{ opacity: 0, y: 50 }"
+                 :enter="{ opacity: 1, y: 0, transition: { delay: 600, duration: 800 } }">
+              <div class="relative h-full overflow-hidden rounded-3xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-lg hover:translate-y-[-4px]">
+                <div class="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-[#3A6E9F]/5"></div>
+                
+                <div class="relative">
+                  <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#3A6E9F]/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#3A6E9F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                  </div>
+                  
+                  <h3 class="text-xl font-semibold text-gray-900">Surveys & Stakeholder Insights</h3>
+                  
+                  <p class="mt-4 text-gray-600">
+                    Through targeted surveys, we collect data to align your initiatives with community needs and stakeholder expectations.
+                  </p>
+                  
+                  <div class="mt-6 flex items-center">
+                    <a href="#" class="text-sm font-medium text-[#3A6E9F] hover:text-[#2A5D8E]">
+                      Learn more
+                      <span aria-hidden="true" class="ml-1">→</span>
+                    </a>
+                  </div>
+                </div>
               </div>
-              <div class="flex flex-col-reverse gap-y-4">
-                <dt class="text-base/7 text-gray-600">New users annually</dt>
-                <dd class="text-5xl font-semibold tracking-tight text-gray-900">46,000</dd>
+            </div>
+            
+            <div class="lg:col-span-4"
+                 v-motion
+                 :initial="{ opacity: 0, y: 50 }"
+                 :enter="{ opacity: 1, y: 0, transition: { delay: 800, duration: 800 } }">
+              <div class="relative h-full overflow-hidden rounded-3xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-lg hover:translate-y-[-4px]">
+                <div class="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-[#3A6E9F]/5"></div>
+                
+                <div class="relative">
+                  <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#3A6E9F]/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#3A6E9F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                  </div>
+                  
+                  <h3 class="text-xl font-semibold text-gray-900">Knowledge Management</h3>
+                  
+                  <p class="mt-4 text-gray-600">
+                    Leveraging deep industry expertise, we deliver insights into trends, societal dynamics, and innovative strategies.
+                  </p>
+                  
+                  <div class="mt-6 flex items-center">
+                    <a href="#" class="text-sm font-medium text-[#3A6E9F] hover:text-[#2A5D8E]">
+                      Learn more
+                      <span aria-hidden="true" class="ml-1">→</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="lg:col-span-6"
+                 v-motion
+                 :initial="{ opacity: 0, y: 50 }"
+                 :enter="{ opacity: 1, y: 0, transition: { delay: 1000, duration: 800 } }">
+              <div class="relative h-full overflow-hidden rounded-3xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-lg hover:translate-y-[-4px]">
+                <div class="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-[#3A6E9F]/5"></div>
+                
+                <div class="relative">
+                  <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#3A6E9F]/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#3A6E9F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                    </svg>
+                  </div>
+                  
+                  <h3 class="text-xl font-semibold text-gray-900">Strategic Communication</h3>
+                  
+                  <p class="mt-4 text-gray-600">
+                    We craft compelling narratives that elevate your brand, engage audiences, and strengthen stakeholder relationships. Our tailored communication strategies ensure your message is clear, impactful, and aligned with your mission.
+                  </p>
+                  
+                  <div class="mt-6 flex items-center">
+                    <a href="#" class="text-sm font-medium text-[#3A6E9F] hover:text-[#2A5D8E]">
+                      Learn more
+                      <span aria-hidden="true" class="ml-1">→</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="lg:col-span-6"
+                 v-motion
+                 :initial="{ opacity: 0, y: 50 }"
+                 :enter="{ opacity: 1, y: 0, transition: { delay: 1200, duration: 800 } }">
+              <div class="relative h-full overflow-hidden rounded-3xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-lg hover:translate-y-[-4px]">
+                <div class="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-[#3A6E9F]/5"></div>
+                
+                <div class="relative">
+                  <div class="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#3A6E9F]/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#3A6E9F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  </div>
+                  
+                  <h3 class="text-xl font-semibold text-gray-900">Project Management & Oversight</h3>
+                  
+                  <p class="mt-4 text-gray-600">
+                    From inception to completion, we ensure seamless project execution with a focus on transparency, accountability, and stakeholder alignment. We provide rigorous progress tracking and evaluation to keep projects on course.
+                  </p>
+                  
+                  <div class="mt-6 flex items-center">
+                    <a href="#" class="text-sm font-medium text-[#3A6E9F] hover:text-[#2A5D8E]">
+                      Learn more
+                      <span aria-hidden="true" class="ml-1">→</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Testimonial -->
+          <div class="mt-16 lg:mt-24"
+               v-motion
+               :initial="{ opacity: 0, y: 50 }"
+               :enter="{ opacity: 1, y: 0, transition: { delay: 1400, duration: 800 } }">
+            <div class="relative rounded-3xl bg-[#3A6E9F]/5 p-8 lg:p-12">
+              <div class="absolute top-0 right-0 -mt-4 -mr-4">
+                <svg class="h-16 w-16 text-[#3A6E9F]/20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                </svg>
+              </div>
+              
+              <blockquote class="text-xl/8 font-medium text-gray-900 italic">
+                "OLGnova's strategic insights and data-driven approach transformed our organization's outreach efforts. Their team delivered exceptional results that exceeded our expectations."
+              </blockquote>
+              
+              <div class="mt-8 flex items-center gap-x-4">
+                <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="h-12 w-12 rounded-full object-cover">
+                <div>
+                  <div class="font-semibold text-gray-900">Gabriel Oke</div>
+                  <div class="text-sm text-gray-600">CEO, TechInnovate</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Work With Us section -->
+      <section class="relative py-24 sm:py-32 overflow-hidden bg-gray-50">
+        <div class="absolute inset-y-0 right-0 -z-10 w-[50%] skew-x-[-10deg] bg-white"></div>
+        
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="grid grid-cols-1 gap-x-16 gap-y-16 lg:grid-cols-2 lg:items-start">
+            <div class="lg:pr-4 lg:pt-4"
+                 v-motion
+                 :initial="{ opacity: 0, x: -100 }"
+                 :enter="{ opacity: 1, x: 0, transition: { duration: 800 } }">
+              <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-lg">
+                <h2 class="text-3xl font-bold tracking-tight text-[#3A6E9F] sm:text-4xl">Why Work With Us?</h2>
+                
+                <div class="mt-10 max-w-xl space-y-8">
+                  <div class="relative">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#3A6E9F] text-white">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                    </div>
+                    <div class="mt-4">
+                      <h3 class="text-xl font-semibold text-gray-900">Expertise</h3>
+                      <p class="mt-2 text-gray-600">
+                        Our team brings extensive experience in research, communication, and sustainability strategies across various sectors.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div class="relative">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#3A6E9F] text-white">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <div class="mt-4">
+                      <h3 class="text-xl font-semibold text-gray-900">Impact-Driven</h3>
+                      <p class="mt-2 text-gray-600">
+                        We are committed to making a positive impact through every project we undertake.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div class="relative">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#3A6E9F] text-white">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+                      </svg>
+                    </div>
+                    <div class="mt-4">
+                      <h3 class="text-xl font-semibold text-gray-900">Custom Solutions</h3>
+                      <p class="mt-2 text-gray-600">
+                        We deliver tailored strategies to meet the specific goals and needs of each client.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Team gallery with hover effects -->
+            <div class="relative"
+                 v-motion
+                 :initial="{ opacity: 0, x: 100 }"
+                 :enter="{ opacity: 1, x: 0, transition: { duration: 800 } }">
+              <div class="grid grid-cols-2 gap-6">
+                <div class="space-y-6">
+                  <div class="overflow-hidden rounded-2xl group">
+                    <img src="@/assets/img/others1.jpg" alt="" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
+                  </div>
+                  <div class="overflow-hidden rounded-2xl group">
+                    <img src="@/assets/img/others2.jpg" alt="" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
+                  </div>
+                </div>
+                <div class="mt-10 space-y-6">
+                  <div class="overflow-hidden rounded-2xl group">
+                    <img src="@/assets/img/others3.png" alt="" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
+                  </div>
+                  <div class="overflow-hidden rounded-2xl group">
+                    <img src="@/assets/img/others4.jpg" alt="" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Floating badge -->
+              <div class="absolute -bottom-6 -left-6 rounded-xl bg-[#3A6E9F] p-4 shadow-xl animate-float">
+                <div class="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-sm font-medium text-white">Expert Team</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Our Objectives section with animated checkmarks -->
+      <section class="py-24 sm:py-32">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-5">
+            <div class="col-span-2"
+                 v-motion
+                 :initial="{ opacity: 0, y: 50 }"
+                 :enter="{ opacity: 1, y: 0, transition: { duration: 800 } }">
+              <h2 class="text-3xl font-bold tracking-tight text-[#3A6E9F] sm:text-5xl">Our Objectives</h2>
+              <p class="mt-6 text-lg text-gray-600">
+                We are committed to delivering exceptional value through these key objectives that guide our work.
+              </p>
+              
+              <!-- Animated illustration -->
+              <div class="mt-10 relative h-64 w-full">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="absolute h-full w-full text-[#3A6E9F] opacity-10">
+                  <path fill="currentColor" d="M47.1,-57.8C59.9,-47.4,68.9,-31.8,73.5,-14.2C78.1,3.4,78.4,22.9,70.1,37.5C61.8,52.1,45,61.7,27.4,68.5C9.9,75.3,-8.3,79.3,-24.9,74.9C-41.5,70.5,-56.5,57.7,-65.2,41.7C-73.9,25.7,-76.3,6.4,-72.6,-11.1C-68.9,-28.6,-59.1,-44.3,-45.6,-54.8C-32.1,-65.3,-16.1,-70.6,0.6,-71.3C17.2,-72,34.4,-68.1,47.1,-57.8Z" transform="translate(100 100)" />
+                </svg>
+                
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="text-center">
+                    <div class="text-5xl font-bold text-[#3A6E9F]">100%</div>
+                    <div class="mt-2 text-lg font-medium text-gray-600">Commitment to Excellence</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-span-3 grid grid-cols-1 gap-y-8 sm:grid-cols-2 lg:gap-x-8 lg:gap-y-12">
+              <div class="relative pl-12"
+                   v-motion
+                   :initial="{ opacity: 0, x: 50 }"
+                   :enter="{ opacity: 1, x: 0, transition: { delay: 200, duration: 800 } }">
+                <div class="absolute left-0 top-1 flex h-8 w-8 items-center justify-center rounded-full bg-[#3A6E9F] animate-pulse">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900">Conduct in-depth research for strategic innovation</h3>
+              </div>
+              
+              <div class="relative pl-12"
+                   v-motion
+                   :initial="{ opacity: 0, x: 50 }"
+                   :enter="{ opacity: 1, x: 0, transition: { delay: 400, duration: 800 } }">
+                <div class="absolute left-0 top-1 flex h-8 w-8 items-center justify-center rounded-full bg-[#3A6E9F] animate-pulse" style="animation-delay: 0.2s">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900">Develop communication strategies that enhance engagement</h3>
+              </div>
+              
+              <div class="relative pl-12"
+                   v-motion
+                   :initial="{ opacity: 0, x: 50 }"
+                   :enter="{ opacity: 1, x: 0, transition: { delay: 600, duration: 800 } }">
+                <div class="absolute left-0 top-1 flex h-8 w-8 items-center justify-center rounded-full bg-[#3A6E9F] animate-pulse" style="animation-delay: 0.4s">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900">Implement efficient project management systems</h3>
+              </div>
+              
+              <div class="relative pl-12"
+                   v-motion
+                   :initial="{ opacity: 0, x: 50 }"
+                   :enter="{ opacity: 1, x: 0, transition: { delay: 800, duration: 800 } }">
+                <div class="absolute left-0 top-1 flex h-8 w-8 items-center justify-center rounded-full bg-[#3A6E9F] animate-pulse" style="animation-delay: 0.6s">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900">Provide meticulous monitoring and evaluation</h3>
+              </div>
+              
+              <div class="relative pl-12"
+                   v-motion
+                   :initial="{ opacity: 0, x: 50 }"
+                   :enter="{ opacity: 1, x: 0, transition: { delay: 1000, duration: 800 } }">
+                <div class="absolute left-0 top-1 flex h-8 w-8 items-center justify-center rounded-full bg-[#3A6E9F] animate-pulse" style="animation-delay: 0.8s">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900">Facilitate surveys to collect critical feedback</h3>
+              </div>
+              
+              <div class="relative pl-12"
+                   v-motion
+                   :initial="{ opacity: 0, x: 50 }"
+                   :enter="{ opacity: 1, x: 0, transition: { delay: 1200, duration: 800 } }">
+                <div class="absolute left-0 top-1 flex h-8 w-8 items-center justify-center rounded-full bg-[#3A6E9F] animate-pulse" style="animation-delay: 1s">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900">Guide companies through social and performance standards</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA section -->
+      <section class="relative isolate overflow-hidden bg-[#3A6E9F] py-16 sm:py-24">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
+            <div class="max-w-xl lg:max-w-lg"
+                 v-motion
+                 :initial="{ opacity: 0, y: 50 }"
+                 :enter="{ opacity: 1, y: 0, transition: { duration: 800 } }">
+              <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Ready to transform your organization?</h2>
+              <p class="mt-4 text-lg leading-8 text-white/80">
+                Let's work together to create sustainable impact and drive positive change for your organization.
+              </p>
+              <div class="mt-6 flex max-w-md gap-x-4">
+                <input type="email" placeholder="Enter your email" class="min-w-0 flex-auto rounded-md border-0 bg-white/10 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6 placeholder:text-white/60" />
+                <button type="submit" class="flex-none rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-[#3A6E9F] shadow-sm hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-all duration-300 hover:scale-105">
+                  Contact Us
+                </button>
+              </div>
+            </div>
+            <dl class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2"
+                v-motion
+                :initial="{ opacity: 0, y: 50 }"
+                :enter="{ opacity: 1, y: 0, transition: { delay: 200, duration: 800 } }">
+              <div class="flex flex-col items-start">
+                <div class="rounded-md bg-white/10 p-2 ring-1 ring-white/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <dt class="mt-4 font-semibold text-white">Email us</dt>
+                <dd class="mt-2 leading-7 text-white/80">info@olgnova.com</dd>
+              </div>
+              <div class="flex flex-col items-start">
+                <div class="rounded-md bg-white/10 p-2 ring-1 ring-white/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+                <dt class="mt-4 font-semibold text-white">Call us</dt>
+                <dd class="mt-2 leading-7 text-white/80">+250 788 249 545</dd>
               </div>
             </dl>
           </div>
         </div>
-      </div>
-    </div> -->
-
-    <div class="relative py-16">
-  <div class="absolute inset-x-0 top-0 hidden h-1/2  lg:block" aria-hidden="true"></div>
-  <div class="mx-auto max-w-7xl bg-indigo-600 lg:bg-transparent lg:px-8">
-    <div class="lg:grid lg:grid-cols-12">
-      <div class="relative z-10 lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:bg-transparent lg:py-16">
-        <div class="absolute inset-x-0 h-1/2 bg-gray-50 lg:hidden" aria-hidden="true"></div>
-        <div class="mx-auto max-w-md px-6 sm:max-w-3xl lg:max-w-none lg:p-0">
-          <img class="relative aspect-[10/6] w-full rounded-3xl object-cover shadow-2xl sm:aspect-[2/1] lg:aspect-square" src="@/assets/img/founder4.jpg" alt="">
+        
+        <!-- Decorative elements -->
+        <div class="absolute left-1/2 top-0 -z-10 -translate-x-1/2 blur-3xl xl:-top-6" aria-hidden="true">
+          <div class="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#6A9AC9] to-[#3A6E9F] opacity-30" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
         </div>
-      </div>
-
-      <div class="relative bg-indigo-600 lg:col-span-10 lg:col-start-3 lg:row-start-1 lg:grid lg:grid-cols-10 lg:items-center lg:rounded-3xl">
-        <div class="absolute inset-0 hidden overflow-hidden rounded-3xl lg:block" aria-hidden="true">
-          <svg class="absolute bottom-full left-full -translate-x-2/3 translate-y-1/3 transform xl:bottom-auto xl:top-0 xl:translate-y-0" width="404" height="384" fill="none" viewBox="0 0 404 384" aria-hidden="true">
-            <defs>
-              <pattern id="64e643ad-2176-4f86-b3d7-f2c5da3b6a6d" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                <rect x="0" y="0" width="4" height="4" class="text-indigo-500" fill="currentColor" />
-              </pattern>
-            </defs>
-            <rect width="404" height="384" fill="url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)" />
-          </svg>
-          <svg class="absolute top-full -translate-x-1/3 -translate-y-1/3 transform xl:-translate-y-1/2" width="404" height="384" fill="none" viewBox="0 0 404 384" aria-hidden="true">
-            <defs>
-              <pattern id="64e643ad-2176-4f86-b3d7-f2c5da3b6a6d" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                <rect x="0" y="0" width="4" height="4" class="text-indigo-500" fill="currentColor" />
-              </pattern>
-            </defs>
-            <rect width="404" height="384" fill="url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)" />
-          </svg>
-        </div>
-        <div class="relative mx-auto max-w-md space-y-6 px-6 py-12 sm:max-w-3xl sm:py-16 lg:col-span-6 lg:col-start-4 lg:max-w-none lg:p-0">
-          <h2 class="text-3xl font-bold tracking-tight text-white" id="join-heading">Our Aim</h2>
-          <p class="text-lg text-white">
-            To empower organizations in achieving their highest potential by providing comprehensive, data-driven insights, strategic communication, and operational expertise for meaningful local and global impact
-          </p>
-          <!-- <a class="block w-full rounded-md border border-transparent bg-white px-5 py-3 text-center text-base font-medium text-indigo-700 shadow-md hover:bg-gray-50 sm:inline-block sm:w-auto" href="#">Explore open positions</a> -->
-        </div>
-      </div>
+      </section>
     </div>
-  </div>
-    </div>
-
-    <div class="relative isolate overflow-hidden bg-white py-24 sm:py-32">
-  <div class="absolute -top-80 left-[max(6rem,33%)] -z-10 transform-gpu blur-3xl sm:left-1/2 md:top-20 lg:ml-20 xl:top-3 xl:ml-56" aria-hidden="true">
-    <div class="aspect-[801/1036] w-[50.0625rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30" style="clip-path: polygon(63.1% 29.6%, 100% 17.2%, 76.7% 3.1%, 48.4% 0.1%, 44.6% 4.8%, 54.5% 25.4%, 59.8% 49.1%, 55.3% 57.9%, 44.5% 57.3%, 27.8% 48%, 35.1% 81.6%, 0% 97.8%, 39.3% 100%, 35.3% 81.5%, 97.2% 52.8%, 63.1% 29.6%)"></div>
-  </div>
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl lg:mx-0">
-      <!-- <p class="text-base/7 font-semibold text-indigo-600">Deploy faster</p> -->
-      <h1 class="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Our Services</h1>
-      <p class="mt-6 text-xl/8 text-gray-700">
-        At OLGnova, we offer a comprehensive suite of services designed to provide organizations with data-driven insights, expert project management, and strategic guidance. Our goal is to help your organization create sustainable, impactful outcomes.
-      </p>
-    </div>
-    <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:mt-10 lg:max-w-none lg:grid-cols-12">
-      <div class="relative lg:order-last lg:col-span-5">
-        <svg class="absolute -top-[40rem] left-1 -z-10 h-[64rem] w-[175.5rem] -translate-x-1/2 stroke-gray-900/10 [mask-image:radial-gradient(64rem_64rem_at_111.5rem_0%,white,transparent)]" aria-hidden="true">
-          <defs>
-            <pattern id="e87443c8-56e4-4c20-9111-55b82fa704e3" width="200" height="200" patternUnits="userSpaceOnUse">
-              <path d="M0.5 0V200M200 0.5L0 0.499983" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" stroke-width="0" fill="url(#e87443c8-56e4-4c20-9111-55b82fa704e3)" />
-        </svg>
-        <figure class="border-l border-indigo-600 pl-8">
-          <blockquote class="text-xl/8 font-semibold tracking-tight text-gray-900">
-            <p>“Vel ultricies morbi odio facilisi ultrices accumsan donec lacus purus. Lectus nibh ullamcorper ac dictum justo in euismod. Risus aenean ut elit massa. In amet aliquet eget cras. Sem volutpat enim tristique.”</p>
-          </blockquote>
-          <figcaption class="mt-8 flex gap-x-4">
-            <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="mt-1 size-10 flex-none rounded-full bg-gray-50">
-            <div class="text-sm/6">
-              <div class="font-semibold text-gray-900">Gabriel Oke</div>
-              <div class="text-gray-600">@brenna</div>
-            </div>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="max-w-xl text-base/7 text-gray-700 lg:col-span-7">
-        <!-- <p>Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque erat velit. Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae sed turpis id.</p> -->
-        <ul role="list" class="mt-8 max-w-xl space-y-8 text-gray-600">
-          <li v-for="(item, idx) in servicesList" :key="idx" class="flex gap-x-3">
-            <svg class="mt-1 size-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-              <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
-            </svg>
-            <span><strong class="font-semibold text-gray-900">{{item?.title}}.</strong> {{item?.description}}.</span>
-          </li>
-        </ul>
-        <!-- <p class="mt-8">Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis odio id et. Id blandit molestie auctor fermentum dignissim. Lacus diam tincidunt ac cursus in vel. Mauris varius vulputate et ultrices hac adipiscing egestas. Iaculis convallis ac tempor et ut. Ac lorem vel integer orci.</p>
-        <h2 class="mt-16 text-2xl font-bold tracking-tight text-gray-900">No server? No problem.</h2>
-        <p class="mt-6">Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam consequat in. Convallis arcu ipsum urna nibh. Pharetra, euismod vitae interdum mauris enim, consequat vulputate nibh. Maecenas pellentesque id sed tellus mauris, ultrices mauris. Tincidunt enim cursus ridiculus mi. Pellentesque nam sed nullam sed diam turpis ipsum eu a sed convallis diam.</p> -->
-      </div>
-    </div>
-  </div>
-   </div>
-
-   <div class="overflow-hidden bg-white">
-  <div class="mx-auto max-w-7xl md:px-6 lg:px-8">
-    <div class="grid grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-2 lg:items-start">
-      <div class="px-6 md:px-0 lg:pr-4 lg:pt-4">
-        <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-lg">
-          <!-- <h2 class="text-base/7 font-semibold text-indigo-600">Deploy faster</h2> -->
-          <p class="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-4xl">Why Work With Us?</p>
-          <!-- <p class="mt-6 text-lg/8 text-gray-600">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.</p> -->
-          <dl class="mt-10 max-w-xl space-y-8 text-base/7 text-gray-600 lg:max-w-none">
-            <div class="relative pl-9">
-              <dt class="inline font-semibold text-gray-900">
-                <svg class="absolute left-1 top-1 size-5 text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                  <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
-                </svg>
-                Expertise
-              </dt>
-              <dd class="inline">
-                Our team brings extensive experience in research, communication, and sustainability strategies across various sectors.
-                <!-- orem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione. -->
-            </dd>
-            </div>
-            <div class="relative pl-9">
-              <dt class="inline font-semibold text-gray-900">
-                <svg class="absolute left-1 top-1 size-5 text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                  <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd" />
-                </svg>
-                Impact-Driven
-              </dt>
-              <dd class="inline">
-                We are committed to making a positive impact through every project we undertake.
-                <!-- Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. -->
-            </dd>
-            </div>
-            <div class="relative pl-9">
-              <dt class="inline font-semibold text-gray-900">
-                <svg class="absolute left-1 top-1 size-5 text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                  <path d="M4.632 3.533A2 2 0 0 1 6.577 2h6.846a2 2 0 0 1 1.945 1.533l1.976 8.234A3.489 3.489 0 0 0 16 11.5H4c-.476 0-.93.095-1.344.267l1.976-8.234Z" />
-                  <path fill-rule="evenodd" d="M4 13a2 2 0 1 0 0 4h12a2 2 0 1 0 0-4H4Zm11.24 2a.75.75 0 0 1 .75-.75H16a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75h-.01a.75.75 0 0 1-.75-.75V15Zm-2.25-.75a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75H13a.75.75 0 0 0 .75-.75V15a.75.75 0 0 0-.75-.75h-.01Z" clip-rule="evenodd" />
-                </svg>
-                Custom Solutions
-                <!-- Database backups. -->
-              </dt>
-              <dd class="inline">
-                We deliver tailored strategies to meet the specific goals and needs of each client.
-                <!-- Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis. -->
-            </dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-      <div class="sm:px-6 lg:px-0">
-        <img src="@/assets/img/founder2.jpg" alt="" class="w-full h-full rounded-xl bg-gray-900/5 object-cover shadow-lg">
-        <!-- <div class="relative isolate overflow-hidden bg-indigo-500 px-6 pt-8 sm:mx-auto sm:max-w-2xl sm:rounded-3xl sm:pl-16 sm:pr-0 sm:pt-16 lg:mx-0 lg:max-w-none">
-          <div class="absolute -inset-y-px -left-3 -z-10 w-full origin-bottom-left skew-x-[-30deg] bg-indigo-100 opacity-20 ring-1 ring-inset ring-white" aria-hidden="true"></div>
-          <div class="mx-auto max-w-2xl sm:mx-0 sm:max-w-none">
-            <div class="w-screen overflow-hidden rounded-tl-xl bg-gray-900 ring-1 ring-white/10">
-              <div class="flex bg-gray-800/40 ring-1 ring-white/5">
-                <div class="-mb-px flex text-sm/6 font-medium text-gray-400">
-                  <div class="border-b border-r border-b-white/20 border-r-white/10 bg-white/5 px-4 py-2 text-white">NotificationSetting.jsx</div>
-                  <div class="border-r border-gray-600/10 px-4 py-2">App.jsx</div>
-                </div>
-              </div>
-              <div class="px-6 pb-14 pt-6">
-                <img src="@/assets/img/founder2.jpg" alt="" class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg">
-              </div>
-            </div>
-          </div>
-          <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/10 sm:rounded-3xl" aria-hidden="true"></div>
-        </div> -->
-      </div>
-    </div>
-  </div>
-   </div>
-
-
-   <div class="bg-white py-24 sm:py-32">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-5">
-      <div class="col-span-2">
-        <!-- <h2 class="text-base/7 font-semibold text-indigo-600">Everything you need</h2> -->
-        <p class="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Our Objectives</p>
-        <p class="mt-6 text-base/7 text-gray-600">Outlined are our objectives.</p>
-      </div>
-      <dl class="col-span-3 grid grid-cols-1 gap-x-8 gap-y-10 text-base/7 text-gray-600 sm:grid-cols-2 lg:gap-y-16">
-        <div class="relative pl-9">
-          <dt class="font-semibold text-gray-900">
-            <svg class="absolute left-0 top-1 size-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-            </svg>
-            <!-- Invite team members -->
-            Conduct in-depth research to generate actionable knowledge for strategic innovation.
-          </dt>
-          <!-- <dd class="mt-2">
-            Conduct in-depth research to generate actionable knowledge for strategic innovation.
-          </dd> -->
-        </div>
-        <div class="relative pl-9">
-          <dt class="font-semibold text-gray-900">
-            <svg class="absolute left-0 top-1 size-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-            </svg>
-            <!-- List view -->
-            Develop communication strategies that enhance engagement and strengthen organizational reputation.
-          </dt>
-          <!-- <dd class="mt-2">Corporis asperiores ea nulla temporibus asperiores non tempore assumenda aut.</dd> -->
-        </div>
-        <div class="relative pl-9">
-          <dt class="font-semibold text-gray-900">
-            <svg class="absolute left-0 top-1 size-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-            </svg>
-            <!-- Keyboard shortcuts -->
-            Implement efficient project management to ensure transparency, accountability, and stakeholder satisfaction.
-          </dt>
-          <!-- <dd class="mt-2">In sit qui aliquid deleniti et. Ad nobis sunt omnis. Quo sapiente dicta laboriosam.</dd> -->
-        </div>
-        <div class="relative pl-9">
-          <dt class="font-semibold text-gray-900">
-            <svg class="absolute left-0 top-1 size-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-            </svg>
-            <!-- Calendars -->
-            Provide meticulous monitoring, evaluation, and learning mechanisms for continuous improvement.
-          </dt>
-          <!-- <dd class="mt-2">Sed rerum sunt dignissimos ullam. Iusto iure occaecati voluptate eligendi.</dd> -->
-        </div>
-        <!-- <div class="relative pl-9">
-          <dt class="font-semibold text-gray-900">
-            <svg class="absolute left-0 top-1 size-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-            </svg>
-            Notifications
-          </dt>
-          <dd class="mt-2">Quos inventore harum enim nesciunt. Aut repellat rerum omnis adipisci.</dd>
-        </div> -->
-        <div class="relative pl-9">
-          <dt class="font-semibold text-gray-900">
-            <svg class="absolute left-0 top-1 size-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-            </svg>
-            <!-- Boards -->
-            Facilitate surveys to collect critical feedback, improving the efficiency of nonprofit projects.
-
-          </dt>
-          <!-- <dd class="mt-2">Quae sit sunt excepturi fugit veniam voluptatem ipsum commodi.</dd> -->
-        </div>
-        <div class="relative pl-9">
-          <dt class="font-semibold text-gray-900">
-            <svg class="absolute left-0 top-1 size-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-            </svg>
-            <!-- Reporting -->
-            Guide companies through the process of meeting necessary social and performance standards.
-          </dt>
-          <!-- <dd class="mt-2">Eos laudantium repellat sed architecto earum unde incidunt.</dd> -->
-        </div>
-        <!-- <div class="relative pl-9">
-          <dt class="font-semibold text-gray-900">
-            <svg class="absolute left-0 top-1 size-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-              <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-            </svg>
-            Mobile app
-          </dt>
-          <dd class="mt-2">Nulla est saepe accusamus nostrum est est fugit omnis.</dd>
-        </div> -->
-      </dl>
-    </div>
-  </div>
-</div>
-
-
-
   </main>
-
-  <!-- Footer -->
-  <!-- <footer class="mt-16 sm:mt-32">
-    <div class="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
-      <nav class="-mb-6 flex flex-wrap justify-center gap-x-12 gap-y-3 text-sm/6" aria-label="Footer">
-        <a href="#" class="text-gray-600 hover:text-gray-900">About</a>
-        <a href="#" class="text-gray-600 hover:text-gray-900">Blog</a>
-        <a href="#" class="text-gray-600 hover:text-gray-900">Jobs</a>
-        <a href="#" class="text-gray-600 hover:text-gray-900">Press</a>
-        <a href="#" class="text-gray-600 hover:text-gray-900">Accessibility</a>
-        <a href="#" class="text-gray-600 hover:text-gray-900">Partners</a>
-      </nav>
-      <div class="mt-16 flex justify-center gap-x-10">
-        <a href="#" class="text-gray-600 hover:text-gray-800">
-          <span class="sr-only">Facebook</span>
-          <svg class="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
-          </svg>
-        </a>
-        <a href="#" class="text-gray-600 hover:text-gray-800">
-          <span class="sr-only">Instagram</span>
-          <svg class="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
-          </svg>
-        </a>
-        <a href="#" class="text-gray-600 hover:text-gray-800">
-          <span class="sr-only">X</span>
-          <svg class="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
-          </svg>
-        </a>
-        <a href="#" class="text-gray-600 hover:text-gray-800">
-          <span class="sr-only">GitHub</span>
-          <svg class="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
-          </svg>
-        </a>
-        <a href="#" class="text-gray-600 hover:text-gray-800">
-          <span class="sr-only">YouTube</span>
-          <svg class="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill-rule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clip-rule="evenodd" />
-          </svg>
-        </a>
-      </div>
-      <p class="mt-10 text-center text-sm/6 text-gray-600">&copy; 2024 Your Company, Inc. All rights reserved.</p>
-    </div>
-  </footer> -->
-</div>
- </main>
-
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+import { useMotion } from '@vueuse/motion'
+
 const servicesList = ref([
   {
     "title": "Research, Publication & Reporting",
-    "description": "We provide end-to-end research services tailored to your organization’s goals, from feasibility studies and market analysis to project evaluations. Our team manages every phase—planning, execution, tracking, and reporting—ensuring rigorous methodology and actionable insights. Additionally, we offer professional writing and publishing support to craft and disseminate reports, articles, and knowledge products that amplify your influence."
+    "description": "We provide end-to-end research services tailored to your organization's goals, from feasibility studies and market analysis to project evaluations. Our team manages every phase—planning, execution, tracking, and reporting—ensuring rigorous methodology and actionable insights."
   },
   {
     "title": "Surveys & Stakeholder Insights",
@@ -437,6 +683,74 @@ const servicesList = ref([
     "title": "Oversight & Monitoring",
     "description": "We provide rigorous progress tracking and evaluation to keep projects on course. Our monitoring frameworks foster learning, accountability, and continuous improvement, ensuring long-term success and impact."
   }
-]
-)
+])
 </script>
+
+<style>
+/* Animation keyframes */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Transitions */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.duration-500 {
+  transition-duration: 500ms;
+}
+
+.duration-800 {
+  transition-duration: 800ms;
+}
+
+/* Hover effects */
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+}
+
+.hover\:scale-110:hover {
+  transform: scale(1.1);
+}
+
+/* Group hover effects for image cards */
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
+}
+</style>

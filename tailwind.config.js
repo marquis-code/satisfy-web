@@ -14,6 +14,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        'olg-blue': '#3a75a4',
         gray: {
           25:  "#fafafa",
           50:  "#f2f2f2",
