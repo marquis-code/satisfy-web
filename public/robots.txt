@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://olgnova.com/sitemap.xml
