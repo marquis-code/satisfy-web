@@ -8,28 +8,32 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: "OLGnova",
+      title: "OLGNova",
       htmlAttrs: { lang: "en" },
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { name: "format-detection", content: "telephone=no" },
-        { name: "description", content: "OLGnova - Health research publications and resources for healthcare professionals in Africa" },
-        { name: "keywords", content: "health research, publications, Africa, healthcare, medical research" },
-        { name: "author", content: "OLGnova" },
-        { property: "og:title", content: "OLGnova" },
-        { property: "og:description", content: "Health research publications and resources for healthcare professionals in Africa" },
-        { property: "og:type", content: "website" },
-        { property: "og:url", content: "https://olgnova.com" },
-        { property: "og:image", content: "https://olgnova.com/og-image.jpg" },
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: "OLGnova" },
-        { name: "twitter:description", content: "Health research publications and resources for healthcare professionals in Africa" },
-        { name: "twitter:image", content: "https://olgnova.com/twitter-image.jpg" },
+        { name: "description", content: "Product development agency, UI/UX design for startups, Software development for founders, MVP development services, Mobile app development agency, Hire remote software development team, Web app development for startups, Freelance product manager, Startup product design agency, Outsource app development" },
+        { name: "author", content: "Buildr" },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:url', content: 'https://metatags.io/' },
+        { property: 'og:title', content: 'Buildr - Build the future of your business' },
+        { property: 'og:description', content: 'Product development agency, UI/UX design for startups, ...' },
+        { property: 'og:image', content: 'https://metatags.io/images/meta-tags.png' },
+        { property: 'twitter:card', content: 'summary_large_image' },
+        { property: 'twitter:url', content: 'https://metatags.io/' },
+        { property: 'twitter:title', content: 'Buildr - Build the future of your business' },
+        { property: 'twitter:description', content: 'Product development agency, UI/UX design for startups, ...' },
+        { property: 'twitter:image', content: 'https://metatags.io/images/meta-tags.png' }
       ],
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.svg" },
-        { rel: "canonical", href: "https://olgnova.com" },
+        { rel: "canonical", href: "https://gobuildr.io/" },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Lexend+Tera:wght@100..900&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap'
+        }
       ],
     },
     pageTransition: { 
@@ -53,6 +57,8 @@ export default defineNuxtConfig({
   tailwindcss: {
     cssPath: "@/assets/css/main.css",
   },
+
+    plugins: ["@/plugins/aos.client.ts"],
   
   transpile: [
     '@vueuse/motion'
@@ -65,7 +71,7 @@ export default defineNuxtConfig({
   // Set public runtime config
   runtimeConfig: {
     public: {
-      siteUrl: 'https://olgnova.com',
+      siteUrl: 'https://OLGNova.com',
     }
   },
 

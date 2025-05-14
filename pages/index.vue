@@ -1,287 +1,412 @@
 <template>
-  <div class="bg-white">
-    <!-- Header -->
- <NavbarSection />
-
-    <main>
-      <!-- Hero section -->
-       <HeroCarousel />
-
-      <!-- Feature section -->
-      <div class="mt-32">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <div class="mx-auto max-w-2xl sm:text-center">
-            <!-- <h2 class="text-base/7 font-semibold text-indigo-600">Everything you need</h2> -->
-            <p class="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-balance sm:text-5xl">Welcome to OLGnova.</p>
-            <p class="mt-6 text-lg/8 text-gray-600">We transform insights into impact by combining research, communication, and consulting to help organizations grow and create meaningful change.</p>
-          </div>
+  <main>
+    <div class="">
+    <header class="absolute inset-x-0 top-0 z-50">
+      <nav class="flex items-center justify-between p-6 container mx-auto" aria-label="Global">
+        <div class="flex lg:flex-1">
+          <a href="#" class="-m-1.5 p-1.5">
+            <span class="sr-only">Your Company</span>
+            <img class="h-8 w-auto" src="@/assets/icons/white-logo.svg" alt="">
+          </a>
         </div>
-        <div class="relative overflow-hidden pt-16">
-          <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <video 
-              class="mb-[-12%] rounded-xl shadow-2xl ring-1 ring-gray-900/10" width="2432" height="1442"
-              autoplay 
-              muted 
-              loop 
-              playsinline
-            >
-              <source :src="currentVideo" type="video/mp4">
-            </video>
-            <!-- <img src="https://tailwindcss.com/plus-assets/img/component-images/project-app-screenshot.png" alt="App screenshot" class="mb-[-12%] rounded-xl shadow-2xl ring-1 ring-gray-900/10" width="2432" height="1442" /> -->
-             <!-- <video src="./company-profile.mp4" /> -->
-            <div class="relative" aria-hidden="true">
-              <div class="absolute -inset-x-20 bottom-0 bg-gradient-to-t from-white pt-[7%]" />
+        <div class="flex lg:hidden">
+          <button @click="isMenuOpen = true" type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400">
+            <span class="sr-only">Open main menu</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+        <div class="hidden lg:flex lg:gap-x-3">
+          <!-- {{ router.currentRoute.fullPath }} -->
+          <!-- {{ route }} -->
+          <NuxtLink to="/" class="text-sm/6 flex justify-center items-center font-semibold bg-black/50 text-white">Home</NuxtLink>
+          <NuxtLink to="/services" class="text-sm/6 flex px-5 rounded-full justify-center items-center font-semibold bg-black/50 text-white">Services</NuxtLink>
+          <NuxtLink to="/projects" class="text-sm/6 flex px-5 rounded-full justify-center items-center font-semibold bg-black/50 text-white">Projects</NuxtLink>
+          <!-- <a href="#contact-us" class="text-sm/6 font-semibold text-white bg-[#444CE7] contact-link">Contact us</a> -->
+          <button onclick="document.getElementById('contact-us').scrollIntoView({ behavior: 'smooth' });" class="text-sm/6 flex px-5 rounded-full justify-center items-center font-semibold bg-black/50 text-white">Contact Us</button>
+        </div>
+        <!-- <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+          <a href="#" class="text-sm/6 font-semibold text-white">Log in <span aria-hidden="true">&rarr;</span></a>
+        </div> -->
+      </nav>
+      <!-- Mobile menu, show/hide based on menu open state. -->
+      <div v-if="isMenuOpen" class="lg:hidden" role="dialog" aria-modal="true">
+        <!-- Background backdrop, show/hide based on slide-over state. -->
+        <div class="fixed inset-0 z-50"></div>
+        <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-white/10">
+          <div class="flex items-center justify-between">
+            <a href="#" class="-m-1.5 p-1.5">
+              <span class="sr-only">Your Company</span>
+              <img class="h-8 w-auto" src="@/assets/icons/white-logo.svg" alt="">
+            </a>
+            <button @click="isMenuOpen = false" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-400">
+              <span class="sr-only">Close menu</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+          </div>
+          <div class="mt-6 flow-root">
+            <div class="-my-6 divide-y divide-gray-500/25">
+              <div class="space-y-2 py-6">
+                <NuxtLink to="/" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-gray-800">Home</NuxtLink>
+                <NuxtLink to="/services" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-gray-800">Services</NuxtLink>
+                <NuxtLink to="/projects" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-gray-800">Projects</NuxtLink>
+                <!-- <NuxtLink to="/" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-gray-800">Contact Us</NuxtLink> -->
+                <button onclick="document.getElementById('contact-us').scrollIntoView({ behavior: 'smooth' });" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white">Contact Us</button>
+              </div>
+              <!-- <div class="py-6">
+                <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-white hover:bg-gray-800">Log in</a>
+              </div> -->
             </div>
           </div>
         </div>
-
-        <TrustedPartners />
       </div>
+    </header>
 
-    </main>
-
-    <div id="contact-us" class="relative isolate bg-white">
-  <div class="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
-    <div class="relative px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-48">
-      <div class="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
-        <div class="absolute inset-y-0 left-0 -z-10 w-full overflow-hidden bg-gray-100 ring-1 ring-gray-900/10 lg:w-1/2">
-          <svg class="absolute inset-0 size-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" aria-hidden="true">
-            <defs>
-              <pattern id="83fd4e5a-9d52-42fc-97b6-718e5d7ee527" width="200" height="200" x="100%" y="-1" patternUnits="userSpaceOnUse">
-                <path d="M130 200V.5M.5 .5H200" fill="none" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" stroke-width="0" fill="white" />
-            <svg x="100%" y="-1" class="overflow-visible fill-gray-50">
-              <path d="M-470.5 0h201v201h-201Z" stroke-width="0" />
-            </svg>
-            <rect width="100%" height="100%" stroke-width="0" fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)" />
-          </svg>
-        </div>
-        <h2 class="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Get in touch</h2>
-        <p class="mt-6 text-lg/8 text-gray-600">
-          We're here to help! For personalized assistance, contact us directly or fill out our simple online form to get the answers you need <a class="font-medium underline text-green-700" href="https://forms.gle/zMUkbgP56JNvt4hE8">https://forms.gle/zMUkbgP56JNvt4hE8</a>
-        </p>
-        <dl class="mt-10 space-y-4 text-base/7 text-gray-600">
-          <div class="flex gap-x-4">
-            <dt class="flex-none">
-              <span class="sr-only">Address</span>
-              <svg class="h-7 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" />
-              </svg>
-            </dt>
-            <div class="space-y-3">
-              <dd class="text-sm">KG 11 Ave, Kigali, Rwanda</dd>
-              <!-- <dd class="text-sm">Shop complex, Opp. Table mannas junction, Licksensation, University of Osun, Nigeria</dd> -->
+    <div class="relative isolate overflow-hidden pt-32 pb-[171px]">
+      <img src="@/assets/img/cta-bg.png" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto">
+          <div class="text-center">
+            <div class="px-4 sm:px-6 lg:px-8">
+              <h1 
+                data-aos="fade-up" 
+                class="text-balance text-3xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-white text-center">
+                Build the future of your business
+              </h1>
+              <p 
+                data-aos="fade-up" 
+                class="mt-4 sm:mt-6 md:mt-8 lg:mt-10 text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-white text-center">
+                Your Vision, Our Mission — Together, We’ll Build Exceptional Software
+              </p>
+            </div>
+            <div data-aos="fade-up" class="mt-10 flex items-center justify-center gap-x-6">
+              <a
+                  href="#contact-us"
+                  class="rounded-full bg-[#444CE7] px-6 py-3 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#444CE7]"
+                >
+                  Ready to Build
+                </a>
             </div>
           </div>
-          <div class="flex gap-x-4">
-            <dt class="flex-none">
-              <span class="sr-only">Telephone</span>
-              <svg class="h-7 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
-              </svg>
-            </dt>
-            <dd>
-             <div class="space-y-3">
-              <a class="hover:text-gray-900 text-sm block" href="tel:+250788249545">+250 788 249 545</a>
-              <a class="hover:text-gray-900 text-sm block" href="tel:+447551289858">+447 551 289 858</a>
-             </div>
-            </dd>
-          </div>
-          <div class="flex gap-x-4">
-            <dt class="flex-none">
-              <span class="sr-only">Email</span>
-              <svg class="h-7 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-              </svg>
-            </dt>
-            <dd><a class="hover:text-gray-900" href="mailto:olgnovateam@gmail.com">olgnovateam@gmail.com</a></dd>
-          </div>
-        </dl>
+        </div>
+      </div>
       </div>
     </div>
-    <form action="#" method="POST" class="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48">
-      <div class="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
-        <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-          <div>
-            <label for="first-name" class="block text-sm/6 font-semibold text-gray-900">First name</label>
-            <div class="mt-2.5">
-              <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600">
+
+    <!-- <WhiteNav class="mb-10 z-50" shade="default" />
+    <div class="relative isolate overflow-hidden border-4">
+      <img
+        src="@/assets/img/hero-section.png"
+        alt=""
+        class="absolute inset-0 -z-10 h-full w-screen  object-cover"
+      />
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+          <div class="text-center flex justify-center items-center flex-col">
+            <h1
+              data-aos="fade-up"
+              class="text-balance text-5xl font-semibold tracking-tight text-white"
+            >
+              Build the future of your business
+            </h1>
+            <p
+              class="text-pretty flex justify-center items-center text-center text-lg text-white sm:text-xl/8"
+            >
+              Your Vision, Our Mission — Together, We’ll Build Exceptional
+              Software
+            </p>
+            <div
+              data-aos="fade-up"
+              class="mt-10 flex items-center justify-center gap-x-6"
+            >
+              <a
+                href="#contact-us"
+                class="rounded-full bg-[#444CE7] px-6 py-3 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#444CE7]"
+              >
+                Ready to Build
+              </a>
             </div>
           </div>
-          <div>
-            <label for="last-name" class="block text-sm/6 font-semibold text-gray-900">Last name</label>
-            <div class="mt-2.5">
-              <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-olg-blue">
-            </div>
-          </div>
-          <div class="sm:col-span-2">
-            <label for="email" class="block text-sm/6 font-semibold text-gray-900">Email</label>
-            <div class="mt-2.5">
-              <input type="email" name="email" id="email" autocomplete="email" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-olg-blue">
-            </div>
-          </div>
-          <div class="sm:col-span-2">
-            <label for="phone-number" class="block text-sm/6 font-semibold text-gray-900">Phone number</label>
-            <div class="mt-2.5">
-              <input type="tel" name="phone-number" id="phone-number" autocomplete="tel" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-olg-blue">
-            </div>
-          </div>
-          <div class="sm:col-span-2">
-            <label for="message" class="block text-sm/6 font-semibold text-gray-900">Message</label>
-            <div class="mt-2.5">
-              <textarea name="message" id="message" rows="4" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-olg-blue"></textarea>
-            </div>
-          </div>
-        </div>
-        <div class="mt-8 flex justify-end">
-          <button type="submit" class="rounded-md w-full bg-olg-blue px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-olg-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olg-blue">Send message</button>
         </div>
       </div>
-    </form>
-  </div>
-</div>
+    </div> -->
 
-<!-- <FaqSection /> -->
+    <MarqueeBanner />
 
+   <section class="">
+    <div class="bg-white">
+      <div
+        data-aos="fade-up"
+        class="max-w-3xl px-6 lg:px-0 mx-auto flex-col items-center flex justify-center items-center w-full mt-20"
+      >
+        <h2
+          class="text-2xl lg:text-3xl text-center font-bold tracking-tight text-[#161616]"
+        >
+          Innovation That Accelerates Your Growth
+        </h2>
+        <p
+          class="mt-4 text-center text-semibold text-[#161616] text-lg leading-loose max-w-lg mx-auto text-center"
+        >
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >We
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >turn
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >ambitious
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >ideas
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >into
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >high-performing
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >digital
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >products.
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >Through
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >innovative
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >tech
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >and
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >agile
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >development,
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >we
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >help
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >you
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >move
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >faster,
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >scale
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >smarter,
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >and
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >stay
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >ahead
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >of
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >the
+          </span>
+          <span class="hover:text-[#444CE7] transition-colors duration-300"
+            >competition.
+          </span>
+        </p>
+      </div>
 
-    <!-- Footer -->
-  </div>
+      <div
+        data-aos="fade-up"
+        class="max-w-3xl mx-auto flex-col items-center flex justify-center items-center w-full mt-20"
+      >
+        <p
+          class="mt-4 text-[#7C7C7C] leading-loose max-w-lg mx-auto text-center"
+        >
+          OUR SERVICES
+        </p>
+        <h2 class="text-3xl font-bold tracking-tight text-[#161616]">
+          What we offer
+        </h2>
+      </div>
+
+      <!-- <CoreContact /> -->
+       <!-- <CoreTestContact /> -->
+
+      <div class="max-w-7xl px-6 mx-auto">
+        <div class="">
+          <div class="mt-16 grid grid-cols-1 gap-x-6 gap-y-6 lg:grid-cols-3">
+            <div
+              data-aos="fade-up"
+              v-for="(item, idx) in offerings"
+              :key="idx"
+              class="sm:flex rounded-xl p-6 bg-gray-25 rounded-lg lg:block"
+            >
+              <div class="sm:shrink-0">
+                <img class="size-14" src="@/assets/icons/service.svg" alt="" />
+              </div>
+              <div class="mt-4 sm:ml-6 sm:mt-0 lg:ml-0 lg:mt-6">
+                <h3 class="text-lg font-bold text-gray-900">
+                  {{ item.title ?? "Nil" }}
+                </h3>
+                <p class="mt-2 leading-loose lg:leading-snug text-[#222222]">
+                  {{ item.desc }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-20">
+          <NuxtLink
+            to="/services"
+            class="bg-[#444CE7] hover:bg-[#3A40C9] transition text-white px-8 py-3.5 rounded-full font-medium transition-colors duration-300"
+          >
+            View more
+          </NuxtLink>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-20">
+      <AllCaseStudies :limit="4" />
+    </div>
+    <div class="text-center my-20">
+          <NuxtLink
+            to="/projects"
+            class="bg-[#444CE7] hover:bg-[#3A40C9] transition text-white px-8 py-3.5 rounded-full font-medium transition-colors duration-300"
+          >
+            View more
+          </NuxtLink>
+        </div>
+    </section>
+   <WhyChooseUsSection />
+  <section class="mx-auto container px-6 pb-44">
+    <TestimonialCarousel />
+  </section>
+
+  </main>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { Dialog, DialogPanel, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
-import { Bars3Icon, MinusSmallIcon, PlusSmallIcon, XMarkIcon } from '@heroicons/vue/24/outline'
-import {
-  ArrowPathIcon,
-  CheckIcon,
-  CloudArrowUpIcon,
-  Cog6ToothIcon,
-  FingerPrintIcon,
-  LockClosedIcon,
-  ServerIcon,
-} from '@heroicons/vue/20/solid'
-import NavbarSection from '../components/NavbarSection.vue'
-import FaqSection from '../components/FaqSection.vue'
+<script setup lang="ts">
+  import storipod from '@/assets/img/covers/storipod.png'
+  import blackcountry from '@/assets/img/covers/blackcountry.png'
+  import iqly from '@/assets/img/covers/iqly.png'
+  import marketsquare from '@/assets/img/covers/marketsquare.png'
+  import novatoons from '@/assets/img/covers/novatoons.png'
+  import grabhub from '@/assets/img/covers/grabhub.png'
+const openNav = ref(false);
+const route = useRoute()
+const router = useRouter()
+const offerings = ref([
+  {
+    title: "Custom software development",
+    desc: `We follow a meticulous product management process to create
+                  innovative solutions that address the specific needs of our users. From ideation to launch, we
+                  prioritize user research, design thinking, and agile development to build products that make a
+                  difference.`,
+  },
+  {
+    title: "UI/UX design and product strategy",
+    desc: `We understand the importance of a seamless user experience, where
+                  we focuses on creating user-friendly navigation, engaging UX/UI design, and optimizing conversions
+                  through relevant content and consistent branding.`,
+  },
+  {
+    title: "Cloud & infrastructure consulting",
+    desc: `We offer cutting-edge software development services that drive
+                  business growth and innovation. Our team of experts specializes in creating robust web and mobile
+                  applications tailored to meet the unique needs of your business`,
+  },
+]);
 
-const navigation = [
-  { name: 'Product', href: '#' },
-  { name: 'Features', href: '#' },
-  { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' },
-]
 
-const videos = [
-    '/company-profile.mp4',
-    '/company-profile.mp4',
-    '/company-profile.mp4'
-  ]
+useServerSeoMeta({
+  title: "Build the Future of Your Business | Buildr",
+  ogTitle: "Build the Future of Your Business | Buildr",
+  description: "Your Vision, Our Mission — Together, We’ll Build Exceptional Software. We turn ambitious ideas into high-performing digital products through innovative tech and agile development.",
+  ogDescription: "Your Vision, Our Mission — Together, We’ll Build Exceptional Software. We turn ambitious ideas into high-performing digital products through innovative tech and agile development.",
+  ogImage: "https://gobuildr.io/og-image.jpg",
+  ogImageUrl: "https://gobuildr.io/og-image.jpg",
+  twitterCard: "summary_large_image",
+  twitterTitle: "Build the Future of Your Business | Buildr",
+  twitterDescription: "Your Vision, Our Mission — Together, We’ll Build Exceptional Software. We turn ambitious ideas into high-performing digital products through innovative tech and agile development.",
+  twitterImage: "https://gobuildr.io/og-image.jpg"
+})
 
-const currentIndex = ref(0);
-const currentVideo = ref(videos[0]);
-    // Auto-advance slides
-    onMounted(() => {
-    setInterval(() => {
-      currentIndex.value = (currentIndex.value + 1) % slides.value.length;
-      currentVideo.value = videos[currentIndex.value % videos.length];
-    }, 5000);
+useSeoMeta({
+  title: "Build the Future of Your Business | Buildr",
+  ogTitle: "Build the Future of Your Business | Buildr",
+  description: "Your Vision, Our Mission — Together, We’ll Build Exceptional Software. We turn ambitious ideas into high-performing digital products through innovative tech and agile development.",
+  ogDescription: "Your Vision, Our Mission — Together, We’ll Build Exceptional Software. We turn ambitious ideas into high-performing digital products through innovative tech and agile development.",
+  ogImage: "https://gobuildr.io/og-image.jpg",
+  ogImageUrl: "https://gobuildr.io/og-image.jpg",
+  twitterCard: "summary_large_image",
+  twitterTitle: "Build the Future of Your Business | Buildr",
+  twitterDescription: "Your Vision, Our Mission — Together, We’ll Build Exceptional Software. We turn ambitious ideas into high-performing digital products through innovative tech and agile development.",
+  twitterImage: "https://gobuildr.io/og-image.jpg"
   });
 
-const features = [
+
+
+const isMenuOpen = ref(false);
+
+
+const cards = ref([
   {
-    name: 'Push to deploy.',
-    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.',
-    icon: CloudArrowUpIcon,
+    title: "BlackCountry",
+    description: "Simplifying Shared Living in Nigeria",
+    image: blackcountry
   },
   {
-    name: 'SSL certificates.',
-    description: 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
-    icon: LockClosedIcon,
+    title: "IQly",
+    description: "Revolutionizing Job Searches with an AI-Driven Career Platform",
+    image: iqly
   },
   {
-    name: 'Simple queues.',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.',
-    icon: ArrowPathIcon,
+    title: "Grabhub",
+    description: "Addressing Food Waste with an Innovative Marketplace",
+    image: grabhub
   },
   {
-    name: 'Advanced security.',
-    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.',
-    icon: FingerPrintIcon,
+    title: "Marketsquare",
+    description: "Connecting Local Services with Ease",
+    image: marketsquare
   },
   {
-    name: 'Powerful API.',
-    description: 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
-    icon: Cog6ToothIcon,
+    title: "BlackCountry",
+    description: "Simplifying Shared Living in Nigeria",
+    image: novatoons
   },
   {
-    name: 'Database backups.',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. ',
-    icon: ServerIcon,
+    title: "Storipod",
+    description: "Revolutionizing Microblogging for Storytellers",
+    image: storipod
   },
-]
-const tiers = [
-  {
-    name: 'Hobby',
-    id: 'tier-hobby',
-    href: '#',
-    priceMonthly: '$19',
-    description: "The perfect plan if you're just getting started with our product.",
-    features: ['25 products', 'Up to 10,000 subscribers', 'Advanced analytics', '24-hour support response time'],
-    featured: false,
-  },
-  {
-    name: 'Enterprise',
-    id: 'tier-enterprise',
-    href: '#',
-    priceMonthly: '$49',
-    description: 'Dedicated support and infrastructure for your company.',
-    features: [
-      'Unlimited products',
-      'Unlimited subscribers',
-      'Advanced analytics',
-      'Dedicated support representative',
-      'Marketing automations',
-      'Custom integrations',
-    ],
-    featured: true,
-  },
-]
-const faqs = [
-  {
-    question: "What's the best thing about Switzerland?",
-    answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-  },
-  // More questions...
-]
-const footerNavigation = {
-  solutions: [
-    { name: 'Marketing', href: '#' },
-    { name: 'Analytics', href: '#' },
-    { name: 'Automation', href: '#' },
-    { name: 'Commerce', href: '#' },
-    { name: 'Insights', href: '#' },
-  ],
-  support: [
-    { name: 'Submit ticket', href: '#' },
-    { name: 'Documentation', href: '#' },
-    { name: 'Guides', href: '#' },
-  ],
-  company: [
-    { name: 'About', href: '#' },
-    { name: 'Blog', href: '#' },
-    { name: 'Jobs', href: '#' },
-    { name: 'Press', href: '#' },
-  ],
-  legal: [
-    { name: 'Terms of service', href: '#' },
-    { name: 'Privacy policy', href: '#' },
-    { name: 'License', href: '#' },
-  ],
+])
+</script>
+
+<style scoped>
+.router-link-exact-active {
+  background-color: #444CE7; /* Matches the blue color */
+  color: white; /* White text */
+  border-radius: 20px; /* Rounded edges */
+  font-weight: bold; /* Ensures the text is bold */
+  padding: 8px 20px;
 }
 
-const mobileMenuOpen = ref(false)
-
-</script>
+</style>

@@ -1,7 +1,6 @@
 <template>
   <div>
-    <NavbarSection />
     <NuxtPage />
-    <FooterSection />
+    <Footer id="contact-us" />
   </div>
 </template>
