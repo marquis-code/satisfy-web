@@ -1,87 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage: Highest priority -->
   <url>
-    <loc>https://OLGNova.com/</loc>
+    <loc>https://gobuildr.io/</loc>
     <lastmod>2025-05-11</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+  
+  <!-- Main service pages: Secondary priority -->
   <url>
-    <loc>https://OLGNova.com/publications</loc>
+    <loc>https://gobuildr.io/services</loc>
+    <lastmod>2025-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://gobuildr.io/projects</loc>
+    <lastmod>2025-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Featured projects: Third tier priority -->
+  <url>
+    <loc>https://gobuildr.io/projects/grabhub</loc>
     <lastmod>2025-05-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://OLGNova.com/about</loc>
+    <loc>https://gobuildr.io/projects/marketsquare</loc>
     <lastmod>2025-05-11</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://OLGNova.com/contact</loc>
+    <loc>https://gobuildr.io/projects/storipod</loc>
+    <lastmod>2025-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Other projects: Fourth tier priority -->
+  <url>
+    <loc>https://gobuildr.io/projects/black-country</loc>
     <lastmod>2025-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://OLGNova.com/blogs</loc>
+    <loc>https://gobuildr.io/projects/iqly</loc>
     <lastmod>2025-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://OLGNova.com/faq</loc>
+    <loc>https://gobuildr.io/projects/novatoons</loc>
     <lastmod>2025-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  
+  <!-- Legal/policy pages: Lowest priority -->
   <url>
-    <loc>https://OLGNova.com/guides</loc>
-    <lastmod>2025-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://OLGNova.com/license</loc>
+    <loc>https://gobuildr.io/privacy-policy</loc>
     <lastmod>2025-05-11</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://OLGNova.com/jobs</loc>
-    <lastmod>2025-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://OLGNova.com/privacy-policy</loc>
-    <lastmod>2025-05-11</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://OLGNova.com/pro-bono</loc>
-    <lastmod>2025-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://OLGNova.com/programs</loc>
-    <lastmod>2025-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://OLGNova.com/teams</loc>
-    <lastmod>2025-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://OLGNova.com/terms-of-service</loc>
-    <lastmod>2025-05-11</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.4</priority>
   </url>
 </urlset>

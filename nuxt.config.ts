@@ -5,36 +5,50 @@ export default defineNuxtConfig({
   // This will prevent the SSR rendering errors
   ssr: false,
   target: "static",
-
   app: {
     head: {
-      title: "OLGNova",
+      title: "Buildr - Build the future of your business",
       htmlAttrs: { lang: "en" },
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { name: "format-detection", content: "telephone=no" },
-        { name: "description", content: "Product development agency, UI/UX design for startups, Software development for founders, MVP development services, Mobile app development agency, Hire remote software development team, Web app development for startups, Freelance product manager, Startup product design agency, Outsource app development" },
+        { 
+          name: "description", 
+          content: "Product development agency specializing in UI/UX design and software development for startups. We build MVPs, mobile apps, and web applications with expert remote teams." 
+        },
         { name: "author", content: "Buildr" },
+        
+        // Open Graph
         { property: 'og:type', content: 'website' },
-        { property: 'og:url', content: 'https://metatags.io/' },
+        { property: 'og:url', content: 'https://gobuildr.io/' },
         { property: 'og:title', content: 'Buildr - Build the future of your business' },
-        { property: 'og:description', content: 'Product development agency, UI/UX design for startups, ...' },
-        { property: 'og:image', content: 'https://metatags.io/images/meta-tags.png' },
+        { 
+          property: 'og:description', 
+          content: 'Product development agency specializing in UI/UX design and software development for startups.' 
+        },
+        { property: 'og:image', content: 'https://gobuildr.io/icon.png' },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        
+        // Twitter
         { property: 'twitter:card', content: 'summary_large_image' },
-        { property: 'twitter:url', content: 'https://metatags.io/' },
+        { property: 'twitter:url', content: 'https://gobuildr.io/' },
         { property: 'twitter:title', content: 'Buildr - Build the future of your business' },
-        { property: 'twitter:description', content: 'Product development agency, UI/UX design for startups, ...' },
-        { property: 'twitter:image', content: 'https://metatags.io/images/meta-tags.png' }
+        { 
+          property: 'twitter:description', 
+          content: 'Product development agency specializing in UI/UX design and software development for startups.' 
+        },
+        { property: 'twitter:image', content: 'https://gobuildr.io/icon.png' }
       ],
       link: [
-        { rel: "icon", type: "image/x-icon", href: "/favicon.svg" },
-        { rel: "canonical", href: "https://gobuildr.io/" },
+        { rel: 'canonical', href: 'https://gobuildr.io/' },
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=Lexend+Tera:wght@100..900&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap'
         }
-      ],
+      ]
     },
     pageTransition: { 
       name: 'page', 
