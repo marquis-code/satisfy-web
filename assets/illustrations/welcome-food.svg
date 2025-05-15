@@ -1,0 +1,37 @@
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="200" cy="200" r="180" fill="#FFF5F5" />
+  
+  <!-- Plate -->
+  <ellipse cx="200" cy="240" rx="120" ry="40" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="2" />
+  <ellipse cx="200" cy="240" rx="100" ry="30" fill="#FEFEFE" stroke="#E5E7EB" stroke-width="1" />
+  
+  <!-- Food items -->
+  <!-- Rice/Jollof -->
+  <path d="M160 200C160 200 180 170 220 170C260 170 280 200 280 200V230C280 230 250 210 220 210C190 210 160 230 160 230V200Z" fill="#FF6B35" />
+  <path d="M170 195C170 195 185 175 220 175C255 175 270 195 270 195V220C270 220 245 205 220 205C195 205 170 220 170 220V195Z" fill="#FF8C61" />
+  
+  <!-- Chicken -->
+  <path d="M230 180C230 180 250 170 260 180C270 190 260 210 250 215C240 220 220 215 220 200C220 185 230 180 230 180Z" fill="#D97706" />
+  <path d="M235 185C235 185 250 178 257 185C264 192 257 207 250 210C243 213 228 210 228 200C228 190 235 185 235 185Z" fill="#F59E0B" />
+  
+  <!-- Vegetables -->
+  <ellipse cx="190" cy="190" rx="15" ry="10" fill="#22C55E" />
+  <ellipse cx="210" cy="185" rx="12" ry="8" fill="#16A34A" />
+  
+  <!-- Fork and Spoon -->
+  <path d="M120 180C120 180 110 220 110 240C110 260 120 270 120 270" stroke="#6B7280" stroke-width="4" stroke-linecap="round" />
+  <path d="M100 180C100 180 90 220 90 240C90 260 100 270 100 270" stroke="#6B7280" stroke-width="4" stroke-linecap="round" />
+  <path d="M80 180C80 180 70 220 70 240C70 260 80 270 80 270" stroke="#6B7280" stroke-width="4" stroke-linecap="round" />
+  <path d="M100 200C100 200 80 200 80 180C80 160 100 150 100 150" stroke="#6B7280" stroke-width="4" stroke-linecap="round" />
+  
+  <path d="M320 150C320 150 300 160 300 180C300 200 310 240 310 250C310 260 320 270 320 270" stroke="#6B7280" stroke-width="4" stroke-linecap="round" />
+  <path d="M320 150C320 150 340 160 340 180C340 200 330 240 330 250C330 260 320 270 320 270" stroke="#6B7280" stroke-width="4" stroke-linecap="round" />
+  
+  <!-- Steam -->
+  <path d="M180 160C180 160 170 140 180 130C190 120 200 130 200 140C200 150 210 150 215 140C220 130 215 120 225 115C235 110 245 120 240 130C235 140 240 150 250 145C260 140 270 150 265 160" stroke="#9CA3AF" stroke-width="3" stroke-linecap="round" />
+  
+  <!-- Text -->
+  <path d="M140 90C140 90 180 70 260 90" stroke="#EF4444" stroke-width="4" stroke-linecap="round" />
+  <path d="M150 110C150 110 190 100 250 110" stroke="#F97316" stroke-width="4" stroke-linecap="round" />
+</svg>

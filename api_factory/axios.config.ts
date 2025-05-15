@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { type AxiosResponse } from "axios";
 import { useUser } from "@/composables/auth/user";
 import { useCustomToast } from '@/composables/core/useCustomToast'
 const { showToast } = useCustomToast();
@@ -7,8 +7,8 @@ const { token, logOut } = useUser();
 
 const $GATEWAY_ENDPOINT_WITHOUT_VERSION = import.meta.env
   .VITE_BASE_URL as string;
-const $GATEWAY_ENDPOINT = import.meta.env.VITE_BASE_URL + "/api/v1";
-const $GATEWAY_ENDPOINT_V2 = import.meta.env.VITE_BASE_URL + "/api/v2";
+const $GATEWAY_ENDPOINT = import.meta.env.VITE_BASE_URL;
+const $GATEWAY_ENDPOINT_V2 = import.meta.env.VITE_BASE_URL + "/v2";
 const $IMAGE_UPLOAD_ENDPOINT = import.meta.env
   .VITE_IMAGE_UPLOAD_BASE_URL as string;
 
@@ -73,7 +73,6 @@ instanceArray.forEach((instance) => {
       return response;
     },
     (err: any) => {
-      console.log(err, 'error here')
       if (typeof err.response === "undefined") {
         showToast({
           title: "Error",
@@ -87,7 +86,7 @@ instanceArray.forEach((instance) => {
         };
       }
       if (err.response.status === 401) {
-        console.log(err.response.data.error)
+        // console.log(err.response.data.error)
         logOut();
         showToast({
           title: "Error",
@@ -113,12 +112,12 @@ instanceArray.forEach((instance) => {
           ...err.response,
         };
       } else if (err.response.status === 500) {
-        showToast({
-          title: "Error",
-          message: err?.response?.data?.message || err?.response?.data?.error || "An error occured",
-          toastType: "error",
-          duration: 3000
-        });
+        // showToast({
+        //   title: "Error",
+        //   message: err?.response?.data?.message || err?.response?.data?.error || "An error occured",
+        //   toastType: "error",
+        //   duration: 3000
+        // });
         return {
           type: "ERROR",
           ...err.response,

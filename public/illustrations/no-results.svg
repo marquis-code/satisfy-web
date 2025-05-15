@@ -1,0 +1,46 @@
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <circle cx="200" cy="200" r="160" fill="#FEF2F2" opacity="0.7" />
+  
+  <!-- Magnifying glass -->
+  <circle cx="160" cy="160" r="70" fill="white" stroke="#6B7280" stroke-width="8" />
+  <circle cx="160" cy="160" r="60" fill="#F9FAFB" />
+  <line x1="210" y1="210" x2="260" y2="260" stroke="#6B7280" stroke-width="12" stroke-linecap="round" />
+  
+  <!-- Empty plate -->
+  <ellipse cx="160" cy="160" rx="50" ry="15" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="2" />
+  <ellipse cx="160" cy="160" rx="40" ry="10" fill="#FEFEFE" stroke="#E5E7EB" stroke-width="1" />
+  
+  <!-- Sad face on plate -->
+  <circle cx="145" cy="155" r="5" fill="#6B7280" />
+  <circle cx="175" cy="155" r="5" fill="#6B7280" />
+  <path d="M145 170C145 170 155 165 160 165C165 165 175 170 175 170" stroke="#6B7280" stroke-width="3" stroke-linecap="round" />
+  
+  <!-- Food icons around -->
+  <!-- Pizza slice -->
+  <path d="M280 120L310 160L250 160L280 120Z" fill="#FBBF24" />
+  <path d="M280 120L310 160L250 160L280 120Z" stroke="#D97706" stroke-width="2" />
+  <circle cx="275" cy="145" r="5" fill="#B91C1C" />
+  <circle cx="290" cy="140" r="5" fill="#B91C1C" />
+  <circle cx="280" cy="150" r="5" fill="#B91C1C" />
+  
+  <!-- Burger -->
+  <path d="M90 260C90 260 70 260 70 270C70 280 90 280 90 280H110C110 280 130 280 130 270C130 260 110 260 110 260H90Z" fill="#92400E" />
+  <path d="M90 250H110C110 250 130 250 130 240C130 230 110 230 110 230H90C90 230 70 230 70 240C70 250 90 250 90 250Z" fill="#FCD34D" />
+  <path d="M90 230H110C110 230 120 225 120 220C120 215 110 210 110 210H90C90 210 80 215 80 220C80 225 90 230 90 230Z" fill="#15803D" />
+  <rect x="80" y="210" width="40" height="10" fill="#FCD34D" />
+  
+  <!-- Drink -->
+  <path d="M320 280L330 220H290L300 280H320Z" fill="#831843" />
+  <path d="M320 280L330 220H290L300 280H320Z" stroke="#831843" stroke-width="2" />
+  <path d="M290 220H330" stroke="#831843" stroke-width="2" />
+  <path d="M330 220C330 220 340 210 330 200C320 190 300 190 290 200C280 210 290 220 290 220" fill="#E879F9" />
+  <path d="M330 220C330 220 340 210 330 200C320 190 300 190 290 200C280 210 290 220 290 220" stroke="#831843" stroke-width="2" />
+  <path d="M310 200V180" stroke="#831843" stroke-width="2" />
+  <path d="M300 180H320" stroke="#831843" stroke-width="2" />
+  
+  <!-- Question marks -->
+  <text x="120" y="100" font-family="Arial" font-size="40" font-weight="bold" fill="#EF4444">?</text>
+  <text x="260" y="320" font-family="Arial" font-size="40" font-weight="bold" fill="#EF4444">?</text>
+  <text x="190" y="280" font-family="Arial" font-size="40" font-weight="bold" fill="#F97316">?</text>
+</svg>

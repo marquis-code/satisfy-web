@@ -1,13 +1,11 @@
 import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
-  // Force disable SSR since your original config had it as false
-  // This will prevent the SSR rendering errors
   ssr: false,
   target: "static",
   app: {
     head: {
-      title: "Buildr - Build the future of your business",
+      title: "Satisfy | Your favorite food, delivered fast to your door. Discover the best food vendors in FUNAAB.",
       htmlAttrs: { lang: "en" },
       meta: [
         { charset: "utf-8" },
@@ -15,34 +13,34 @@ export default defineNuxtConfig({
         { name: "format-detection", content: "telephone=no" },
         { 
           name: "description", 
-          content: "Product development agency specializing in UI/UX design and software development for startups. We build MVPs, mobile apps, and web applications with expert remote teams." 
+          content: "Your favorite food, delivered fast to your door. Discover the best food vendors in FUNAAB." 
         },
-        { name: "author", content: "Buildr" },
+        { name: "author", content: "Satisfy" },
         
         // Open Graph
         { property: 'og:type', content: 'website' },
-        { property: 'og:url', content: 'https://gobuildr.io/' },
-        { property: 'og:title', content: 'Buildr - Build the future of your business' },
+        { property: 'og:url', content: 'https://satisfy.africa/' },
+        { property: 'og:title', content: 'Satisfy | Your favorite food, delivered fast to your door. Discover the best food vendors in FUNAAB.' },
         { 
           property: 'og:description', 
-          content: 'Product development agency specializing in UI/UX design and software development for startups.' 
+          content: 'Your favorite food, delivered fast to your door. Discover the best food vendors in FUNAAB.' 
         },
-        { property: 'og:image', content: 'https://gobuildr.io/icon.png' },
+        { property: 'og:image', content: 'https://satisfy.africa/icon.png' },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
         
         // Twitter
         { property: 'twitter:card', content: 'summary_large_image' },
-        { property: 'twitter:url', content: 'https://gobuildr.io/' },
-        { property: 'twitter:title', content: 'Buildr - Build the future of your business' },
+        { property: 'twitter:url', content: 'https://satisfy.africa/' },
+        { property: 'twitter:title', content: 'Satisfy | Your favorite food, delivered fast to your door. Discover the best food vendors in FUNAAB.' },
         { 
           property: 'twitter:description', 
-          content: 'Product development agency specializing in UI/UX design and software development for startups.' 
+          content: 'Your favorite food, delivered fast to your door. Discover the best food vendors in FUNAAB.' 
         },
-        { property: 'twitter:image', content: 'https://gobuildr.io/icon.png' }
+        { property: 'twitter:image', content: 'https://satisfy.africa/icon.png' }
       ],
       link: [
-        { rel: 'canonical', href: 'https://gobuildr.io/' },
+        { rel: 'canonical', href: 'https://satisfy.africa/' },
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         {
           rel: 'stylesheet',
@@ -85,7 +83,7 @@ export default defineNuxtConfig({
   // Set public runtime config
   runtimeConfig: {
     public: {
-      siteUrl: 'https://OLGNova.com',
+      siteUrl: 'https://satisfy.africa',
     }
   },
 
