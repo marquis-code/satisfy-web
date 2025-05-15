@@ -1,18 +1,24 @@
-# robots.txt for gobuildr.io
+# robots.txt for satisfy.africa
 User-agent: *
 Allow: /
 
 # Disallow crawling of private or admin areas
-Disallow: /admin/
-Disallow: /login/
-Disallow: /user/
-Disallow: /cart/
+Disallow: /dashboard/
+Disallow: /order/
+Disallow: /orders/
+Disallow: /analysis/
+Disallow: /categories/
+Disallow: /delivery/
+Disallow: /menu/
+Disallow: /promotions/
+Disallow: /transactions/
+Disallow: /working-hours/
 Disallow: /checkout/
-Disallow: /search/
 
 # Allow important content directories
-Allow: /projects/
-Allow: /services/
+Allow: /pages/
+Allow: /vendors/
+Allow: /plugins/
 Allow: /assets/
 Allow: /images/
 
@@ -20,4 +26,4 @@ Allow: /images/
 Crawl-delay: 10
 
 # Sitemap location
-Sitemap: https://gobuildr.io/sitemap.xml
+Sitemap: https://satisfy.africa/sitemap.xml
