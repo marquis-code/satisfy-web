@@ -84,8 +84,9 @@
                       {{ tag }}
                     </span>
                   </div>
-                  
+                  <!-- {{vendor}} -->
                   <button 
+                    v-if="vendor.isStoreOpen"
                     @click="router.push(`/${vendor.slug}`)" 
                     class="group bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-6 py-3 rounded-full transition-all duration-300 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                     :class="{'animate-slide-right': index === currentSlide}"

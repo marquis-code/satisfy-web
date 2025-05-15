@@ -518,6 +518,11 @@
                       <span class="text-gray-600">Service Charge</span>
                       <span class="font-medium">₦{{ formatPrice(serviceCharge) }}</span>
                     </div>
+
+                    <!-- <div class="flex justify-between items-center">
+                      <span class="text-gray-600">Service Charge</span>
+                      <span class="font-medium">₦{{ formatPrice(serviceCharge) }}</span>
+                    </div> -->
                     
                     <div 
                       v-if="deliveryMethod === 'delivery'" 
@@ -834,6 +839,7 @@ const validationErrors = ref({
   deliveryAddress: "",
 });
 const orderIds = ref<string[]>([]);
+// const serviceCharge = ref(30)
 
 // Toast state
 const toastMessage = ref("");
