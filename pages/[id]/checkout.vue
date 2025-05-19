@@ -1134,6 +1134,119 @@ const submitOrder = async () => {
   }
 };
 
+// const chatWithVendor = () => {
+//   // Get vendor details from local storage
+//   let vendorData = null;
+//   try {
+//     const vendorString = localStorage.getItem("selected-vendor");
+//     if (vendorString) {
+//       vendorData = JSON.parse(vendorString);
+//     }
+//   } catch (error) {
+//     console.error("Error retrieving vendor data:", error);
+//   }
+
+//   // If no vendor data or phone number, use a fallback approach
+//   const vendorPhone = vendorData?.phoneNumber || "";
+  
+//   // Create a more compact message format
+//   let message = `🛍️ ORDER FROM SATISFY\n`;
+//   message += `📋 Order ID: ${orderResponse?.value?.orderId || 'Pending'}\n`;
+//   message += `🚚 Delivery: ${deliveryMethod.value === 'delivery' ? '✅' : '❌'}\n\n`;
+  
+//   // Add items from each pack with a more compact format
+//   cart.packs.value.forEach((pack, packIndex) => {
+//     if (pack.items.length > 0) {
+//       message += `📦 PACK ${packIndex + 1}:\n`;
+      
+//       // Add each item in the pack
+//       pack.items.forEach(item => {
+//         message += `- ${item.name} x${item.quantity}\n`;
+//       });
+      
+//       if (pack.note) {
+//         message += `Note: ${pack.note}\n`;
+//       }
+      
+//       message += '\n';
+//     }
+//   });
+  
+//   // Add order summary
+//   message += `💰 SUMMARY:\n`;
+//   message += `Subtotal: ₦${formatPrice(cart.subtotal.value)}\n`;
+  
+//   if (deliveryMethod.value === 'delivery' && selectedLocation.value) {
+//     message += `Delivery: ₦${formatPrice(selectedLocation.value.deliveryFee)}\n`;
+//   }
+  
+//   if (calculatePackFees() > 0) {
+//     message += `Pack Fee: ₦${formatPrice(calculatePackFees())}\n`;
+//   }
+  
+//   message += `TOTAL: ₦${formatPrice(calculateGrandTotal())}\n\n`;
+  
+//   // Add customer details section
+//   message += `👤 CUSTOMER INFO:\n`;
+//   message += `Name: ${customerName.value}\n`;
+//   message += `Phone: ${phoneNumber.value}\n`;
+  
+//   if (deliveryMethod.value === 'delivery') {
+//     if (selectedLocation.value) {
+//       message += `Location: ${selectedLocation.value.name}\n`;
+//     }
+    
+//     if (deliveryAddress.value) {
+//       message += `Address: ${deliveryAddress.value}\n`;
+//     }
+//   }
+  
+//   if (additionalNotes.value) {
+//     message += `\n📝 Additional Notes: ${additionalNotes.value}\n`;
+//   }
+  
+//   // Encode the message for WhatsApp URL
+//   const encodedMessage = encodeURIComponent(message);
+  
+//   // Format the phone number correctly for WhatsApp
+//   let formattedPhone = "";
+//   if (vendorPhone) {
+//     // Remove any non-digit characters
+//     formattedPhone = vendorPhone.replace(/\D/g, "");
+    
+//     // Ensure it starts with country code (if not already)
+//     if (!formattedPhone.startsWith("234") && formattedPhone.startsWith("0")) {
+//       // Replace leading 0 with 234 (Nigeria's country code)
+//       formattedPhone = "234" + formattedPhone.substring(1);
+//     } else if (!formattedPhone.startsWith("234") && !formattedPhone.startsWith("+")) {
+//       // Add country code if missing
+//       formattedPhone = "234" + formattedPhone;
+//     }
+//   }
+  
+//   // Use the wa.me WhatsApp URL format
+//   const whatsappUrl = formattedPhone 
+//     ? `https://wa.me/${formattedPhone}?text=${encodedMessage}` 
+//     : `https://wa.me/?text=${encodedMessage}`;
+  
+//   // Immediately redirect to WhatsApp without delay
+//   window.location.href = whatsappUrl;
+//   cart.clearCart();
+
+//   // Set a fallback for mobile devices that might not have WhatsApp installed
+//   setTimeout(() => {
+//     // If we're still on the same page after 1.5 seconds, offer alternative options
+//     showToast({
+//       title: "WhatsApp not opening?",
+//       message: "Try copying the vendor's number manually",
+//       type: "warning"
+//     });
+    
+//     // Navigate back to menu
+//     router.push(`/${route.params.id}`);
+//   }, 1500);
+// };
+
 const chatWithVendor = () => {
   // Get vendor details from local storage
   let vendorData = null;
@@ -1208,42 +1321,89 @@ const chatWithVendor = () => {
   // Encode the message for WhatsApp URL
   const encodedMessage = encodeURIComponent(message);
   
-  // Format the phone number correctly for WhatsApp
+  // Enhanced Nigerian phone number formatting
   let formattedPhone = "";
   if (vendorPhone) {
-    // Remove any non-digit characters
-    formattedPhone = vendorPhone.replace(/\D/g, "");
+    // Clean the phone number (remove all non-digit characters)
+    let cleanPhone = vendorPhone.replace(/\D/g, "");
     
-    // Ensure it starts with country code (if not already)
-    if (!formattedPhone.startsWith("234") && formattedPhone.startsWith("0")) {
-      // Replace leading 0 with 234 (Nigeria's country code)
-      formattedPhone = "234" + formattedPhone.substring(1);
-    } else if (!formattedPhone.startsWith("234") && !formattedPhone.startsWith("+")) {
-      // Add country code if missing
-      formattedPhone = "234" + formattedPhone;
+    // Handle different Nigerian phone number formats
+    if (cleanPhone.startsWith('234')) {
+      // Already has country code 234
+      formattedPhone = cleanPhone;
+    } else if (cleanPhone.startsWith('0')) {
+      // Starts with 0 (local format), replace with 234
+      formattedPhone = '234' + cleanPhone.substring(1);
+    } else if (cleanPhone.length === 10) {
+      // 10 digits, likely missing country code and leading 0
+      formattedPhone = '234' + cleanPhone;
+    } else if (cleanPhone.length === 11 && !cleanPhone.startsWith('234')) {
+      // 11 digits starting with 0, replace 0 with 234
+      formattedPhone = '234' + cleanPhone.substring(1);
+    } else {
+      // Fallback: assume it needs 234 prefix
+      formattedPhone = '234' + cleanPhone;
+    }
+    
+    // Validate Nigerian phone number (should be 13 digits: 234 + 10 digits)
+    if (formattedPhone.length !== 13 || !formattedPhone.startsWith('234')) {
+      console.warn('Invalid Nigerian phone number format:', vendorPhone);
+      // Still proceed but log the warning
     }
   }
   
-  // Use the wa.me WhatsApp URL format
+  // Use the wa.me WhatsApp URL format (works for both regular and business WhatsApp)
   const whatsappUrl = formattedPhone 
     ? `https://wa.me/${formattedPhone}?text=${encodedMessage}` 
     : `https://wa.me/?text=${encodedMessage}`;
   
-  // Immediately redirect to WhatsApp without delay
-  window.location.href = whatsappUrl;
+  // Enhanced WhatsApp opening logic with better cross-platform support
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
+  if (isMobile) {
+    // On mobile devices, direct redirect usually works better
+    window.location.href = whatsappUrl;
+  } else {
+    // On desktop, try to open in new tab first
+    const newWindow = window.open(whatsappUrl, '_blank');
+    
+    // If popup is blocked, fallback to direct redirect
+    if (!newWindow) {
+      window.location.href = whatsappUrl;
+    }
+  }
+  
+  // Clear cart after opening WhatsApp
   cart.clearCart();
 
-  // Set a fallback for mobile devices that might not have WhatsApp installed
+  // Enhanced fallback handling with more helpful options
   setTimeout(() => {
-    // If we're still on the same page after 1.5 seconds, offer alternative options
-    showToast({
-      title: "WhatsApp not opening?",
-      message: "Try copying the vendor's number manually",
-      type: "warning"
-    });
+    // Check if we're still on the same page (WhatsApp might not have opened)
+    if (document.hasFocus()) {
+      showToast({
+        title: "WhatsApp not opening?",
+        message: `Try copying this number: ${formattedPhone ? `+${formattedPhone}` : 'Number not available'}`,
+        type: "warning",
+        // duration: 5000 // Show for 5 seconds 
+      });
+      
+      // Optional: Provide additional fallback options
+      if (formattedPhone) {
+        // Create a fallback with WhatsApp Web
+        const webWhatsAppUrl = `https://web.whatsapp.com/send?phone=${formattedPhone}&text=${encodedMessage}`;
+        
+        // Optionally show a dialog with both options
+        const useWebWhatsApp = confirm("WhatsApp app didn't open. Would you like to try WhatsApp Web instead?");
+        if (useWebWhatsApp) {
+          window.open(webWhatsAppUrl, '_blank');
+        }
+      }
+    }
     
-    // Navigate back to menu
-    router.push(`/${route.params.id}`);
+    // Navigate back to menu after a delay
+    setTimeout(() => {
+      router.push(`/${route.params.id}`);
+    }, 2000);
   }, 1500);
 };
 
