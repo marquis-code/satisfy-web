@@ -1,5 +1,7 @@
 <template>
-  <section class="my-10 max-w-7xl mx-auto">
+<main>
+  <NavigationbarComponent />
+  <section class="my-10 container px-6 mx-auto">
 <div class="my-6">
   <button class="bg-black text-white px-6 py-2 rounded-full text-sm" @click="router.back()">
       Go Back
@@ -340,6 +342,7 @@
       </div>
     </CoreModal>
   </section>
+</main>
 </template>
 
 <script setup lang="ts">

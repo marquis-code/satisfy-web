@@ -1,4 +1,6 @@
 <template>
+<main>
+  <NavigationbarComponent />
   <div class="min-h-screen bg-gradient-to-b from-green-50 to-white overflow-hidden">
     <!-- Animated Background Elements -->
     <div class="fixed inset-0 pointer-events-none z-0">
@@ -23,20 +25,7 @@
     
     <!-- Main Content -->
     <div class="relative z-10 min-h-screen flex flex-col">
-      <!-- Header -->
-      <header class="py-6 px-6 md:px-10 bg-white shadow-sm">
-        <div class="container mx-auto flex justify-between items-center">
-          <NuxtLink to="/" class="flex items-center">
-            <!-- <img src="/images/Satisfy-logo.svg" alt="Satisfy" class="h-10" /> -->
-          </NuxtLink>
-          <div class="flex items-center space-x-4">
-            <NuxtLink to="/login" class="text-gray-700 hover:text-primary transition-colors">
-              Already have an account?
-            </NuxtLink>
-          </div>
-        </div>
-      </header>
-      
+    
       <!-- Registration Form -->
       <div class="flex-1 flex items-center justify-center px-6 py-10">
         <div class="w-full max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden">
@@ -803,6 +792,7 @@
       :orbit-icons="foodIcons"
     />
   </div>
+</main>
 </template>
 
 <script setup lang="ts">
